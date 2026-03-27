@@ -245,6 +245,30 @@
   @media (max-width: 700px) {
     .cards-grid { grid-template-columns: 1fr; }
   }
+<style>
+  .lang-bar {
+    background: #1C1917;
+    margin: 0;
+    padding: 10px 24px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .lang-bar-label { font-size:0.75rem; font-weight:700; color:#A8A29E; text-transform:uppercase; letter-spacing:0.1em; margin-right:4px; }
+  .lang-btn { font-size:0.8rem; font-weight:700; padding:5px 14px; border-radius:8px; text-decoration:none; border:1.5px solid rgba(255,255,255,0.15); color:#D6D3D1; transition:background 0.15s,color 0.15s; }
+  .lang-btn:hover { background:rgba(255,255,255,0.1); color:white; }
+  .lang-btn.active { background:#FF6B35; border-color:#FF6B35; color:white; }
+  /* Nav link color fixes */
+  .nav-logo,.nav-logo:link,.nav-logo:visited { color:#FFD23F !important; -webkit-text-fill-color:#FFD23F !important; text-decoration:none !important; }
+  .nav-links a,.nav-links a:link,.nav-links a:visited { color:#D6D3D1 !important; -webkit-text-fill-color:#D6D3D1 !important; text-decoration:none !important; }
+  @media (max-width:700px) {
+    .nav-toggle { display:flex !important; background:transparent !important; border:none !important; -webkit-appearance:none; }
+    .nav-links { display:none !important; position:fixed !important; top:58px !important; left:0 !important; right:0 !important; z-index:9999 !important; background:#1C1917 !important; flex-direction:column !important; align-items:stretch !important; padding:8px 12px 16px !important; gap:2px !important; box-shadow:0 12px 32px rgba(0,0,0,0.7) !important; border-top:1px solid rgba(255,255,255,0.08) !important; }
+    .nav-links.open { display:flex !important; }
+    .nav-links a,.nav-links a:link,.nav-links a:visited { color:#FFFFFF !important; -webkit-text-fill-color:#FFFFFF !important; padding:13px 16px !important; font-size:0.95rem !important; border-radius:10px !important; }
+  }
+</style>
 </style>
 </head>
 <body>
@@ -260,6 +284,13 @@
     <li><a href="checklist.html">✅ Progress</a></li>
   </ul>
 </nav>
+
+<div class="lang-bar">
+  <span class="lang-bar-label">🌍 Language:</span>
+  <a href="activity-cards.html" class="lang-btn active">🇬🇧 English</a>
+  <a href="activity-cards-bg.html" class="lang-btn">🇧🇬 Български</a>
+  <span style="color:#57534E;font-size:0.75rem;font-weight:700;margin-left:8px;">Coming soon: 🇪🇸 🇮🇹 🇵🇹 🇫🇷</span>
+</div>
 
 <h1 class="page-title">🧩 ScratchJr Activity Cards</h1>
 <p class="page-subtitle">Print and cut • Place next to the tablet each day • Child + teacher friendly</p>
@@ -1333,12 +1364,14 @@
   <div class="footer-links">
     <a href="../index.html">Home</a>
     <a href="curriculum.html">Curriculum</a>
-    <a href="activity-cards.html">Activity Cards</a>
+    <a href="activity-cards.html">Activity Cards (EN)</a>
+    <a href="activity-cards-bg.html">Карти (БГ)</a>
     <a href="lesson-scripts.html">Lesson Scripts</a>
     <a href="troubleshooting.html">Troubleshooting</a>
     <a href="checklist.html">Progress Checklist</a>
   </div>
-  <p>Made with ❤️ for parents everywhere · Free & Open Source · <a href="https://github.com" style="color:var(--yellow);">View on GitHub</a></p>
+  <p>Made with ❤️ for parents everywhere · Free & Open Source · <a href="https://github.com" style="color:#FFD23F;text-decoration:none;">View on GitHub ↗</a></p>
+  <p style="margin-top:8px;font-size:0.85rem;opacity:0.8;">Created by <strong style="color:#FFD23F;">Petya Lozanova</strong> · ScratchJr is a product of the Scratch Foundation · This is an independent educational resource</p>
 </footer>
 <script>
   document.getElementById('navToggle').addEventListener('click', () => {
