@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="color-scheme" content="light">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ScratchJr Adventure — Free Coding Curriculum for Kids Age 7–10</title>
+  <meta name="description" content="A free 6-week ScratchJr curriculum for parents teaching kids to code at home. Daily 1-hour lessons, printable activity cards, teacher scripts, and progress checklists.">
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/site.css">
+
+  <style>
+  /* ─────────────────────────────────────────────
+     HOMEPAGE — redesigned
+  ───────────────────────────────────────────── */
+
+  body { font-family: 'Atkinson Hyperlegible', sans-serif !important; line-height: 1.75; letter-spacing: 0.01em; }
+
+  /* Force nav logo yellow — override browser default blue link color */
+  .nav-logo,
+  .nav-logo:link,
+  .nav-logo:visited,
+  .nav-logo:hover,
+  .nav-logo:active {
+    color: #FFD23F !important;
+    -webkit-text-fill-color: #FFD23F !important;
+    text-decoration: none !important;
+  }
+
+  /* Force all nav links white — override browser default */
+  .nav-links a,
+  .nav-links a:link,
+  .nav-links a:visited {
+    color: #D6D3D1 !important;
+    -webkit-text-fill-color: #D6D3D1 !important;
+    text-decoration: none !important;
+  }
+  .nav-links a.active,
+  .nav-links a.active:visited {
+    color: #FFFFFF !important;
+    -webkit-text-fill-color: #FFFFFF !important;
+  }
+
+  /* NAV fix — sticky */
+  .site-nav { position: fixed; width: 100%; top: 0; z-index: 200; }
+
+  /* ── HAMBURGER FIX — full reset ── */
+  .nav-toggle {
+    display: none;
+    background: transparent !important;
+    -webkit-appearance: none;
+    appearance: none;
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+    cursor: pointer;
+    padding: 8px;
+    margin-left: 8px;
+    width: 40px;
+    height: 40px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    flex-shrink: 0;
+  }
+  .nav-toggle span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: white !important;
+    border-radius: 2px;
+    transition: transform 0.25s, opacity 0.25s;
+    pointer-events: none;
+  }
+
+  @media (max-width: 700px) {
+    .nav-toggle { display: flex !important; }
+    .nav-links {
+      display: none !important;
+      position: fixed !important;
+      top: 58px !important;
+      left: 0 !important; right: 0 !important;
+      z-index: 9999 !important;
+      background: #1C1917 !important;
+      flex-direction: column !important;
+      align-items: stretch !important;
+      padding: 8px 12px 16px !important;
+      gap: 2px !important;
+      box-shadow: 0 12px 32px rgba(0,0,0,0.7) !important;
+      border-top: 1px solid rgba(255,255,255,0.08) !important;
+    }
+    .nav-links.open { display: flex !important; }
+    .nav-links a,
+    .nav-links a:link,
+    .nav-links a:visited {
+      padding: 13px 16px !important;
+      font-size: 0.95rem !important;
+      border-radius: 10px !important;
+      color: #FFFFFF !important;
+      -webkit-text-fill-color: #FFFFFF !important;
+      text-decoration: none !important;
+      font-weight: 700 !important;
+    }
+    .nav-links a:hover {
+      background: rgba(255,255,255,0.1) !important;
+      color: #FFFFFF !important;
+      -webkit-text-fill-color: #FFFFFF !important;
+    }
+    .nav-links a.active {
+      background: #FF6B35 !important;
+      color: #FFFFFF !important;
+      -webkit-text-fill-color: #FFFFFF !important;
+    }
+  }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    background: #0E0B1A;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 130px 24px 90px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 70% 60% at 20% 80%, rgba(255,107,53,0.18) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 50% at 80% 20%, rgba(123,47,190,0.18) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 40% at 55% 50%, rgba(6,182,212,0.08) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  /* Animated floating blocks */
+  .float-block {
+    position: absolute;
+    border-radius: 10px;
+    font-family: 'Fredoka One', cursive;
+    font-size: 0.78rem;
+    padding: 7px 13px;
+    opacity: 0;
+    animation: floatUp var(--dur) ease-in-out infinite;
+    animation-delay: var(--delay);
+    pointer-events: none;
+    white-space: nowrap;
+    border: 1.5px solid rgba(255,255,255,0.1);
+  }
+
+  @keyframes floatUp {
+    0%   { opacity: 0; transform: translateY(0) rotate(var(--rot)); }
+    12%  { opacity: 0.75; }
+    80%  { opacity: 0.45; }
+    100% { opacity: 0; transform: translateY(-90px) rotate(calc(var(--rot) + 6deg)); }
+  }
+
+  /* Stars */
+  .stars-layer {
+    position: absolute; inset: 0; pointer-events: none;
+    background-image:
+      radial-gradient(1.5px 1.5px at 8%  12%, rgba(255,255,255,0.9), transparent),
+      radial-gradient(1px   1px   at 22% 34%, rgba(255,255,255,0.6), transparent),
+      radial-gradient(1.5px 1.5px at 38%  8%, rgba(255,255,255,0.8), transparent),
+      radial-gradient(1px   1px   at 54% 28%, rgba(255,255,255,0.7), transparent),
+      radial-gradient(2px   2px   at 68% 15%, rgba(255,255,255,0.5), transparent),
+      radial-gradient(1px   1px   at 82% 42%, rgba(255,255,255,0.9), transparent),
+      radial-gradient(1.5px 1.5px at 92%  8%, rgba(255,255,255,0.6), transparent),
+      radial-gradient(1px   1px   at 14% 68%, rgba(255,255,255,0.4), transparent),
+      radial-gradient(1px   1px   at 45% 75%, rgba(255,255,255,0.7), transparent),
+      radial-gradient(1.5px 1.5px at 76% 62%, rgba(255,255,255,0.5), transparent),
+      radial-gradient(1px   1px   at 30% 85%, rgba(255,255,255,0.6), transparent),
+      radial-gradient(1px   1px   at 88% 78%, rgba(255,255,255,0.8), transparent);
+  }
+
+  /* Hero content */
+  .hero-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 50px;
+    padding: 7px 18px;
+    font-size: 0.75rem;
+    font-weight: 800;
+    color: #D6D3D1;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 28px;
+    position: relative;
+    animation: fadeUp 0.6s ease both;
+  }
+
+  .live-dot {
+    width: 7px; height: 7px;
+    background: #4ADE80;
+    border-radius: 50%;
+    box-shadow: 0 0 8px #4ADE80;
+    animation: blink 2s ease-in-out infinite;
+  }
+
+  @keyframes blink { 0%,100%{opacity:1;} 50%{opacity:0.25;} }
+
+  .hero h1 {
+    font-family: 'Fredoka One', cursive;
+    font-size: clamp(3.2rem, 10vw, 7rem);
+    line-height: 0.93;
+    margin-bottom: 10px;
+    position: relative;
+    animation: fadeUp 0.6s ease 0.1s both;
+  }
+
+  .hero h1 .l1 {
+    display: block;
+    background: linear-gradient(140deg, #FFD23F 0%, #FF6B35 55%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .hero h1 .l2 {
+    display: block;
+    background: linear-gradient(140deg, #FF6B35 0%, #FF3D77 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero-sub {
+    font-size: clamp(0.95rem, 2.5vw, 1.18rem);
+    color: #D6D3D1;
+    max-width: 540px;
+    margin: 24px auto 42px;
+    font-weight: 400;
+    line-height: 1.8;
+    position: relative;
+    animation: fadeUp 0.6s ease 0.2s both;
+  }
+  .hero-sub strong { color: #D6D3D1; }
+
+  .hero-btns {
+    display: flex;
+    gap: 14px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 64px;
+    position: relative;
+    animation: fadeUp 0.6s ease 0.3s both;
+  }
+
+  .btn-start {
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.05rem;
+    padding: 15px 32px;
+    border-radius: 14px;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: linear-gradient(135deg, #FF6B35, #FF3D77);
+    color: white;
+    box-shadow: 0 8px 32px rgba(255,107,53,0.4);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .btn-start:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 14px 40px rgba(255,107,53,0.5);
+  }
+
+  .btn-ghost {
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.05rem;
+    padding: 15px 32px;
+    border-radius: 14px;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255,255,255,0.07);
+    color: #D6D3D1;
+    border: 1.5px solid rgba(255,255,255,0.18);
+    transition: transform 0.2s, background 0.2s, color 0.2s;
+  }
+  .btn-ghost:hover {
+    transform: translateY(-3px);
+    background: rgba(255,255,255,0.12);
+    color: white;
+  }
+
+  /* Stats */
+  .hero-stats {
+    display: flex;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 18px;
+    max-width: 600px;
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    animation: fadeUp 0.6s ease 0.4s both;
+  }
+  .hs { flex:1; padding: 20px 14px; text-align: center; border-right: 1px solid rgba(255,255,255,0.07); }
+  .hs:last-child { border-right: none; }
+  .hs-n {
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.9rem;
+    line-height: 1;
+    margin-bottom: 5px;
+    background: linear-gradient(135deg, #FFD23F, #FF6B35);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  }
+  .hs-l { font-size: 0.65rem; font-weight: 700; color: #A8A29E; text-transform: uppercase; letter-spacing: 0.1em; }
+
+  /* scroll hint */
+  .scroll-hint {
+    position: absolute; bottom: 32px; left: 50%; transform: translateX(-50%);
+    display: flex; flex-direction: column; align-items: center; gap: 6px;
+    color: rgba(255,255,255,0.45); font-size: 0.65rem; font-weight: 700;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    animation: fadeUp 1s ease 1.2s both;
+  }
+  .scroll-hint svg { animation: bob 2s ease-in-out infinite; }
+  @keyframes bob { 0%,100%{transform:translateY(0);} 50%{transform:translateY(7px);} }
+
+  /* ── SECTION SHARED ── */
+  .sec { padding: 88px 24px; }
+  .sec-inner { max-width: 1080px; margin: 0 auto; }
+  .sec-eyebrow { font-size: 0.7rem; font-weight: 900; letter-spacing: 0.2em; text-transform: uppercase; color: #FF6B35; margin-bottom: 10px; }
+  .sec-h2 { font-family: 'Fredoka One', cursive; font-size: clamp(1.9rem, 4vw, 2.9rem); color: #1C1917; line-height: 1.1; margin-bottom: 14px; }
+  .sec-lead { font-size: 1rem; color: #78716C; font-weight: 600; max-width: 500px; line-height: 1.65; margin-bottom: 52px; }
+
+  .sec-dark .sec-h2 { color: white; }
+  .sec-dark .sec-eyebrow { color: #FF6B35; }
+  .sec-dark .sec-lead { color: #C4BDB3; }
+
+  /* ── TOOLS GRID ── */
+  .tools-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(258px, 1fr));
+    gap: 20px;
+  }
+
+  .tool-card {
+    background: white;
+    border-radius: 24px;
+    padding: 34px 28px 28px;
+    border: 1.5px solid #E8DCC8;
+    text-decoration: none;
+    color: #1C1917;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.25s, box-shadow 0.25s;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+  }
+
+  .tool-card::before {
+    content: '';
+    position: absolute; top:0; left:0; right:0; height:4px;
+    border-radius: 24px 24px 0 0;
+  }
+
+  .tool-card:hover { transform: translateY(-6px); box-shadow: 0 20px 56px rgba(0,0,0,0.1); }
+
+  .tc-blue::before  { background: linear-gradient(90deg,#2563EB,#60A5FA); }
+  .tc-green::before { background: linear-gradient(90deg,#16A34A,#4ADE80); }
+  .tc-purple::before{ background: linear-gradient(90deg,#7C3AED,#E879F9); }
+  .tc-orange::before{ background: linear-gradient(90deg,#EA580C,#FB923C); }
+
+  .tc-icon { font-size: 2.8rem; margin-bottom: 16px; margin-top: 8px; }
+
+  .tc-badge {
+    font-size: 0.63rem; font-weight: 900; letter-spacing: 0.1em;
+    text-transform: uppercase; padding: 3px 10px; border-radius: 50px;
+    margin-bottom: 14px; display: inline-block;
+  }
+  .tc-blue .tc-badge   { background:#DBEAFE; color:#1E40AF; }
+  .tc-green .tc-badge  { background:#DCFCE7; color:#14532D; }
+  .tc-purple .tc-badge { background:#EDE9FE; color:#4C1D95; }
+  .tc-orange .tc-badge { background:#FFF7ED; color:#7C2D12; }
+
+  .tc-title { font-family:'Fredoka One',cursive; font-size:1.3rem; margin-bottom:10px; color:#1C1917; }
+  .tc-desc  { font-size:0.86rem; color:#78716C; font-weight:600; line-height:1.6; margin-bottom:20px; flex:1; }
+
+  .tc-list { list-style:none; border-top:1px solid #F5EFE0; padding-top:16px; display:flex; flex-direction:column; gap:8px; margin-bottom:22px; }
+  .tc-list li { font-size:0.8rem; font-weight:700; color:#44403C; display:flex; align-items:flex-start; gap:9px; line-height:1.4; }
+  .tc-list li span {
+    width:18px; height:18px; border-radius:50%;
+    display:inline-flex; align-items:center; justify-content:center;
+    font-size:0.65rem; color:white; flex-shrink:0; margin-top:1px;
+  }
+  .tc-blue .tc-list li span   { background:#2563EB; }
+  .tc-green .tc-list li span  { background:#16A34A; }
+  .tc-purple .tc-list li span { background:#7C3AED; }
+  .tc-orange .tc-list li span { background:#EA580C; }
+
+  .tc-cta {
+    font-family:'Fredoka One',cursive; font-size:0.9rem;
+    display:inline-flex; align-items:center; gap:6px;
+    padding:9px 18px; border-radius:10px; color:white;
+    text-decoration:none; align-self:flex-start;
+    transition: transform 0.15s;
+  }
+  .tc-cta:hover { transform: translateX(3px); }
+  .tc-blue .tc-cta   { background:#2563EB; }
+  .tc-green .tc-cta  { background:#16A34A; }
+  .tc-purple .tc-cta { background:#7C3AED; }
+  .tc-orange .tc-cta { background:#EA580C; }
+
+  /* ── WEEKS TRACK ── */
+  .weeks-track {
+    max-width: 860px;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  .weeks-track::before {
+    content: '';
+    position: absolute;
+    left: 26px; top: 48px; bottom: 48px;
+    width: 2px;
+    background: linear-gradient(180deg,#2563EB,#16A34A,#7C3AED,#EA580C,#0891B2,#BE123C);
+    opacity: 0.35;
+  }
+
+  .wk-row {
+    display: flex; align-items: flex-start; gap: 24px;
+    padding: 18px 20px; margin: 2px 0;
+    border-radius: 14px; cursor: pointer;
+    transition: background 0.2s;
+    text-decoration: none;
+  }
+  .wk-row:hover { background: rgba(255,255,255,0.05); }
+
+  .wk-dot {
+    width: 52px; height: 52px; border-radius: 50%;
+    display: flex; align-items:center; justify-content:center;
+    font-size: 1.4rem; color: white; flex-shrink: 0; position:relative; z-index:1;
+  }
+
+  .wk-info { flex:1; }
+  .wk-label { font-size:0.63rem; font-weight:700; letter-spacing:0.15em; text-transform:uppercase; color:#A8A29E; margin-bottom:3px; }
+  .wk-name  { font-family:'Fredoka One',cursive; font-size:1.1rem; color:white; margin-bottom:5px; }
+  .wk-desc  { font-size:0.88rem; font-weight:400; color:#C4BDB3; line-height:1.6; margin-bottom:8px; }
+
+  .wk-pills { display:flex; gap:5px; flex-wrap:wrap; }
+  .wk-pill  { font-size:0.64rem; font-weight:800; padding:2px 9px; border-radius:50px; }
+
+  .wk-project { text-align:right; flex-shrink:0; }
+  .wk-plabel  { font-size:0.6rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:#A8A29E; margin-bottom:2px; }
+  .wk-pname   { font-family:'Fredoka One',cursive; font-size:0.85rem; color:#D6D3D1; }
+
+  @media (max-width:560px) { .wk-project { display:none; } .weeks-track::before { left:18px; } .wk-dot { width:38px;height:38px;font-size:1rem; } }
+
+  /* ── WHO GRID ── */
+  .who-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(255px,1fr)); gap:20px; }
+
+  .who-card {
+    background:white; border:1.5px solid #E8DCC8; border-radius:20px;
+    padding:30px 26px; position:relative; overflow:hidden;
+  }
+  .who-card::after {
+    content:''; position:absolute; top:0; right:0;
+    width:72px; height:72px; border-radius:0 20px 0 72px; opacity:0.06;
+  }
+  .who-card:nth-child(1)::after { background:#2563EB; }
+  .who-card:nth-child(2)::after { background:#16A34A; }
+  .who-card:nth-child(3)::after { background:#7C3AED; }
+  .who-card:nth-child(4)::after { background:#EA580C; }
+  .who-icon  { font-size:2.2rem; margin-bottom:14px; }
+  .who-title { font-family:'Fredoka One',cursive; font-size:1.08rem; color:#1C1917; margin-bottom:10px; }
+  .who-text  { font-size:0.85rem; color:#78716C; font-weight:600; line-height:1.6; }
+
+  /* ── 3-STEP ── */
+  .steps-wrap {
+    display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+    gap:0; max-width:860px; margin:0 auto; position:relative;
+  }
+  .steps-wrap::before {
+    content:''; position:absolute;
+    top:36px; left:calc(100%/6); right:calc(100%/6);
+    height:2px;
+    background:linear-gradient(90deg,#FF6B35,#FF3D77,#7C3AED);
+    opacity:0.25; pointer-events:none;
+  }
+  @media (max-width:560px) { .steps-wrap::before { display:none; } }
+
+  .step { display:flex; flex-direction:column; align-items:center; text-align:center; padding:0 20px 32px; }
+  .step-num {
+    width:72px; height:72px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Fredoka One',cursive; font-size:1.8rem; color:white;
+    margin-bottom:20px; position:relative; z-index:1;
+    box-shadow:0 8px 24px rgba(0,0,0,0.12);
+  }
+  .step:nth-child(1) .step-num { background:linear-gradient(135deg,#2563EB,#60A5FA); }
+  .step:nth-child(2) .step-num { background:linear-gradient(135deg,#FF6B35,#FF3D77); }
+  .step:nth-child(3) .step-num { background:linear-gradient(135deg,#7C3AED,#E879F9); }
+  .step-title { font-family:'Fredoka One',cursive; font-size:1.1rem; color:#1C1917; margin-bottom:10px; }
+  .step-text  { font-size:0.84rem; font-weight:600; color:#78716C; line-height:1.6; max-width:210px; }
+  .step-text a { color:#FF6B35; font-weight:800; text-decoration:none; }
+
+  /* ── FINAL CTA ── */
+  .cta-sec {
+    background:#0E0B1A; padding:100px 24px; text-align:center; position:relative; overflow:hidden;
+  }
+  .cta-sec::before {
+    content:''; position:absolute; inset:0;
+    background:
+      radial-gradient(ellipse 60% 70% at 50% 110%, rgba(255,107,53,0.2) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 40% at 20% 10%, rgba(123,47,190,0.1) 0%, transparent 60%);
+    pointer-events:none;
+  }
+  .cta-sec .sec-h2  { color:white; position:relative; margin-bottom:16px; }
+  .cta-sec .sec-lead{ position:relative; text-align:center; margin:0 auto 36px; color:#C4BDB3; }
+
+  .cta-pills { display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-bottom:40px; position:relative; }
+  .cta-pill  {
+    background:rgba(255,255,255,0.07); border:1px solid rgba(255,255,255,0.12);
+    border-radius:50px; padding:7px 16px; font-size:0.78rem; font-weight:700; color:#D6D3D1;
+  }
+
+  .cta-btns { display:flex; gap:14px; justify-content:center; flex-wrap:wrap; position:relative; }
+
+  /* ── FOOTER ── */
+  .site-footer {
+    background:#0E0B1A;
+    border-top:1px solid rgba(255,255,255,0.06);
+    padding:40px 24px; text-align:center;
+    color:#A8A29E; font-size:0.84rem; font-weight:700;
+  }
+  .footer-nav { display:flex; gap:6px; justify-content:center; flex-wrap:wrap; margin-bottom:20px; }
+  .footer-nav a {
+    color:#C4BDB3; text-decoration:none; padding:5px 12px;
+    border-radius:8px; font-size:0.82rem; transition:color 0.15s,background 0.15s;
+  }
+  .footer-nav a:hover { color:white; background:rgba(255,255,255,0.07); }
+  .footer-rule { width:40px; height:2px; background:rgba(255,255,255,0.1); margin:20px auto; border-radius:2px; }
+  .footer-fine { font-size:0.73rem; color:rgba(255,255,255,0.35); margin-top:8px; }
+
+  /* fadeUp animation */
+  @keyframes fadeUp { from{opacity:0;transform:translateY(22px);} to{opacity:1;transform:translateY(0);} }
+
+  /* scroll-animated elements start invisible */
+  .reveal { opacity:0; transform:translateY(22px); transition:opacity 0.5s ease, transform 0.5s ease; }
+  .reveal.in { opacity:1; transform:translateY(0); }
+  </style>
+</head>
+<body>
+
+<!-- ══════════════ NAV ══════════════ -->
+<nav class="site-nav">
+  <a href="index.html" class="nav-logo">🐱 ScratchJr Adventure</a>
+  <button class="nav-toggle" id="navToggle" aria-label="Open menu">
+    <span></span><span></span><span></span>
+  </button>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="index.html" class="active">🏠 Home</a></li>
+    <li><a href="pages/curriculum.html">📅 Curriculum</a></li>
+    <li><a href="pages/activity-cards.html">🧩 Activity Cards</a></li>
+    <li><a href="pages/lesson-scripts.html">📋 Lesson Scripts</a></li>
+    <li><a href="pages/troubleshooting.html">🔧 Troubleshooting</a></li>
+    <li><a href="pages/checklist.html">✅ Progress</a></li>
+  </ul>
+</nav>
+
+<!-- ══════════════ HERO ══════════════ -->
+<section class="hero">
+  <div class="stars-layer"></div>
+
+  <!-- Floating ScratchJr block labels -->
+  <div class="float-block" style="bottom:18%;left:5%;background:rgba(37,99,235,0.28);color:#93C5FD;--rot:-4deg;--dur:19s;--delay:0s;">▶ move right 3</div>
+  <div class="float-block" style="bottom:28%;left:17%;background:rgba(22,163,74,0.28);color:#86EFAC;--rot:3deg;--dur:23s;--delay:3s;">🔁 repeat 8</div>
+  <div class="float-block" style="bottom:12%;left:33%;background:rgba(124,58,237,0.28);color:#C4B5FD;--rot:-2deg;--dur:17s;--delay:7s;">💬 say "Hello!"</div>
+  <div class="float-block" style="bottom:22%;right:26%;background:rgba(234,88,12,0.28);color:#FCA5A5;--rot:5deg;--dur:21s;--delay:10s;">📨 send message</div>
+  <div class="float-block" style="bottom:9%;right:9%;background:rgba(8,145,178,0.28);color:#67E8F9;--rot:-3deg;--dur:25s;--delay:13s;">🌀 forever loop</div>
+  <div class="float-block" style="bottom:32%;right:4%;background:rgba(190,18,60,0.28);color:#FDA4AF;--rot:2deg;--dur:20s;--delay:5s;">⭐ when tapped</div>
+
+  <div class="hero-eyebrow">
+    <span class="live-dot"></span>
+    Free · Open Source · No Sign-up
+  </div>
+
+  <h1>
+    <span class="l1">Teach Your Kid</span>
+    <span class="l2">to Code! 🚀</span>
+  </h1>
+
+  <p class="hero-sub">
+    A <strong>free 6-week program</strong> for parents and kids aged 7–10.
+    Daily 1-hour lessons, printable cards, word-for-word teacher scripts —
+    <strong>no coding experience needed.</strong>
+  </p>
+
+  <div class="hero-btns">
+    <a href="pages/curriculum.html" class="btn-start">📅 Start the Program</a>
+    <a href="pages/activity-cards.html" class="btn-ghost">🧩 Print Activity Cards</a>
+  </div>
+
+  <div class="hero-stats">
+    <div class="hs"><div class="hs-n">6</div><div class="hs-l">Weeks</div></div>
+    <div class="hs"><div class="hs-n">30</div><div class="hs-l">Lessons</div></div>
+    <div class="hs"><div class="hs-n">1 hr</div><div class="hs-l">Per Day</div></div>
+    <div class="hs"><div class="hs-n">6</div><div class="hs-l">Projects</div></div>
+    <div class="hs"><div class="hs-n">Free</div><div class="hs-l">Always</div></div>
+  </div>
+
+  <div class="scroll-hint">
+    <span>Scroll to explore</span>
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+      <path d="M8 3v10M3 9l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </div>
+</section>
+
+<!-- ══════════════ WHAT'S INSIDE ══════════════ -->
+<section class="sec" style="background:#FFFBF5;">
+  <div class="sec-inner">
+    <div class="sec-eyebrow">📦 Everything Included</div>
+    <h2 class="sec-h2">A Complete Teaching Kit,<br>Not Just a Lesson Plan</h2>
+    <p class="sec-lead">Four tools that work together — so every session runs smoothly, even on the first day.</p>
+
+    <div class="tools-grid">
+
+      <a href="pages/curriculum.html" class="tool-card tc-blue reveal">
+        <div class="tc-icon">📅</div>
+        <span class="tc-badge">6 Weeks · 30 Days</span>
+        <div class="tc-title">Full Curriculum</div>
+        <div class="tc-desc">Day-by-day plan from Week 1 "Hello ScratchJr!" all the way to a Graduation Day final project.</div>
+        <ul class="tc-list">
+          <li><span>✓</span>Every day has a clear focus and goal</li>
+          <li><span>✓</span>Friday = mini-project to show off</li>
+          <li><span>✓</span>Covers motion, stories, loops, messages & sound</li>
+        </ul>
+        <span class="tc-cta">View Curriculum →</span>
+      </a>
+
+      <a href="pages/activity-cards.html" class="tool-card tc-green reveal">
+        <div class="tc-icon">🧩</div>
+        <span class="tc-badge">30 Cards · Print-Ready</span>
+        <div class="tc-title">Activity Cards</div>
+        <div class="tc-desc">One colorful card per day. Place it next to the tablet — kids follow the steps independently.</div>
+        <ul class="tc-list">
+          <li><span>✓</span>Fun & colorful, designed for age 7–10</li>
+          <li><span>✓</span>Step-by-step instructions + daily challenge</li>
+          <li><span>✓</span>"I did it!" checkbox to tick each day</li>
+        </ul>
+        <span class="tc-cta">Print Cards →</span>
+      </a>
+
+      <a href="pages/lesson-scripts.html" class="tool-card tc-purple reveal">
+        <div class="tc-icon">📋</div>
+        <span class="tc-badge">30 Scripts · Minute-by-Minute</span>
+        <div class="tc-title">Lesson Scripts</div>
+        <div class="tc-desc">Open on your phone while teaching. Exact timing, words to say, and guiding questions for each session.</div>
+        <ul class="tc-list">
+          <li><span>✓</span>What to say at the start of each session</li>
+          <li><span>✓</span>Questions to ask — not answers to give</li>
+          <li><span>✓</span>"✅ Success looks like…" for every day</li>
+        </ul>
+        <span class="tc-cta">Read Scripts →</span>
+      </a>
+
+      <a href="pages/troubleshooting.html" class="tool-card tc-orange reveal">
+        <div class="tc-icon">🔧</div>
+        <span class="tc-badge">Fixes + Progress Tracking</span>
+        <div class="tc-title">Troubleshooting & Checklist</div>
+        <div class="tc-desc">When things go wrong (they will!), this guide has instant fixes — plus a weekly skill checklist to track progress.</div>
+        <ul class="tc-list">
+          <li><span>✓</span>9 most common problems, solved step-by-step</li>
+          <li><span>✓</span>Weekly skill observation checklist</li>
+          <li><span>✓</span>What to say vs. what NOT to say</li>
+        </ul>
+        <span class="tc-cta">Open Guide →</span>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ THE 6-WEEK JOURNEY ══════════════ -->
+<section class="sec sec-dark" style="background:#1C1917;">
+  <div class="sec-inner">
+    <div class="sec-eyebrow" style="color:#FF8C5A;">🗓️ The Program</div>
+    <h2 class="sec-h2" style="color:white;">Six Weeks,<br>Six Big Ideas</h2>
+    <p class="sec-lead" style="color:#C4BDB3;">Each week builds on the last. By the end, kids design and present their own original project — completely independently.</p>
+
+    <div class="weeks-track">
+
+      <a href="pages/curriculum.html#week1" class="wk-row reveal">
+        <div class="wk-dot" style="background:linear-gradient(135deg,#1D4ED8,#60A5FA)">🐱</div>
+        <div class="wk-info">
+          <div class="wk-label">Week 1</div>
+          <div class="wk-name">Hello, ScratchJr!</div>
+          <div class="wk-desc">Meet the app, draw characters, make things move, talk, and respond to taps</div>
+          <div class="wk-pills">
+            <span class="wk-pill" style="background:#1E3A8A;color:#93C5FD;">Motion</span>
+            <span class="wk-pill" style="background:#1E3A8A;color:#93C5FD;">Triggers</span>
+            <span class="wk-pill" style="background:#1E3A8A;color:#93C5FD;">Looks</span>
+          </div>
+        </div>
+        <div class="wk-project"><div class="wk-plabel">Friday Project</div><div class="wk-pname">Hello World! 🌍</div></div>
+      </a>
+
+      <a href="pages/curriculum.html#week2" class="wk-row reveal">
+        <div class="wk-dot" style="background:linear-gradient(135deg,#15803D,#4ADE80)">📖</div>
+        <div class="wk-info">
+          <div class="wk-label">Week 2</div>
+          <div class="wk-name">Tell a Story!</div>
+          <div class="wk-desc">Multi-scene stories with dialogue, timing, and automatic page jumps between scenes</div>
+          <div class="wk-pills">
+            <span class="wk-pill" style="background:#14532D;color:#86EFAC;">Pages</span>
+            <span class="wk-pill" style="background:#14532D;color:#86EFAC;">Dialogue</span>
+            <span class="wk-pill" style="background:#14532D;color:#86EFAC;">Wait Blocks</span>
+          </div>
+        </div>
+        <div class="wk-project"><div class="wk-plabel">Friday Project</div><div class="wk-pname">My First Story! 📚</div></div>
+      </a>
+
+      <a href="pages/curriculum.html#week3" class="wk-row reveal">
+        <div class="wk-dot" style="background:linear-gradient(135deg,#6D28D9,#A855F7)">🔁</div>
+        <div class="wk-info">
+          <div class="wk-label">Week 3</div>
+          <div class="wk-name">Loops & Repeats!</div>
+          <div class="wk-desc">The secret of loops — dances, repeating patterns, and animations that run forever</div>
+          <div class="wk-pills">
+            <span class="wk-pill" style="background:#3B0764;color:#C4B5FD;">Repeat</span>
+            <span class="wk-pill" style="background:#3B0764;color:#C4B5FD;">Forever Loop</span>
+            <span class="wk-pill" style="background:#3B0764;color:#C4B5FD;">Patterns</span>
+          </div>
+        </div>
+        <div class="wk-project"><div class="wk-plabel">Friday Project</div><div class="wk-pname">Dance Show! 🕺</div></div>
+      </a>
+
+      <a href="pages/curriculum.html#week4" class="wk-row reveal">
+        <div class="wk-dot" style="background:linear-gradient(135deg,#C2410C,#FB923C)">📨</div>
+        <div class="wk-info">
+          <div class="wk-label">Week 4</div>
+          <div class="wk-name">Characters Talking to Each Other!</div>
+          <div class="wk-desc">Messages — characters react to each other, chain reactions, and a real tap-to-play game</div>
+          <div class="wk-pills">
+            <span class="wk-pill" style="background:#431407;color:#FCA5A5;">Messages</span>
+            <span class="wk-pill" style="background:#431407;color:#FCA5A5;">Events</span>
+            <span class="wk-pill" style="background:#431407;color:#FCA5A5;">First Game</span>
+          </div>
+        </div>
+        <div class="wk-project"><div class="wk-plabel">Friday Project</div><div class="wk-pname">Interactive Story! 🗺️</div></div>
+      </a>
+
+      <a href="pages/curriculum.html#week5" class="wk-row reveal">
+        <div class="wk-dot" style="background:linear-gradient(135deg,#0E7490,#22D3EE)">🎵</div>
+        <div class="wk-info">
+          <div class="wk-label">Week 5</div>
+          <div class="wk-name">Sound & Music!</div>
+          <div class="wk-desc">Record your voice, add sound effects, build a tap instrument, sync audio with animation</div>
+          <div class="wk-pills">
+            <span class="wk-pill" style="background:#164E63;color:#67E8F9;">Sound FX</span>
+            <span class="wk-pill" style="background:#164E63;color:#67E8F9;">Recording</span>
+            <span class="wk-pill" style="background:#164E63;color:#67E8F9;">Instrument</span>
+          </div>
+        </div>
+        <div class="wk-project"><div class="wk-plabel">Friday Project</div><div class="wk-pname">Music Video! 🎤</div></div>
+      </a>
+
+      <a href="pages/curriculum.html#week6" class="wk-row reveal" style="border-bottom:none;">
+        <div class="wk-dot" style="background:linear-gradient(135deg,#9F1239,#FB7185)">🏆</div>
+        <div class="wk-info">
+          <div class="wk-label">Week 6</div>
+          <div class="wk-name">Grand Finale!</div>
+          <div class="wk-desc">Design, build, polish and present a completely original project — then celebrate! 🎓</div>
+          <div class="wk-pills">
+            <span class="wk-pill" style="background:#4C0519;color:#FDA4AF;">Independent</span>
+            <span class="wk-pill" style="background:#4C0519;color:#FDA4AF;">Full Project</span>
+            <span class="wk-pill" style="background:#4C0519;color:#FDA4AF;">Graduation</span>
+          </div>
+        </div>
+        <div class="wk-project"><div class="wk-plabel">Friday Project</div><div class="wk-pname">Graduation Day! 🎓</div></div>
+      </a>
+
+    </div>
+
+    <div style="text-align:center;margin-top:44px;">
+      <a href="pages/curriculum.html" class="btn-start">📅 See Full Day-by-Day Breakdown →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ WHO IS THIS FOR ══════════════ -->
+<section class="sec" style="background:#FFFBF5;">
+  <div class="sec-inner">
+    <div class="sec-eyebrow">👨‍👩‍👧 Who It's For</div>
+    <h2 class="sec-h2">Built for Real Families,<br>Not Classrooms</h2>
+    <p class="sec-lead">Designed around how kids actually learn at home — through play, drawing, and projects they're genuinely proud of.</p>
+
+    <div class="who-grid">
+      <div class="who-card reveal">
+        <div class="who-icon">👩‍💻</div>
+        <div class="who-title">Parents with zero coding experience</div>
+        <p class="who-text">Every session has a word-for-word script and guiding questions. You never need to know the answer — you just need to ask the right question and let them figure it out.</p>
+      </div>
+      <div class="who-card reveal">
+        <div class="who-icon">🧒</div>
+        <div class="who-title">Kids aged 7–10</div>
+        <p class="who-text">ScratchJr uses visual block — no typing, no syntax errors, no frustration. Kids learn real programming concepts like loops, events, and sequences through stories, dances, and games.</p>
+      </div>
+      <div class="who-card reveal">
+        <div class="who-icon">🏠</div>
+        <div class="who-title">Home learners & homeschoolers</div>
+        <p class="who-text">One focused hour a day, five days a week. Each lesson is self-contained and runs on a free iPad or Android app. No computer, no subscription, no special equipment needed.</p>
+      </div>
+      <div class="who-card reveal">
+        <div class="who-icon">🎓</div>
+        <div class="who-title">After-school club teachers</div>
+        <p class="who-text">Printable cards let kids work semi-independently at their own pace while you move around. Scripts make it easy to delegate to a co-teacher or classroom assistant.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ HOW TO START ══════════════ -->
+<section class="sec" style="background:#F5EFE0;">
+  <div class="sec-inner" style="text-align:center;">
+    <div class="sec-eyebrow">⚡ Getting Started</div>
+    <h2 class="sec-h2">Up and Running<br>in Under 10 Minutes</h2>
+    <p class="sec-lead" style="margin:0 auto 52px;">No setup, no accounts, no installs — except the free ScratchJr app.</p>
+
+    <div class="steps-wrap">
+      <div class="step reveal">
+        <div class="step-num">1</div>
+        <div class="step-title">Download ScratchJr</div>
+        <p class="step-text">Free on the <a href="https://apps.apple.com/app/scratchjr/id895485086" target="_blank">App Store</a> (iPad) and <a href="https://play.google.com/store/apps/details?id=org.scratchjr.android" target="_blank">Google Play</a> (Android). No account — just open and go.</p>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">2</div>
+        <div class="step-title">Print Week 1 Cards</div>
+        <p class="step-text">Open <a href="pages/activity-cards.html">Activity Cards</a>, print Monday–Friday of Week 1. Place one card next to the tablet each morning.</p>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">3</div>
+        <div class="step-title">Open Your Lesson Script</div>
+        <p class="step-text">Keep <a href="pages/lesson-scripts.html">Lesson Scripts</a> open on your phone. Follow the timing, ask the questions, and celebrate every small win!</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ FINAL CTA ══════════════ -->
+<section class="cta-sec">
+  <div class="sec-inner">
+    <h2 class="sec-h2">Your Child's First Line<br>of Code Starts Today 🌟</h2>
+    <p class="sec-lead" style="color:#C4BDB3;text-align:center;margin:0 auto 32px;">Free, printable, and ready to use right now. No account. No credit card. No catch.</p>
+
+    <div class="cta-pills">
+      <span class="cta-pill">✅ 100% Free</span>
+      <span class="cta-pill">🖨️ Print-Ready Cards</span>
+      <span class="cta-pill">📱 iPad & Android</span>
+      <span class="cta-pill">🌍 Open Source</span>
+      <span class="cta-pill">👩‍💻 No coding experience needed</span>
+    </div>
+
+    <div class="cta-btns">
+      <a href="pages/curriculum.html" class="btn-start">📅 See the Full Curriculum</a>
+      <a href="pages/activity-cards.html" class="btn-ghost">🧩 Print Activity Cards</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ FOOTER ══════════════ -->
+<footer class="site-footer">
+  <nav class="footer-nav">
+    <a href="index.html">Home</a>
+    <a href="pages/curriculum.html">Curriculum</a>
+    <a href="pages/activity-cards.html">Activity Cards</a>
+    <a href="pages/lesson-scripts.html">Lesson Scripts</a>
+    <a href="pages/troubleshooting.html">Troubleshooting</a>
+    <a href="pages/checklist.html">Progress</a>
+  </nav>
+  <div class="footer-rule"></div>
+  <p style="color:#A8A29E;margin-bottom:6px;">
+    Made with ❤️ for parents everywhere &nbsp;·&nbsp; Free &amp; Open Source &nbsp;·&nbsp;
+    <a href="https://github.com" style="color:#FFD23F;text-decoration:none;">View on GitHub ↗</a>
+  </p>
+  <p class="footer-fine">ScratchJr is a product of the Scratch Foundation. This curriculum is an independent community resource not affiliated with the Scratch Foundation.</p>
+</footer>
+
+<script>
+  // Mobile nav
+  const toggle = document.getElementById('navToggle');
+  const links  = document.getElementById('navLinks');
+  toggle.addEventListener('click', () => links.classList.toggle('open'));
+  links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => links.classList.remove('open')));
+
+  // Scroll reveal
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+  }, { threshold: 0.07 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+</body>
+</html>

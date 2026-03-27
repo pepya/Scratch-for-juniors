@@ -1,0 +1,961 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+  <meta name="color-scheme" content="light">
+  <link rel="stylesheet" href="../css/site.css">
+<meta name="color-scheme" content="light">
+<meta name="supported-color-schemes" content="light">
+<title>ScratchJr — Daily Lesson Scripts (Teacher Guide)</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1C1917;
+    --paper: #FFFBF5;
+    --warm: #F5EFE0;
+    --rule: #E8DCC8;
+    --accent: #C2410C;
+    --accent2: #0369A1;
+    --green: #166534;
+    --purple: #6B21A8;
+    --muted: #78716C;
+    --w1: #1D4ED8; --w2: #16A34A; --w3: #7C3AED;
+    --w4: #EA580C; --w5: #0891B2; --w6: #BE123C;
+    color-scheme: light only;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: #FFFBF5 !important;
+    color: #1C1917 !important;
+    line-height: 1.6;
+  }
+  /* Force all text to be dark — override any dark mode injection */
+  *, *::before, *::after {
+    color: inherit;
+  }
+
+  /* Cover */
+  .cover {
+    background: var(--ink);
+    color: white;
+    padding: 60px 40px;
+    text-align: center;
+  }
+  .cover-label {
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #A8A29E;
+    margin-bottom: 16px;
+  }
+  .cover h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2.8rem;
+    line-height: 1.1;
+    margin-bottom: 12px;
+  }
+  .cover p { color: #A8A29E; font-size: 1rem; }
+
+  /* How to use */
+  .how-to {
+    background: var(--warm);
+    border-bottom: 2px solid var(--rule);
+    padding: 32px 40px;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  .how-to h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.4rem;
+    margin-bottom: 16px;
+    color: var(--accent);
+  }
+  .how-to-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+  }
+  .how-item { }
+  .how-item strong { display: block; font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
+  .how-item span { font-size: 0.9rem; font-weight: 500; }
+
+  /* Main container */
+  .container { max-width: 900px; margin: 0 auto; padding: 40px 40px 80px; }
+
+  /* Week header */
+  .week-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 20px 24px;
+    border-radius: 12px;
+    margin: 40px 0 24px;
+    color: white;
+  }
+  .week-header h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.6rem;
+  }
+  .week-header p { font-size: 0.9rem; opacity: 0.85; margin-top: 2px; }
+  .week-num-big {
+    font-family: 'DM Serif Display', serif;
+    font-size: 3.5rem;
+    line-height: 1;
+    opacity: 0.3;
+  }
+
+  /* Day lesson */
+  .day-lesson {
+    border: 1.5px solid var(--rule);
+    border-radius: 12px;
+    margin-bottom: 24px;
+    overflow: hidden;
+  }
+
+  .day-lesson-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 20px;
+    background: var(--warm);
+    border-bottom: 1.5px solid var(--rule);
+  }
+
+  .day-emoji { font-size: 1.6rem; }
+
+  .day-lesson-header h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.15rem;
+  }
+  .day-lesson-header .day-meta {
+    font-size: 0.75rem;
+    color: var(--muted);
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .day-lesson-body { padding: 20px; background: #FFFBF5 !important; }
+
+  /* Segments */
+  .segment { margin-bottom: 20px; }
+
+  .segment-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    color: #1C1917 !important;
+  }
+
+  .seg-dot {
+    width: 10px; height: 10px;
+    border-radius: 3px;
+    flex-shrink: 0;
+  }
+
+  .script-block {
+    background: #DBEAFE !important;
+    border-left: 4px solid #1D4ED8;
+    border-radius: 0 8px 8px 0;
+    padding: 14px 16px;
+    font-size: 0.9rem;
+    line-height: 1.7;
+    font-style: italic;
+    color: #1E3A5F !important;
+    margin-bottom: 8px;
+  }
+
+  .script-block strong {
+    font-style: normal;
+    color: #1D4ED8 !important;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  .action-list { list-style: none; }
+  .action-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 0.87rem;
+    padding: 8px 0;
+    border-bottom: 1px solid #E8DCC8;
+    font-weight: 600;
+    color: #1C1917 !important;
+  }
+  .action-list li:last-child { border: none; }
+  .action-list .tstamp {
+    font-size: 0.72rem;
+    font-weight: 800;
+    color: #78716C !important;
+    min-width: 42px;
+    padding-top: 2px;
+    font-family: monospace;
+  }
+
+  .questions-box {
+    background: #DCFCE7 !important;
+    border: 1.5px solid #4ADE80;
+    border-radius: 10px;
+    padding: 12px 16px;
+  }
+  .questions-box .q-title {
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #166534 !important;
+    margin-bottom: 8px;
+  }
+  .questions-box ul { list-style: none; }
+  .questions-box li {
+    font-size: 0.85rem;
+    padding: 4px 0;
+    color: #14532D !important;
+    font-weight: 600;
+  }
+  .questions-box li::before { content: "→ "; color: #16A34A; font-weight: 700; }
+
+  .watch-box {
+    background: #FFF3E0 !important;
+    border: 1.5px solid #FB923C;
+    border-radius: 10px;
+    padding: 12px 16px;
+    margin-top: 10px;
+  }
+  .watch-box .w-title {
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #C2410C !important;
+    margin-bottom: 8px;
+  }
+  .watch-box ul { list-style: none; }
+  .watch-box li {
+    font-size: 0.85rem;
+    padding: 4px 0;
+    color: #7C2D12 !important;
+    font-weight: 600;
+  }
+  .watch-box li::before { content: "👁 "; }
+
+  .success-bar {
+    background: #1C1917 !important;
+    color: #FFFFFF !important;
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-top: 14px;
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+  }
+
+  /* day lesson card backgrounds — force light */
+  .day-lesson { background: #FFFFFF !important; }
+  .day-lesson-header {
+    background: #F5EFE0 !important;
+  }
+  .day-lesson-header h3 { color: #1C1917 !important; }
+  .day-lesson-header .day-meta { color: #78716C !important; }
+
+  /* how-to section */
+  .how-to { background: #F5EFE0 !important; }
+  .how-to h2 { color: #C2410C !important; }
+  .how-item strong { color: #78716C !important; }
+  .how-item span { color: #1C1917 !important; }
+
+  /* container text */
+  .container { background: #FFFBF5 !important; }
+
+  /* Print */
+  @media print {
+    .cover { padding: 40px 30px; }
+    .container { padding: 20px 30px; }
+    .day-lesson { page-break-inside: avoid; }
+    .week-header { page-break-before: always; }
+  }
+</style>
+</head>
+<body>
+<nav class="site-nav">
+  <a href="../index.html" class="nav-logo">🐱 ScratchJr Adventure</a>
+  <button class="nav-toggle" id="navToggle" aria-label="Menu"><span></span><span></span><span></span></button>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="../index.html">🏠 Home</a></li>
+    <li><a href="curriculum.html">📅 Curriculum</a></li>
+    <li><a href="activity-cards.html">🧩 Activity Cards</a></li>
+    <li><a href="lesson-scripts.html" class="active">📋 Lesson Scripts</a></li>
+    <li><a href="troubleshooting.html">🔧 Troubleshooting</a></li>
+    <li><a href="checklist.html">✅ Progress</a></li>
+  </ul>
+</nav>
+
+<div class="cover">
+  <div class="cover-label">ScratchJr Home Learning Program</div>
+  <h1>Daily Lesson Scripts<br>Teacher's Guide</h1>
+  <p>Minute-by-minute plans · Guiding questions · What to watch for · 6 Weeks · 30 Days</p>
+</div>
+
+<div class="how-to">
+  <h2>How to Use This Guide</h2>
+  <div class="how-to-grid">
+    <div class="how-item"><strong>📋 Script (blue)</strong><span>Suggested things to say — use your own words, this is a guide not a script to read verbatim.</span></div>
+    <div class="how-item"><strong>⏱ Timing</strong><span>Approximate minutes — adjust based on energy and engagement. It's fine to run over on good days!</span></div>
+    <div class="how-item"><strong>→ Questions (green)</strong><span>Ask these instead of telling. Wait for their answer — even silence is them thinking.</span></div>
+    <div class="how-item"><strong>👁 Watch for (orange)</strong><span>Signs the child is getting it, or struggling. Act on what you observe.</span></div>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- ═══════════════════ WEEK 1 ═══════════════════ -->
+<div class="week-header" style="background: linear-gradient(135deg, #1D4ED8, #3B82F6);">
+  <div class="week-num-big">1</div>
+  <div>
+    <h2>Hello, ScratchJr!</h2>
+    <p>Week goal: Child can open ScratchJr, add a character, connect 3+ blocks, and press play independently</p>
+  </div>
+</div>
+
+<!-- Day 1 -->
+<div class="day-lesson">
+  <div class="day-lesson-header">
+    <div class="day-emoji">🛝</div>
+    <div>
+      <div class="day-meta">Week 1 · Day 1 · Monday</div>
+      <h3>Meet the Playground</h3>
+    </div>
+  </div>
+  <div class="day-lesson-body">
+
+    <div class="segment">
+      <div class="segment-label"><span class="seg-dot" style="background:#6B7280"></span>OPENING — 5 min</div>
+      <div class="script-block">
+        <strong>Say to child →</strong>
+        "Today we're going to explore a magical app where you can make characters come alive — kind of like being a movie director AND a programmer at the same time. Before we touch anything, let's just look at the screen together for a minute. What do you notice? What looks interesting to you?"
+      </div>
+    </div>
+
+    <div class="segment">
+      <div class="segment-label"><span class="seg-dot" style="background:#2563EB"></span>EXPLORE — 20 min</div>
+      <ul class="action-list">
+        <li><span class="tstamp">0:05</span>Open ScratchJr together. Don't click anything yet — just observe.</li>
+        <li><span class="tstamp">0:08</span>Point to Stage (main area), Blocks panel (left), Characters tray (bottom). Name them together.</li>
+        <li><span class="tstamp">0:12</span>Say "OK, tap the cat character and see what happens." Let them discover it selects it.</li>
+        <li><span class="tstamp">0:15</span>Open Paint tool together. Let them draw freely for 8 minutes — their own character.</li>
+        <li><span class="tstamp">0:23</span>Help them save if needed — show them where the save button is.</li>
+      </ul>
+    </div>
+
+    <div class="segment">
+      <div class="segment-label"><span class="seg-dot" style="background:#16A34A"></span>GUIDING QUESTIONS</div>
+      <div class="questions-box">
+        <div class="q-title">💬 Ask these — don't answer for them</div>
+        <ul>
+          <li>"What do you think this button does? Let's try it and see!"</li>
+          <li>"If you were a character in a game, what would YOU look like? Draw that!"</li>
+          <li>"Can you find the place where you can put the character's name?"</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="segment">
+      <div class="segment-label"><span class="seg-dot" style="background:#EA580C"></span>WATCH FOR</div>
+      <div class="watch-box">
+        <div class="w-title">👁 Observe these signals</div>
+        <ul>
+          <li>Are they curious and exploring — or anxious and waiting for instruction? (Curious = great! Anxious = more encouragement)</li>
+          <li>Do they try things without asking permission? (Good sign of confidence)</li>
+          <li>Are they spending too long on drawing? (That's fine — art engagement = investment)</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="success-bar">✅ Success looks like: Child has drawn their own character, saved the project, and can point to the Stage, Blocks, and Characters areas by name.</div>
+  </div>
+</div>
+
+<!-- Day 2 -->
+<div class="day-lesson">
+  <div class="day-lesson-header">
+    <div class="day-emoji">🏃</div>
+    <div>
+      <div class="day-meta">Week 1 · Day 2 · Tuesday</div>
+      <h3>Move It! Arrow Blocks</h3>
+    </div>
+  </div>
+  <div class="day-lesson-body">
+    <div class="segment">
+      <div class="segment-label"><span class="seg-dot" style="background:#6B7280"></span>OPENING — 5 min</div>
+      <div class="script-block">
+        <strong>Say to child →</strong>
+        "Yesterday we explored the app and made a character. Today we're going to make that character actually MOVE. Programmers use special instructions called blocks — today we'll meet the movement blocks. They're blue. Can you find all the blue blocks before we start?"
+      </div>
+    </div>
+
+    <div class="segment">
+      <div class="segment-label"><span class="seg-dot" style="background:#2563EB"></span>GUIDED BUILD — 25 min</div>
+      <ul class="action-list">
+        <li><span class="tstamp">0:05</span>Ask them to drag ONE move-right block to the script area. Let them figure out dragging.</li>
+        <li><span class="tstamp">0:10</span>Tap the block — character moves! "Whoa! What just happened?" Let them react.</li>
+        <li><span class="tstamp">0:15</span>Challenge: "Can you make it go right AND then left? What blocks do you need?"</li>
+        <li><span class="tstamp">0:20</span>Introduce the number on the block — tap it. "What do you think changes when this number is bigger?"</li>
+        <li><span class="tstamp">0:25</span>Free time: "Build a 5-step dance — any direction, any speed. Surprise me!"</li>
+      </ul>
+    </div>
+
+    <div class="segment">
+      <div class="segment-label"><span class="seg-dot" style="background:#16A34A"></span>GUIDING QUESTIONS</div>
+      <div class="questions-box">
+        <div class="q-title">💬 Ask these</div>
+        <ul>
+          <li>"If the number 3 makes it go a little, what number will make it go a LOT?"</li>
+          <li>"Can you predict what will happen before you tap? Then test your prediction!"</li>
+          <li>"If you wanted the character to walk in a square, which directions would you need?"</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="segment">
+      <div class="segment-label"><span class="seg-dot" style="background:#EA580C"></span>WATCH FOR</div>
+      <div class="watch-box">
+        <div class="w-title">👁 Observe</div>
+        <ul>
+          <li>Do they tap the block or drag it to test? (Dragging = understanding scripts; Tapping = using it like a button — gently show the difference)</li>
+          <li>Do they change the numbers experimentally? (Great sign of curiosity)</li>
+          <li>Do they connect blocks in a chain? (Key concept — praise this explicitly)</li>
+        </ul>
+      </div>
+    </div>
+    <div class="success-bar">✅ Success looks like: Child can chain at least 3 motion blocks and predict roughly where the character will end up.</div>
+  </div>
+</div>
+
+<!-- Day 3 -->
+<div class="day-lesson">
+  <div class="day-lesson-header">
+    <div class="day-emoji">▶️</div>
+    <div>
+      <div class="day-meta">Week 1 · Day 3 · Wednesday</div>
+      <h3>Press Play! Start Blocks</h3>
+    </div>
+  </div>
+  <div class="day-lesson-body">
+    <div class="segment">
+      <div class="segment-label"><span class="seg-dot" style="background:#6B7280"></span>OPENING — 5 min</div>
+      <div class="script-block">
+        <strong>Say to child →</strong>
+        "Every program needs a START button — something that kicks everything off. In real programming, we call these triggers or events. Today you'll find ScratchJr's version. Here's the question: what do you think needs to happen FIRST before any code runs?"
+      </div>
+    </div>
+    <div class="segment">
+      <div class="segment-label"><span class="seg-dot" style="background:#2563EB"></span>GUIDED BUILD — 25 min</div>
+      <ul class="action-list">
+        <li><span class="tstamp">0:05</span>Open the yellow blocks section together — look at the options.</li>
+        <li><span class="tstamp">0:08</span>"The green flag means 'when you press play.' Drag it to the FRONT of your dance chain."</li>
+        <li><span class="tstamp">0:12</span>Press the green flag on screen — everything runs! "Is this different from just tapping the block?"</li>
+        <li><span class="tstamp">0:18</span>Add a SECOND trigger: "when character is tapped" → same dance. Now both work!</li>
+        <li><span class="tstamp">0:25</span>Free play: explore all trigger options — what does "shake phone" trigger do?</li>
+      </ul>
+    </div>
+    <div class="segment">
+      <div class="segment-label"><span class="seg-dot" style="background:#16A34A"></span>GUIDING QUESTIONS</div>
+      <div class="questions-box">
+        <div class="q-title">💬 Ask these</div>
+        <ul>
+          <li>"Why do you think EVERY program needs a starting point?"</li>
+          <li>"If you have 2 different triggers for the same script, what happens if you press both at once?"</li>
+          <li>"Can you think of real-life triggers? (doorbell → someone opens door, alarm → you wake up)"</li>
+        </ul>
+      </div>
+    </div>
+    <div class="watch-box" style="margin:0 0 14px">
+      <div class="w-title">👁 Watch For</div>
+      <ul>
+        <li>Do they understand a chain must START with a trigger? (Key mental model)</li>
+        <li>Do they try the different trigger types? (Curiosity = great)</li>
+        <li>Do they connect blocks in the wrong order? (Gently ask "which should come first?")</li>
+      </ul>
+    </div>
+    <div class="success-bar">✅ Success looks like: Child independently adds a trigger to a script and can explain "the green flag starts everything."</div>
+  </div>
+</div>
+
+<!-- Day 4 - condensed for space -->
+<div class="day-lesson">
+  <div class="day-lesson-header">
+    <div class="day-emoji">🎨</div>
+    <div>
+      <div class="day-meta">Week 1 · Day 4 · Thursday</div>
+      <h3>Look Different! Looks Blocks</h3>
+    </div>
+  </div>
+  <div class="day-lesson-body">
+    <div class="segment">
+      <div class="segment-label"><span class="seg-dot" style="background:#6B7280"></span>OPENING — 5 min</div>
+      <div class="script-block">
+        <strong>Say to child →</strong>
+        "Today's blocks are my favourites — they're the ones that make things look WILD. Programmers call these 'appearance' or 'looks' commands. Before we start: if your character could do anything visually — grow huge, shrink tiny, disappear, talk — what would be the coolest?"
+      </div>
+    </div>
+    <div class="segment">
+      <div class="segment-label"><span class="seg-dot" style="background:#2563EB"></span>GUIDED BUILD — 30 min</div>
+      <ul class="action-list">
+        <li><span class="tstamp">0:05</span>Find purple blocks. Let them tap each one on their character to discover what it does.</li>
+        <li><span class="tstamp">0:12</span>Build together: Grow → Say "Hello!" → Shrink → Hide. Run it!</li>
+        <li><span class="tstamp">0:22</span>Ask: "What happens if you put SHOW after HIDE?" Let them predict then test.</li>
+        <li><span class="tstamp">0:28</span>Free build: make the most dramatic entrance/exit they can imagine!</li>
+      </ul>
+    </div>
+    <div class="questions-box" style="margin-bottom:12px">
+      <div class="q-title">💬 Ask</div>
+      <ul>
+        <li>"What happens if you grow 5 times in a row without shrinking? Try it!"</li>
+        <li>"Can you make the character seem surprised — like it sees something scary?"</li>
+        <li>"What's the difference between HIDE and shrinking really small?"</li>
+      </ul>
+    </div>
+    <div class="success-bar">✅ Success looks like: Child builds a 4+ block looks script independently and can explain what each block does.</div>
+  </div>
+</div>
+
+<!-- Day 5 -->
+<div class="day-lesson">
+  <div class="day-lesson-header">
+    <div class="day-emoji">🎉</div>
+    <div>
+      <div class="day-meta">Week 1 · Day 5 · Friday — MINI-PROJECT</div>
+      <h3>Hello World! First Complete Project</h3>
+    </div>
+  </div>
+  <div class="day-lesson-body">
+    <div class="segment">
+      <div class="segment-label"><span class="seg-dot" style="background:#6B7280"></span>OPENING — 5 min</div>
+      <div class="script-block">
+        <strong>Say to child →</strong>
+        "Today is the day everything comes together. You've learned movement, triggers, and looks. Now you're going to build your FIRST complete project — totally your own design. I'll be here if you get stuck, but this is YOUR creation. What are you going to make?"
+      </div>
+    </div>
+    <div class="segment">
+      <div class="segment-label"><span class="seg-dot" style="background:#2563EB"></span>PROJECT TIME — 45 min</div>
+      <ul class="action-list">
+        <li><span class="tstamp">0:05</span>Let them pick background and characters with minimal input from you.</li>
+        <li><span class="tstamp">0:15</span>Check in: "How's it going? Tell me what you're building." Don't solve — ask!</li>
+        <li><span class="tstamp">0:35</span>Gentle nudge if stuck: "Can you make the second character do something interesting too?"</li>
+        <li><span class="tstamp">0:45</span>Share time: "Press play and tell me what everything does!"</li>
+        <li><span class="tstamp">0:55</span>Celebrate! "You just made your first ScratchJr program!"</li>
+      </ul>
+    </div>
+    <div class="segment">
+      <div class="segment-label"><span class="seg-dot" style="background:#16A34A"></span>DEBRIEF QUESTIONS</div>
+      <div class="questions-box">
+        <div class="q-title">💬 After they show you</div>
+        <ul>
+          <li>"What part are you most proud of?"</li>
+          <li>"Was there anything that didn't work the way you wanted? What did you do?"</li>
+          <li>"If you had one more hour, what would you add?"</li>
+          <li>"What did you learn this week that surprised you?"</li>
+        </ul>
+      </div>
+    </div>
+    <div class="success-bar">✅ Success looks like: A complete project with 2 characters, each with at least a trigger + 2 blocks. Child can explain it to you in their own words.</div>
+  </div>
+</div>
+
+<!-- ═══════════════════ WEEK 2 ═══════════════════ -->
+<div class="week-header" style="background: linear-gradient(135deg, #16A34A, #4ADE80);">
+  <div class="week-num-big">2</div>
+  <div>
+    <h2>Tell a Story!</h2>
+    <p>Week goal: Child builds a 3-page animated story with dialogue and page transitions, independently</p>
+  </div>
+</div>
+
+<div class="day-lesson">
+  <div class="day-lesson-header">
+    <div class="day-emoji">🎭</div>
+    <div>
+      <div class="day-meta">Week 2 · Day 1 · Monday</div>
+      <h3>Scene 1 & Scene 2 — Pages!</h3>
+    </div>
+  </div>
+  <div class="day-lesson-body">
+    <div class="segment">
+      <div class="segment-label"><span class="seg-dot" style="background:#6B7280"></span>OPENING — 5 min</div>
+      <div class="script-block">
+        <strong>Say to child →</strong>
+        "Great stories have more than one scene — imagine your favourite movie: it jumps from place to place! In ScratchJr, different scenes are called pages. Today we'll learn how to have MULTIPLE scenes and make the story jump from one to the next."
+      </div>
+    </div>
+    <div class="segment">
+      <div class="segment-label"><span class="seg-dot" style="background:#2563EB"></span>GUIDED BUILD — 30 min</div>
+      <ul class="action-list">
+        <li><span class="tstamp">0:05</span>Show them the + button to add pages. Let them add Page 2 themselves.</li>
+        <li><span class="tstamp">0:10</span>"Each page is a different scene. Give them different backgrounds — Page 1 = one place, Page 2 = somewhere else."</li>
+        <li><span class="tstamp">0:20</span>Find the "go to page" block (orange section). Connect it: end of Page 1 script → go to Page 2.</li>
+        <li><span class="tstamp">0:30</span>Test: press play on Page 1. Does it jump? If not, debug together!</li>
+      </ul>
+    </div>
+    <div class="questions-box" style="margin-bottom:12px">
+      <div class="q-title">💬 Ask</div>
+      <ul>
+        <li>"What story could happen in two different places?"</li>
+        <li>"What needs to happen on Page 1 BEFORE jumping to Page 2?"</li>
+        <li>"How is this like turning a page in a book?"</li>
+      </ul>
+    </div>
+    <div class="success-bar">✅ Success: Child creates 2 pages with different backgrounds and connects them with a page-jump block.</div>
+  </div>
+</div>
+
+<div class="day-lesson">
+  <div class="day-lesson-header">
+    <div class="day-emoji">💬</div>
+    <div>
+      <div class="day-meta">Week 2 · Day 2 · Tuesday</div>
+      <h3>Characters Talking — Dialogue!</h3>
+    </div>
+  </div>
+  <div class="day-lesson-body">
+    <div class="segment">
+      <div class="segment-label"><span class="seg-dot" style="background:#6B7280"></span>OPENING — 5 min</div>
+      <div class="script-block">
+        <strong>Say to child →</strong>
+        "Every good story has characters who talk to each other. The tricky bit is making them take TURNS — one speaks, then waits, then the other speaks. Before we code this, let's act it out! You be one character, I'll be the other. What would they say to each other?"
+      </div>
+    </div>
+    <div class="segment">
+      <div class="segment-label"><span class="seg-dot" style="background:#2563EB"></span>GUIDED BUILD — 30 min</div>
+      <ul class="action-list">
+        <li><span class="tstamp">0:05</span>Act out the conversation physically first — at least 4 lines.</li>
+        <li><span class="tstamp">0:10</span>In ScratchJr: add Character A's script — say block for their line.</li>
+        <li><span class="tstamp">0:18</span>Key insight: "Character B also needs a trigger — but with a WAIT block first so A finishes speaking."</li>
+        <li><span class="tstamp">0:25</span>Build it, test it, adjust the wait time until it feels natural.</li>
+        <li><span class="tstamp">0:40</span>Watch it play together — does it feel like a real conversation?</li>
+      </ul>
+    </div>
+    <div class="questions-box" style="margin-bottom:12px">
+      <div class="q-title">💬 Ask</div>
+      <ul>
+        <li>"Why does Character B need to wait? What happens if they don't?"</li>
+        <li>"How long should the wait be? What feels natural to you?"</li>
+        <li>"Could they interrupt each other? How would you code that?"</li>
+      </ul>
+    </div>
+    <div class="success-bar">✅ Success: Two characters have a 4+ line conversation with appropriate wait timing between turns.</div>
+  </div>
+</div>
+
+<div class="day-lesson">
+  <div class="day-lesson-header">
+    <div class="day-emoji">⏳</div>
+    <div>
+      <div class="day-meta">Week 2 · Day 3 · Wednesday</div>
+      <h3>Wait For Me! Timing Events</h3>
+    </div>
+  </div>
+  <div class="day-lesson-body">
+    <div class="segment">
+      <div class="segment-label"><span class="seg-dot" style="background:#6B7280"></span>OPENING — 5 min</div>
+      <div class="script-block">
+        <strong>Say to child →</strong>
+        "Timing is everything in stories and movies. If things happen too fast — you miss them. Too slow — you get bored. Today we're learning to control TIME in our programs using the Wait block. Think of it like a pause button in your code."
+      </div>
+    </div>
+    <div class="segment">
+      <div class="segment-label"><span class="seg-dot" style="background:#2563EB"></span>GUIDED BUILD — 30 min</div>
+      <ul class="action-list">
+        <li><span class="tstamp">0:05</span>Build a sunrise scene: character appears → sun rises (grow from small) → birds fly across.</li>
+        <li><span class="tstamp">0:15</span>Without wait blocks first — everything happens at once! "Does this feel right?"</li>
+        <li><span class="tstamp">0:20</span>Add wait blocks between each event. Test. Adjust. "What wait value feels most like a real sunrise?"</li>
+        <li><span class="tstamp">0:30</span>Free time: build a 5-event chain of their own idea.</li>
+      </ul>
+    </div>
+    <div class="questions-box" style="margin-bottom:12px">
+      <div class="q-title">💬 Ask</div>
+      <ul>
+        <li>"What's the difference between wait=1 and wait=4? Count seconds with me."</li>
+        <li>"If you were making a scary scene, would you make things happen fast or slow? Why?"</li>
+        <li>"Can you control the mood of a scene just by changing wait times?"</li>
+      </ul>
+    </div>
+    <div class="success-bar">✅ Success: Child intentionally uses wait blocks to create a timed sequence that feels deliberate and controlled.</div>
+  </div>
+</div>
+
+<div class="day-lesson">
+  <div class="day-lesson-header">
+    <div class="day-emoji">🖌️</div>
+    <div>
+      <div class="day-meta">Week 2 · Day 4 · Thursday</div>
+      <h3>Draw Your World — Background Art!</h3>
+    </div>
+  </div>
+  <div class="day-lesson-body">
+    <div class="segment">
+      <div class="segment-label"><span class="seg-dot" style="background:#6B7280"></span>OPENING — 5 min</div>
+      <div class="script-block">
+        <strong>Say to child →</strong>
+        "Today is mostly an art day — and here's the secret: the more YOU put into designing the world, the more you'll care about the story. Great game designers spend months on art before writing any code. So today: draw YOUR world. I'll barely help. This is your vision."
+      </div>
+    </div>
+    <div class="segment">
+      <div class="segment-label"><span class="seg-dot" style="background:#2563EB"></span>BUILD — 40 min (mostly free)</div>
+      <ul class="action-list">
+        <li><span class="tstamp">0:05</span>Let them design freely. Tip to share: "Draw sky layer first, then ground, then details."</li>
+        <li><span class="tstamp">0:25</span>Move to character design: "Draw someone who belongs in this world."</li>
+        <li><span class="tstamp">0:40</span>Add character to scene — does it fit? Resize if needed.</li>
+        <li><span class="tstamp">0:50</span>Add a simple motion so it feels alive.</li>
+      </ul>
+    </div>
+    <div class="questions-box" style="margin-bottom:12px">
+      <div class="q-title">💬 Ask (to inspire, not direct)</div>
+      <ul>
+        <li>"If this world had a name, what would it be?"</li>
+        <li>"What time of day is it in this scene? Morning? Night? Sunset?"</li>
+        <li>"Who else lives in this world besides your main character?"</li>
+      </ul>
+    </div>
+    <div class="success-bar">✅ Success: Child has a unique drawn background and at least one custom character that feels matched to the world.</div>
+  </div>
+</div>
+
+<div class="day-lesson">
+  <div class="day-lesson-header">
+    <div class="day-emoji">📖</div>
+    <div>
+      <div class="day-meta">Week 2 · Day 5 · Friday — MINI-PROJECT</div>
+      <h3>My First Story!</h3>
+    </div>
+  </div>
+  <div class="day-lesson-body">
+    <div class="segment">
+      <div class="segment-label"><span class="seg-dot" style="background:#6B7280"></span>OPENING — 10 min (paper first!)</div>
+      <div class="script-block">
+        <strong>Say to child →</strong>
+        "Before we open the tablet, let's plan on paper. Great programmers plan before they code! Write 3 sentences — your story in 3 lines. Scene 1: where does it start? Scene 2: what happens? Scene 3: how does it end?"
+      </div>
+    </div>
+    <div class="segment">
+      <div class="segment-label"><span class="seg-dot" style="background:#2563EB"></span>PROJECT TIME — 40 min</div>
+      <ul class="action-list">
+        <li><span class="tstamp">0:10</span>Build from their paper plan — 3 pages, their backgrounds.</li>
+        <li><span class="tstamp">0:30</span>Check: does each page have movement + dialogue + page jump?</li>
+        <li><span class="tstamp">0:45</span>Title page: "Add your name as the author on Page 1!"</li>
+        <li><span class="tstamp">0:50</span>Read-aloud performance — child narrates while it plays.</li>
+      </ul>
+    </div>
+    <div class="segment">
+      <div class="segment-label"><span class="seg-dot" style="background:#16A34A"></span>DEBRIEF</div>
+      <div class="questions-box">
+        <div class="q-title">💬 After show</div>
+        <ul>
+          <li>"Did your story turn out the same as your paper plan, or different? Why?"</li>
+          <li>"What part of storytelling is hardest to code?"</li>
+          <li>"What do you want to add to this story if you come back to it?"</li>
+        </ul>
+      </div>
+    </div>
+    <div class="success-bar">✅ Success: A 3-page animated story with 2 characters, dialogue, and page transitions. Child can narrate it aloud.</div>
+  </div>
+</div>
+
+<!-- WEEKS 3-6 abbreviated headers + key day summaries -->
+
+<!-- WEEK 3 -->
+<div class="week-header" style="background: linear-gradient(135deg, #7C3AED, #A855F7);">
+  <div class="week-num-big">3</div>
+  <div>
+    <h2>Loops & Repeats!</h2>
+    <p>Week goal: Child can use repeat and forever loops intentionally to create patterns, dances, and continuous animations</p>
+  </div>
+</div>
+
+<div class="day-lesson">
+  <div class="day-lesson-header">
+    <div class="day-emoji">🤔</div>
+    <div><div class="day-meta">Week 3 · Day 1 · Monday</div><h3>Why Repeat? The Loop Idea</h3></div>
+  </div>
+  <div class="day-lesson-body">
+    <div class="script-block"><strong>Opening Script →</strong>"Here's a puzzle: how would you make a character walk right 20 steps? You could drag 20 blocks... OR you could use one magic block called a LOOP. Programmers use loops because we're lazy in a smart way — we never repeat ourselves when we can repeat our code! Let's prove it."</div>
+    <div class="segment"><div class="segment-label"><span class="seg-dot" style="background:#2563EB"></span>KEY MOMENT — the "aha" comparison</div>
+    <ul class="action-list">
+      <li><span class="tstamp">0:05</span>Physical: clap 5 times. "You just ran a loop! The instruction was 'clap' and you repeated it 5 times."</li>
+      <li><span class="tstamp">0:10</span>Build a 5-move chain WITHOUT a loop first.</li>
+      <li><span class="tstamp">0:18</span>Then rebuild WITH a repeat-5 loop. Same result — fewer blocks!</li>
+      <li><span class="tstamp">0:25</span>"Which would you rather build if you needed it to run 100 times?"</li>
+    </ul></div>
+    <div class="questions-box" style="margin-bottom:12px"><div class="q-title">💬 Ask</div><ul>
+      <li>"Can you think of something in real life that's a loop? (brushing teeth, seasons, school days)"</li>
+      <li>"What goes INSIDE the loop? What goes OUTSIDE?"</li>
+      <li>"What happens if the number in the repeat is 0? Try it!"</li>
+    </ul></div>
+    <div class="success-bar">✅ Success: Child can build a repeat loop, change the number, and explain "it runs X times."</div>
+  </div>
+</div>
+
+<div class="day-lesson">
+  <div class="day-lesson-header">
+    <div class="day-emoji">🌀</div>
+    <div><div class="day-meta">Week 3 · Day 2 · Tuesday</div><h3>Forever Loop!</h3></div>
+  </div>
+  <div class="day-lesson-body">
+    <div class="script-block"><strong>Opening Script →</strong>"Yesterday's loop ran a set number of times. But what if you want something to NEVER stop — like a heartbeat, or the earth spinning? There's a special loop called Forever. It has no number because it runs until you press stop. Warning: once you start it, the only way to stop it is the red button!"</div>
+    <div class="questions-box" style="margin-bottom:12px"><div class="q-title">💬 Key questions</div><ul>
+      <li>"Can you make a bird that flaps its wings forever using just grow and shrink inside a forever loop?"</li>
+      <li>"What's dangerous about a forever loop if you put too many things inside it?"</li>
+      <li>"Can two characters have different forever loops running at the same time? Try it!"</li>
+    </ul></div>
+    <div class="success-bar">✅ Success: Child uses forever loop for continuous animation — flapping, bouncing, spinning — and can stop it with the red button.</div>
+  </div>
+</div>
+
+<div class="day-lesson">
+  <div class="day-lesson-header">
+    <div class="day-emoji">🕺</div>
+    <div><div class="day-meta">Week 3 · Days 3-4 · Wed-Thu</div><h3>Dance Party + Pattern Art</h3></div>
+  </div>
+  <div class="day-lesson-body">
+    <div class="script-block"><strong>Wed Opening →</strong>"Today we're choreographers — we'll design dances using loops. First step: design the dance on PAPER. What 4 moves make a good dance? Then we'll loop it." <br><br><strong>Thu Opening →</strong>"Loops aren't just for dancing — they make beautiful patterns too. What do you think happens if a character moves AND turns inside a loop? Let's find out!"</div>
+    <div class="questions-box" style="margin-bottom:12px"><div class="q-title">💬 Ask both days</div><ul>
+      <li>"What happens if two characters have loops with DIFFERENT numbers? Do they stay in sync?"</li>
+      <li>"Can you make a pattern that looks like a spiral? What combination of moves would create that?"</li>
+      <li>"If a dance has 4 moves and loops 8 times, how many total moves happen?"</li>
+    </ul></div>
+    <div class="success-bar">✅ Success Wed: 3 dancers with different loop dances running simultaneously. Thu: A geometric pattern made with move+turn loops.</div>
+  </div>
+</div>
+
+<!-- WEEK 4 -->
+<div class="week-header" style="background: linear-gradient(135deg, #EA580C, #FB923C);">
+  <div class="week-num-big">4</div>
+  <div>
+    <h2>Characters Talking to Each Other!</h2>
+    <p>Week goal: Child understands and uses message blocks to create character interactions and build a simple interactive experience</p>
+  </div>
+</div>
+
+<div class="day-lesson">
+  <div class="day-lesson-header">
+    <div class="day-emoji">📬</div>
+    <div><div class="day-meta">Week 4 · Days 1-2 · Mon-Tue</div><h3>Messages + Chain Reactions</h3></div>
+  </div>
+  <div class="day-lesson-body">
+    <div class="script-block"><strong>Mon Opening →</strong>"This week we unlock one of the most powerful ideas in programming: characters reacting to each other. One character does something, sends a signal, and another character responds. This is called event-driven programming — and it's how almost every app you've ever used works."<br><br><strong>Tue Opening →</strong>"Yesterday one character sent a message to another. Today: can you make a chain — where the receiver ALSO sends a message to a third character? Like dominoes falling!"</div>
+    <div class="questions-box" style="margin-bottom:12px"><div class="q-title">💬 Key questions</div><ul>
+      <li>"What's the most important thing about messages? (The colour must match!)"</li>
+      <li>"What if you used the same colour message for two different receivers? What would happen?"</li>
+      <li>"Where else in real life do you see chain reactions? (News spreads, falling dominoes, passing notes)</li>
+    </ul></div>
+    <div class="success-bar">✅ Success Mon: Two characters interacting via message. Tue: A 3+ character chain reaction using multiple message colours.</div>
+  </div>
+</div>
+
+<div class="day-lesson">
+  <div class="day-lesson-header">
+    <div class="day-emoji">🎮</div>
+    <div><div class="day-meta">Week 4 · Days 3-4 · Wed-Thu</div><h3>Tap & Respond + First Game!</h3></div>
+  </div>
+  <div class="day-lesson-body">
+    <div class="script-block"><strong>Wed Opening →</strong>"Tap triggers are how games work — you tap something and things react. Today we'll build our most interactive project yet."<br><br><strong>Thu Opening →</strong>"Today you're building a REAL game. When the star is caught, something happens. This is called event-driven programming — exactly what Angry Birds, Mario, and every game you've ever played uses!"</div>
+    <div class="questions-box" style="margin-bottom:12px"><div class="q-title">💬 Key questions</div><ul>
+      <li>"In your game, what makes the player feel like they WON? How can you make that feeling bigger?"</li>
+      <li>"What would make your game harder? Easier? Can you add a difficulty setting?"</li>
+      <li>"You're a game designer now — what's the one thing you'd add to make it more fun?"</li>
+    </ul></div>
+    <div class="success-bar">✅ Success: A working tap-to-win game using messages to trigger a win reaction. Child can play it and explain how it works.</div>
+  </div>
+</div>
+
+<!-- WEEK 5 -->
+<div class="week-header" style="background: linear-gradient(135deg, #0891B2, #22D3EE);">
+  <div class="week-num-big">5</div>
+  <div>
+    <h2>Sound & Music!</h2>
+    <p>Week goal: Child can add sound effects, record voice, build a tap instrument, and synchronise sound with motion</p>
+  </div>
+</div>
+
+<div class="day-lesson">
+  <div class="day-lesson-header">
+    <div class="day-emoji">🎵</div>
+    <div><div class="day-meta">Week 5 · Days 1-3 · Mon-Wed</div><h3>Sounds + Voice + Instruments</h3></div>
+  </div>
+  <div class="day-lesson-body">
+    <div class="script-block"><strong>Mon →</strong>"Close your eyes. I'm going to play two versions of the same animation — one with sound, one without. Which feels better? [Demonstrate] Sound changes EVERYTHING. Today we add it."<br><br><strong>Tue →</strong>"Your voice inside the tablet — how cool is that? Today your character will literally speak in YOUR voice."<br><br><strong>Wed →</strong>"You've tapped apps that make music. Today you BUILD one — 4 characters, each a different note. You're a music app developer!"</div>
+    <div class="questions-box" style="margin-bottom:12px"><div class="q-title">💬 Questions across the week</div><ul>
+      <li>"How does sound change the FEELING of a scene? Try the same animation with different sounds."</li>
+      <li>"If you had to choose one sound for your whole project, what would feel most 'you'?"</li>
+      <li>"Can you play a tune on your instrument app? What song could work with just 4 notes?"</li>
+    </ul></div>
+    <div class="success-bar">✅ Success: Child has used all three sound features — library sounds, recorded voice, and built a simple instrument.</div>
+  </div>
+</div>
+
+<!-- WEEK 6 -->
+<div class="week-header" style="background: linear-gradient(135deg, #BE123C, #FB7185);">
+  <div class="week-num-big">6</div>
+  <div>
+    <h2>Grand Finale — The Big Project!</h2>
+    <p>Week goal: Child independently designs, builds, and presents a complete original ScratchJr project</p>
+  </div>
+</div>
+
+<div class="day-lesson">
+  <div class="day-lesson-header">
+    <div class="day-emoji">🎓</div>
+    <div><div class="day-meta">Week 6 · Full Week</div><h3>Design → Build → Polish → Present</h3></div>
+  </div>
+  <div class="day-lesson-body">
+    <div class="script-block"><strong>Mon Planning →</strong>"This is YOUR week. No lessons, no guided steps — just you and your ideas. I'm here as a helper, not a teacher. What would YOU build if you could build anything in ScratchJr? That's what we're making this week."<br><br><strong>Fri Graduation →</strong>"Today you're not just showing a project — you're presenting your work, like a real developer showing their app. Tell us: what does it do? How did you build it? What was hardest? What are you most proud of?"</div>
+    <div class="segment">
+      <div class="segment-label"><span class="seg-dot" style="background:#2563EB"></span>TEACHER ROLE THIS WEEK</div>
+      <ul class="action-list">
+        <li><span class="tstamp">Mon</span>Facilitator of brainstorm — ask questions, don't suggest directions</li>
+        <li><span class="tstamp">Tue</span>Art supporter — encourage, praise, stay hands-off</li>
+        <li><span class="tstamp">Wed</span>Debugging partner — "what were you trying to do?" before offering any help</li>
+        <li><span class="tstamp">Thu</span>Quality checker — "what would make this 10% better?" then let them decide</li>
+        <li><span class="tstamp">Fri</span>Proud audience member and facilitator of their presentation</li>
+      </ul>
+    </div>
+    <div class="questions-box" style="margin-bottom:12px"><div class="q-title">💬 Graduation Day Debrief</div><ul>
+      <li>"What is the ONE thing you learned in 6 weeks that surprised you most?"</li>
+      <li>"What would you build next — now that you know how?"</li>
+      <li>"What was the hardest bug you fixed? How did you figure it out?"</li>
+      <li>"If you could teach a friend ONE thing about ScratchJr, what would it be?"</li>
+    </ul></div>
+    <div class="success-bar">✅ Success: Child presents a complete project they're proud of and can explain it in their own words. Celebrate big! 🏆🎉</div>
+  </div>
+</div>
+
+</div><!-- container -->
+<footer class="site-footer">
+  <div class="footer-links">
+    <a href="../index.html">Home</a>
+    <a href="curriculum.html">Curriculum</a>
+    <a href="activity-cards.html">Activity Cards</a>
+    <a href="lesson-scripts.html">Lesson Scripts</a>
+    <a href="troubleshooting.html">Troubleshooting</a>
+    <a href="checklist.html">Progress Checklist</a>
+  </div>
+  <p>Made with ❤️ for parents everywhere · Free & Open Source · <a href="https://github.com" style="color:var(--yellow);">View on GitHub</a></p>
+</footer>
+<script>
+  document.getElementById('navToggle').addEventListener('click', () => {
+    document.getElementById('navLinks').classList.toggle('open');
+  });
+</script>
+</body>
+</html>

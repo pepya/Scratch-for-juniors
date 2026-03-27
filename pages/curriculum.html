@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="color-scheme" content="light">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>6-Week Curriculum — ScratchJr Adventure</title>
+  <meta name="description" content="Full 6-week ScratchJr curriculum. Day-by-day lessons for kids aged 7-10, covering motion, stories, loops, messages, sound and a final project.">
+  <link rel="stylesheet" href="../css/site.css">
+  <style>
+    color-scheme: light only;
+
+    .week-block {
+      background: white;
+      border: 1.5px solid var(--rule);
+      border-radius: 24px;
+      overflow: hidden;
+      margin-bottom: 40px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+    }
+
+    .week-header {
+      padding: 24px 32px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      color: white;
+    }
+
+    .week-num {
+      font-family: 'Fredoka One', cursive;
+      font-size: 3.2rem;
+      line-height: 1;
+      opacity: 0.25;
+      color: white;
+    }
+
+    .week-info { flex: 1; }
+
+    .week-theme {
+      font-family: 'Fredoka One', cursive;
+      font-size: 1.55rem;
+      color: white;
+      margin-bottom: 4px;
+    }
+
+    .week-desc {
+      font-size: 0.88rem;
+      color: rgba(255,255,255,0.75);
+      font-weight: 600;
+    }
+
+    .week-emoji { font-size: 3rem; }
+
+    .week-tags {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-top: 10px;
+    }
+
+    .week-tag {
+      font-size: 0.68rem;
+      font-weight: 900;
+      padding: 3px 10px;
+      border-radius: 50px;
+      background: rgba(255,255,255,0.2);
+      color: white;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    /* Days grid */
+    .days-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1px;
+      background: var(--rule);
+    }
+
+    .day-card {
+      background: #FAFAF8;
+      padding: 22px 22px 18px;
+      transition: background 0.15s;
+    }
+
+    .day-card:hover { background: white; }
+
+    .day-label {
+      font-size: 0.68rem;
+      font-weight: 900;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    .day-title {
+      font-family: 'Fredoka One', cursive;
+      font-size: 1.05rem;
+      color: var(--ink);
+      margin-bottom: 12px;
+      line-height: 1.2;
+    }
+
+    .activity-list { list-style: none; }
+    .activity-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #44403C;
+      padding: 4px 0;
+      border-bottom: 1px dashed var(--rule);
+      line-height: 1.4;
+    }
+    .activity-list li:last-child { border: none; }
+
+    .act-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      margin-top: 5px;
+    }
+
+    .challenge-row {
+      margin-top: 12px;
+      background: #FFFBEB;
+      border: 1px solid #FDE68A;
+      border-radius: 10px;
+      padding: 8px 12px;
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      font-size: 0.78rem;
+      font-weight: 800;
+      color: #92400E;
+      line-height: 1.35;
+    }
+
+    .time-bar {
+      padding: 14px 24px;
+      background: rgba(0,0,0,0.03);
+      border-top: 1px solid var(--rule);
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .time-chunk {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--muted);
+    }
+
+    .time-sq {
+      width: 10px; height: 10px;
+      border-radius: 3px;
+    }
+
+    /* week color bands */
+    .w1-h { background: linear-gradient(135deg, #1D4ED8, #3B82F6); }
+    .w2-h { background: linear-gradient(135deg, #15803D, #4ADE80); }
+    .w3-h { background: linear-gradient(135deg, #6D28D9, #A855F7); }
+    .w4-h { background: linear-gradient(135deg, #C2410C, #FB923C); }
+    .w5-h { background: linear-gradient(135deg, #0E7490, #22D3EE); }
+    .w6-h { background: linear-gradient(135deg, #9F1239, #FB7185); }
+
+    .w1-dot { background: #2563EB; }
+    .w2-dot { background: #16A34A; }
+    .w3-dot { background: #7C3AED; }
+    .w4-dot { background: #EA580C; }
+    .w5-dot { background: #0891B2; }
+    .w6-dot { background: #BE123C; }
+
+    /* progress bar */
+    .progress-line {
+      height: 4px;
+      background: rgba(0,0,0,0.08);
+    }
+    .progress-fill {
+      height: 100%;
+      border-radius: 4px;
+    }
+
+    /* jump nav */
+    .jump-nav {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 36px;
+    }
+    .jump-btn {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-family: 'Fredoka One', cursive;
+      font-size: 0.88rem;
+      padding: 8px 16px;
+      border-radius: 10px;
+      text-decoration: none;
+      color: white;
+      transition: opacity 0.15s, transform 0.15s;
+    }
+    .jump-btn:hover { opacity: 0.85; transform: translateY(-1px); }
+  </style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <a href="../index.html" class="nav-logo">🐱 ScratchJr Adventure</a>
+  <button class="nav-toggle" id="navToggle" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="../index.html">🏠 Home</a></li>
+    <li><a href="curriculum.html" class="active">📅 Curriculum</a></li>
+    <li><a href="activity-cards.html">🧩 Activity Cards</a></li>
+    <li><a href="lesson-scripts.html">📋 Lesson Scripts</a></li>
+    <li><a href="troubleshooting.html">🔧 Troubleshooting</a></li>
+    <li><a href="checklist.html">✅ Progress</a></li>
+  </ul>
+</nav>
+
+<section class="page-hero">
+  <div class="badge">📅 6 Weeks · 30 Lessons</div>
+  <h1>The Full Curriculum</h1>
+  <p>Day-by-day breakdown of every lesson, activity, and Friday mini-project across 6 weeks</p>
+</section>
+
+<div class="site-container">
+
+  <!-- Jump nav -->
+  <div class="jump-nav">
+    <a href="#week1" class="jump-btn" style="background:var(--w1)">Week 1 🐱</a>
+    <a href="#week2" class="jump-btn" style="background:var(--w2)">Week 2 🦁</a>
+    <a href="#week3" class="jump-btn" style="background:var(--w3)">Week 3 🔁</a>
+    <a href="#week4" class="jump-btn" style="background:var(--w4)">Week 4 📨</a>
+    <a href="#week5" class="jump-btn" style="background:var(--w5)">Week 5 🎵</a>
+    <a href="#week6" class="jump-btn" style="background:var(--w6)">Week 6 🏆</a>
+  </div>
+
+  <!-- WEEK 1 -->
+  <div class="week-block" id="week1">
+    <div class="week-header w1-h">
+      <div class="week-num">01</div>
+      <div class="week-info">
+        <div class="week-theme">Hello, ScratchJr! 🐱</div>
+        <div class="week-desc">Discover the app, meet the characters, and make your first animation</div>
+        <div class="week-tags">
+          <span class="week-tag">Motion Blocks</span>
+          <span class="week-tag">Triggers</span>
+          <span class="week-tag">Looks Blocks</span>
+          <span class="week-tag">Drawing</span>
+        </div>
+      </div>
+      <div class="week-emoji">🐱</div>
+    </div>
+    <div class="progress-line"><div class="progress-fill" style="width:100%;background:linear-gradient(90deg,#3B82F6,#60A5FA)"></div></div>
+    <div class="days-grid">
+      <div class="day-card">
+        <div class="day-label">Day 1 · Monday</div>
+        <div class="day-title">Meet the Playground 🛝</div>
+        <ul class="activity-list">
+          <li><span class="act-dot w1-dot"></span>Open ScratchJr — explore every button together</li>
+          <li><span class="act-dot w1-dot"></span>Name the Stage, Blocks panel, and Characters tray</li>
+          <li><span class="act-dot w1-dot"></span>Tap a character — watch it respond!</li>
+          <li><span class="act-dot w1-dot"></span>Draw your own character in the paint tool</li>
+        </ul>
+        <div class="challenge-row">⭐ Challenge: Name your character and save your first project</div>
+      </div>
+      <div class="day-card">
+        <div class="day-label">Day 2 · Tuesday</div>
+        <div class="day-title">Move It! Arrow Blocks 🏃</div>
+        <ul class="activity-list">
+          <li><span class="act-dot w1-dot"></span>Discover blue Motion blocks (left, right, up, down)</li>
+          <li><span class="act-dot w1-dot"></span>Drag and chain movement blocks together</li>
+          <li><span class="act-dot w1-dot"></span>Change the speed numbers and observe the difference</li>
+          <li><span class="act-dot w1-dot"></span>Build a dance by chaining 5+ moves</li>
+        </ul>
+        <div class="challenge-row">⭐ Challenge: A 5-block dance routine!</div>
+      </div>
+      <div class="day-card">
+        <div class="day-label">Day 3 · Wednesday</div>
+        <div class="day-title">Press Play! Start Blocks ▶️</div>
+        <ul class="activity-list">
+          <li><span class="act-dot w1-dot"></span>Find yellow Trigger blocks (green flag, tap character)</li>
+          <li><span class="act-dot w1-dot"></span>Connect a trigger to the start of a script</li>
+          <li><span class="act-dot w1-dot"></span>Press the green flag — see the difference!</li>
+          <li><span class="act-dot w1-dot"></span>Try all trigger types — what does each one do?</li>
+        </ul>
+        <div class="challenge-row">⭐ Challenge: Make it start both ways — flag AND tap!</div>
+      </div>
+      <div class="day-card">
+        <div class="day-label">Day 4 · Thursday</div>
+        <div class="day-title">Look Different! Looks Blocks 🎨</div>
+        <ul class="activity-list">
+          <li><span class="act-dot w1-dot"></span>Find purple Looks blocks</li>
+          <li><span class="act-dot w1-dot"></span>Make the character grow big and shrink small</li>
+          <li><span class="act-dot w1-dot"></span>Add a speech bubble with "Hello!"</li>
+          <li><span class="act-dot w1-dot"></span>Try hide and show — now you see it, now you don't!</li>
+        </ul>
+        <div class="challenge-row">⭐ Challenge: Grow → say hello → shrink → hide! One script!</div>
+      </div>
+      <div class="day-card">
+        <div class="day-label">Day 5 · Friday 🎉</div>
+        <div class="day-title">Mini-Project: Hello World!</div>
+        <ul class="activity-list">
+          <li><span class="act-dot w1-dot"></span>Choose a background scene</li>
+          <li><span class="act-dot w1-dot"></span>Add 2 characters (draw at least one)</li>
+          <li><span class="act-dot w1-dot"></span>Both characters move and say something</li>
+          <li><span class="act-dot w1-dot"></span>Present to your parent — explain every block</li>
+        </ul>
+        <div class="challenge-row">⭐ Challenge: Record a video of your project playing!</div>
+      </div>
+    </div>
+    <div class="time-bar">
+      <span class="time-chunk"><span class="time-sq" style="background:#3B82F6"></span>Warm-up 5 min</span>
+      <span class="time-chunk"><span class="time-sq" style="background:#FCD34D"></span>Learn new block 20 min</span>
+      <span class="time-chunk"><span class="time-sq" style="background:#34D399"></span>Free explore 20 min</span>
+      <span class="time-chunk"><span class="time-sq" style="background:#F87171"></span>Challenge 10 min</span>
+      <span class="time-chunk"><span class="time-sq" style="background:#A78BFA"></span>Show & tell 5 min</span>
+    </div>
+  </div>
+
+  <!-- WEEK 2 -->
+  <div class="week-block" id="week2">
+    <div class="week-header w2-h">
+      <div class="week-num">02</div>
+      <div class="week-info">
+        <div class="week-theme">Tell a Story! 📖</div>
+        <div class="week-desc">Build multi-scene stories with dialogue, timing, and page navigation</div>
+        <div class="week-tags">
+          <span class="week-tag">Pages</span><span class="week-tag">Dialogue</span><span class="week-tag">Wait Blocks</span><span class="week-tag">Background Art</span>
+        </div>
+      </div>
+      <div class="week-emoji">🦁</div>
+    </div>
+    <div class="progress-line"><div class="progress-fill" style="width:100%;background:linear-gradient(90deg,#16A34A,#4ADE80)"></div></div>
+    <div class="days-grid">
+      <div class="day-card">
+        <div class="day-label">Day 1 · Monday</div>
+        <div class="day-title">Scene 1 & Scene 2 🎭</div>
+        <ul class="activity-list">
+          <li><span class="act-dot w2-dot"></span>Add a second page — different background!</li>
+          <li><span class="act-dot w2-dot"></span>Learn the "go to page" orange block</li>
+          <li><span class="act-dot w2-dot"></span>Connect pages: end of page 1 → jump to page 2</li>
+          <li><span class="act-dot w2-dot"></span>Test the page jump — does it work?</li>
+        </ul>
+        <div class="challenge-row">⭐ Challenge: 3-page story with automatic page jumps!</div>
+      </div>
+      <div class="day-card">
+        <div class="day-label">Day 2 · Tuesday</div>
+        <div class="day-title">Characters Talking 💬</div>
+        <ul class="activity-list">
+          <li><span class="act-dot w2-dot"></span>Act out the conversation out loud first</li>
+          <li><span class="act-dot w2-dot"></span>Use "say" blocks for each character</li>
+          <li><span class="act-dot w2-dot"></span>Add Wait blocks so they take turns</li>
+          <li><span class="act-dot w2-dot"></span>Adjust timing until it feels natural</li>
+        </ul>
+        <div class="challenge-row">⭐ Challenge: A 4-line back-and-forth conversation!</div>
+      </div>
+      <div class="day-card">
+        <div class="day-label">Day 3 · Wednesday</div>
+        <div class="day-title">Wait For Me! Timing ⏳</div>
+        <ul class="activity-list">
+          <li><span class="act-dot w2-dot"></span>Discover the orange Wait block</li>
+          <li><span class="act-dot w2-dot"></span>Build a sunrise: character → sun → birds, each timed</li>
+          <li><span class="act-dot w2-dot"></span>Try wait=1 vs wait=4 — feel the difference</li>
+          <li><span class="act-dot w2-dot"></span>Ask: does speed change the mood of a scene?</li>
+        </ul>
+        <div class="challenge-row">⭐ Challenge: A 5-event timed scene, one thing after another!</div>
+      </div>
+      <div class="day-card">
+        <div class="day-label">Day 4 · Thursday</div>
+        <div class="day-title">Draw Your World 🖌️</div>
+        <ul class="activity-list">
+          <li><span class="act-dot w2-dot"></span>Open the background paint editor</li>
+          <li><span class="act-dot w2-dot"></span>Draw: sky first, ground, then details</li>
+          <li><span class="act-dot w2-dot"></span>Draw a custom character to match the world</li>
+          <li><span class="act-dot w2-dot"></span>Add both to the project and make it move</li>
+        </ul>
+        <div class="challenge-row">⭐ Challenge: Original background + matching character!</div>
+      </div>
+      <div class="day-card">
+        <div class="day-label">Day 5 · Friday 🎉</div>
+        <div class="day-title">Mini-Project: My First Story!</div>
+        <ul class="activity-list">
+          <li><span class="act-dot w2-dot"></span>Write a 3-sentence plan on paper first</li>
+          <li><span class="act-dot w2-dot"></span>Build 3 pages with movement and dialogue</li>
+          <li><span class="act-dot w2-dot"></span>Add a title page with your name as author</li>
+          <li><span class="act-dot w2-dot"></span>Narrate aloud while it plays!</li>
+        </ul>
+        <div class="challenge-row">⭐ Challenge: You're a real author now — sign your story! ✍️</div>
+      </div>
+    </div>
+    <div class="time-bar">
+      <span class="time-chunk"><span class="time-sq" style="background:#16A34A"></span>Review 5 min</span>
+      <span class="time-chunk"><span class="time-sq" style="background:#FCD34D"></span>New skill 20 min</span>
+      <span class="time-chunk"><span class="time-sq" style="background:#34D399"></span>Build scene 25 min</span>
+      <span class="time-chunk"><span class="time-sq" style="background:#F87171"></span>Share 10 min</span>
+    </div>
+  </div>
+
+  <!-- WEEK 3 -->
+  <div class="week-block" id="week3">
+    <div class="week-header w3-h">
+      <div class="week-num">03</div>
+      <div class="week-info">
+        <div class="week-theme">Loops & Repeats! 🔁</div>
+        <div class="week-desc">Unlock the secret of loops — patterns, dances, and continuous animations</div>
+        <div class="week-tags">
+          <span class="week-tag">Repeat Loop</span><span class="week-tag">Forever Loop</span><span class="week-tag">Patterns</span><span class="week-tag">Dance</span>
+        </div>
+      </div>
+      <div class="week-emoji">🔁</div>
+    </div>
+    <div class="progress-line"><div class="progress-fill" style="width:100%;background:linear-gradient(90deg,#7C3AED,#E879F9)"></div></div>
+    <div class="days-grid">
+      <div class="day-card">
+        <div class="day-label">Day 1 · Monday</div>
+        <div class="day-title">Why Repeat? The Loop Idea 🤔</div>
+        <ul class="activity-list">
+          <li><span class="act-dot w3-dot"></span>Physical: clap 5 times — that's a loop!</li>
+          <li><span class="act-dot w3-dot"></span>Find the orange Repeat block</li>
+          <li><span class="act-dot w3-dot"></span>Build loop version vs 5 separate blocks</li>
+          <li><span class="act-dot w3-dot"></span>Compare — which was easier to build?</li>
+        </ul>
+        <div class="challenge-row">⭐ Challenge: Make a loop that runs 10 times. How far does it go?</div>
+      </div>
+      <div class="day-card">
+        <div class="day-label">Day 2 · Tuesday</div>
+        <div class="day-title">Forever Loop! 🌀</div>
+        <ul class="activity-list">
+          <li><span class="act-dot w3-dot"></span>Discover the Forever loop — it never stops!</li>
+          <li><span class="act-dot w3-dot"></span>Make a bird flap its wings forever (grow+shrink)</li>
+          <li><span class="act-dot w3-dot"></span>Make the sun spin forever with a turn block</li>
+          <li><span class="act-dot w3-dot"></span>Stop with the red button — learn to control it</li>
+        </ul>
+        <div class="challenge-row">⭐ Challenge: 2 characters, different forever loops — both at once!</div>
+      </div>
+      <div class="day-card">
+        <div class="day-label">Day 3 · Wednesday</div>
+        <div class="day-title">Dance Party! 🕺💃</div>
+        <ul class="activity-list">
+          <li><span class="act-dot w3-dot"></span>Design a 4-move dance on paper first</li>
+          <li><span class="act-dot w3-dot"></span>Put 4 moves inside a Repeat 8 loop</li>
+          <li><span class="act-dot w3-dot"></span>Add a second dancer with a different dance</li>
+          <li><span class="act-dot w3-dot"></span>Make one big, one small — more dynamic!</li>
+        </ul>
+        <div class="challenge-row">⭐ Challenge: Add a third dancer — 3 different dances at once!</div>
+      </div>
+      <div class="day-card">
+        <div class="day-label">Day 4 · Thursday</div>
+        <div class="day-title">Patterns & Art 🌺</div>
+        <ul class="activity-list">
+          <li><span class="act-dot w3-dot"></span>Use move + turn inside a loop = pattern path!</li>
+          <li><span class="act-dot w3-dot"></span>Experiment with different turn amounts</li>
+          <li><span class="act-dot w3-dot"></span>Add more characters with different patterns</li>
+          <li><span class="act-dot w3-dot"></span>Create a repeating pattern you love</li>
+        </ul>
+        <div class="challenge-row">⭐ Challenge: Design a pattern cool enough for a T-shirt! 👕</div>
+      </div>
+      <div class="day-card">
+        <div class="day-label">Day 5 · Friday 🎉</div>
+        <div class="day-title">Mini-Project: Dance Show!</div>
+        <ul class="activity-list">
+          <li><span class="act-dot w3-dot"></span>Draw a colourful stage background</li>
+          <li><span class="act-dot w3-dot"></span>3+ characters each with a unique loop dance</li>
+          <li><span class="act-dot w3-dot"></span>Title page: "Welcome to the Show!"</li>
+          <li><span class="act-dot w3-dot"></span>Perform it for the family — be the announcer!</li>
+        </ul>
+        <div class="challenge-row">⭐ Challenge: Dance alongside your characters while it plays! 🕺</div>
+      </div>
+    </div>
+    <div class="time-bar">
+      <span class="time-chunk"><span class="time-sq" style="background:#7C3AED"></span>Concept intro 10 min</span>
+      <span class="time-chunk"><span class="time-sq" style="background:#FCD34D"></span>Guided build 25 min</span>
+      <span class="time-chunk"><span class="time-sq" style="background:#34D399"></span>Free create 20 min</span>
+      <span class="time-chunk"><span class="time-sq" style="background:#F87171"></span>Reflect 5 min</span>
+    </div>
+  </div>
+
+  <!-- WEEK 4 -->
+  <div class="week-block" id="week4">
+    <div class="week-header w4-h">
+      <div class="week-num">04</div>
+      <div class="week-info">
+        <div class="week-theme">Characters Talking to Each Other! 📨</div>
+        <div class="week-desc">Learn messages — make characters react to each other like magic</div>
+        <div class="week-tags">
+          <span class="week-tag">Send Message</span><span class="week-tag">Receive Message</span><span class="week-tag">Events</span><span class="week-tag">Simple Games</span>
+        </div>
+      </div>
+      <div class="week-emoji">📨</div>
+    </div>
+    <div class="progress-line"><div class="progress-fill" style="width:100%;background:linear-gradient(90deg,#C2410C,#FB923C)"></div></div>
+    <div class="days-grid">
+      <div class="day-card">
+        <div class="day-label">Day 1 · Monday</div>
+        <div class="day-title">What's a Message? 📬</div>
+        <ul class="activity-list">
+          <li><span class="act-dot w4-dot"></span>Real life: shout "GO!" → friend starts running</li>
+          <li><span class="act-dot w4-dot"></span>Find Send and Receive message blocks</li>
+          <li><span class="act-dot w4-dot"></span>Character A sends → Character B reacts!</li>
+          <li><span class="act-dot w4-dot"></span>Key rule: sender and receiver must be same colour</li>
+        </ul>
+        <div class="challenge-row">⭐ Challenge: A sends message → B grows huge, then B sends back → A spins!</div>
+      </div>
+      <div class="day-card">
+        <div class="day-label">Day 2 · Tuesday</div>
+        <div class="day-title">Chain Reactions ⛓️</div>
+        <ul class="activity-list">
+          <li><span class="act-dot w4-dot"></span>Build a domino chain: A → B → C</li>
+          <li><span class="act-dot w4-dot"></span>Each character reacts AND sends the next message</li>
+          <li><span class="act-dot w4-dot"></span>Use different colour messages for each link</li>
+          <li><span class="act-dot w4-dot"></span>Press play — watch the chain! 😱</li>
+        </ul>
+        <div class="challenge-row">⭐ Challenge: Extend to a 4-character domino chain!</div>
+      </div>
+      <div class="day-card">
+        <div class="day-label">Day 3 · Wednesday</div>
+        <div class="day-title">Tap & Respond 👆</div>
+        <ul class="activity-list">
+          <li><span class="act-dot w4-dot"></span>Use "when character is tapped" trigger</li>
+          <li><span class="act-dot w4-dot"></span>Tap dog → barks + sends message → cat runs away!</li>
+          <li><span class="act-dot w4-dot"></span>Add speech bubbles for funny reactions</li>
+          <li><span class="act-dot w4-dot"></span>Build a simple tap-interaction mini-scene</li>
+        </ul>
+        <div class="challenge-row">⭐ Challenge: Tap one character — all THREE react differently!</div>
+      </div>
+      <div class="day-card">
+        <div class="day-label">Day 4 · Thursday</div>
+        <div class="day-title">Build a Simple Game 🎮</div>
+        <ul class="activity-list">
+          <li><span class="act-dot w4-dot"></span>"Catch the Star" — star bounces in a forever loop</li>
+          <li><span class="act-dot w4-dot"></span>Tap star → sends WIN message → star hides</li>
+          <li><span class="act-dot w4-dot"></span>Add a "YAY!" character that appears on WIN</li>
+          <li><span class="act-dot w4-dot"></span>Play 5 times, then make it harder!</li>
+        </ul>
+        <div class="challenge-row">⭐ Challenge: You built a real game! Tell someone how it works!</div>
+      </div>
+      <div class="day-card">
+        <div class="day-label">Day 5 · Friday 🎉</div>
+        <div class="day-title">Mini-Project: Interactive Story!</div>
+        <ul class="activity-list">
+          <li><span class="act-dot w4-dot"></span>Page 1: character at two doors — left and right</li>
+          <li><span class="act-dot w4-dot"></span>Tap left door → happy ending (Page 2)</li>
+          <li><span class="act-dot w4-dot"></span>Tap right door → funny ending (Page 3)</li>
+          <li><span class="act-dot w4-dot"></span>Let a parent play — can they find both endings?</li>
+        </ul>
+        <div class="challenge-row">⭐ Challenge: You built a choose-your-own-adventure app! 🚀</div>
+      </div>
+    </div>
+    <div class="time-bar">
+      <span class="time-chunk"><span class="time-sq" style="background:#EA580C"></span>Concept + demo 15 min</span>
+      <span class="time-chunk"><span class="time-sq" style="background:#FCD34D"></span>Build together 20 min</span>
+      <span class="time-chunk"><span class="time-sq" style="background:#34D399"></span>Solo create 20 min</span>
+      <span class="time-chunk"><span class="time-sq" style="background:#F87171"></span>Present 5 min</span>
+    </div>
+  </div>
+
+  <!-- WEEK 5 -->
+  <div class="week-block" id="week5">
+    <div class="week-header w5-h">
+      <div class="week-num">05</div>
+      <div class="week-info">
+        <div class="week-theme">Sound & Music! 🎵</div>
+        <div class="week-desc">Add sound effects, record your voice, and build musical animations</div>
+        <div class="week-tags">
+          <span class="week-tag">Sound Blocks</span><span class="week-tag">Voice Recording</span><span class="week-tag">Instruments</span><span class="week-tag">Sync</span>
+        </div>
+      </div>
+      <div class="week-emoji">🎵</div>
+    </div>
+    <div class="progress-line"><div class="progress-fill" style="width:100%;background:linear-gradient(90deg,#0891B2,#22D3EE)"></div></div>
+    <div class="days-grid">
+      <div class="day-card">
+        <div class="day-label">Day 1 · Monday</div>
+        <div class="day-title">Make Some Noise! 🔊</div>
+        <ul class="activity-list">
+          <li><span class="act-dot w5-dot"></span>Find the green Sound blocks</li>
+          <li><span class="act-dot w5-dot"></span>Add a pop sound when character is tapped</li>
+          <li><span class="act-dot w5-dot"></span>Try different sounds: boing, meow, bell</li>
+          <li><span class="act-dot w5-dot"></span>Trigger sounds at start, on tap, after a move</li>
+        </ul>
+        <div class="challenge-row">⭐ Challenge: 3 characters, 3 different sounds — tap each one!</div>
+      </div>
+      <div class="day-card">
+        <div class="day-label">Day 2 · Tuesday</div>
+        <div class="day-title">Record Your Voice! 🎤</div>
+        <ul class="activity-list">
+          <li><span class="act-dot w5-dot"></span>Tap the microphone icon in ScratchJr</li>
+          <li><span class="act-dot w5-dot"></span>Record "Hello! I am [name]!" loud and clear</li>
+          <li><span class="act-dot w5-dot"></span>Attach to a character — tap it and hear yourself!</li>
+          <li><span class="act-dot w5-dot"></span>Try funny voices: robot, whisper, monster 👾</li>
+        </ul>
+        <div class="challenge-row">⭐ Challenge: Record a narration for your Week 2 story! 🎬</div>
+      </div>
+      <div class="day-card">
+        <div class="day-label">Day 3 · Wednesday</div>
+        <div class="day-title">Musical Instruments 🎹</div>
+        <ul class="activity-list">
+          <li><span class="act-dot w5-dot"></span>Draw 4 colourful characters = 4 notes</li>
+          <li><span class="act-dot w5-dot"></span>Each gets a different sound on tap</li>
+          <li><span class="act-dot w5-dot"></span>Try playing do-re-mi-fa on your instrument!</li>
+          <li><span class="act-dot w5-dot"></span>Practice Happy Birthday 🎂</li>
+        </ul>
+        <div class="challenge-row">⭐ Challenge: Play a tune — can your parent guess the song?</div>
+      </div>
+      <div class="day-card">
+        <div class="day-label">Day 4 · Thursday</div>
+        <div class="day-title">Sync Sound & Motion 🎬</div>
+        <ul class="activity-list">
+          <li><span class="act-dot w5-dot"></span>Make a character jump + play sound simultaneously</li>
+          <li><span class="act-dot w5-dot"></span>Sound before vs after a move — spot the difference!</li>
+          <li><span class="act-dot w5-dot"></span>Build fireworks: burst animation + pop sound</li>
+          <li><span class="act-dot w5-dot"></span>Record "3… 2… 1… Launch!" as voice countdown</li>
+        </ul>
+        <div class="challenge-row">⭐ Challenge: A 5-second sound + motion show — like a movie trailer!</div>
+      </div>
+      <div class="day-card">
+        <div class="day-label">Day 5 · Friday 🎉</div>
+        <div class="day-title">Mini-Project: Music Video!</div>
+        <ul class="activity-list">
+          <li><span class="act-dot w5-dot"></span>Pick a theme: jungle, space, or underwater</li>
+          <li><span class="act-dot w5-dot"></span>3+ animated characters moving in loops</li>
+          <li><span class="act-dot w5-dot"></span>Record an original song or poem</li>
+          <li><span class="act-dot w5-dot"></span>Perform it live for the family! 🎤🌟</li>
+        </ul>
+        <div class="challenge-row">⭐ Challenge: Sing your song live while the video plays!</div>
+      </div>
+    </div>
+    <div class="time-bar">
+      <span class="time-chunk"><span class="time-sq" style="background:#0891B2"></span>Sound exploration 10 min</span>
+      <span class="time-chunk"><span class="time-sq" style="background:#FCD34D"></span>Build project 30 min</span>
+      <span class="time-chunk"><span class="time-sq" style="background:#F87171"></span>Perform & share 20 min</span>
+    </div>
+  </div>
+
+  <!-- WEEK 6 -->
+  <div class="week-block" id="week6">
+    <div class="week-header w6-h">
+      <div class="week-num">06</div>
+      <div class="week-info">
+        <div class="week-theme">Grand Finale! 🏆</div>
+        <div class="week-desc">Apply everything — design, build, polish and present your own original project</div>
+        <div class="week-tags">
+          <span class="week-tag">Independent Build</span><span class="week-tag">Creative Design</span><span class="week-tag">Presentation</span><span class="week-tag">Graduation</span>
+        </div>
+      </div>
+      <div class="week-emoji">🏆</div>
+    </div>
+    <div class="progress-line"><div class="progress-fill" style="width:100%;background:linear-gradient(90deg,#BE123C,#FB7185)"></div></div>
+    <div class="days-grid">
+      <div class="day-card">
+        <div class="day-label">Day 1 · Monday</div>
+        <div class="day-title">Big Idea Planning Day 💡</div>
+        <ul class="activity-list">
+          <li><span class="act-dot w6-dot"></span>Review all 5 weeks — what was your favourite?</li>
+          <li><span class="act-dot w6-dot"></span>Brainstorm: story, game, music video, or something new?</li>
+          <li><span class="act-dot w6-dot"></span>Draw the plan on paper: characters, scenes, actions</li>
+          <li><span class="act-dot w6-dot"></span>Tell your parent your idea — they're your first audience!</li>
+        </ul>
+        <div class="challenge-row">⭐ Challenge: Write 3 things your project MUST include — your promise!</div>
+      </div>
+      <div class="day-card">
+        <div class="day-label">Day 2 · Tuesday</div>
+        <div class="day-title">Build: Art Day 🎨</div>
+        <ul class="activity-list">
+          <li><span class="act-dot w6-dot"></span>Draw ALL characters in the paint tool</li>
+          <li><span class="act-dot w6-dot"></span>Create all backgrounds for every scene</li>
+          <li><span class="act-dot w6-dot"></span>Set up all pages in the right order</li>
+          <li><span class="act-dot w6-dot"></span>No code yet — just art! Make it beautiful first</li>
+        </ul>
+        <div class="challenge-row">⭐ Challenge: All art assets ready — take a screenshot of your work!</div>
+      </div>
+      <div class="day-card">
+        <div class="day-label">Day 3 · Wednesday</div>
+        <div class="day-title">Build: Add the Code 🧩</div>
+        <ul class="activity-list">
+          <li><span class="act-dot w6-dot"></span>Add motion, loops, messages to each character</li>
+          <li><span class="act-dot w6-dot"></span>Test each script as you build — don't wait!</li>
+          <li><span class="act-dot w6-dot"></span>Fix bugs: "why did that happen?" debug together</li>
+          <li><span class="act-dot w6-dot"></span>Add sound and voice recordings</li>
+        </ul>
+        <div class="challenge-row">⭐ Challenge: Play through the whole project — write 3 things to improve!</div>
+      </div>
+      <div class="day-card">
+        <div class="day-label">Day 4 · Thursday</div>
+        <div class="day-title">Polish & Improve ✨</div>
+        <ul class="activity-list">
+          <li><span class="act-dot w6-dot"></span>Play through — what's missing? What needs fixing?</li>
+          <li><span class="act-dot w6-dot"></span>Add title screen with your name as creator!</li>
+          <li><span class="act-dot w6-dot"></span>Add "The End" or "Play Again" on last page</li>
+          <li><span class="act-dot w6-dot"></span>Let parent play without help — watch what confuses them</li>
+        </ul>
+        <div class="challenge-row">⭐ Challenge: Project 100% done — save one final time! 💾</div>
+      </div>
+      <div class="day-card">
+        <div class="day-label">Day 5 · Friday 🎓</div>
+        <div class="day-title">Graduation Day! 🏆</div>
+        <ul class="activity-list">
+          <li><span class="act-dot w6-dot"></span>Present to the whole family 👨‍👩‍👧</li>
+          <li><span class="act-dot w6-dot"></span>Explain what each part does and how you built it</li>
+          <li><span class="act-dot w6-dot"></span>"What was hardest? What are you most proud of?"</li>
+          <li><span class="act-dot w6-dot"></span>Celebrate with your favourite treat! 🍰🌟</li>
+        </ul>
+        <div class="challenge-row">⭐ You are now officially a ScratchJr Coder! What's next? 🚀</div>
+      </div>
+    </div>
+    <div class="time-bar">
+      <span class="time-chunk"><span class="time-sq" style="background:#BE123C"></span>Free build 45 min</span>
+      <span class="time-chunk"><span class="time-sq" style="background:#FCD34D"></span>Parent check-in 10 min</span>
+      <span class="time-chunk"><span class="time-sq" style="background:#34D399"></span>Wrap-up 5 min</span>
+    </div>
+  </div>
+
+  <!-- Next steps CTA -->
+  <div style="background:#1C1917;border-radius:20px;padding:40px;text-align:center;color:white;margin-top:20px;">
+    <div style="font-family:'Fredoka One',cursive;font-size:1.8rem;margin-bottom:10px;">Ready to teach? 👩‍🏫</div>
+    <p style="color:#A8A29E;font-weight:600;margin-bottom:24px;">Get the activity cards to print, or open the lesson scripts on your phone</p>
+    <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+      <a href="activity-cards.html" class="btn btn-primary">🧩 Print Activity Cards</a>
+      <a href="lesson-scripts.html" class="btn" style="background:rgba(255,255,255,0.1);color:white;border:1.5px solid rgba(255,255,255,0.2);">📋 Open Lesson Scripts</a>
+    </div>
+  </div>
+
+</div>
+
+<footer class="site-footer">
+  <div class="footer-links">
+    <a href="../index.html">Home</a>
+    <a href="curriculum.html">Curriculum</a>
+    <a href="activity-cards.html">Activity Cards</a>
+    <a href="lesson-scripts.html">Lesson Scripts</a>
+    <a href="troubleshooting.html">Troubleshooting</a>
+    <a href="checklist.html">Progress Checklist</a>
+  </div>
+  <p>Made with ❤️ for parents everywhere · Free & Open Source · <a href="https://github.com">View on GitHub</a></p>
+</footer>
+
+<script>
+  document.getElementById('navToggle').addEventListener('click', () => {
+    document.getElementById('navLinks').classList.toggle('open');
+  });
+</script>
+</body>
+</html>

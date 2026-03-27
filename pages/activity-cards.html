@@ -1,0 +1,1349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+  <meta name="color-scheme" content="light">
+  <link rel="stylesheet" href="../css/site.css">
+<title>ScratchJr Activity Cards — Print</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;700;800;900&display=swap" rel="stylesheet">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+
+  body {
+    font-family: 'Nunito', sans-serif;
+    background: #f5f0ff;
+    padding: 20px;
+  }
+
+  h1.page-title {
+    font-family: 'Fredoka One', cursive;
+    text-align: center;
+    font-size: 2rem;
+    color: #4B1FA8;
+    margin-bottom: 6px;
+  }
+  .page-subtitle {
+    text-align: center;
+    color: #888;
+    font-size: 0.85rem;
+    font-weight: 700;
+    margin-bottom: 24px;
+  }
+
+  /* Grid of cards — 2 per row on screen, 1 per page when printing */
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  /* ── CARD ── */
+  .card {
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+    background: white;
+    page-break-inside: avoid;
+    break-inside: avoid;
+    position: relative;
+  }
+
+  .card-header {
+    padding: 18px 22px 14px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .card-emoji {
+    font-size: 2.8rem;
+    line-height: 1;
+    flex-shrink: 0;
+  }
+
+  .card-meta { flex: 1; }
+
+  .card-week-day {
+    font-size: 0.7rem;
+    font-weight: 900;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    opacity: 0.65;
+    margin-bottom: 2px;
+  }
+
+  .card-title {
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.35rem;
+    line-height: 1.1;
+    color: white;
+  }
+
+  .card-body {
+    background: white;
+    padding: 16px 20px 18px;
+  }
+
+  /* Steps */
+  .steps { list-style: none; margin-bottom: 14px; }
+  .steps li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 6px 0;
+    border-bottom: 1px dashed #eee;
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: #333;
+    line-height: 1.4;
+  }
+  .steps li:last-child { border-bottom: none; }
+
+  .step-num {
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Fredoka One', cursive;
+    font-size: 0.75rem;
+    color: white;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  /* Challenge box */
+  .challenge-box {
+    border-radius: 14px;
+    padding: 10px 14px;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-top: 2px;
+  }
+
+  .challenge-star { font-size: 1.4rem; flex-shrink: 0; }
+  .challenge-label {
+    font-size: 0.65rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 2px;
+  }
+  .challenge-text {
+    font-size: 0.82rem;
+    font-weight: 800;
+    line-height: 1.3;
+  }
+
+  /* Done checkbox */
+  .done-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 12px;
+    padding-top: 10px;
+    border-top: 2px dashed #eee;
+  }
+  .done-box {
+    width: 28px; height: 28px;
+    border-radius: 8px;
+    border: 3px solid #ddd;
+    flex-shrink: 0;
+  }
+  .done-label {
+    font-family: 'Fredoka One', cursive;
+    font-size: 0.9rem;
+    color: #aaa;
+  }
+
+  /* Time pills row */
+  .time-row {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-bottom: 12px;
+  }
+  .time-pill {
+    font-size: 0.68rem;
+    font-weight: 900;
+    padding: 3px 9px;
+    border-radius: 50px;
+    color: white;
+  }
+
+  /* ── COLOUR THEMES ── */
+  /* Week 1 — Blue */
+  .w1 .card-header { background: linear-gradient(135deg, #2563EB, #60A5FA); }
+  .w1 .step-num { background: #2563EB; }
+  .w1 .challenge-box { background: #EFF6FF; }
+  .w1 .challenge-label { color: #2563EB; }
+  .w1 .challenge-text { color: #1E40AF; }
+  .w1 .done-box { border-color: #93C5FD; }
+
+  /* Week 2 — Green */
+  .w2 .card-header { background: linear-gradient(135deg, #16A34A, #4ADE80); }
+  .w2 .step-num { background: #16A34A; }
+  .w2 .challenge-box { background: #F0FDF4; }
+  .w2 .challenge-label { color: #16A34A; }
+  .w2 .challenge-text { color: #14532D; }
+  .w2 .done-box { border-color: #86EFAC; }
+
+  /* Week 3 — Purple */
+  .w3 .card-header { background: linear-gradient(135deg, #7C3AED, #E879F9); }
+  .w3 .step-num { background: #7C3AED; }
+  .w3 .challenge-box { background: #FAF5FF; }
+  .w3 .challenge-label { color: #7C3AED; }
+  .w3 .challenge-text { color: #4C1D95; }
+  .w3 .done-box { border-color: #C084FC; }
+
+  /* Week 4 — Orange */
+  .w4 .card-header { background: linear-gradient(135deg, #EA580C, #FB923C); }
+  .w4 .step-num { background: #EA580C; }
+  .w4 .challenge-box { background: #FFF7ED; }
+  .w4 .challenge-label { color: #EA580C; }
+  .w4 .challenge-text { color: #7C2D12; }
+  .w4 .done-box { border-color: #FCA5A5; }
+
+  /* Week 5 — Teal */
+  .w5 .card-header { background: linear-gradient(135deg, #0891B2, #22D3EE); }
+  .w5 .step-num { background: #0891B2; }
+  .w5 .challenge-box { background: #ECFEFF; }
+  .w5 .challenge-label { color: #0891B2; }
+  .w5 .challenge-text { color: #164E63; }
+  .w5 .done-box { border-color: #67E8F9; }
+
+  /* Week 6 — Pink/Red */
+  .w6 .card-header { background: linear-gradient(135deg, #BE123C, #FB7185); }
+  .w6 .step-num { background: #BE123C; }
+  .w6 .challenge-box { background: #FFF1F2; }
+  .w6 .challenge-label { color: #BE123C; }
+  .w6 .challenge-text { color: #881337; }
+  .w6 .done-box { border-color: #FDA4AF; }
+
+  /* Print */
+  @media print {
+    body { background: white; padding: 0; }
+    h1.page-title, .page-subtitle { display: none; }
+    .cards-grid {
+      display: block;
+    }
+    .card {
+      page-break-after: always;
+      break-after: page;
+      margin: 0;
+      border-radius: 0;
+      box-shadow: none;
+      width: 100%;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    .card-body { flex: 1; }
+  }
+
+  @media (max-width: 700px) {
+    .cards-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<nav class="site-nav">
+  <a href="../index.html" class="nav-logo">🐱 ScratchJr Adventure</a>
+  <button class="nav-toggle" id="navToggle" aria-label="Menu"><span></span><span></span><span></span></button>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="../index.html">🏠 Home</a></li>
+    <li><a href="curriculum.html">📅 Curriculum</a></li>
+    <li><a href="activity-cards.html" class="active">🧩 Activity Cards</a></li>
+    <li><a href="lesson-scripts.html">📋 Lesson Scripts</a></li>
+    <li><a href="troubleshooting.html">🔧 Troubleshooting</a></li>
+    <li><a href="checklist.html">✅ Progress</a></li>
+  </ul>
+</nav>
+
+<h1 class="page-title">🧩 ScratchJr Activity Cards</h1>
+<p class="page-subtitle">Print and cut • Place next to the tablet each day • Child + teacher friendly</p>
+
+<div class="cards-grid">
+
+<!-- ═══════════════ WEEK 1 ═══════════════ -->
+
+<div class="card w1">
+  <div class="card-header">
+    <div class="card-emoji">🛝</div>
+    <div class="card-meta">
+      <div class="card-week-day">Week 1 · Day 1 · Monday</div>
+      <div class="card-title">Meet the Playground!</div>
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="time-row">
+      <span class="time-pill" style="background:#2563EB">▶ Open ScratchJr</span>
+      <span class="time-pill" style="background:#60A5FA">🎨 Draw a character</span>
+      <span class="time-pill" style="background:#93C5FD;color:#1e3a8a">⏱ 60 min</span>
+    </div>
+    <ul class="steps">
+      <li><span class="step-num">1</span>Open ScratchJr — explore together for 5 minutes, just look!</li>
+      <li><span class="step-num">2</span>Find the Stage (big area), Blocks (left side), Characters (bottom)</li>
+      <li><span class="step-num">3</span>Tap a character — what happens? Try tapping it lots of times!</li>
+      <li><span class="step-num">4</span>Tap the paint brush 🎨 and draw YOUR OWN character</li>
+      <li><span class="step-num">5</span>Give it a name and press the save button 💾</li>
+    </ul>
+    <div class="challenge-box">
+      <span class="challenge-star">⭐</span>
+      <div>
+        <div class="challenge-label">Today's Challenge</div>
+        <div class="challenge-text">Name your character and save your first project. Show a grown-up!</div>
+      </div>
+    </div>
+    <div class="done-row">
+      <div class="done-box"></div>
+      <div class="done-label">I did it! ✓</div>
+    </div>
+  </div>
+</div>
+
+<div class="card w1">
+  <div class="card-header">
+    <div class="card-emoji">🏃</div>
+    <div class="card-meta">
+      <div class="card-week-day">Week 1 · Day 2 · Tuesday</div>
+      <div class="card-title">Move It! Arrow Blocks</div>
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="time-row">
+      <span class="time-pill" style="background:#2563EB">🔵 Blue blocks</span>
+      <span class="time-pill" style="background:#60A5FA">↕↔ Directions</span>
+      <span class="time-pill" style="background:#93C5FD;color:#1e3a8a">⏱ 60 min</span>
+    </div>
+    <ul class="steps">
+      <li><span class="step-num">1</span>Find the BLUE blocks — these make characters move!</li>
+      <li><span class="step-num">2</span>Drag a "move right" block onto the script area</li>
+      <li><span class="step-num">3</span>Tap it — watch your character go right!</li>
+      <li><span class="step-num">4</span>Try adding left, up, down — chain them together</li>
+      <li><span class="step-num">5</span>Use "go faster" (bigger number) and "go slower" (smaller number)</li>
+    </ul>
+    <div class="challenge-box">
+      <span class="challenge-star">⭐</span>
+      <div>
+        <div class="challenge-label">Today's Challenge</div>
+        <div class="challenge-text">Make a 5-block dance routine! Right → Up → Left → Down → Spin!</div>
+      </div>
+    </div>
+    <div class="done-row">
+      <div class="done-box"></div>
+      <div class="done-label">I did it! ✓</div>
+    </div>
+  </div>
+</div>
+
+<div class="card w1">
+  <div class="card-header">
+    <div class="card-emoji">▶️</div>
+    <div class="card-meta">
+      <div class="card-week-day">Week 1 · Day 3 · Wednesday</div>
+      <div class="card-title">Press Play! Start Blocks</div>
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="time-row">
+      <span class="time-pill" style="background:#F59E0B">🟡 Yellow blocks</span>
+      <span class="time-pill" style="background:#2563EB">🚦 Triggers</span>
+      <span class="time-pill" style="background:#93C5FD;color:#1e3a8a">⏱ 60 min</span>
+    </div>
+    <ul class="steps">
+      <li><span class="step-num">1</span>Find the YELLOW blocks — these start everything!</li>
+      <li><span class="step-num">2</span>Drag the green flag block — this is like pressing Play!</li>
+      <li><span class="step-num">3</span>Connect: Green Flag → Move Right → Move Up</li>
+      <li><span class="step-num">4</span>Press the green flag on screen — it works!</li>
+      <li><span class="step-num">5</span>Try the "tap character" trigger — what's different?</li>
+    </ul>
+    <div class="challenge-box">
+      <span class="challenge-star">⭐</span>
+      <div>
+        <div class="challenge-label">Today's Challenge</div>
+        <div class="challenge-text">Make it start BOTH ways — green flag AND tap. Same dance, two triggers!</div>
+      </div>
+    </div>
+    <div class="done-row">
+      <div class="done-box"></div>
+      <div class="done-label">I did it! ✓</div>
+    </div>
+  </div>
+</div>
+
+<div class="card w1">
+  <div class="card-header">
+    <div class="card-emoji">🎨</div>
+    <div class="card-meta">
+      <div class="card-week-day">Week 1 · Day 4 · Thursday</div>
+      <div class="card-title">Look Different! Looks Blocks</div>
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="time-row">
+      <span class="time-pill" style="background:#7C3AED">🟣 Purple blocks</span>
+      <span class="time-pill" style="background:#A78BFA">💬 Speech bubbles</span>
+      <span class="time-pill" style="background:#93C5FD;color:#1e3a8a">⏱ 60 min</span>
+    </div>
+    <ul class="steps">
+      <li><span class="step-num">1</span>Find the PURPLE blocks — these change how things look!</li>
+      <li><span class="step-num">2</span>Make your character grow BIG with the grow block</li>
+      <li><span class="step-num">3</span>Make it shrink SMALL — like magic!</li>
+      <li><span class="step-num">4</span>Add a "say" block — type "Hello!" in the speech bubble</li>
+      <li><span class="step-num">5</span>Try hide and show — now you see it, now you don't!</li>
+    </ul>
+    <div class="challenge-box">
+      <span class="challenge-star">⭐</span>
+      <div>
+        <div class="challenge-label">Today's Challenge</div>
+        <div class="challenge-text">Grow big → say "Hello!" → shrink small → hide! All in one script!</div>
+      </div>
+    </div>
+    <div class="done-row">
+      <div class="done-box"></div>
+      <div class="done-label">I did it! ✓</div>
+    </div>
+  </div>
+</div>
+
+<div class="card w1">
+  <div class="card-header">
+    <div class="card-emoji">🎉</div>
+    <div class="card-meta">
+      <div class="card-week-day">Week 1 · Day 5 · Friday</div>
+      <div class="card-title">Mini-Project: Hello World!</div>
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="time-row">
+      <span class="time-pill" style="background:#2563EB">🌍 First project!</span>
+      <span class="time-pill" style="background:#16A34A">✅ Use all skills</span>
+      <span class="time-pill" style="background:#93C5FD;color:#1e3a8a">⏱ 60 min</span>
+    </div>
+    <ul class="steps">
+      <li><span class="step-num">1</span>Choose a fun background — city, space, forest, ocean!</li>
+      <li><span class="step-num">2</span>Add 2 characters (draw at least one yourself!)</li>
+      <li><span class="step-num">3</span>Make BOTH characters move and say something</li>
+      <li><span class="step-num">4</span>Press the green flag — does it work? Fix any bugs!</li>
+      <li><span class="step-num">5</span>Show your grown-up and explain what each block does</li>
+    </ul>
+    <div class="challenge-box">
+      <span class="challenge-star">⭐</span>
+      <div>
+        <div class="challenge-label">Today's Challenge</div>
+        <div class="challenge-text">Record a video of your project playing and watch it back together! 🎬</div>
+      </div>
+    </div>
+    <div class="done-row">
+      <div class="done-box"></div>
+      <div class="done-label">I did it! ✓</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ WEEK 2 ═══════════════ -->
+
+<div class="card w2">
+  <div class="card-header">
+    <div class="card-emoji">🎭</div>
+    <div class="card-meta">
+      <div class="card-week-day">Week 2 · Day 1 · Monday</div>
+      <div class="card-title">Scene 1 & Scene 2</div>
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="time-row">
+      <span class="time-pill" style="background:#16A34A">📄 Pages</span>
+      <span class="time-pill" style="background:#4ADE80;color:#14532d">🔗 Page jumps</span>
+      <span class="time-pill" style="background:#86EFAC;color:#14532d">⏱ 60 min</span>
+    </div>
+    <ul class="steps">
+      <li><span class="step-num">1</span>Tap the "+" button to add a new page — now you have 2 scenes!</li>
+      <li><span class="step-num">2</span>Give Page 1 a home background, Page 2 a forest or space!</li>
+      <li><span class="step-num">3</span>Add a character to each page</li>
+      <li><span class="step-num">4</span>Find the orange "go to page" block and connect it</li>
+      <li><span class="step-num">5</span>Press play — does it jump to the next scene?</li>
+    </ul>
+    <div class="challenge-box">
+      <span class="challenge-star">⭐</span>
+      <div>
+        <div class="challenge-label">Today's Challenge</div>
+        <div class="challenge-text">Make a 3-page story where each page jumps to the next! Like a flipbook!</div>
+      </div>
+    </div>
+    <div class="done-row">
+      <div class="done-box"></div>
+      <div class="done-label">I did it! ✓</div>
+    </div>
+  </div>
+</div>
+
+<div class="card w2">
+  <div class="card-header">
+    <div class="card-emoji">💬</div>
+    <div class="card-meta">
+      <div class="card-week-day">Week 2 · Day 2 · Tuesday</div>
+      <div class="card-title">Characters Talking!</div>
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="time-row">
+      <span class="time-pill" style="background:#16A34A">💬 Say blocks</span>
+      <span class="time-pill" style="background:#F59E0B">⏳ Wait blocks</span>
+      <span class="time-pill" style="background:#86EFAC;color:#14532d">⏱ 60 min</span>
+    </div>
+    <ul class="steps">
+      <li><span class="step-num">1</span>Put 2 characters on the same stage</li>
+      <li><span class="step-num">2</span>Act out your conversation out loud first — who says what?</li>
+      <li><span class="step-num">3</span>Add "say" blocks to Character 1</li>
+      <li><span class="step-num">4</span>Add a WAIT block before Character 2 speaks — so they take turns!</li>
+      <li><span class="step-num">5</span>Play it — does it feel like a real conversation?</li>
+    </ul>
+    <div class="challenge-box">
+      <span class="challenge-star">⭐</span>
+      <div>
+        <div class="challenge-label">Today's Challenge</div>
+        <div class="challenge-text">Write a 4-line conversation. Make them greet each other and say goodbye!</div>
+      </div>
+    </div>
+    <div class="done-row">
+      <div class="done-box"></div>
+      <div class="done-label">I did it! ✓</div>
+    </div>
+  </div>
+</div>
+
+<div class="card w2">
+  <div class="card-header">
+    <div class="card-emoji">⏳</div>
+    <div class="card-meta">
+      <div class="card-week-day">Week 2 · Day 3 · Wednesday</div>
+      <div class="card-title">Wait For Me! Timing</div>
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="time-row">
+      <span class="time-pill" style="background:#16A34A">🟠 Wait block</span>
+      <span class="time-pill" style="background:#4ADE80;color:#14532d">🎬 Sequences</span>
+      <span class="time-pill" style="background:#86EFAC;color:#14532d">⏱ 60 min</span>
+    </div>
+    <ul class="steps">
+      <li><span class="step-num">1</span>Find the orange WAIT block — it makes things pause!</li>
+      <li><span class="step-num">2</span>Plan a sunrise: character appears, then sun rises, then birds fly</li>
+      <li><span class="step-num">3</span>Put WAIT blocks between each event</li>
+      <li><span class="step-num">4</span>Try wait=1 vs wait=4 — what feels better?</li>
+      <li><span class="step-num">5</span>Watch it play — does it feel like a movie scene?</li>
+    </ul>
+    <div class="challenge-box">
+      <span class="challenge-star">⭐</span>
+      <div>
+        <div class="challenge-label">Today's Challenge</div>
+        <div class="challenge-text">Build a 5-event timed scene — 5 things happen one after another!</div>
+      </div>
+    </div>
+    <div class="done-row">
+      <div class="done-box"></div>
+      <div class="done-label">I did it! ✓</div>
+    </div>
+  </div>
+</div>
+
+<div class="card w2">
+  <div class="card-header">
+    <div class="card-emoji">🖌️</div>
+    <div class="card-meta">
+      <div class="card-week-day">Week 2 · Day 4 · Thursday</div>
+      <div class="card-title">Draw Your World!</div>
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="time-row">
+      <span class="time-pill" style="background:#16A34A">🎨 Paint tool</span>
+      <span class="time-pill" style="background:#4ADE80;color:#14532d">🏞 Backgrounds</span>
+      <span class="time-pill" style="background:#86EFAC;color:#14532d">⏱ 60 min</span>
+    </div>
+    <ul class="steps">
+      <li><span class="step-num">1</span>Open the background editor — tap the scene!</li>
+      <li><span class="step-num">2</span>Draw sky first (top), then ground (bottom), then details</li>
+      <li><span class="step-num">3</span>Add trees, clouds, a house — whatever fits your story!</li>
+      <li><span class="step-num">4</span>Now draw a custom character to live in this world</li>
+      <li><span class="step-num">5</span>Add both to your story and make the character move in the scene</li>
+    </ul>
+    <div class="challenge-box">
+      <span class="challenge-star">⭐</span>
+      <div>
+        <div class="challenge-label">Today's Challenge</div>
+        <div class="challenge-text">Draw a background AND a matching character. They should belong together!</div>
+      </div>
+    </div>
+    <div class="done-row">
+      <div class="done-box"></div>
+      <div class="done-label">I did it! ✓</div>
+    </div>
+  </div>
+</div>
+
+<div class="card w2">
+  <div class="card-header">
+    <div class="card-emoji">📖</div>
+    <div class="card-meta">
+      <div class="card-week-day">Week 2 · Day 5 · Friday</div>
+      <div class="card-title">Mini-Project: My First Story!</div>
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="time-row">
+      <span class="time-pill" style="background:#16A34A">📚 Full story</span>
+      <span class="time-pill" style="background:#4ADE80;color:#14532d">✅ 3 scenes</span>
+      <span class="time-pill" style="background:#86EFAC;color:#14532d">⏱ 60 min</span>
+    </div>
+    <ul class="steps">
+      <li><span class="step-num">1</span>Write 3 sentences on paper — that's your story plan!</li>
+      <li><span class="step-num">2</span>Build 3 pages with different backgrounds</li>
+      <li><span class="step-num">3</span>Add 2 characters with movement and speech bubbles</li>
+      <li><span class="step-num">4</span>Make the pages jump to each other automatically</li>
+      <li><span class="step-num">5</span>Read the story aloud while pressing play — be the narrator!</li>
+    </ul>
+    <div class="challenge-box">
+      <span class="challenge-star">⭐</span>
+      <div>
+        <div class="challenge-label">Today's Challenge</div>
+        <div class="challenge-text">Add a title on Page 1 with your name! You're a real author now! ✍️</div>
+      </div>
+    </div>
+    <div class="done-row">
+      <div class="done-box"></div>
+      <div class="done-label">I did it! ✓</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ WEEK 3 ═══════════════ -->
+
+<div class="card w3">
+  <div class="card-header">
+    <div class="card-emoji">🤔</div>
+    <div class="card-meta">
+      <div class="card-week-day">Week 3 · Day 1 · Monday</div>
+      <div class="card-title">Why Repeat? The Loop Idea</div>
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="time-row">
+      <span class="time-pill" style="background:#7C3AED">🔁 Repeat block</span>
+      <span class="time-pill" style="background:#A78BFA">💡 Big idea</span>
+      <span class="time-pill" style="background:#C084FC;color:#3b0764">⏱ 60 min</span>
+    </div>
+    <ul class="steps">
+      <li><span class="step-num">1</span>Physical warm-up: clap 5 times — that's a loop! 👏👏👏👏👏</li>
+      <li><span class="step-num">2</span>Find the orange REPEAT block in ScratchJr</li>
+      <li><span class="step-num">3</span>Put a move block INSIDE the repeat — see the wrapping shape?</li>
+      <li><span class="step-num">4</span>Set repeat to 5 — run it — character walks 5 steps!</li>
+      <li><span class="step-num">5</span>Compare: loop vs 5 separate move blocks. Which was easier to build?</li>
+    </ul>
+    <div class="challenge-box">
+      <span class="challenge-star">⭐</span>
+      <div>
+        <div class="challenge-label">Today's Challenge</div>
+        <div class="challenge-text">Make a loop that runs 10 times. How far does the character travel?</div>
+      </div>
+    </div>
+    <div class="done-row">
+      <div class="done-box"></div>
+      <div class="done-label">I did it! ✓</div>
+    </div>
+  </div>
+</div>
+
+<div class="card w3">
+  <div class="card-header">
+    <div class="card-emoji">🌀</div>
+    <div class="card-meta">
+      <div class="card-week-day">Week 3 · Day 2 · Tuesday</div>
+      <div class="card-title">Forever Loop! (Keep Going!)</div>
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="time-row">
+      <span class="time-pill" style="background:#7C3AED">♾️ Forever loop</span>
+      <span class="time-pill" style="background:#A78BFA">🐦 Animation</span>
+      <span class="time-pill" style="background:#C084FC;color:#3b0764">⏱ 60 min</span>
+    </div>
+    <ul class="steps">
+      <li><span class="step-num">1</span>Find the FOREVER loop — it has no number, it never stops!</li>
+      <li><span class="step-num">2</span>Put "move right, move left" inside — character bounces forever!</li>
+      <li><span class="step-num">3</span>Try: grow + shrink inside forever = wings flapping!</li>
+      <li><span class="step-num">4</span>Make the sun spin forever with a turn block inside</li>
+      <li><span class="step-num">5</span>Stop it by pressing the red stop button — it pauses!</li>
+    </ul>
+    <div class="challenge-box">
+      <span class="challenge-star">⭐</span>
+      <div>
+        <div class="challenge-label">Today's Challenge</div>
+        <div class="challenge-text">Two characters, DIFFERENT forever loops — both running at the same time!</div>
+      </div>
+    </div>
+    <div class="done-row">
+      <div class="done-box"></div>
+      <div class="done-label">I did it! ✓</div>
+    </div>
+  </div>
+</div>
+
+<div class="card w3">
+  <div class="card-header">
+    <div class="card-emoji">🕺</div>
+    <div class="card-meta">
+      <div class="card-week-day">Week 3 · Day 3 · Wednesday</div>
+      <div class="card-title">Dance Party!</div>
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="time-row">
+      <span class="time-pill" style="background:#7C3AED">💃 Choreography</span>
+      <span class="time-pill" style="background:#A78BFA">🔁 Repeat 8</span>
+      <span class="time-pill" style="background:#C084FC;color:#3b0764">⏱ 60 min</span>
+    </div>
+    <ul class="steps">
+      <li><span class="step-num">1</span>Design a 4-move dance on paper: up → turn → down → turn</li>
+      <li><span class="step-num">2</span>Put those 4 moves inside a Repeat 8 loop</li>
+      <li><span class="step-num">3</span>Add a second dancer with a DIFFERENT dance!</li>
+      <li><span class="step-num">4</span>Make one dancer big and one small — more fun!</li>
+      <li><span class="step-num">5</span>Press play — it's a dance party! 🎉</li>
+    </ul>
+    <div class="challenge-box">
+      <span class="challenge-star">⭐</span>
+      <div>
+        <div class="challenge-label">Today's Challenge</div>
+        <div class="challenge-text">Add a THIRD dancer! All three dancing differently at the same time!</div>
+      </div>
+    </div>
+    <div class="done-row">
+      <div class="done-box"></div>
+      <div class="done-label">I did it! ✓</div>
+    </div>
+  </div>
+</div>
+
+<div class="card w3">
+  <div class="card-header">
+    <div class="card-emoji">🌺</div>
+    <div class="card-meta">
+      <div class="card-week-day">Week 3 · Day 4 · Thursday</div>
+      <div class="card-title">Patterns & Art!</div>
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="time-row">
+      <span class="time-pill" style="background:#7C3AED">🎨 Art + loops</span>
+      <span class="time-pill" style="background:#A78BFA">🔄 Turns</span>
+      <span class="time-pill" style="background:#C084FC;color:#3b0764">⏱ 60 min</span>
+    </div>
+    <ul class="steps">
+      <li><span class="step-num">1</span>Pick a favourite background colour first</li>
+      <li><span class="step-num">2</span>Add a small star or shape character</li>
+      <li><span class="step-num">3</span>Loop: move + turn + move + turn = it makes a pattern path!</li>
+      <li><span class="step-num">4</span>Try different turn amounts — 1 turn vs 3 turns. See the shapes?</li>
+      <li><span class="step-num">5</span>Add 2 more characters making different patterns at the same time</li>
+    </ul>
+    <div class="challenge-box">
+      <span class="challenge-star">⭐</span>
+      <div>
+        <div class="challenge-label">Today's Challenge</div>
+        <div class="challenge-text">Create a pattern cool enough to put on a T-shirt! Show your design! 👕</div>
+      </div>
+    </div>
+    <div class="done-row">
+      <div class="done-box"></div>
+      <div class="done-label">I did it! ✓</div>
+    </div>
+  </div>
+</div>
+
+<div class="card w3">
+  <div class="card-header">
+    <div class="card-emoji">🎪</div>
+    <div class="card-meta">
+      <div class="card-week-day">Week 3 · Day 5 · Friday</div>
+      <div class="card-title">Mini-Project: Dance Show!</div>
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="time-row">
+      <span class="time-pill" style="background:#7C3AED">🎭 Full show</span>
+      <span class="time-pill" style="background:#A78BFA">✅ 3+ dancers</span>
+      <span class="time-pill" style="background:#C084FC;color:#3b0764">⏱ 60 min</span>
+    </div>
+    <ul class="steps">
+      <li><span class="step-num">1</span>Draw a colourful stage background yourself</li>
+      <li><span class="step-num">2</span>Add 3+ characters — each with a unique loop dance!</li>
+      <li><span class="step-num">3</span>Add a title Page 1: "Welcome to the Show!" in big letters</li>
+      <li><span class="step-num">4</span>Add a page jump from the title to the dance scene</li>
+      <li><span class="step-num">5</span>Perform it for your family — be the announcer! 🎤</li>
+    </ul>
+    <div class="challenge-box">
+      <span class="challenge-star">⭐</span>
+      <div>
+        <div class="challenge-label">Today's Challenge</div>
+        <div class="challenge-text">Stand up and do the dance yourself WHILE your character dances! 🕺</div>
+      </div>
+    </div>
+    <div class="done-row">
+      <div class="done-box"></div>
+      <div class="done-label">I did it! ✓</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ WEEK 4 ═══════════════ -->
+
+<div class="card w4">
+  <div class="card-header">
+    <div class="card-emoji">📬</div>
+    <div class="card-meta">
+      <div class="card-week-day">Week 4 · Day 1 · Monday</div>
+      <div class="card-title">What's a Message?</div>
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="time-row">
+      <span class="time-pill" style="background:#EA580C">📨 Messages</span>
+      <span class="time-pill" style="background:#FB923C;color:#431407">🎯 Send & Receive</span>
+      <span class="time-pill" style="background:#FED7AA;color:#431407">⏱ 60 min</span>
+    </div>
+    <ul class="steps">
+      <li><span class="step-num">1</span>Real life warm-up: you shout "GO!" → friend starts running. That's a message!</li>
+      <li><span class="step-num">2</span>Find SEND message block (yellow) and RECEIVE message block</li>
+      <li><span class="step-num">3</span>Character A gets script: flag → SEND message</li>
+      <li><span class="step-num">4</span>Character B gets script: RECEIVE message → move!</li>
+      <li><span class="step-num">5</span>Press flag — A sends, B reacts! Make sure same colour message!</li>
+    </ul>
+    <div class="challenge-box">
+      <span class="challenge-star">⭐</span>
+      <div>
+        <div class="challenge-label">Today's Challenge</div>
+        <div class="challenge-text">A sends message → B grows HUGE! Then B sends back → A does a spin!</div>
+      </div>
+    </div>
+    <div class="done-row">
+      <div class="done-box"></div>
+      <div class="done-label">I did it! ✓</div>
+    </div>
+  </div>
+</div>
+
+<div class="card w4">
+  <div class="card-header">
+    <div class="card-emoji">⛓️</div>
+    <div class="card-meta">
+      <div class="card-week-day">Week 4 · Day 2 · Tuesday</div>
+      <div class="card-title">Chain Reactions!</div>
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="time-row">
+      <span class="time-pill" style="background:#EA580C">🁣 Domino effect</span>
+      <span class="time-pill" style="background:#FB923C;color:#431407">3 characters</span>
+      <span class="time-pill" style="background:#FED7AA;color:#431407">⏱ 60 min</span>
+    </div>
+    <ul class="steps">
+      <li><span class="step-num">1</span>Imagine falling dominoes — A hits B hits C hits D!</li>
+      <li><span class="step-num">2</span>Character A: flag → action → SEND orange message</li>
+      <li><span class="step-num">3</span>Character B: RECEIVE orange → action → SEND blue message</li>
+      <li><span class="step-num">4</span>Character C: RECEIVE blue → action → SEND green message</li>
+      <li><span class="step-num">5</span>Press play — watch the chain reaction! 😱</li>
+    </ul>
+    <div class="challenge-box">
+      <span class="challenge-star">⭐</span>
+      <div>
+        <div class="challenge-label">Today's Challenge</div>
+        <div class="challenge-text">Add a 4th character to extend the chain! How long can you make it?</div>
+      </div>
+    </div>
+    <div class="done-row">
+      <div class="done-box"></div>
+      <div class="done-label">I did it! ✓</div>
+    </div>
+  </div>
+</div>
+
+<div class="card w4">
+  <div class="card-header">
+    <div class="card-emoji">👆</div>
+    <div class="card-meta">
+      <div class="card-week-day">Week 4 · Day 3 · Wednesday</div>
+      <div class="card-title">Tap & Respond!</div>
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="time-row">
+      <span class="time-pill" style="background:#EA580C">👆 Tap trigger</span>
+      <span class="time-pill" style="background:#FB923C;color:#431407">😸 Reactions</span>
+      <span class="time-pill" style="background:#FED7AA;color:#431407">⏱ 60 min</span>
+    </div>
+    <ul class="steps">
+      <li><span class="step-num">1</span>Use "when character is tapped" as your start block</li>
+      <li><span class="step-num">2</span>Tap the dog → it does something → sends a message</li>
+      <li><span class="step-num">3</span>Cat receives message → runs away!</li>
+      <li><span class="step-num">4</span>Add speech bubbles — dog says "WOOF!", cat says "YIKES!"</li>
+      <li><span class="step-num">5</span>Tap the dog lots of times — what happens each time?</li>
+    </ul>
+    <div class="challenge-box">
+      <span class="challenge-star">⭐</span>
+      <div>
+        <div class="challenge-label">Today's Challenge</div>
+        <div class="challenge-text">3 characters — tap one and ALL THREE react differently! Chaos! 😄</div>
+      </div>
+    </div>
+    <div class="done-row">
+      <div class="done-box"></div>
+      <div class="done-label">I did it! ✓</div>
+    </div>
+  </div>
+</div>
+
+<div class="card w4">
+  <div class="card-header">
+    <div class="card-emoji">🎮</div>
+    <div class="card-meta">
+      <div class="card-week-day">Week 4 · Day 4 · Thursday</div>
+      <div class="card-title">Build a Simple Game!</div>
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="time-row">
+      <span class="time-pill" style="background:#EA580C">⭐ Catch the star</span>
+      <span class="time-pill" style="background:#FB923C;color:#431407">🏆 Win screen</span>
+      <span class="time-pill" style="background:#FED7AA;color:#431407">⏱ 60 min</span>
+    </div>
+    <ul class="steps">
+      <li><span class="step-num">1</span>Draw a STAR character — this is what you need to catch!</li>
+      <li><span class="step-num">2</span>Give star a forever loop: bounce left and right</li>
+      <li><span class="step-num">3</span>When star is tapped → it sends a WIN message + hides</li>
+      <li><span class="step-num">4</span>Add a "YAY!" character that appears when it receives WIN</li>
+      <li><span class="step-num">5</span>Play it 5 times — then make the star faster!</div></li>
+    </ul>
+    <div class="challenge-box">
+      <span class="challenge-star">⭐</span>
+      <div>
+        <div class="challenge-label">Today's Challenge</div>
+        <div class="challenge-text">You just made a REAL game using event-driven programming! Tell someone! 🎉</div>
+      </div>
+    </div>
+    <div class="done-row">
+      <div class="done-box"></div>
+      <div class="done-label">I did it! ✓</div>
+    </div>
+  </div>
+</div>
+
+<div class="card w4">
+  <div class="card-header">
+    <div class="card-emoji">🗺️</div>
+    <div class="card-meta">
+      <div class="card-week-day">Week 4 · Day 5 · Friday</div>
+      <div class="card-title">Mini-Project: Interactive Story!</div>
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="time-row">
+      <span class="time-pill" style="background:#EA580C">🔀 Two endings</span>
+      <span class="time-pill" style="background:#FB923C;color:#431407">✅ Player chooses</span>
+      <span class="time-pill" style="background:#FED7AA;color:#431407">⏱ 60 min</span>
+    </div>
+    <ul class="steps">
+      <li><span class="step-num">1</span>Page 1: A character stands at two doors — left and right</li>
+      <li><span class="step-num">2</span>Tap left door → jumps to Page 2 (happy ending!)</li>
+      <li><span class="step-num">3</span>Tap right door → jumps to Page 3 (funny ending!)</li>
+      <li><span class="step-num">4</span>Both endings need their own background and story</li>
+      <li><span class="step-num">5</span>Let a parent play — can they find both endings?</li>
+    </ul>
+    <div class="challenge-box">
+      <span class="challenge-star">⭐</span>
+      <div>
+        <div class="challenge-label">Today's Challenge</div>
+        <div class="challenge-text">You built an interactive app with choices! That's what real apps do! 🚀</div>
+      </div>
+    </div>
+    <div class="done-row">
+      <div class="done-box"></div>
+      <div class="done-label">I did it! ✓</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ WEEK 5 ═══════════════ -->
+
+<div class="card w5">
+  <div class="card-header">
+    <div class="card-emoji">🔊</div>
+    <div class="card-meta">
+      <div class="card-week-day">Week 5 · Day 1 · Monday</div>
+      <div class="card-title">Make Some Noise!</div>
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="time-row">
+      <span class="time-pill" style="background:#0891B2">🟢 Green blocks</span>
+      <span class="time-pill" style="background:#22D3EE;color:#164e63">🎵 Sounds</span>
+      <span class="time-pill" style="background:#A5F3FC;color:#164e63">⏱ 60 min</span>
+    </div>
+    <ul class="steps">
+      <li><span class="step-num">1</span>Find the GREEN sound blocks</li>
+      <li><span class="step-num">2</span>Add a "pop" sound when character is tapped</li>
+      <li><span class="step-num">3</span>Try boing, meow, bell — which is your favourite?</li>
+      <li><span class="step-num">4</span>Trigger sounds at different moments: start, on tap, after move</li>
+      <li><span class="step-num">5</span>Close your eyes and listen — does it feel like a scene?</li>
+    </ul>
+    <div class="challenge-box">
+      <span class="challenge-star">⭐</span>
+      <div>
+        <div class="challenge-label">Today's Challenge</div>
+        <div class="challenge-text">3 characters, 3 different sounds — tap each one for a sound effect!</div>
+      </div>
+    </div>
+    <div class="done-row">
+      <div class="done-box"></div>
+      <div class="done-label">I did it! ✓</div>
+    </div>
+  </div>
+</div>
+
+<div class="card w5">
+  <div class="card-header">
+    <div class="card-emoji">🎤</div>
+    <div class="card-meta">
+      <div class="card-week-day">Week 5 · Day 2 · Tuesday</div>
+      <div class="card-title">Record Your Voice!</div>
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="time-row">
+      <span class="time-pill" style="background:#0891B2">🎙️ Microphone</span>
+      <span class="time-pill" style="background:#22D3EE;color:#164e63">🗣️ Your voice!</span>
+      <span class="time-pill" style="background:#A5F3FC;color:#164e63">⏱ 60 min</span>
+    </div>
+    <ul class="steps">
+      <li><span class="step-num">1</span>Tap the microphone icon in the sound blocks area</li>
+      <li><span class="step-num">2</span>Record: "Hello! I am [YOUR NAME]!" — loud and clear!</li>
+      <li><span class="step-num">3</span>Attach it to your character — tap it and hear yourself!</li>
+      <li><span class="step-num">4</span>Try a robot voice, a whisper, a loud monster voice 👾</li>
+      <li><span class="step-num">5</span>Record 3 different voice clips for different moments</li>
+    </ul>
+    <div class="challenge-box">
+      <span class="challenge-star">⭐</span>
+      <div>
+        <div class="challenge-label">Today's Challenge</div>
+        <div class="challenge-text">Record a narration for your Week 2 story — give it a real voiceover! 🎬</div>
+      </div>
+    </div>
+    <div class="done-row">
+      <div class="done-box"></div>
+      <div class="done-label">I did it! ✓</div>
+    </div>
+  </div>
+</div>
+
+<div class="card w5">
+  <div class="card-header">
+    <div class="card-emoji">🎹</div>
+    <div class="card-meta">
+      <div class="card-week-day">Week 5 · Day 3 · Wednesday</div>
+      <div class="card-title">Musical Instruments!</div>
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="time-row">
+      <span class="time-pill" style="background:#0891B2">🎵 4 notes</span>
+      <span class="time-pill" style="background:#22D3EE;color:#164e63">🎹 Tap piano</span>
+      <span class="time-pill" style="background:#A5F3FC;color:#164e63">⏱ 60 min</span>
+    </div>
+    <ul class="steps">
+      <li><span class="step-num">1</span>Draw 4 characters — make them look like instrument keys!</li>
+      <li><span class="step-num">2</span>Give each one a different colour and a different sound</li>
+      <li><span class="step-num">3</span>Tap each — you have a 4-note instrument!</li>
+      <li><span class="step-num">4</span>Try playing: do-re-mi-fa — can you hear the scale?</li>
+      <li><span class="step-num">5</span>Practice "Happy Birthday" one tap at a time 🎂</li>
+    </ul>
+    <div class="challenge-box">
+      <span class="challenge-star">⭐</span>
+      <div>
+        <div class="challenge-label">Today's Challenge</div>
+        <div class="challenge-text">Play a short tune for your parent! Can they guess the song? 🎵</div>
+      </div>
+    </div>
+    <div class="done-row">
+      <div class="done-box"></div>
+      <div class="done-label">I did it! ✓</div>
+    </div>
+  </div>
+</div>
+
+<div class="card w5">
+  <div class="card-header">
+    <div class="card-emoji">🎬</div>
+    <div class="card-meta">
+      <div class="card-week-day">Week 5 · Day 4 · Thursday</div>
+      <div class="card-title">Sync Sound & Motion!</div>
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="time-row">
+      <span class="time-pill" style="background:#0891B2">🎞️ Sync</span>
+      <span class="time-pill" style="background:#22D3EE;color:#164e63">🎆 Fireworks!</span>
+      <span class="time-pill" style="background:#A5F3FC;color:#164e63">⏱ 60 min</span>
+    </div>
+    <ul class="steps">
+      <li><span class="step-num">1</span>Make a character jump — add a sound at the SAME TIME</li>
+      <li><span class="step-num">2</span>Experiment: sound BEFORE move vs sound AFTER move — feel different?</li>
+      <li><span class="step-num">3</span>Build fireworks: burst animation (grow+shrink) + POP sound</li>
+      <li><span class="step-num">4</span>Record a countdown: "3… 2… 1… LAUNCH!" with your voice</li>
+      <li><span class="step-num">5</span>Chain it: countdown plays → rocket appears → fireworks burst!</li>
+    </ul>
+    <div class="challenge-box">
+      <span class="challenge-star">⭐</span>
+      <div>
+        <div class="challenge-label">Today's Challenge</div>
+        <div class="challenge-text">A 5-second sound + motion show — like a real movie trailer! 🎥</div>
+      </div>
+    </div>
+    <div class="done-row">
+      <div class="done-box"></div>
+      <div class="done-label">I did it! ✓</div>
+    </div>
+  </div>
+</div>
+
+<div class="card w5">
+  <div class="card-header">
+    <div class="card-emoji">🎵</div>
+    <div class="card-meta">
+      <div class="card-week-day">Week 5 · Day 5 · Friday</div>
+      <div class="card-title">Mini-Project: Music Video!</div>
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="time-row">
+      <span class="time-pill" style="background:#0891B2">🎤 Your song</span>
+      <span class="time-pill" style="background:#22D3EE;color:#164e63">✅ 3+ dancers</span>
+      <span class="time-pill" style="background:#A5F3FC;color:#164e63">⏱ 60 min</span>
+    </div>
+    <ul class="steps">
+      <li><span class="step-num">1</span>Pick a theme: jungle 🌿 space 🚀 or underwater 🐠</li>
+      <li><span class="step-num">2</span>Draw your background and 3+ animated characters</li>
+      <li><span class="step-num">3</span>Make them all move in loops — dancing to a beat!</li>
+      <li><span class="step-num">4</span>Record a song or poem YOU made up — be creative!</li>
+      <li><span class="step-num">5</span>Perform your music video for the whole family! 🌟</li>
+    </ul>
+    <div class="challenge-box">
+      <span class="challenge-star">⭐</span>
+      <div>
+        <div class="challenge-label">Today's Challenge</div>
+        <div class="challenge-text">Stand up and perform your song LIVE while the video plays! 🎤🌟</div>
+      </div>
+    </div>
+    <div class="done-row">
+      <div class="done-box"></div>
+      <div class="done-label">I did it! ✓</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ WEEK 6 ═══════════════ -->
+
+<div class="card w6">
+  <div class="card-header">
+    <div class="card-emoji">💡</div>
+    <div class="card-meta">
+      <div class="card-week-day">Week 6 · Day 1 · Monday</div>
+      <div class="card-title">Big Idea Planning Day!</div>
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="time-row">
+      <span class="time-pill" style="background:#BE123C">🧠 Brainstorm</span>
+      <span class="time-pill" style="background:#FB7185;color:#4c0519">✏️ Plan on paper</span>
+      <span class="time-pill" style="background:#FDA4AF;color:#4c0519">⏱ 60 min</span>
+    </div>
+    <ul class="steps">
+      <li><span class="step-num">1</span>Look back at all 5 weeks — what was your FAVOURITE thing?</li>
+      <li><span class="step-num">2</span>Brainstorm: story? game? music video? something totally new?</li>
+      <li><span class="step-num">3</span>Draw your plan on paper: characters, scenes, what happens</li>
+      <li><span class="step-num">4</span>Write: "My project will…" and finish the sentence 3 ways</li>
+      <li><span class="step-num">5</span>Tell your parent your idea — they're your first audience!</li>
+    </ul>
+    <div class="challenge-box">
+      <span class="challenge-star">⭐</span>
+      <div>
+        <div class="challenge-label">Today's Challenge</div>
+        <div class="challenge-text">Write down 3 things your final project MUST include. Your promise to yourself!</div>
+      </div>
+    </div>
+    <div class="done-row">
+      <div class="done-box"></div>
+      <div class="done-label">I did it! ✓</div>
+    </div>
+  </div>
+</div>
+
+<div class="card w6">
+  <div class="card-header">
+    <div class="card-emoji">🎨</div>
+    <div class="card-meta">
+      <div class="card-week-day">Week 6 · Day 2 · Tuesday</div>
+      <div class="card-title">Build: Art Day!</div>
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="time-row">
+      <span class="time-pill" style="background:#BE123C">🖌️ Draw everything</span>
+      <span class="time-pill" style="background:#FB7185;color:#4c0519">No code yet!</span>
+      <span class="time-pill" style="background:#FDA4AF;color:#4c0519">⏱ 60 min</span>
+    </div>
+    <ul class="steps">
+      <li><span class="step-num">1</span>Open ScratchJr — start a brand new project</li>
+      <li><span class="step-num">2</span>Draw ALL your characters in the paint tool — take your time!</li>
+      <li><span class="step-num">3</span>Create all your backgrounds for each scene</li>
+      <li><span class="step-num">4</span>Set up all your pages in the right order</li>
+      <li><span class="step-num">5</span>NO CODE TODAY — just art. Make it beautiful first! 🌟</li>
+    </ul>
+    <div class="challenge-box">
+      <span class="challenge-star">⭐</span>
+      <div>
+        <div class="challenge-label">Today's Challenge</div>
+        <div class="challenge-text">All your art assets ready by end of session. Take a screenshot of your work!</div>
+      </div>
+    </div>
+    <div class="done-row">
+      <div class="done-box"></div>
+      <div class="done-label">I did it! ✓</div>
+    </div>
+  </div>
+</div>
+
+<div class="card w6">
+  <div class="card-header">
+    <div class="card-emoji">🧩</div>
+    <div class="card-meta">
+      <div class="card-week-day">Week 6 · Day 3 · Wednesday</div>
+      <div class="card-title">Build: Add the Code!</div>
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="time-row">
+      <span class="time-pill" style="background:#BE123C">💻 Coding day</span>
+      <span class="time-pill" style="background:#FB7185;color:#4c0519">🐛 Fix bugs</span>
+      <span class="time-pill" style="background:#FDA4AF;color:#4c0519">⏱ 60 min</span>
+    </div>
+    <ul class="steps">
+      <li><span class="step-num">1</span>Start adding motion, loops, and messages to each character</li>
+      <li><span class="step-num">2</span>Test each script AS YOU BUILD — don't wait until the end!</li>
+      <li><span class="step-num">3</span>Something weird? That's a bug — try to figure out why!</li>
+      <li><span class="step-num">4</span>Add your sound and voice recordings</li>
+      <li><span class="step-num">5</span>By end of session: core idea should be working! ✅</li>
+    </ul>
+    <div class="challenge-box">
+      <span class="challenge-star">⭐</span>
+      <div>
+        <div class="challenge-label">Today's Challenge</div>
+        <div class="challenge-text">Play through your whole project once. Write down 3 things to improve!</div>
+      </div>
+    </div>
+    <div class="done-row">
+      <div class="done-box"></div>
+      <div class="done-label">I did it! ✓</div>
+    </div>
+  </div>
+</div>
+
+<div class="card w6">
+  <div class="card-header">
+    <div class="card-emoji">✨</div>
+    <div class="card-meta">
+      <div class="card-week-day">Week 6 · Day 4 · Thursday</div>
+      <div class="card-title">Polish & Improve!</div>
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="time-row">
+      <span class="time-pill" style="background:#BE123C">✨ Make it shine</span>
+      <span class="time-pill" style="background:#FB7185;color:#4c0519">🏁 Finish line</span>
+      <span class="time-pill" style="background:#FDA4AF;color:#4c0519">⏱ 60 min</span>
+    </div>
+    <ul class="steps">
+      <li><span class="step-num">1</span>Play through your whole project and note anything missing</li>
+      <li><span class="step-num">2</span>Add a TITLE screen — with your name as the creator!</li>
+      <li><span class="step-num">3</span>Add "The End" or "Play Again" on the last page</li>
+      <li><span class="step-num">4</span>Ask: what would make this 10% cooler? Do it!</li>
+      <li><span class="step-num">5</span>Final playthrough — is it ready? Save it one more time 💾</li>
+    </ul>
+    <div class="challenge-box">
+      <span class="challenge-star">⭐</span>
+      <div>
+        <div class="challenge-label">Today's Challenge</div>
+        <div class="challenge-text">Let a parent play your project WITHOUT you helping. Watch what confuses them!</div>
+      </div>
+    </div>
+    <div class="done-row">
+      <div class="done-box"></div>
+      <div class="done-label">I did it! ✓</div>
+    </div>
+  </div>
+</div>
+
+<div class="card w6">
+  <div class="card-header">
+    <div class="card-emoji">🎓</div>
+    <div class="card-meta">
+      <div class="card-week-day">Week 6 · Day 5 · Friday</div>
+      <div class="card-title">🏆 Graduation Day!</div>
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="time-row">
+      <span class="time-pill" style="background:#BE123C">🎓 Graduate!</span>
+      <span class="time-pill" style="background:#FB7185;color:#4c0519">🎉 Celebrate!</span>
+      <span class="time-pill" style="background:#FDA4AF;color:#4c0519">⏱ 60 min</span>
+    </div>
+    <ul class="steps">
+      <li><span class="step-num">1</span>Present your final project to the whole family 👨‍👩‍👧</li>
+      <li><span class="step-num">2</span>Explain what each part does and how you built it</li>
+      <li><span class="step-num">3</span>Answer: "What was hardest?" and "What are you most proud of?"</li>
+      <li><span class="step-num">4</span>Take a photo of yourself holding the tablet with your project 📸</li>
+      <li><span class="step-num">5</span>Celebrate with your favourite treat — you earned it! 🍰🌟</li>
+    </ul>
+    <div class="challenge-box">
+      <span class="challenge-star">⭐</span>
+      <div>
+        <div class="challenge-label">Today's Challenge</div>
+        <div class="challenge-text">You are now officially a ScratchJr Coder! What will you build next? 🚀</div>
+      </div>
+    </div>
+    <div class="done-row">
+      <div class="done-box"></div>
+      <div class="done-label">I did it! ✓</div>
+    </div>
+  </div>
+</div>
+
+</div><!-- end cards-grid -->
+<footer class="site-footer">
+  <div class="footer-links">
+    <a href="../index.html">Home</a>
+    <a href="curriculum.html">Curriculum</a>
+    <a href="activity-cards.html">Activity Cards</a>
+    <a href="lesson-scripts.html">Lesson Scripts</a>
+    <a href="troubleshooting.html">Troubleshooting</a>
+    <a href="checklist.html">Progress Checklist</a>
+  </div>
+  <p>Made with ❤️ for parents everywhere · Free & Open Source · <a href="https://github.com" style="color:var(--yellow);">View on GitHub</a></p>
+</footer>
+<script>
+  document.getElementById('navToggle').addEventListener('click', () => {
+    document.getElementById('navLinks').classList.toggle('open');
+  });
+</script>
+</body>
+</html>

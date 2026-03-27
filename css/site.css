@@ -1,0 +1,367 @@
+/* ═══════════════════════════════════════════════
+   ScratchJr Adventure — Shared Site Styles
+   Light-mode forced, GitHub Pages ready
+═══════════════════════════════════════════════ */
+
+@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+:root {
+  --yellow:  #FFD23F;
+  --orange:  #FF6B35;
+  --pink:    #FF3D77;
+  --purple:  #7B2FBE;
+  --blue:    #2563EB;
+  --teal:    #06B6D4;
+  --green:   #22C55E;
+
+  --w1: #2563EB; --w1l: #DBEAFE; --w1d: #1E40AF;
+  --w2: #16A34A; --w2l: #DCFCE7; --w2d: #14532D;
+  --w3: #7C3AED; --w3l: #EDE9FE; --w3d: #4C1D95;
+  --w4: #EA580C; --w4l: #FFF7ED; --w4d: #7C2D12;
+  --w5: #0891B2; --w5l: #ECFEFF; --w5d: #164E63;
+  --w6: #BE123C; --w6l: #FFF1F2; --w6d: #881337;
+
+  --bg:   #FFFBF5;
+  --card: #FFFFFF;
+  --warm: #F5EFE0;
+  --rule: #E8DCC8;
+  --ink:  #1C1917;
+  --muted:#78716C;
+
+  color-scheme: light only;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Atkinson Hyperlegible', sans-serif;
+  background: var(--bg) !important;
+  color: var(--ink) !important;
+  line-height: 1.75;
+  letter-spacing: 0.01em;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── NAV ── */
+.site-nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: #1C1917;
+  color: white;
+  display: flex;
+  align-items: center;
+  gap: 0;
+  padding: 0 24px;
+  height: 58px;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.3);
+}
+
+.nav-logo,
+.nav-logo:link,
+.nav-logo:visited,
+.nav-logo:hover,
+.nav-logo:active {
+  font-family: 'Fredoka One', cursive;
+  font-size: 1.2rem;
+  color: #FFD23F !important;
+  -webkit-text-fill-color: #FFD23F !important;
+  text-decoration: none !important;
+  white-space: nowrap;
+  margin-right: auto;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.nav-links {
+  display: flex;
+  gap: 2px;
+  list-style: none;
+  align-items: center;
+}
+
+.nav-links a {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: #D6D3D1;
+  text-decoration: none;
+  font-size: 0.82rem;
+  font-weight: 700;
+  padding: 6px 12px;
+  border-radius: 8px;
+  transition: background 0.15s, color 0.15s;
+  white-space: nowrap;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+  background: rgba(255,255,255,0.1);
+  color: white;
+}
+
+.nav-links a.active {
+  background: var(--orange);
+  color: white;
+}
+
+/* hamburger */
+.nav-toggle {
+  display: none;
+  background: transparent !important;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+  -webkit-appearance: none;
+  appearance: none;
+  cursor: pointer;
+  padding: 8px;
+  margin-left: 8px;
+  width: 40px;
+  height: 40px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  flex-shrink: 0;
+}
+.nav-toggle span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: white !important;
+  border-radius: 2px;
+  transition: 0.3s;
+  pointer-events: none;
+}
+
+@media (max-width: 700px) {
+  .nav-toggle {
+    display: flex !important;
+  }
+  .nav-links {
+    display: none;
+    position: fixed;
+    top: 58px;
+    left: 0;
+    right: 0;
+    z-index: 9999;
+    background: #1C1917;
+    flex-direction: column;
+    align-items: stretch;
+    padding: 8px 12px 16px;
+    gap: 2px;
+    box-shadow: 0 12px 32px rgba(0,0,0,0.6);
+    border-top: 1px solid rgba(255,255,255,0.08);
+  }
+  .nav-links.open { display: flex !important; }
+  .nav-links a,
+  .nav-links a:link,
+  .nav-links a:visited {
+    padding: 12px 16px !important;
+    font-size: 0.95rem !important;
+    border-radius: 10px !important;
+    color: #FFFFFF !important;
+    -webkit-text-fill-color: #FFFFFF !important;
+    text-decoration: none !important;
+    font-weight: 700 !important;
+  }
+  .nav-links a:hover {
+    background: rgba(255,255,255,0.1) !important;
+    color: #FFFFFF !important;
+    -webkit-text-fill-color: #FFFFFF !important;
+  }
+  .nav-links a.active {
+    background: #FF6B35 !important;
+    color: #FFFFFF !important;
+    -webkit-text-fill-color: #FFFFFF !important;
+  }
+}
+
+/* ── HERO BAND ── */
+.page-hero {
+  background: #1C1917;
+  color: white;
+  text-align: center;
+  padding: 56px 24px 48px;
+  position: relative;
+  overflow: hidden;
+}
+
+.page-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 60% 60% at 20% 50%, rgba(255,107,53,0.12) 0%, transparent 70%),
+    radial-gradient(ellipse 50% 50% at 80% 50%, rgba(123,47,190,0.12) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.page-hero .badge {
+  display: inline-block;
+  background: linear-gradient(135deg, var(--orange), var(--pink));
+  font-family: 'Fredoka One', cursive;
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 5px 16px;
+  border-radius: 50px;
+  margin-bottom: 18px;
+  position: relative;
+}
+
+.page-hero h1 {
+  font-family: 'Fredoka One', cursive;
+  font-size: clamp(2rem, 6vw, 3.8rem);
+  line-height: 1.05;
+  margin-bottom: 14px;
+  background: linear-gradient(135deg, var(--yellow) 0%, var(--orange) 50%, var(--pink) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  position: relative;
+}
+
+.page-hero p {
+  font-size: 1rem;
+  color: #A8A29E;
+  max-width: 520px;
+  margin: 0 auto;
+  font-weight: 600;
+  position: relative;
+}
+
+/* ── CONTAINERS ── */
+.site-container {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 48px 24px 80px;
+}
+
+.site-container.narrow {
+  max-width: 820px;
+}
+
+/* ── SECTION TITLE ── */
+.section-title {
+  font-family: 'Fredoka One', cursive;
+  font-size: 1.6rem;
+  color: var(--ink);
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* ── CARDS ── */
+.card {
+  background: var(--card);
+  border: 1.5px solid var(--rule);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+}
+
+/* ── FOOTER ── */
+.site-footer {
+  background: #1C1917;
+  color: #A8A29E;
+  text-align: center;
+  padding: 40px 24px;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.site-footer a {
+  color: var(--yellow);
+  text-decoration: none;
+}
+
+.site-footer .footer-links {
+  display: flex;
+  gap: 24px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+
+/* ── UTILITIES ── */
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.72rem;
+  font-weight: 800;
+  padding: 4px 12px;
+  border-radius: 50px;
+  letter-spacing: 0.05em;
+}
+
+.pill-blue   { background: var(--w1l); color: var(--w1d); }
+.pill-green  { background: var(--w2l); color: var(--w2d); }
+.pill-purple { background: var(--w3l); color: var(--w3d); }
+.pill-orange { background: var(--w4l); color: var(--w4d); }
+.pill-teal   { background: var(--w5l); color: var(--w5d); }
+.pill-pink   { background: var(--w6l); color: var(--w6d); }
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Fredoka One', cursive;
+  font-size: 1rem;
+  padding: 12px 28px;
+  border-radius: 12px;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--orange), var(--pink));
+  color: white;
+}
+
+.btn-secondary {
+  background: var(--warm);
+  color: var(--ink);
+  border: 1.5px solid var(--rule);
+}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.fade-up {
+  animation: fadeUp 0.5s ease both;
+}
+
+/* staggered children */
+.stagger > *:nth-child(1) { animation-delay: 0.05s; }
+.stagger > *:nth-child(2) { animation-delay: 0.10s; }
+.stagger > *:nth-child(3) { animation-delay: 0.15s; }
+.stagger > *:nth-child(4) { animation-delay: 0.20s; }
+.stagger > *:nth-child(5) { animation-delay: 0.25s; }
+.stagger > *:nth-child(6) { animation-delay: 0.30s; }
