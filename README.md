@@ -17,47 +17,6 @@
 | 🔧 **Troubleshooting** (`pages/troubleshooting.html`) | 9 common problems with fixes + mindset phrases |
 | ✅ **Progress Checklist** (`pages/checklist.html`) | Weekly skill tracking checklist + 6-week progress tracker |
 
----
-
-## 🚀 Publishing on GitHub Pages (Step-by-Step)
-
-### 1. Create a GitHub account
-Go to [github.com](https://github.com) and sign up for a free account.
-
-### 2. Create a new repository
-- Click the **+** button → **New repository**
-- Name it: `scratchjr-adventure`
-- Set it to **Public**
-- Click **Create repository**
-
-### 3. Upload the files
-- Click **Add file** → **Upload files**
-- Drag and drop the entire folder contents:
-  ```
-  index.html
-  css/
-    site.css
-  pages/
-    curriculum.html
-    activity-cards.html
-    lesson-scripts.html
-    troubleshooting.html
-    checklist.html
-  README.md
-  ```
-- Click **Commit changes**
-
-### 4. Enable GitHub Pages
-- Go to your repository → **Settings** → **Pages** (left sidebar)
-- Under **Source**, select **Deploy from a branch**
-- Under **Branch**, select `main` and folder `/` (root)
-- Click **Save**
-
-### 5. Your site is live! 🎉
-After 1-2 minutes, your site will be available at:
-```
-https://yourusername.github.io/scratchjr-adventure
-```
 
 ---
 
