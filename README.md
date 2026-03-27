@@ -2,7 +2,7 @@
 
 > A complete 6-week home learning program for kids aged 7–10. Daily 1-hour lessons, printable activity cards, teacher scripts, and everything you need — even if you've never coded before.
 
-🌐 **Live site:** [https://yourusername.github.io/scratch-for-juniors](https://yourusername.github.io/scratch-for-juniors)
+🌐 **Live site:** [https://pepya.github.io/scratch-for-juniors](https://pepya.github.io/scratch-for-juniors)
 
 ---
 
