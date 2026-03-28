@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="color-scheme" content="light">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Achievement Badges & Certificates — ScratchJr Adventure</title>
+  <meta name="description" content="Printable weekly achievement badges and graduation certificates for kids completing the ScratchJr Adventure program.">
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Atkinson+Hyperlegible:wght@400;700&family=Nunito:wght@700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/site.css">
+  <style>
+    color-scheme: light only;
+
+    /* ── NAV FIXES ── */
+    .nav-logo,.nav-logo:link,.nav-logo:visited,.nav-logo:hover,.nav-logo:active {
+      color:#FFD23F !important; -webkit-text-fill-color:#FFD23F !important; text-decoration:none !important;
+    }
+    .nav-links a,.nav-links a:link,.nav-links a:visited {
+      color:#D6D3D1 !important; -webkit-text-fill-color:#D6D3D1 !important; text-decoration:none !important;
+    }
+    @media (max-width:700px) {
+      .nav-toggle { display:flex !important; background:transparent !important; border:none !important; -webkit-appearance:none; width:40px; height:40px; flex-direction:column; align-items:center; justify-content:center; gap:5px; }
+      .nav-toggle span { display:block; width:22px; height:2px; background:white !important; border-radius:2px; }
+      .nav-links { display:none !important; position:fixed !important; top:58px !important; left:0 !important; right:0 !important; z-index:9999 !important; background:#1C1917 !important; flex-direction:column !important; align-items:stretch !important; padding:8px 12px 16px !important; gap:2px !important; box-shadow:0 12px 32px rgba(0,0,0,0.7) !important; border-top:1px solid rgba(255,255,255,0.08) !important; }
+      .nav-links.open { display:flex !important; }
+      .nav-links a,.nav-links a:link,.nav-links a:visited { color:#FFFFFF !important; -webkit-text-fill-color:#FFFFFF !important; padding:13px 16px !important; font-size:0.95rem !important; border-radius:10px !important; }
+    }
+
+    /* ── PAGE LAYOUT ── */
+    .page-intro {
+      background: #1C1917;
+      padding: 48px 24px 40px;
+      text-align: center;
+      color: white;
+      position: relative;
+      overflow: hidden;
+    }
+    .page-intro::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse 60% 80% at 50% 100%, rgba(255,107,53,0.15) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .page-intro .eyebrow {
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.18em;
+      text-transform: uppercase; color: #FF6B35; margin-bottom: 12px;
+    }
+    .page-intro h1 {
+      font-family: 'Fredoka One', cursive;
+      font-size: clamp(1.8rem, 5vw, 3rem);
+      background: linear-gradient(135deg, #FFD23F, #FF6B35);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 12px; position: relative;
+    }
+    .page-intro p {
+      color: #A8A29E; font-size: 0.95rem; font-weight: 600;
+      max-width: 520px; margin: 0 auto 24px; line-height: 1.65; position: relative;
+    }
+    .print-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: 'Fredoka One', cursive; font-size: 1rem;
+      background: linear-gradient(135deg, #FF6B35, #FF3D77);
+      color: white; padding: 12px 28px; border-radius: 12px;
+      text-decoration: none; border: none; cursor: pointer;
+      transition: transform 0.15s, box-shadow 0.15s;
+      position: relative;
+    }
+    .print-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(255,107,53,0.4); }
+
+    /* ── MAIN CONTAINER ── */
+    .main { max-width: 1080px; margin: 0 auto; padding: 48px 24px 80px; }
+
+    .section-head {
+      margin-bottom: 28px;
+    }
+    .section-head h2 {
+      font-family: 'Fredoka One', cursive;
+      font-size: 1.6rem; color: #1C1917; margin-bottom: 6px;
+    }
+    .section-head p { font-size: 0.9rem; color: #78716C; font-weight: 600; }
+
+    /* ── BADGE GRID ── */
+    .badges-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 24px;
+      margin-bottom: 64px;
+    }
+
+    /* ── BADGE CARD ── */
+    .badge-card {
+      background: white;
+      border-radius: 24px;
+      overflow: hidden;
+      border: 2px solid #E8DCC8;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .badge-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.1); }
+
+    .badge-visual {
+      padding: 32px 24px 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Decorative radial burst behind the badge */
+    .badge-visual::before {
+      content: '';
+      position: absolute;
+      width: 200px; height: 200px;
+      border-radius: 50%;
+      opacity: 0.12;
+      top: -40px; left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .badge-emoji {
+      font-size: 4rem;
+      margin-bottom: 12px;
+      position: relative;
+      filter: drop-shadow(0 4px 12px rgba(0,0,0,0.15));
+    }
+
+    .badge-week {
+      font-size: 0.65rem; font-weight: 800;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      margin-bottom: 6px; opacity: 0.7;
+    }
+
+    .badge-name {
+      font-family: 'Fredoka One', cursive;
+      font-size: 1.4rem;
+      margin-bottom: 8px;
+      color: white;
+    }
+
+    .badge-desc {
+      font-size: 0.82rem; font-weight: 600;
+      color: rgba(255,255,255,0.85);
+      line-height: 1.5;
+      max-width: 220px;
+    }
+
+    /* Star decoration */
+    .badge-stars {
+      display: flex; gap: 4px; margin-top: 12px;
+      font-size: 0.9rem;
+    }
+
+    .badge-footer {
+      padding: 16px 20px;
+      background: #FAFAF8;
+      border-top: 1.5px solid #F0EAE0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .badge-skills {
+      display: flex; gap: 5px; flex-wrap: wrap;
+    }
+    .badge-skill {
+      font-size: 0.67rem; font-weight: 800;
+      padding: 3px 9px; border-radius: 50px;
+    }
+
+    .badge-print-link {
+      font-family: 'Fredoka One', cursive;
+      font-size: 0.82rem;
+      text-decoration: none;
+      display: flex; align-items: center; gap: 4px;
+      white-space: nowrap;
+      transition: opacity 0.15s;
+    }
+    .badge-print-link:hover { opacity: 0.7; }
+
+    /* Week colour themes */
+    .bw1 .badge-visual { background: linear-gradient(135deg, #1D4ED8, #60A5FA); }
+    .bw1 .badge-visual::before { background: #93C5FD; }
+    .bw1 .badge-week { color: #BFDBFE; }
+    .bw1 .badge-skill { background: #DBEAFE; color: #1E40AF; }
+    .bw1 .badge-print-link { color: #2563EB; }
+
+    .bw2 .badge-visual { background: linear-gradient(135deg, #15803D, #4ADE80); }
+    .bw2 .badge-visual::before { background: #86EFAC; }
+    .bw2 .badge-week { color: #BBF7D0; }
+    .bw2 .badge-skill { background: #DCFCE7; color: #14532D; }
+    .bw2 .badge-print-link { color: #16A34A; }
+
+    .bw3 .badge-visual { background: linear-gradient(135deg, #6D28D9, #A855F7); }
+    .bw3 .badge-visual::before { background: #C084FC; }
+    .bw3 .badge-week { color: #E9D5FF; }
+    .bw3 .badge-skill { background: #EDE9FE; color: #4C1D95; }
+    .bw3 .badge-print-link { color: #7C3AED; }
+
+    .bw4 .badge-visual { background: linear-gradient(135deg, #C2410C, #FB923C); }
+    .bw4 .badge-visual::before { background: #FCA5A5; }
+    .bw4 .badge-week { color: #FED7AA; }
+    .bw4 .badge-skill { background: #FFF7ED; color: #7C2D12; }
+    .bw4 .badge-print-link { color: #EA580C; }
+
+    .bw5 .badge-visual { background: linear-gradient(135deg, #0E7490, #22D3EE); }
+    .bw5 .badge-visual::before { background: #67E8F9; }
+    .bw5 .badge-week { color: #A5F3FC; }
+    .bw5 .badge-skill { background: #ECFEFF; color: #164E63; }
+    .bw5 .badge-print-link { color: #0891B2; }
+
+    .bw6 .badge-visual { background: linear-gradient(135deg, #9F1239, #FB7185); }
+    .bw6 .badge-visual::before { background: #FDA4AF; }
+    .bw6 .badge-week { color: #FFE4E6; }
+    .bw6 .badge-skill { background: #FFF1F2; color: #881337; }
+    .bw6 .badge-print-link { color: #BE123C; }
+
+    /* ── GRADUATION DIPLOMA ── */
+    .diploma-wrapper {
+      margin-bottom: 64px;
+    }
+
+    .diploma {
+      background: white;
+      border-radius: 24px;
+      border: 3px solid #FFD23F;
+      box-shadow: 0 8px 40px rgba(255,210,63,0.2);
+      padding: 0;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .diploma-top {
+      background: linear-gradient(135deg, #1C1917, #292524);
+      padding: 40px 32px 36px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .diploma-top::before {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 50% 60% at 20% 50%, rgba(255,107,53,0.15) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 60% at 80% 50%, rgba(255,210,63,0.15) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .diploma-stars-top {
+      font-size: 1.6rem; letter-spacing: 6px;
+      margin-bottom: 16px; position: relative;
+    }
+
+    .diploma-title {
+      font-family: 'Fredoka One', cursive;
+      font-size: clamp(1.4rem, 4vw, 2.2rem);
+      color: #FFD23F;
+      margin-bottom: 6px;
+      position: relative;
+    }
+
+    .diploma-subtitle {
+      font-size: 0.85rem; font-weight: 700;
+      color: #A8A29E; letter-spacing: 0.12em;
+      text-transform: uppercase; position: relative;
+    }
+
+    .diploma-body {
+      padding: 40px 40px 36px;
+      text-align: center;
+    }
+
+    .diploma-presents {
+      font-size: 0.8rem; font-weight: 700;
+      color: #78716C; letter-spacing: 0.1em;
+      text-transform: uppercase; margin-bottom: 16px;
+    }
+
+    .diploma-name-field {
+      border: none; border-bottom: 2px solid #E8DCC8;
+      font-family: 'Fredoka One', cursive;
+      font-size: clamp(1.6rem, 5vw, 2.4rem);
+      color: #1C1917; text-align: center;
+      width: 100%; max-width: 480px;
+      padding: 8px 0; margin-bottom: 8px;
+      background: transparent; outline: none;
+      display: block; margin: 0 auto 8px;
+    }
+    .diploma-name-field::placeholder { color: #D1D5DB; }
+    .diploma-name-field:focus { border-bottom-color: #FF6B35; }
+
+    .diploma-name-hint {
+      font-size: 0.75rem; color: #A8A29E; font-weight: 600;
+      margin-bottom: 28px;
+    }
+
+    .diploma-text {
+      font-size: 1rem; color: #1C1917; font-weight: 600;
+      line-height: 1.7; max-width: 520px; margin: 0 auto 28px;
+    }
+
+    .diploma-skills-row {
+      display: flex; gap: 10px;
+      justify-content: center; flex-wrap: wrap;
+      margin-bottom: 32px;
+    }
+
+    .diploma-skill-pill {
+      font-size: 0.78rem; font-weight: 800;
+      padding: 6px 14px; border-radius: 50px;
+      display: flex; align-items: center; gap: 5px;
+    }
+
+    .diploma-bottom {
+      border-top: 2px dashed #E8DCC8;
+      padding: 24px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .diploma-sig {
+      text-align: center;
+    }
+    .diploma-sig-line {
+      width: 160px; height: 1px;
+      background: #1C1917;
+      margin: 0 auto 6px;
+    }
+    .diploma-sig-label {
+      font-size: 0.72rem; font-weight: 700;
+      color: #78716C; text-transform: uppercase; letter-spacing: 0.08em;
+    }
+
+    .diploma-seal {
+      width: 80px; height: 80px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #FFD23F, #FF6B35);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      box-shadow: 0 4px 16px rgba(255,107,53,0.4);
+    }
+    .diploma-seal-emoji { font-size: 1.8rem; }
+    .diploma-seal-text {
+      font-size: 0.42rem; font-weight: 900;
+      color: white; text-transform: uppercase;
+      letter-spacing: 0.1em; margin-top: 2px;
+    }
+
+    /* ── PRINT STYLES ── */
+    @media print {
+      .site-nav, .page-intro, .print-btn, .badge-print-link,
+      .main > .section-head:first-child,
+      .site-footer { display: none !important; }
+
+      body { background: white !important; }
+
+      .badges-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+        page-break-inside: avoid;
+      }
+
+      .badge-card {
+        page-break-inside: avoid;
+        break-inside: avoid;
+      }
+
+      .diploma {
+        page-break-before: always;
+        border: 3px solid #FFD23F;
+      }
+    }
+
+    /* divider */
+    .divider { height: 1px; background: #E8DCC8; margin: 48px 0; }
+
+    /* How to use box */
+    .how-to-box {
+      background: #F0FDF4;
+      border: 1.5px solid #86EFAC;
+      border-radius: 16px;
+      padding: 24px 28px;
+      margin-bottom: 40px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+    }
+    .how-step { display: flex; gap: 12px; align-items: flex-start; }
+    .how-num {
+      width: 32px; height: 32px; border-radius: 50%;
+      background: #16A34A; color: white;
+      font-family: 'Fredoka One', cursive; font-size: 1rem;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .how-text strong { display: block; font-size: 0.88rem; color: #1C1917; margin-bottom: 2px; }
+    .how-text span { font-size: 0.8rem; color: #78716C; font-weight: 600; line-height: 1.4; }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="site-nav">
+  <a href="../index.html" class="nav-logo">🐱 ScratchJr Adventure</a>
+  <button class="nav-toggle" id="navToggle" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="../index.html">🏠 Home</a></li>
+    <li><a href="curriculum.html">📅 Curriculum</a></li>
+    <li><a href="activity-cards.html">🧩 Activity Cards</a></li>
+    <li><a href="lesson-scripts.html">📋 Lesson Scripts</a></li>
+    <li><a href="badges.html" class="active">🏅 Badges</a></li>
+    <li><a href="bonus-challenges.html">⚡ Bonus</a></li>
+    <li><a href="troubleshooting.html">🔧 Help</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="page-intro">
+  <div class="eyebrow">🏅 Rewards & Recognition</div>
+  <h1>Achievement Badges<br>&amp; Certificates</h1>
+  <p>Print a badge at the end of each week. Fill in the child's name on the diploma and present it at Graduation Day. Every coder deserves to celebrate their wins!</p>
+  <button class="print-btn" onclick="window.print()">🖨️ Print All Badges &amp; Diploma</button>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+  <!-- How to use -->
+  <div class="how-to-box">
+    <div class="how-step">
+      <div class="how-num">1</div>
+      <div class="how-text">
+        <strong>Print each Friday</strong>
+        <span>After the mini-project, print that week's badge. Hand it to the child as a physical reward.</span>
+      </div>
+    </div>
+    <div class="how-step">
+      <div class="how-num">2</div>
+      <div class="how-text">
+        <strong>Stick or display</strong>
+        <span>Use a badge wall, notebook, or fridge. Seeing all 6 badges builds excitement toward graduation.</span>
+      </div>
+    </div>
+    <div class="how-step">
+      <div class="how-num">3</div>
+      <div class="how-text">
+        <strong>Diploma on Day 30</strong>
+        <span>Type the child's name below, then print the diploma. Present it at the Week 6 Graduation Day celebration!</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── WEEKLY BADGES ── -->
+  <div class="section-head">
+    <h2>🌟 Weekly Achievement Badges</h2>
+    <p>One badge per week — earned on Friday after completing the mini-project.</p>
+  </div>
+
+  <div class="badges-grid">
+
+    <!-- Week 1 -->
+    <div class="badge-card bw1">
+      <div class="badge-visual">
+        <div class="badge-emoji">🎮</div>
+        <div class="badge-week">Week 1 Achievement</div>
+        <div class="badge-name">Explorer Badge</div>
+        <div class="badge-desc">I discovered ScratchJr, drew my own character, and made my first animation!</div>
+        <div class="badge-stars">⭐⭐⭐⭐⭐</div>
+      </div>
+      <div class="badge-footer">
+        <div class="badge-skills">
+          <span class="badge-skill">🏃 Motion</span>
+          <span class="badge-skill">▶️ Triggers</span>
+          <span class="badge-skill">🎨 Looks</span>
+        </div>
+        <a href="#" class="badge-print-link" onclick="window.print();return false;">🖨️ Print</a>
+      </div>
+    </div>
+
+    <!-- Week 2 -->
+    <div class="badge-card bw2">
+      <div class="badge-visual">
+        <div class="badge-emoji">📖</div>
+        <div class="badge-week">Week 2 Achievement</div>
+        <div class="badge-name">Story Teller Badge</div>
+        <div class="badge-desc">I built a multi-scene story with characters that talk to each other!</div>
+        <div class="badge-stars">⭐⭐⭐⭐⭐</div>
+      </div>
+      <div class="badge-footer">
+        <div class="badge-skills">
+          <span class="badge-skill">📄 Pages</span>
+          <span class="badge-skill">💬 Dialogue</span>
+          <span class="badge-skill">⏳ Timing</span>
+        </div>
+        <a href="#" class="badge-print-link" onclick="window.print();return false;">🖨️ Print</a>
+      </div>
+    </div>
+
+    <!-- Week 3 -->
+    <div class="badge-card bw3">
+      <div class="badge-visual">
+        <div class="badge-emoji">🔁</div>
+        <div class="badge-week">Week 3 Achievement</div>
+        <div class="badge-name">Loop Master Badge</div>
+        <div class="badge-desc">I unlocked the secret of loops and made characters dance and repeat forever!</div>
+        <div class="badge-stars">⭐⭐⭐⭐⭐</div>
+      </div>
+      <div class="badge-footer">
+        <div class="badge-skills">
+          <span class="badge-skill">🔁 Repeat</span>
+          <span class="badge-skill">♾️ Forever</span>
+          <span class="badge-skill">🌺 Patterns</span>
+        </div>
+        <a href="#" class="badge-print-link" onclick="window.print();return false;">🖨️ Print</a>
+      </div>
+    </div>
+
+    <!-- Week 4 -->
+    <div class="badge-card bw4">
+      <div class="badge-visual">
+        <div class="badge-emoji">📨</div>
+        <div class="badge-week">Week 4 Achievement</div>
+        <div class="badge-name">Game Maker Badge</div>
+        <div class="badge-desc">I made characters talk to each other with messages and built my first real game!</div>
+        <div class="badge-stars">⭐⭐⭐⭐⭐</div>
+      </div>
+      <div class="badge-footer">
+        <div class="badge-skills">
+          <span class="badge-skill">📨 Messages</span>
+          <span class="badge-skill">🎮 Events</span>
+          <span class="badge-skill">🏆 Games</span>
+        </div>
+        <a href="#" class="badge-print-link" onclick="window.print();return false;">🖨️ Print</a>
+      </div>
+    </div>
+
+    <!-- Week 5 -->
+    <div class="badge-card bw5">
+      <div class="badge-visual">
+        <div class="badge-emoji">🎵</div>
+        <div class="badge-week">Week 5 Achievement</div>
+        <div class="badge-name">Sound Engineer Badge</div>
+        <div class="badge-desc">I recorded my voice, built a musical instrument, and made my own music video!</div>
+        <div class="badge-stars">⭐⭐⭐⭐⭐</div>
+      </div>
+      <div class="badge-footer">
+        <div class="badge-skills">
+          <span class="badge-skill">🔊 Sound</span>
+          <span class="badge-skill">🎤 Recording</span>
+          <span class="badge-skill">🎹 Music</span>
+        </div>
+        <a href="#" class="badge-print-link" onclick="window.print();return false;">🖨️ Print</a>
+      </div>
+    </div>
+
+    <!-- Week 6 -->
+    <div class="badge-card bw6">
+      <div class="badge-visual">
+        <div class="badge-emoji">🏆</div>
+        <div class="badge-week">Week 6 Achievement</div>
+        <div class="badge-name">Creator Badge</div>
+        <div class="badge-desc">I designed, built, and presented my own original project from scratch — all by myself!</div>
+        <div class="badge-stars">⭐⭐⭐⭐⭐</div>
+      </div>
+      <div class="badge-footer">
+        <div class="badge-skills">
+          <span class="badge-skill">💡 Design</span>
+          <span class="badge-skill">🧩 Build</span>
+          <span class="badge-skill">🎤 Present</span>
+        </div>
+        <a href="#" class="badge-print-link" onclick="window.print();return false;">🖨️ Print</a>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ── GRADUATION DIPLOMA ── -->
+  <div class="section-head diploma-wrapper">
+    <h2>🎓 Graduation Diploma</h2>
+    <p>Type the child's name in the field below, then print — or fill it in by hand after printing.</p>
+  </div>
+
+  <div class="diploma-wrapper">
+    <div class="diploma">
+
+      <div class="diploma-top">
+        <div class="diploma-stars-top">🌟 ⭐ 🌟 ⭐ 🌟</div>
+        <div class="diploma-title">Certificate of Achievement</div>
+        <div class="diploma-subtitle">ScratchJr Adventure · 6-Week Coding Program</div>
+      </div>
+
+      <div class="diploma-body">
+        <div class="diploma-presents">This certificate is proudly awarded to</div>
+
+        <input
+          class="diploma-name-field"
+          type="text"
+          placeholder="Child's Name"
+          id="diplomaName"
+        />
+        <div class="diploma-name-hint">← Type the name here before printing</div>
+
+        <div class="diploma-text">
+          for successfully completing all <strong>6 weeks</strong> of the
+          <strong>ScratchJr Adventure</strong> coding program —
+          30 lessons, 6 projects, and countless bugs bravely fixed.
+          <br><br>
+          You have shown curiosity, creativity, and the courage
+          to keep trying when things didn't work. You are now
+          officially a <strong>ScratchJr Coder</strong>. 🚀
+        </div>
+
+        <div class="diploma-skills-row">
+          <span class="diploma-skill-pill" style="background:#DBEAFE;color:#1E40AF;">🎮 Explorer</span>
+          <span class="diploma-skill-pill" style="background:#DCFCE7;color:#14532D;">📖 Story Teller</span>
+          <span class="diploma-skill-pill" style="background:#EDE9FE;color:#4C1D95;">🔁 Loop Master</span>
+          <span class="diploma-skill-pill" style="background:#FFF7ED;color:#7C2D12;">📨 Game Maker</span>
+          <span class="diploma-skill-pill" style="background:#ECFEFF;color:#164E63;">🎵 Sound Engineer</span>
+          <span class="diploma-skill-pill" style="background:#FFF1F2;color:#881337;">🏆 Creator</span>
+        </div>
+      </div>
+
+      <div class="diploma-bottom">
+        <div class="diploma-sig">
+          <div class="diploma-sig-line"></div>
+          <div class="diploma-sig-label">Teacher / Parent Signature</div>
+        </div>
+
+        <div class="diploma-seal">
+          <div class="diploma-seal-emoji">🐱</div>
+          <div class="diploma-seal-text">Certified Coder</div>
+        </div>
+
+        <div class="diploma-sig">
+          <div class="diploma-sig-line"></div>
+          <div class="diploma-sig-label">Date Completed</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="footer-links">
+    <a href="../index.html">Home</a>
+    <a href="curriculum.html">Curriculum</a>
+    <a href="activity-cards.html">Activity Cards</a>
+    <a href="badges.html">Badges</a>
+    <a href="bonus-challenges.html">Bonus Challenges</a>
+    <a href="troubleshooting.html">Help</a>
+    <a href="checklist.html">Progress</a>
+  </div>
+  <p style="color:#A8A29E;margin-bottom:8px;">Made with ❤️ for parents everywhere · Free &amp; Open Source · <a href="https://github.com" style="color:#FFD23F;text-decoration:none;">View on GitHub ↗</a></p>
+  <p style="font-size:0.85rem;opacity:0.8;color:#A8A29E;">Created by <strong style="color:#FFD23F;">Petya Lozanova</strong> · ScratchJr is a product of the Scratch Foundation · Independent educational resource</p>
+</footer>
+
+<script>
+  // Mobile nav
+  document.getElementById('navToggle').addEventListener('click', () => {
+    document.getElementById('navLinks').classList.toggle('open');
+  });
+  document.querySelectorAll('.nav-links a').forEach(a =>
+    a.addEventListener('click', () => document.getElementById('navLinks').classList.remove('open'))
+  );
+</script>
+</body>
+</html>
