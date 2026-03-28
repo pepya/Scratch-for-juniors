@@ -148,13 +148,14 @@
   .done-box {
     width: 28px; height: 28px;
     border-radius: 8px;
-    border: 3px solid #ddd;
+    border: 3px solid #AAAAAA;
     flex-shrink: 0;
   }
   .done-label {
-    font-family: 'Fredoka One', cursive;
-    font-size: 0.9rem;
-    color: #aaa;
+    font-family: 'Atkinson Hyperlegible', 'Nunito', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: #555555;
   }
 
   /* Time pills row */
@@ -269,6 +270,22 @@
     .nav-links a,.nav-links a:link,.nav-links a:visited { color:#FFFFFF !important; -webkit-text-fill-color:#FFFFFF !important; padding:13px 16px !important; font-size:0.95rem !important; border-radius:10px !important; }
   }
 </style>
+
+  /* Week divider — forces clean grid break between weeks */
+  .week-divider {
+    grid-column: 1 / -1;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 8px 0;
+    margin-top: 8px;
+  }
+  .week-divider-line { flex: 1; height: 2px; background: #E8DCC8; border-radius: 2px; }
+  .week-divider-label {
+    font-family: 'Fredoka One', cursive;
+    font-size: 1rem;
+    white-space: nowrap;
+  }
 </style>
 </head>
 <body>
@@ -298,6 +315,7 @@
 <div class="cards-grid">
 
 <!-- ═══════════════ WEEK 1 ═══════════════ -->
+<div class="week-divider"><div class="week-divider-line"></div><div class="week-divider-label" style="color:#2563EB;">🐱 Week 1 — Hello, ScratchJr!</div><div class="week-divider-line"></div></div>
 
 <div class="card w1">
   <div class="card-header">
@@ -475,6 +493,7 @@
 </div>
 
 <!-- ═══════════════ WEEK 2 ═══════════════ -->
+<div class="week-divider"><div class="week-divider-line"></div><div class="week-divider-label" style="color:#16A34A;">🦁 Week 2 — Tell a Story!</div><div class="week-divider-line"></div></div>
 
 <div class="card w2">
   <div class="card-header">
@@ -652,6 +671,7 @@
 </div>
 
 <!-- ═══════════════ WEEK 3 ═══════════════ -->
+<div class="week-divider"><div class="week-divider-line"></div><div class="week-divider-label" style="color:#7C3AED;">🔁 Week 3 — Loops &amp; Repeats!</div><div class="week-divider-line"></div></div>
 
 <div class="card w3">
   <div class="card-header">
@@ -829,6 +849,7 @@
 </div>
 
 <!-- ═══════════════ WEEK 4 ═══════════════ -->
+<div class="week-divider"><div class="week-divider-line"></div><div class="week-divider-label" style="color:#EA580C;">📨 Week 4 — Messages!</div><div class="week-divider-line"></div></div>
 
 <div class="card w4">
   <div class="card-header">
@@ -1006,6 +1027,7 @@
 </div>
 
 <!-- ═══════════════ WEEK 5 ═══════════════ -->
+<div class="week-divider"><div class="week-divider-line"></div><div class="week-divider-label" style="color:#0891B2;">🎵 Week 5 — Sound &amp; Music!</div><div class="week-divider-line"></div></div>
 
 <div class="card w5">
   <div class="card-header">
@@ -1183,6 +1205,7 @@
 </div>
 
 <!-- ═══════════════ WEEK 6 ═══════════════ -->
+<div class="week-divider"><div class="week-divider-line"></div><div class="week-divider-label" style="color:#BE123C;">🏆 Week 6 — Grand Finale!</div><div class="week-divider-line"></div></div>
 
 <div class="card w6">
   <div class="card-header">

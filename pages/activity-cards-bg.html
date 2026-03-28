@@ -5,13 +5,13 @@
 <meta name="color-scheme" content="light">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ScratchJr Карти за дейности — на български</title>
-<link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Atkinson+Hyperlegible:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&family=Atkinson+Hyperlegible:wght@400;700&display=swap&subset=cyrillic,latin" rel="stylesheet">
 <link rel="stylesheet" href="../css/site.css">
 <style>
   * { margin:0; padding:0; box-sizing:border-box; }
 
   body {
-    font-family: 'Atkinson Hyperlegible', sans-serif;
+    font-family: 'Atkinson Hyperlegible', 'Arial', sans-serif;
     background: #f5f0ff;
     padding: 20px;
     color: #1C1917;
@@ -54,11 +54,13 @@
   }
 
   h1.page-title {
-    font-family: 'Fredoka One', cursive;
+    font-family: 'Nunito', 'Arial', sans-serif;
+    font-weight: 900;
     text-align: center;
     font-size: 2rem;
     color: #4B1FA8;
     margin-bottom: 6px;
+    font-style: normal !important;
   }
   .page-subtitle {
     text-align: center;
@@ -109,10 +111,12 @@
   }
 
   .card-title {
-    font-family: 'Fredoka One', cursive;
-    font-size: 1.25rem;
+    font-family: 'Nunito', 'Arial', sans-serif;
+    font-weight: 900;
+    font-size: 1.2rem;
     color: white;
-    line-height: 1.15;
+    line-height: 1.2;
+    font-style: normal !important;
   }
 
   .card-body {
@@ -138,7 +142,8 @@
     width: 22px; height: 22px;
     border-radius: 50%;
     display: flex; align-items: center; justify-content: center;
-    font-family: 'Fredoka One', cursive;
+    font-family: 'Nunito', 'Arial', sans-serif;
+    font-weight: 900;
     font-size: 0.75rem;
     color: white;
     flex-shrink: 0;
@@ -177,7 +182,7 @@
     width: 28px; height: 28px;
     border-radius: 8px; border: 3px solid #ddd; flex-shrink: 0;
   }
-  .done-label { font-family: 'Fredoka One', cursive; font-size: 0.9rem; color: #aaa; }
+  .done-label { font-family: 'Atkinson Hyperlegible', sans-serif; font-size: 1rem; font-weight: 700; color: #555555; }
 
   /* Week colour themes */
   .w1 .card-header { background: linear-gradient(135deg, #2563EB, #60A5FA); }
@@ -232,12 +237,22 @@
   }
   .week-divider-line { flex: 1; height: 2px; background: #E8DCC8; border-radius: 2px; }
   .week-divider-label {
-    font-family: 'Fredoka One', cursive;
+    font-family: 'Nunito', 'Arial', sans-serif;
+    font-weight: 800;
     font-size: 1rem;
-    color: #78716C;
+    color: #44403C;
     white-space: nowrap;
+    font-style: normal !important;
   }
 
+
+  /* Prevent Cyrillic from falling back to system italic/cursive fonts */
+  * { font-style: normal !important; }
+  .card-title, .week-divider-label, h1.page-title, .done-label, .lang-btn {
+    font-style: normal !important;
+    font-family: 'Nunito', 'Arial', sans-serif !important;
+    font-weight: 800 !important;
+  }
   /* Print */
   @media print {
     .lang-bar { display: none; }
