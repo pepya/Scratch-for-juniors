@@ -2,7 +2,7 @@
 
 > A complete 6-week home learning program for kids aged 7–10. Daily 1-hour lessons, printable activity cards, teacher scripts, and everything you need — even if you've never coded before.
 
-🌐 **Live site:** [https://pepya.github.io/scratch-for-juniors](https://pepya.github.io/scratch-for-juniors)
+🌐 **Live site:** [https://pepya.github.io/Scratch-for-juniors/index.html](https://pepya.github.io/Scratch-for-juniors/index.html)
 
 ---
 
@@ -84,8 +84,8 @@ This curriculum is built on three principles:
 
 This is an open-source community resource. Contributions welcome!
 
-- 🐛 Found a bug or broken link? Open an [Issue](https://github.com/yourusername/scratchjr-adventure/issues)
-- 💡 Have an idea for a new lesson or feature? Open a [Pull Request](https://github.com/yourusername/scratchjr-adventure/pulls)
+- 🐛 Found a bug or broken link? Open an [Issue](https://github.com/pepya/Scratch-for-juniors/issues)
+- 💡 Have an idea for a new lesson or feature? Open a [Pull Request](https://github.com/pepya/Scratch-for-juniors/pulls)
 - 🌍 Want to translate to another language? Get in touch!
 
 ---
