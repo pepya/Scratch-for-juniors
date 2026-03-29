@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+  <meta charset="UTF-8">
+  <meta name="color-scheme" content="light">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>6-Седмична програма — ScratchJr Приключение</title>
+  <meta name="description" content="Full 6-week ScratchJr curriculum. Day-by-day lessons for kids aged 7-10, covering motion, stories, loops, messages, sound and a final project.">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&family=Atkinson+Hyperlegible:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/site.css">
+  <style>
+    color-scheme: light only;
+
+    .week-block {
+      background: white;
+      border: 1.5px solid var(--rule);
+      border-radius: 24px;
+      overflow: hidden;
+      margin-bottom: 40px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+    }
+
+    .week-header {
+      padding: 24px 32px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      color: white;
+    }
+
+    .week-num {
+      font-family: 'Nunito', sans-serif; font-weight: 900;
+      font-size: 3.2rem;
+      line-height: 1;
+      opacity: 0.25;
+      color: white;
+    }
+
+    .week-info { flex: 1; }
+
+    .week-theme {
+      font-family: 'Nunito', sans-serif; font-weight: 900;
+      font-size: 1.55rem;
+      color: white;
+      margin-bottom: 4px;
+    }
+
+    .week-desc {
+      font-size: 0.88rem;
+      color: rgba(255,255,255,0.75);
+      font-weight: 600;
+    }
+
+    .week-emoji { font-size: 3rem; }
+
+    .week-tags {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-top: 10px;
+    }
+
+    .week-tag {
+      font-size: 0.68rem;
+      font-weight: 900;
+      padding: 3px 10px;
+      border-radius: 50px;
+      background: rgba(255,255,255,0.2);
+      color: white;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    /* Days grid */
+    .days-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1px;
+      background: var(--rule);
+    }
+
+    .day-card {
+      background: #FAFAF8;
+      padding: 22px 22px 18px;
+      transition: background 0.15s;
+    }
+
+    .day-card:hover { background: white; }
+
+    .day-label {
+      font-size: 0.68rem;
+      font-weight: 900;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    .day-title {
+      font-family: 'Nunito', sans-serif; font-weight: 900;
+      font-size: 1.05rem;
+      color: var(--ink);
+      margin-bottom: 12px;
+      line-height: 1.2;
+    }
+
+    .activity-list { list-style: none; }
+    .activity-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #44403C;
+      padding: 4px 0;
+      border-bottom: 1px dashed var(--rule);
+      line-height: 1.4;
+    }
+    .activity-list li:last-child { border: none; }
+
+    .act-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      margin-top: 5px;
+    }
+
+    .challenge-row {
+      margin-top: 12px;
+      background: #FFFBEB;
+      border: 1px solid #FDE68A;
+      border-radius: 10px;
+      padding: 8px 12px;
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      font-size: 0.78rem;
+      font-weight: 800;
+      color: #92400E;
+      line-height: 1.35;
+    }
+
+    .time-bar {
+      padding: 14px 24px;
+      background: rgba(0,0,0,0.03);
+      border-top: 1px solid var(--rule);
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .time-chunk {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--muted);
+    }
+
+    .time-sq {
+      width: 10px; height: 10px;
+      border-radius: 3px;
+    }
+
+    /* week color bands */
+    .w1-h { background: linear-gradient(135deg, #1D4ED8, #3B82F6); }
+    .w2-h { background: linear-gradient(135deg, #15803D, #4ADE80); }
+    .w3-h { background: linear-gradient(135deg, #6D28D9, #A855F7); }
+    .w4-h { background: linear-gradient(135deg, #C2410C, #FB923C); }
+    .w5-h { background: linear-gradient(135deg, #0E7490, #22D3EE); }
+    .w6-h { background: linear-gradient(135deg, #9F1239, #FB7185); }
+
+    .w1-dot { background: #2563EB; }
+    .w2-dot { background: #16A34A; }
+    .w3-dot { background: #7C3AED; }
+    .w4-dot { background: #EA580C; }
+    .w5-dot { background: #0891B2; }
+    .w6-dot { background: #BE123C; }
+
+    /* progress bar */
+    .progress-line {
+      height: 4px;
+      background: rgba(0,0,0,0.08);
+    }
+    .progress-fill {
+      height: 100%;
+      border-radius: 4px;
+    }
+
+    /* jump nav */
+    .jump-nav {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 36px;
+    }
+    .jump-btn {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-family: 'Nunito', sans-serif; font-weight: 900;
+      font-size: 0.88rem;
+      padding: 8px 16px;
+      border-radius: 10px;
+      text-decoration: none;
+      color: white;
+      transition: opacity 0.15s, transform 0.15s;
+    }
+    .jump-btn:hover { opacity: 0.85; transform: translateY(-1px); }
+  </style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <a href="../index-bg.html" class="nav-logo">🐱 ScratchJr Adventure</a>
+  <button class="nav-toggle" id="navToggle" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="../index-bg.html">🏠 Home</a></li>
+    <li><a href="curriculum-bg.html" class="active">📅 Програма</a></li>
+    <li><a href="activity-cards-bg.html">🧩 Карти</a></li>
+    <li><a href="lesson-scripts-bg.html">📋 Скриптове</a></li>
+    <li><a href="troubleshooting-bg.html">🔧 Помощ</a></li>
+    <li><a href="checklist-bg.html">✅ Прогрес</a></li>
+  </ul>
+</nav>
+
+<div style="background:#292524;padding:8px 24px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;border-bottom:1px solid rgba(255,255,255,0.06);">
+  <span style="font-size:0.72rem;font-weight:700;color:#A8A29E;text-transform:uppercase;letter-spacing:0.1em;">🌍 Език / Language:</span>
+  <a href="curriculum.html" style="font-size:0.8rem;font-weight:700;padding:4px 12px;border-radius:8px;text-decoration:none;border:1.5px solid rgba(255,255,255,0.15);color:#D6D3D1;">🇬🇧 English</a>
+  <a href="curriculum-bg.html" style="font-size:0.8rem;font-weight:700;padding:4px 12px;border-radius:8px;text-decoration:none;border:1.5px solid rgba(255,255,255,0.15);color:#D6D3D1;" style="background:#FF6B35;border-color:#FF6B35;color:white !important;-webkit-text-fill-color:white !important;">🇧🇬 Български</a>
+</div>
+
+<section class="page-hero">
+  <div class="badge">📅 6 Седмици · 30 Урока</div>
+  <h1>Пълната програма</h1>
+  <p>Ден по ден — всеки урок, дейност и петъчен мини-проект в 6 седмици</p>
+</section>
+
+<div class="site-container">
+
+  <!-- Jump nav -->
+  <div class="jump-nav">
+    <a href="#week1" class="jump-btn" style="background:var(--w1)">Седмица 1 🐱</a>
+    <a href="#week2" class="jump-btn" style="background:var(--w2)">Седмица 2 🦁</a>
+    <a href="#week3" class="jump-btn" style="background:var(--w3)">Седмица 3 🔁</a>
+    <a href="#week4" class="jump-btn" style="background:var(--w4)">Седмица 4 📨</a>
+    <a href="#week5" class="jump-btn" style="background:var(--w5)">Седмица 5 🎵</a>
+    <a href="#week6" class="jump-btn" style="background:var(--w6)">Седмица 6 🏆</a>
+  </div>
+
+  <!-- WEEK 1 -->
+  <div class="week-block" id="week1">
+    <div class="week-header w1-h">
+      <div class="week-num">01</div>
+      <div class="week-info">
+        <div class="week-theme">Здравей, ScratchJr! 🐱</div>
+        <div class="week-desc">Открий приложението, запознай се с героите и направи първата си анимация</div>
+        <div class="week-tags">
+          <span class="week-tag">Блокове за движение</span>
+          <span class="week-tag">Тригери</span>
+          <span class="week-tag">Блокове за вид</span>
+          <span class="week-tag">Рисуване</span>
+        </div>
+      </div>
+      <div class="week-emoji">🐱</div>
+    </div>
+    <div class="progress-line"><div class="progress-fill" style="width:100%;background:linear-gradient(90deg,#3B82F6,#60A5FA)"></div></div>
+    <div class="days-grid">
+      <div class="day-card">
+        <div class="day-label">Ден 1 · Понеделник</div>
+        <div class="day-title">Запознай се с приложението 🛝</div>
+        <ul class="activity-list">
+          <li><span class="act-dot w1-dot"></span>Отвори ScratchJr — разгледайте заедно всеки бутон</li>
+          <li><span class="act-dot w1-dot"></span>Назови Сцената, панела с блокове и тавата с герои</li>
+          <li><span class="act-dot w1-dot"></span>Докосни герой — виж как реагира!</li>
+          <li><span class="act-dot w1-dot"></span>Нарисувай свой герой с инструмента за рисуване</li>
+        </ul>
+        <div class="challenge-row">⭐ Предизвикателство: Дай име на героя и запази първия проект</div>
+      </div>
+      <div class="day-card">
+        <div class="day-label">Ден 2 · Вторник</div>
+        <div class="day-title">Движи се! Блокове за движение 🏃</div>
+        <ul class="activity-list">
+          <li><span class="act-dot w1-dot"></span>Открий сините блокове за движение (ляво, дясно, нагоре, надолу)</li>
+          <li><span class="act-dot w1-dot"></span>Плъзни и свърже блокове за движение заедно</li>
+          <li><span class="act-dot w1-dot"></span>Промени числата за скорост и наблюдавай разликата</li>
+          <li><span class="act-dot w1-dot"></span>Изгради танц, като свържеш 5+ движения</li>
+        </ul>
+        <div class="challenge-row">⭐ Предизвикателство: Танцова рутина от 5 блока!</div>
+      </div>
+      <div class="day-card">
+        <div class="day-label">Ден 3 · Сряда</div>
+        <div class="day-title">Натисни Старт! Начални блокове ▶️</div>
+        <ul class="activity-list">
+          <li><span class="act-dot w1-dot"></span>Намери жълтите начални блокове (зелен флаг, докосване)</li>
+          <li><span class="act-dot w1-dot"></span>Свържи начален блок към началото на скрипта</li>
+          <li><span class="act-dot w1-dot"></span>Натисни зеления флаг — виж разликата!</li>
+          <li><span class="act-dot w1-dot"></span>Пробвай всички видове тригери — какво прави всеки?</li>
+        </ul>
+        <div class="challenge-row">⭐ Предизвикателство: Накарай го да стартира по двата начина — флаг И докосване!</div>
+      </div>
+      <div class="day-card">
+        <div class="day-label">Ден 4 · Четвъртък</div>
+        <div class="day-title">Изглеждай различно! Блокове за вид 🎨</div>
+        <ul class="activity-list">
+          <li><span class="act-dot w1-dot"></span>Намери лилавите блокове за вид</li>
+          <li><span class="act-dot w1-dot"></span>Накарай героя да расте голям и да се смалява</li>
+          <li><span class="act-dot w1-dot"></span>Добави говорен балон с „Здравей!"</li>
+          <li><span class="act-dot w1-dot"></span>Пробвай скрий и покажи — сега го виждаш, сега не!</li>
+        </ul>
+        <div class="challenge-row">⭐ Предизвикателство: Расте → кажи здравей → смали → скрий! Един скрипт!</div>
+      </div>
+      <div class="day-card">
+        <div class="day-label">Ден 5 · Петък 🎉</div>
+        <div class="day-title">Мини-проект: Здравей, свят!</div>
+        <ul class="activity-list">
+          <li><span class="act-dot w1-dot"></span>Избери фонова сцена</li>
+          <li><span class="act-dot w1-dot"></span>Добави 2 героя (нарисувай поне един)</li>
+          <li><span class="act-dot w1-dot"></span>И двата героя се движат и казват нещо</li>
+          <li><span class="act-dot w1-dot"></span>Представи пред родителя — обясни всеки блок</li>
+        </ul>
+        <div class="challenge-row">⭐ Предизвикателство: Запиши видео на проекта!</div>
+      </div>
+    </div>
+    <div class="time-bar">
+      <span class="time-chunk"><span class="time-sq" style="background:#3B82F6"></span>Загряване 5 мин</span>
+      <span class="time-chunk"><span class="time-sq" style="background:#FCD34D"></span>Нов блок 20 мин</span>
+      <span class="time-chunk"><span class="time-sq" style="background:#34D399"></span>Свободно изследване 20 мин</span>
+      <span class="time-chunk"><span class="time-sq" style="background:#F87171"></span>Предизвикателство 10 мин</span>
+      <span class="time-chunk"><span class="time-sq" style="background:#A78BFA"></span>Покажи и разкажи 5 мин</span>
+    </div>
+  </div>
+
+  <!-- WEEK 2 -->
+  <div class="week-block" id="week2">
+    <div class="week-header w2-h">
+      <div class="week-num">02</div>
+      <div class="week-info">
+        <div class="week-theme">Разкажи история! 📖</div>
+        <div class="week-desc">Изгради многосценни истории с диалог, синхронизация и навигация между страници</div>
+        <div class="week-tags">
+          <span class="week-tag">Страници</span><span class="week-tag">Диалог</span><span class="week-tag">Блок „чакай"</span><span class="week-tag">Изкуство за фон</span>
+        </div>
+      </div>
+      <div class="week-emoji">🦁</div>
+    </div>
+    <div class="progress-line"><div class="progress-fill" style="width:100%;background:linear-gradient(90deg,#16A34A,#4ADE80)"></div></div>
+    <div class="days-grid">
+      <div class="day-card">
+        <div class="day-label">Ден 1 · Понеделник</div>
+        <div class="day-title">Сцена 1 и Сцена 2 🎭</div>
+        <ul class="activity-list">
+          <li><span class="act-dot w2-dot"></span>Добави втора страница — различен фон!</li>
+          <li><span class="act-dot w2-dot"></span>Научи оранжевия блок „отиди на страница"</li>
+          <li><span class="act-dot w2-dot"></span>Свържи страниците: край на страница 1 → прескочи на страница 2</li>
+          <li><span class="act-dot w2-dot"></span>Тествай прескачането — работи ли?</li>
+        </ul>
+        <div class="challenge-row">⭐ Предизвикателство: История от 3 страници с автоматични прескачания!</div>
+      </div>
+      <div class="day-card">
+        <div class="day-label">Ден 2 · Вторник</div>
+        <div class="day-title">Героите говорят 💬</div>
+        <ul class="activity-list">
+          <li><span class="act-dot w2-dot"></span>Изиграй разговора на глас първо</li>
+          <li><span class="act-dot w2-dot"></span>Използвай блокове „кажи" за всеки герой</li>
+          <li><span class="act-dot w2-dot"></span>Добави блокове ЧАКАЙ за да се редуват</li>
+          <li><span class="act-dot w2-dot"></span>Нагласи времето докато изглежда естествено</li>
+        </ul>
+        <div class="challenge-row">⭐ Предизвикателство: Разговор от 4 реплики напред-назад!</div>
+      </div>
+      <div class="day-card">
+        <div class="day-label">Ден 3 · Сряда</div>
+        <div class="day-title">Изчакай ме! Синхронизация ⏳</div>
+        <ul class="activity-list">
+          <li><span class="act-dot w2-dot"></span>Открий оранжевия блок ЧАКАЙ</li>
+          <li><span class="act-dot w2-dot"></span>Изгради изгрев: герой → слънце → птици, всяко с времетраене</li>
+          <li><span class="act-dot w2-dot"></span>Пробвай чакай=1 срещу чакай=4 — усети разликата</li>
+          <li><span class="act-dot w2-dot"></span>Попитай: променя ли скоростта настроението на сцена?</li>
+        </ul>
+        <div class="challenge-row">⭐ Предизвикателство: Сцена с 5 последователни събития!</div>
+      </div>
+      <div class="day-card">
+        <div class="day-label">Ден 4 · Четвъртък</div>
+        <div class="day-title">Нарисувай своя свят 🖌️</div>
+        <ul class="activity-list">
+          <li><span class="act-dot w2-dot"></span>Отвори редактора на фона</li>
+          <li><span class="act-dot w2-dot"></span>Рисувай: първо небе, после земя, после детайли</li>
+          <li><span class="act-dot w2-dot"></span>Нарисувай герой, подходящ за този свят</li>
+          <li><span class="act-dot w2-dot"></span>Добави и двете към проекта и накарай героя да се движи</li>
+        </ul>
+        <div class="challenge-row">⭐ Предизвикателство: Оригинален фон + подходящ герой!</div>
+      </div>
+      <div class="day-card">
+        <div class="day-label">Ден 5 · Петък 🎉</div>
+        <div class="day-title">Мини-проект: Моята първа история!</div>
+        <ul class="activity-list">
+          <li><span class="act-dot w2-dot"></span>Напиши план от 3 изречения на хартия първо</li>
+          <li><span class="act-dot w2-dot"></span>Изгради 3 страници с движение и диалог</li>
+          <li><span class="act-dot w2-dot"></span>Добави заглавна страница с името си като автор</li>
+          <li><span class="act-dot w2-dot"></span>Разказвай на глас докато се изпълнява!</li>
+        </ul>
+        <div class="challenge-row">⭐ Предизвикателство: Вече си истински автор — подпиши историята! ✍️</div>
+      </div>
+    </div>
+    <div class="time-bar">
+      <span class="time-chunk"><span class="time-sq" style="background:#16A34A"></span>Преглед 5 мин</span>
+      <span class="time-chunk"><span class="time-sq" style="background:#FCD34D"></span>Нови умения 20 мин</span>
+      <span class="time-chunk"><span class="time-sq" style="background:#34D399"></span>Изгради сцена 25 мин</span>
+      <span class="time-chunk"><span class="time-sq" style="background:#F87171"></span>Сподели 10 мин</span>
+    </div>
+  </div>
+
+  <!-- WEEK 3 -->
+  <div class="week-block" id="week3">
+    <div class="week-header w3-h">
+      <div class="week-num">03</div>
+      <div class="week-info">
+        <div class="week-theme">Цикли и повторения! 🔁</div>
+        <div class="week-desc">Отключи тайната на циклите — шарки, танци и непрекъснати анимации</div>
+        <div class="week-tags">
+          <span class="week-tag">Цикъл повтори</span><span class="week-tag">Вечен цикъл</span><span class="week-tag">Шарки</span><span class="week-tag">Танц</span>
+        </div>
+      </div>
+      <div class="week-emoji">🔁</div>
+    </div>
+    <div class="progress-line"><div class="progress-fill" style="width:100%;background:linear-gradient(90deg,#7C3AED,#E879F9)"></div></div>
+    <div class="days-grid">
+      <div class="day-card">
+        <div class="day-label">Ден 1 · Понеделник</div>
+        <div class="day-title">Защо се повтаря? Идеята за цикъл 🤔</div>
+        <ul class="activity-list">
+          <li><span class="act-dot w3-dot"></span>Физически: ръкопляскай 5 пъти — това е цикъл!</li>
+          <li><span class="act-dot w3-dot"></span>Намери оранжевия блок ПОВТОРИ</li>
+          <li><span class="act-dot w3-dot"></span>Изгради версия с цикъл срещу 5 отделни блока</li>
+          <li><span class="act-dot w3-dot"></span>Сравни — кое беше по-лесно за изграждане?</li>
+        </ul>
+        <div class="challenge-row">⭐ Предизвикателство: Направи цикъл от 10 повторения. Колко далеч стига?</div>
+      </div>
+      <div class="day-card">
+        <div class="day-label">Ден 2 · Вторник</div>
+        <div class="day-title">Вечен цикъл! 🌀</div>
+        <ul class="activity-list">
+          <li><span class="act-dot w3-dot"></span>Открий вечния цикъл — никога не спира!</li>
+          <li><span class="act-dot w3-dot"></span>Накарай птица да маха с криле вечно (расте+смали)</li>
+          <li><span class="act-dot w3-dot"></span>Накарай слънцето да се върти вечно с блок за завъртане</li>
+          <li><span class="act-dot w3-dot"></span>Спри с червения бутон — научи се да го контролираш</li>
+        </ul>
+        <div class="challenge-row">⭐ Предизвикателство: 2 героя с различни вечни цикли — и двата едновременно!</div>
+      </div>
+      <div class="day-card">
+        <div class="day-label">Ден 3 · Сряда</div>
+        <div class="day-title">Танцово парти! 🕺💃</div>
+        <ul class="activity-list">
+          <li><span class="act-dot w3-dot"></span>Проектирай танц от 4 движения на хартия първо</li>
+          <li><span class="act-dot w3-dot"></span>Постави 4 движения вътре в цикъл Повтори 8</li>
+          <li><span class="act-dot w3-dot"></span>Добави втори танцьор с различен танц</li>
+          <li><span class="act-dot w3-dot"></span>Направи единия голям, другия малък — по-динамично!</li>
+        </ul>
+        <div class="challenge-row">⭐ Предизвикателство: Добави трети танцьор — 3 различни танца едновременно!</div>
+      </div>
+      <div class="day-card">
+        <div class="day-label">Ден 4 · Четвъртък</div>
+        <div class="day-title">Шарки и изкуство 🌺</div>
+        <ul class="activity-list">
+          <li><span class="act-dot w3-dot"></span>Използвай движи + завърти вътре в цикъл = шарка!</li>
+          <li><span class="act-dot w3-dot"></span>Експериментирай с различни ъгли на завъртане</li>
+          <li><span class="act-dot w3-dot"></span>Добави още герои с различни шарки</li>
+          <li><span class="act-dot w3-dot"></span>Създай повтаряща се шарка, която харесваш</li>
+        </ul>
+        <div class="challenge-row">⭐ Предизвикателство: Проектирай шарка за тениска! 👕</div>
+      </div>
+      <div class="day-card">
+        <div class="day-label">Ден 5 · Петък 🎉</div>
+        <div class="day-title">Мини-проект: Танцово шоу!</div>
+        <ul class="activity-list">
+          <li><span class="act-dot w3-dot"></span>Нарисувай цветен фон на сцена</li>
+          <li><span class="act-dot w3-dot"></span>3+ героя, всеки с уникален цикличен танц</li>
+          <li><span class="act-dot w3-dot"></span>Заглавна страница: „Добре дошли на шоуто!"</li>
+          <li><span class="act-dot w3-dot"></span>Изпълни го пред семейството — бъди водещ!</li>
+        </ul>
+        <div class="challenge-row">⭐ Предизвикателство: Танцувай заедно с героите докато се изпълнява! 🕺</div>
+      </div>
+    </div>
+    <div class="time-bar">
+      <span class="time-chunk"><span class="time-sq" style="background:#7C3AED"></span>Въведение 10 мин</span>
+      <span class="time-chunk"><span class="time-sq" style="background:#FCD34D"></span>Насочено изграждане 25 мин</span>
+      <span class="time-chunk"><span class="time-sq" style="background:#34D399"></span>Свободно творчество 20 мин</span>
+      <span class="time-chunk"><span class="time-sq" style="background:#F87171"></span>Размисли 5 мин</span>
+    </div>
+  </div>
+
+  <!-- WEEK 4 -->
+  <div class="week-block" id="week4">
+    <div class="week-header w4-h">
+      <div class="week-num">04</div>
+      <div class="week-info">
+        <div class="week-theme">Героите говорят помежду си! 📨</div>
+        <div class="week-desc">Научи съобщенията — накарай героите да реагират един на друг</div>
+        <div class="week-tags">
+          <span class="week-tag">Изпрати съобщение</span><span class="week-tag">Получи съобщение</span><span class="week-tag">Събития</span><span class="week-tag">Прости игри</span>
+        </div>
+      </div>
+      <div class="week-emoji">📨</div>
+    </div>
+    <div class="progress-line"><div class="progress-fill" style="width:100%;background:linear-gradient(90deg,#C2410C,#FB923C)"></div></div>
+    <div class="days-grid">
+      <div class="day-card">
+        <div class="day-label">Ден 1 · Понеделник</div>
+        <div class="day-title">Какво е съобщение? 📬</div>
+        <ul class="activity-list">
+          <li><span class="act-dot w4-dot"></span>От живота: викни „СТАРТ!" → приятелят започва да бяга</li>
+          <li><span class="act-dot w4-dot"></span>Намери блоковете ИЗПРАТИ и ПОЛУЧИ съобщение</li>
+          <li><span class="act-dot w4-dot"></span>Герой А изпраща → Герой Б реагира!</li>
+          <li><span class="act-dot w4-dot"></span>Ключово правило: изпращачът и получателят трябва да са един цвят</li>
+        </ul>
+        <div class="challenge-row">⭐ Предизвикателство: А изпраща → Б става огромен, после Б изпраща → А се върти!</div>
+      </div>
+      <div class="day-card">
+        <div class="day-label">Ден 2 · Вторник</div>
+        <div class="day-title">Верижни реакции ⛓️</div>
+        <ul class="activity-list">
+          <li><span class="act-dot w4-dot"></span>Изгради верига от домина: А → Б → В</li>
+          <li><span class="act-dot w4-dot"></span>Всеки герой реагира И изпраща следващото съобщение</li>
+          <li><span class="act-dot w4-dot"></span>Използвай различни цветове съобщения за всяка връзка</li>
+          <li><span class="act-dot w4-dot"></span>Натисни старт — виж веригата! 😱</li>
+        </ul>
+        <div class="challenge-row">⭐ Предизвикателство: Разшири до верига от 4 героя!</div>
+      </div>
+      <div class="day-card">
+        <div class="day-label">Ден 3 · Сряда</div>
+        <div class="day-title">Докосни и реагирай 👆</div>
+        <ul class="activity-list">
+          <li><span class="act-dot w4-dot"></span>Използвай тригера „когато героят е докоснат"</li>
+          <li><span class="act-dot w4-dot"></span>Докосни кучето → лае + изпраща съобщение → котката бяга!</li>
+          <li><span class="act-dot w4-dot"></span>Добави говорни балони за смешни реакции</li>
+          <li><span class="act-dot w4-dot"></span>Изгради проста мини-сцена с докосване</li>
+        </ul>
+        <div class="challenge-row">⭐ Предизвикателство: Докосни един герой — и трима реагират различно!</div>
+      </div>
+      <div class="day-card">
+        <div class="day-label">Ден 4 · Четвъртък</div>
+        <div class="day-title">Направи проста игра 🎮</div>
+        <ul class="activity-list">
+          <li><span class="act-dot w4-dot"></span>„Хвани звездата" — звездата отскача в вечен цикъл</li>
+          <li><span class="act-dot w4-dot"></span>Докосни звездата → изпраща съобщение ПОБЕДА → звездата се скрива</li>
+          <li><span class="act-dot w4-dot"></span>Добави герой „УРА!", появяващ се при ПОБЕДА</li>
+          <li><span class="act-dot w4-dot"></span>Play 5 times, then make it harder!</li>
+        </ul>
+        <div class="challenge-row">⭐ Предизвикателство: You built a real game! Tell someone how it works!</div>
+      </div>
+      <div class="day-card">
+        <div class="day-label">Ден 5 · Петък 🎉</div>
+        <div class="day-title">Мини-проект: Интерактивна история!</div>
+        <ul class="activity-list">
+          <li><span class="act-dot w4-dot"></span>Страница 1: герой пред две врати — лява и дясна</li>
+          <li><span class="act-dot w4-dot"></span>Докосни лявата врата → щастлив край (Страница 2)</li>
+          <li><span class="act-dot w4-dot"></span>Докосни дясната врата → смешен край (Страница 3)</li>
+          <li><span class="act-dot w4-dot"></span>Нека родител играе — може ли да намери и двата края?</li>
+        </ul>
+        <div class="challenge-row">⭐ Предизвикателство: Направи интерактивно приложение с избор! 🚀</div>
+      </div>
+    </div>
+    <div class="time-bar">
+      <span class="time-chunk"><span class="time-sq" style="background:#EA580C"></span>Концепция + демо 15 мин</span>
+      <span class="time-chunk"><span class="time-sq" style="background:#FCD34D"></span>Изградете заедно 20 мин</span>
+      <span class="time-chunk"><span class="time-sq" style="background:#34D399"></span>Самостоятелно 20 мин</span>
+      <span class="time-chunk"><span class="time-sq" style="background:#F87171"></span>Представи 5 мин</span>
+    </div>
+  </div>
+
+  <!-- WEEK 5 -->
+  <div class="week-block" id="week5">
+    <div class="week-header w5-h">
+      <div class="week-num">05</div>
+      <div class="week-info">
+        <div class="week-theme">Sound & Music! 🎵</div>
+        <div class="week-desc">Add sound effects, record your voice, and build musical animations</div>
+        <div class="week-tags">
+          <span class="week-tag">Звукови блокове</span><span class="week-tag">Гласов запис</span><span class="week-tag">Инструменти</span><span class="week-tag">Синхрон</span>
+        </div>
+      </div>
+      <div class="week-emoji">🎵</div>
+    </div>
+    <div class="progress-line"><div class="progress-fill" style="width:100%;background:linear-gradient(90deg,#0891B2,#22D3EE)"></div></div>
+    <div class="days-grid">
+      <div class="day-card">
+        <div class="day-label">Ден 1 · Понеделник</div>
+        <div class="day-title">Направи шум! 🔊</div>
+        <ul class="activity-list">
+          <li><span class="act-dot w5-dot"></span>Намери зелените звукови блокове</li>
+          <li><span class="act-dot w5-dot"></span>Добави звук „поп" когато героят е докоснат</li>
+          <li><span class="act-dot w5-dot"></span>Пробвай различни звуци: бам, мяу, камбанка</li>
+          <li><span class="act-dot w5-dot"></span>Trigger sounds at start, on tap, after a move</li>
+        </ul>
+        <div class="challenge-row">⭐ Предизвикателство: 3 героя, 3 различни звука — докосни всеки!</div>
+      </div>
+      <div class="day-card">
+        <div class="day-label">Ден 2 · Вторник</div>
+        <div class="day-title">Запиши гласа си! 🎤</div>
+        <ul class="activity-list">
+          <li><span class="act-dot w5-dot"></span>Докосни иконата на микрофона в ScratchJr</li>
+          <li><span class="act-dot w5-dot"></span>Запиши „Здравей! Аз съм [твоето_име]!" ясно и силно</li>
+          <li><span class="act-dot w5-dot"></span>Прикрепи към герой — докосни го и се чуй!</li>
+          <li><span class="act-dot w5-dot"></span>Пробвай смешни гласове: робот, шепот, чудовище 👾</li>
+        </ul>
+        <div class="challenge-row">⭐ Предизвикателство: Record a narration for your Седмица 2 story! 🎬</div>
+      </div>
+      <div class="day-card">
+        <div class="day-label">Ден 3 · Сряда</div>
+        <div class="day-title">Музикални инструменти 🎹</div>
+        <ul class="activity-list">
+          <li><span class="act-dot w5-dot"></span>Нарисувай 4 цветни героя = 4 ноти</li>
+          <li><span class="act-dot w5-dot"></span>Всеки получава различен звук при докосване</li>
+          <li><span class="act-dot w5-dot"></span>Пробвай да свириш до-ре-ми-фа на инструмента!</li>
+          <li><span class="act-dot w5-dot"></span>Упражни „Честит рожден ден" 🎂</li>
+        </ul>
+        <div class="challenge-row">⭐ Предизвикателство: Изсвири мелодия — може ли родителят да я познае?</div>
+      </div>
+      <div class="day-card">
+        <div class="day-label">Ден 4 · Четвъртък</div>
+        <div class="day-title">Sync Sound & Motion 🎬</div>
+        <ul class="activity-list">
+          <li><span class="act-dot w5-dot"></span>Накарай герой да скочи + пусни звук едновременно</li>
+          <li><span class="act-dot w5-dot"></span>Звук преди срещу след движение — забележи разликата!</li>
+          <li><span class="act-dot w5-dot"></span>Изгради фойерверки: анимация + звук поп</li>
+          <li><span class="act-dot w5-dot"></span>Запиши „3… 2… 1… Старт!" като гласово обратно броене</li>
+        </ul>
+        <div class="challenge-row">⭐ Предизвикателство: 5-секундно шоу от звук + движение — като трейлър!</div>
+      </div>
+      <div class="day-card">
+        <div class="day-label">Ден 5 · Петък 🎉</div>
+        <div class="day-title">Мини-проект: Музикален клип!</div>
+        <ul class="activity-list">
+          <li><span class="act-dot w5-dot"></span>Избери тема: джунгла, космос или под вода</li>
+          <li><span class="act-dot w5-dot"></span>3+ анимирани герои движещи се в цикли</li>
+          <li><span class="act-dot w5-dot"></span>Запиши оригинална песен или стихотворение</li>
+          <li><span class="act-dot w5-dot"></span>Изпълни го на живо пред семейството! 🎤🌟</li>
+        </ul>
+        <div class="challenge-row">⭐ Предизвикателство: Пей песента на живо докато видеото се изпълнява!</div>
+      </div>
+    </div>
+    <div class="time-bar">
+      <span class="time-chunk"><span class="time-sq" style="background:#0891B2"></span>Изследване на звук 10 мин</span>
+      <span class="time-chunk"><span class="time-sq" style="background:#FCD34D"></span>Изгради проект 30 мин</span>
+      <span class="time-chunk"><span class="time-sq" style="background:#F87171"></span>Изпълни и сподели 20 мин</span>
+    </div>
+  </div>
+
+  <!-- WEEK 6 -->
+  <div class="week-block" id="week6">
+    <div class="week-header w6-h">
+      <div class="week-num">06</div>
+      <div class="week-info">
+        <div class="week-theme">Голям финал! 🏆</div>
+        <div class="week-desc">Приложи всичко — проектирай, изгради, полирай и представи свой оригинален проект</div>
+        <div class="week-tags">
+          <span class="week-tag">Самостоятелна работа</span><span class="week-tag">Творчески дизайн</span><span class="week-tag">Презентация</span><span class="week-tag">Дипломиране</span>
+        </div>
+      </div>
+      <div class="week-emoji">🏆</div>
+    </div>
+    <div class="progress-line"><div class="progress-fill" style="width:100%;background:linear-gradient(90deg,#BE123C,#FB7185)"></div></div>
+    <div class="days-grid">
+      <div class="day-card">
+        <div class="day-label">Ден 1 · Понеделник</div>
+        <div class="day-title">Ден на планирането 💡</div>
+        <ul class="activity-list">
+          <li><span class="act-dot w6-dot"></span>Прегледай всичките 5 седмици — кое беше любимото ти?</li>
+          <li><span class="act-dot w6-dot"></span>Мозъчна буря: история, игра, музикален клип или нещо ново?</li>
+          <li><span class="act-dot w6-dot"></span>Нарисувай плана на хартия: герои, сцени, действия</li>
+          <li><span class="act-dot w6-dot"></span>Разкажи идеята на родителя — те са твоята първа публика!</li>
+        </ul>
+        <div class="challenge-row">⭐ Предизвикателство: Запиши 3 неща, които задължително трябва да има — твоето обещание!</div>
+      </div>
+      <div class="day-card">
+        <div class="day-label">Ден 2 · Вторник</div>
+        <div class="day-title">Изграждане: Ден на изкуството 🎨</div>
+        <ul class="activity-list">
+          <li><span class="act-dot w6-dot"></span>Нарисувай ВСИЧКИ герои с инструмента за рисуване</li>
+          <li><span class="act-dot w6-dot"></span>Създай всички фонове за всяка сцена</li>
+          <li><span class="act-dot w6-dot"></span>Подреди всички страници в правилния ред</li>
+          <li><span class="act-dot w6-dot"></span>Без код засега — само изкуство! Направи го красиво първо</li>
+        </ul>
+        <div class="challenge-row">⭐ Предизвикателство: Всички арт елементи готови — направи снимка на екрана!</div>
+      </div>
+      <div class="day-card">
+        <div class="day-label">Ден 3 · Сряда</div>
+        <div class="day-title">Изграждане: Добави кода 🧩</div>
+        <ul class="activity-list">
+          <li><span class="act-dot w6-dot"></span>Добави движение, цикли, съобщения към всеки герой</li>
+          <li><span class="act-dot w6-dot"></span>Тествай всеки скрипт докато го правиш — не чакай!</li>
+          <li><span class="act-dot w6-dot"></span>Поправяй грешки: „защо се случи това?" дебъгвайте заедно</li>
+          <li><span class="act-dot w6-dot"></span>Добави звуци и гласови записи</li>
+        </ul>
+        <div class="challenge-row">⭐ Предизвикателство: Изиграй целия проект — запиши 3 неща за подобрение!</div>
+      </div>
+      <div class="day-card">
+        <div class="day-label">Ден 4 · Четвъртък</div>
+        <div class="day-title">Полирай и подобрявай ✨</div>
+        <ul class="activity-list">
+          <li><span class="act-dot w6-dot"></span>Изиграй — какво липсва? Какво трябва да се поправи?</li>
+          <li><span class="act-dot w6-dot"></span>Добави заглавен екран с името си като създател!</li>
+          <li><span class="act-dot w6-dot"></span>Добави „Краят" или „Играй отново" на последната страница</li>
+          <li><span class="act-dot w6-dot"></span>Нека родителят играе без помощ — виж какво го обърква</li>
+        </ul>
+        <div class="challenge-row">⭐ Предизвикателство: Проектът е 100% готов — запази финално! 💾</div>
+      </div>
+      <div class="day-card">
+        <div class="day-label">Ден 5 · Петък 🎓</div>
+        <div class="day-title">Ден на дипломирането! 🏆</div>
+        <ul class="activity-list">
+          <li><span class="act-dot w6-dot"></span>Представи пред цялото семейство 👨‍👩‍👧</li>
+          <li><span class="act-dot w6-dot"></span>Обясни какво прави всяка част и как си го направил</li>
+          <li><span class="act-dot w6-dot"></span>„Кое беше най-трудното? С кое се гордееш най-много?"</li>
+          <li><span class="act-dot w6-dot"></span>Отпразнувай с любимото си лакомство! 🍰🌟</li>
+        </ul>
+        <div class="challenge-row">⭐ Вече официално си ScratchJr програмист! Какво следва? 🚀</div>
+      </div>
+    </div>
+    <div class="time-bar">
+      <span class="time-chunk"><span class="time-sq" style="background:#BE123C"></span>Свободно изграждане 45 мин</span>
+      <span class="time-chunk"><span class="time-sq" style="background:#FCD34D"></span>Проверка с родителя 10 мин</span>
+      <span class="time-chunk"><span class="time-sq" style="background:#34D399"></span>Обобщение 5 мин</span>
+    </div>
+  </div>
+
+  <!-- Next steps CTA -->
+  <div style="background:#1C1917;border-radius:20px;padding:40px;text-align:center;color:white;margin-top:20px;">
+    <div style="font-family:'Fredoka One',cursive;font-size:1.8rem;margin-bottom:10px;">Готов да преподаваш? 👩‍🏫</div>
+    <p style="color:#A8A29E;font-weight:600;margin-bottom:24px;">Вземи картите за дейности за печат или отвори скриптовете за уроци на телефона</p>
+    <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+      <a href="activity-cards-bg.html" class="btn btn-primary">🧩 Отпечатай картите</a>
+      <a href="lesson-scripts-bg.html" class="btn" style="background:rgba(255,255,255,0.1);color:white;border:1.5px solid rgba(255,255,255,0.2);">📋 Отвори скриптовете</a>
+    </div>
+  </div>
+
+</div>
+
+<footer class="site-footer">
+  <div class="footer-links">
+    <a href="../index-bg.html">Начало</a>
+    <a href="curriculum-bg.html">Програма</a>
+    <a href="activity-cards-bg.html">Карти</a>
+    <a href="lesson-scripts-bg.html">Скриптове</a>
+    <a href="troubleshooting-bg.html">Помощ</a>
+    <a href="checklist-bg.html">Прогрес</a>
+  </div>
+  <p>Направено с ❤️ за родители навсякъде · Безплатно и с отворен код · <a href="https://github.com">Виж в GitHub</a></p>
+</footer>
+
+<script>
+  document.getElementById('navToggle').addEventListener('click', () => {
+    document.getElementById('navLinks').classList.toggle('open');
+  });
+</script>
+</body>
+</html>

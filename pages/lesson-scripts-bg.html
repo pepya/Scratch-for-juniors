@@ -1,0 +1,968 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+<meta charset="UTF-8">
+  <meta name="color-scheme" content="light">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&family=Atkinson+Hyperlegible:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/site.css">
+<meta name="color-scheme" content="light">
+<meta name="supported-color-schemes" content="light">
+<title>ScratchJr — Ежедневни скриптове за уроци (Ръководство за учителя)</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1C1917;
+    --paper: #FFFBF5;
+    --warm: #F5EFE0;
+    --rule: #E8DCC8;
+    --accent: #C2410C;
+    --accent2: #0369A1;
+    --green: #166534;
+    --purple: #6B21A8;
+    --muted: #78716C;
+    --w1: #1D4ED8; --w2: #16A34A; --w3: #7C3AED;
+    --w4: #EA580C; --w5: #0891B2; --w6: #BE123C;
+    color-scheme: light only;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: #FFFBF5 !important;
+    color: #1C1917 !important;
+    line-height: 1.6;
+  }
+  /* Force all text to be dark — override any dark mode injection */
+  *, *::before, *::after {
+    color: inherit;
+  }
+
+  /* Cover */
+  .cover {
+    background: var(--ink);
+    color: white;
+    padding: 60px 40px;
+    text-align: center;
+  }
+  .cover-label {
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #A8A29E;
+    margin-bottom: 16px;
+  }
+  .cover h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2.8rem;
+    line-height: 1.1;
+    margin-bottom: 12px;
+  }
+  .cover p { color: #A8A29E; font-size: 1rem; }
+
+  /* How to use */
+  .how-to {
+    background: var(--warm);
+    border-bottom: 2px solid var(--rule);
+    padding: 32px 40px;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  .how-to h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.4rem;
+    margin-bottom: 16px;
+    color: var(--accent);
+  }
+  .how-to-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, минmax(200px, 1fr));
+    gap: 16px;
+  }
+  .how-item { }
+  .how-item strong { display: block; font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
+  .how-item span { font-size: 0.9rem; font-weight: 500; }
+
+  /* Main container */
+  .container { max-width: 900px; margin: 0 auto; padding: 40px 40px 80px; }
+
+  /* Week header */
+  .week-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 20px 24px;
+    border-radius: 12px;
+    margin: 40px 0 24px;
+    color: white;
+  }
+  .week-header h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.6rem;
+  }
+  .week-header p { font-size: 0.9rem; opacity: 0.85; margin-top: 2px; }
+  .week-num-big {
+    font-family: 'DM Serif Display', serif;
+    font-size: 3.5rem;
+    line-height: 1;
+    opacity: 0.3;
+  }
+
+  /* Day lesson */
+  .day-lesson {
+    border: 1.5px solid var(--rule);
+    border-radius: 12px;
+    margin-bottom: 24px;
+    overflow: hidden;
+  }
+
+  .day-lesson-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 20px;
+    background: var(--warm);
+    border-bottom: 1.5px solid var(--rule);
+  }
+
+  .day-emoji { font-size: 1.6rem; }
+
+  .day-lesson-header h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.15rem;
+  }
+  .day-lesson-header .day-meta {
+    font-size: 0.75rem;
+    color: var(--muted);
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .day-lesson-body { padding: 20px; background: #FFFBF5 !important; }
+
+  /* Segments */
+  .segment { margin-bottom: 20px; }
+
+  .segment-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    color: #1C1917 !important;
+  }
+
+  .seg-dot {
+    width: 10px; height: 10px;
+    border-radius: 3px;
+    flex-shrink: 0;
+  }
+
+  .script-block {
+    background: #DBEAFE !important;
+    border-left: 4px solid #1D4ED8;
+    border-radius: 0 8px 8px 0;
+    padding: 14px 16px;
+    font-size: 0.9rem;
+    line-height: 1.7;
+    font-style: italic;
+    color: #1E3A5F !important;
+    margin-bottom: 8px;
+  }
+
+  .script-block strong {
+    font-style: normal;
+    color: #1D4ED8 !important;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  .action-list { list-style: none; }
+  .action-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 0.87rem;
+    padding: 8px 0;
+    border-bottom: 1px solid #E8DCC8;
+    font-weight: 600;
+    color: #1C1917 !important;
+  }
+  .action-list li:last-child { border: none; }
+  .action-list .tstamp {
+    font-size: 0.72rem;
+    font-weight: 800;
+    color: #78716C !important;
+    мин-width: 42px;
+    padding-top: 2px;
+    font-family: monospace;
+  }
+
+  .questions-box {
+    background: #DCFCE7 !important;
+    border: 1.5px solid #4ADE80;
+    border-radius: 10px;
+    padding: 12px 16px;
+  }
+  .questions-box .q-title {
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #166534 !important;
+    margin-bottom: 8px;
+  }
+  .questions-box ul { list-style: none; }
+  .questions-box li {
+    font-size: 0.85rem;
+    padding: 4px 0;
+    color: #14532D !important;
+    font-weight: 600;
+  }
+  .questions-box li::before { content: "→ "; color: #16A34A; font-weight: 700; }
+
+  .watch-box {
+    background: #FFF3E0 !important;
+    border: 1.5px solid #FB923C;
+    border-radius: 10px;
+    padding: 12px 16px;
+    margin-top: 10px;
+  }
+  .watch-box .w-title {
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #C2410C !important;
+    margin-bottom: 8px;
+  }
+  .watch-box ul { list-style: none; }
+  .watch-box li {
+    font-size: 0.85rem;
+    padding: 4px 0;
+    color: #7C2D12 !important;
+    font-weight: 600;
+  }
+  .watch-box li::before { content: "👁 "; }
+
+  .success-bar {
+    background: #1C1917 !important;
+    color: #FFFFFF !important;
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-top: 14px;
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+  }
+
+  /* day lesson card backgrounds — force light */
+  .day-lesson { background: #FFFFFF !important; }
+  .day-lesson-header {
+    background: #F5EFE0 !important;
+  }
+  .day-lesson-header h3 { color: #1C1917 !important; }
+  .day-lesson-header .day-meta { color: #78716C !important; }
+
+  /* how-to section */
+  .how-to { background: #F5EFE0 !important; }
+  .how-to h2 { color: #C2410C !important; }
+  .how-item strong { color: #78716C !important; }
+  .how-item span { color: #1C1917 !important; }
+
+  /* container text */
+  .container { background: #FFFBF5 !important; }
+
+  /* Print */
+  @media print {
+    .cover { padding: 40px 30px; }
+    .container { padding: 20px 30px; }
+    .day-lesson { page-break-inside: avoid; }
+    .week-header { page-break-before: always; }
+  }
+</style>
+</head>
+<body>
+<nav class="site-nav">
+  <a href="../index-bg.html" class="nav-logo">🐱 ScratchJr Adventure</a>
+  <button class="nav-toggle" id="navToggle" aria-label="Menu"><span></span><span></span><span></span></button>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="../index-bg.html">🏠 Начало</a></li>
+    <li><a href="curriculum-bg.html">📅 Програма</a></li>
+    <li><a href="activity-cards-bg.html">🧩 Карти</a></li>
+    <li><a href="lesson-scripts-bg.html" class="active">📋 Скриптове</a></li>
+    <li><a href="troubleshooting-bg.html">🔧 Помощ</a></li>
+    <li><a href="checklist-bg.html">✅ Прогрес</a></li>
+  </ul>
+</nav>
+
+<div style="background:#292524;padding:8px 24px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;border-bottom:1px solid rgba(255,255,255,0.06);">
+  <span style="font-size:0.72rem;font-weight:700;color:#A8A29E;text-transform:uppercase;letter-spacing:0.1em;">🌍 Език:</span>
+  <a href="lesson-scripts.html" style="font-size:0.8rem;font-weight:700;padding:4px 12px;border-radius:8px;text-decoration:none;border:1.5px solid rgba(255,255,255,0.2);" style="color:#D6D3D1;">🇬🇧 English</a>
+  <a href="lesson-scripts-bg.html" style="font-size:0.8rem;font-weight:700;padding:4px 12px;border-radius:8px;text-decoration:none;border:1.5px solid rgba(255,255,255,0.2);" style="background:#FF6B35;border-color:#FF6B35;color:white !important;">🇧🇬 Български</a>
+</div>
+
+<div class="cover">
+  <div class="cover-label">Домашна учебна програма ScratchJr</div>
+  <h1>Ежедневни скриптове за уроци<br>Ръководство за учителя</h1>
+  <p>Планове минута по минута · Насочващи въпроси · Какво да наблюдаваш · 6 Седмици · 30 Дни</p>
+</div>
+
+<div class="how-to">
+  <h2>Как да използваш това ръководство</h2>
+  <div class="how-to-grid">
+    <div class="how-item"><strong>📋 Скрипт (синьо)</strong><span>Предложени неща за казване — използвай собствените си думи, това е ръководство, не скрипт за четене дословно.</span></div>
+    <div class="how-item"><strong>⏱ Времетраене</strong><span>Приблизителни минути — нагласи според енергията и ангажираността. It's fine to run over on good days!</span></div>
+    <div class="how-item"><strong>→ Въпроси (зелено)</strong><span>Задавай ги вместо да обясняваш. Чакай отговора — дори тишината е мислене.</span></div>
+    <div class="how-item"><strong>👁 Наблюдавай (оранжево)</strong><span>Знаци, че детето разбира или се затруднява. Действай според наблюдението.</span></div>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- ═══════════════════ WEEK 1 ═══════════════════ -->
+<div class="week-header" style="background: linear-gradient(135deg, #1D4ED8, #3B82F6);">
+  <div class="week-num-big">1</div>
+  <div>
+    <h2>Здравей, ScratchJr!</h2>
+    <p>Цел на седмицата: Детето може да отвори ScratchJr, да добави герой, да свърже 3+ блока и да натисне старт самостоятелно</p>
+  </div>
+</div>
+
+<!-- Day 1 -->
+<div class="day-lesson">
+  <div class="day-lesson-header">
+    <div class="day-emoji">🛝</div>
+    <div>
+      <div class="day-meta">Седмица 1 · Day 1 · Понеделник</div>
+      <h3>Запознай се с приложението</h3>
+    </div>
+  </div>
+  <div class="day-lesson-body">
+
+    <div class="segment">
+      <div class="segment-label"><span class="seg-dot" style="background:#6B7280"></span>НАЧАЛО — 5 мин</div>
+      <div class="script-block">
+        <strong>Кажи на детето →</strong>
+        "Today we're going to explore a magical app where you can make characters come alive — kind of like being a movie director AND a programmer at the same time. Before we touch anything, let's just look at the screen together for a минute. What do you notice? What looks interesting to you?"
+      </div>
+    </div>
+
+    <div class="segment">
+      <div class="segment-label"><span class="seg-dot" style="background:#2563EB"></span>ИЗСЛЕДВАНЕ — 20 мин</div>
+      <ul class="action-list">
+        <li><span class="tstamp">0:05</span>Отворете ScratchJr заедно. Не кликайте нищо засега — просто наблюдавайте.</li>
+        <li><span class="tstamp">0:08</span>Покажете Сцената (главното поле), панела с блокове (вляво), тавата с герои (долу). Назовете ги заедно.</li>
+        <li><span class="tstamp">0:12</span>Кажи „Добре, докосни героя-котка и виж какво ще стане." Нека открият сами, че го избира.</li>
+        <li><span class="tstamp">0:15</span>Open Paint tool together. Let them draw freely for 8 минutes — their own character.</li>
+        <li><span class="tstamp">0:23</span>Помогни им да запазят при нужда — покажи им бутона за запазване.</li>
+      </ul>
+    </div>
+
+    <div class="segment">
+      <div class="segment-label"><span class="seg-dot" style="background:#16A34A"></span>НАСОЧВАЩИ ВЪПРОСИ</div>
+      <div class="questions-box">
+        <div class="q-title">💬 Задай тези — не отговаряй вместо тях</div>
+        <ul>
+          <li>„Какво мислиш, че прави този бутон? Нека пробваме и да видим!"</li>
+          <li>„Ако беше герой в игра, как би изглеждал ТИ? Нарисувай го!"</li>
+          <li>„Можеш ли да намериш мястото, където се пише името на героя?"</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="segment">
+      <div class="segment-label"><span class="seg-dot" style="background:#EA580C"></span>НАБЛЮДАВАЙ</div>
+      <div class="watch-box">
+        <div class="w-title">👁 Observe these signals</div>
+        <ul>
+          <li>Любопитни ли са и изследват — или тревожни и чакат указания? (Любопитни = чудесно! Тревожни = повече насърчение)</li>
+          <li>Пробват ли неща без да искат разрешение? (Добър знак за увереност)</li>
+          <li>Прекарват ли прекалено дълго в рисуване? (Нормално е — ангажираност с изкуството = инвестиция)</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="success-bar">✅ Успехът изглежда така: Детето е нарисувало собствен герой, запазило е проекта и може да посочи Сцената, Блоковете и Героите по име.</div>
+  </div>
+</div>
+
+<!-- Day 2 -->
+<div class="day-lesson">
+  <div class="day-lesson-header">
+    <div class="day-emoji">🏃</div>
+    <div>
+      <div class="day-meta">Седмица 1 · Day 2 · Вторник</div>
+      <h3>Движи се! Блокове за движение</h3>
+    </div>
+  </div>
+  <div class="day-lesson-body">
+    <div class="segment">
+      <div class="segment-label"><span class="seg-dot" style="background:#6B7280"></span>НАЧАЛО — 5 мин</div>
+      <div class="script-block">
+        <strong>Кажи на детето →</strong>
+        „Вчера изследвахме приложението и направихме герой. Днес ще накараме героя да се ДВИЖИ. Програмистите използват специални инструкции, наречени блокове — днес ще срещнем блоковете за движение. Те са сини. Можеш ли да намериш всички сини блокове преди да започнем?"
+      </div>
+    </div>
+
+    <div class="segment">
+      <div class="segment-label"><span class="seg-dot" style="background:#2563EB"></span>НАСОЧЕНО ИЗГРАЖДАНЕ — 25 мин</div>
+      <ul class="action-list">
+        <li><span class="tstamp">0:05</span>Помоли ги да плъзнат ЕДИН блок „движи надясно" в зоната за скрипт. Нека сами открият как се плъзга.</li>
+        <li><span class="tstamp">0:10</span>Докосни блока — героят се движи! „Уау! Какво се случи?" Нека реагират.</li>
+        <li><span class="tstamp">0:15</span>Предизвикателство: „Можеш ли да го накараш да иде надясно И после наляво? Кои блокове са ти нужни?"</li>
+        <li><span class="tstamp">0:20</span>Покажи числото на блока — докосни го. „Какво мислиш, че се променя когато числото е по-голямо?"</li>
+        <li><span class="tstamp">0:25</span>Свободно време: „Направи танц от 5 стъпки — каква посока, каква скорост искаш. Изненадай ме!"</li>
+      </ul>
+    </div>
+
+    <div class="segment">
+      <div class="segment-label"><span class="seg-dot" style="background:#16A34A"></span>НАСОЧВАЩИ ВЪПРОСИ</div>
+      <div class="questions-box">
+        <div class="q-title">💬 Задай тези</div>
+        <ul>
+          <li>„Ако числото 3 го движи малко, кое число ще го движи МНОГО?"</li>
+          <li>„Можеш ли да предвидиш какво ще стане преди да докоснеш? После тествай предположението си!"</li>
+          <li>„Ако искаш героят да ходи в квадрат, кои посоки са ти нужни?"</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="segment">
+      <div class="segment-label"><span class="seg-dot" style="background:#EA580C"></span>НАБЛЮДАВАЙ</div>
+      <div class="watch-box">
+        <div class="w-title">👁 Observe</div>
+        <ul>
+          <li>Do they tap the block or drag it to test? (Dragging = understanding scripts; Tapping = using it like a button — gently show the difference)</li>
+          <li>Do they change the numbers experimentally? (Great sign of curiosity)</li>
+          <li>Do they connect blocks in a chain? (Key concept — praise this explicitly)</li>
+        </ul>
+      </div>
+    </div>
+    <div class="success-bar">✅ Успехът изглежда така: Детето може да свърже поне 3 блока за движение и да предвиди приблизително накъде ще отиде героят.</div>
+  </div>
+</div>
+
+<!-- Day 3 -->
+<div class="day-lesson">
+  <div class="day-lesson-header">
+    <div class="day-emoji">▶️</div>
+    <div>
+      <div class="day-meta">Седмица 1 · Day 3 · Сряда</div>
+      <h3>Натисни Старт! Начални блокове</h3>
+    </div>
+  </div>
+  <div class="day-lesson-body">
+    <div class="segment">
+      <div class="segment-label"><span class="seg-dot" style="background:#6B7280"></span>НАЧАЛО — 5 мин</div>
+      <div class="script-block">
+        <strong>Кажи на детето →</strong>
+        "Every program needs a START button — something that kicks everything off. In real programминg, we call these triggers or events. Today you'll find ScratchJr's version. Here's the question: what do you think needs to happen FIRST before any code runs?"
+      </div>
+    </div>
+    <div class="segment">
+      <div class="segment-label"><span class="seg-dot" style="background:#2563EB"></span>НАСОЧЕНО ИЗГРАЖДАНЕ — 25 мин</div>
+      <ul class="action-list">
+        <li><span class="tstamp">0:05</span>Отворете заедно секцията с жълти блокове — разгледайте опциите.</li>
+        <li><span class="tstamp">0:08</span>„Зеленият флаг означава 'когато натиснеш старт.' Плъзни го ПРЕД веригата с танца."</li>
+        <li><span class="tstamp">0:12</span>Натисни зеления флаг на екрана — всичко тръгва! „Различно ли е от просто докосване на блока?"</li>
+        <li><span class="tstamp">0:18</span>Добави ВТОРИ тригер: „когато героят е докоснат" → същият танц. Сега и двата работят!</li>
+        <li><span class="tstamp">0:25</span>Свободна игра: изследвайте всички тригери — какво прави тригерът „разклати телефона"?</li>
+      </ul>
+    </div>
+    <div class="segment">
+      <div class="segment-label"><span class="seg-dot" style="background:#16A34A"></span>НАСОЧВАЩИ ВЪПРОСИ</div>
+      <div class="questions-box">
+        <div class="q-title">💬 Задай тези</div>
+        <ul>
+          <li>„Защо мислиш, че ВСЯКА програма се нуждае от начална точка?"</li>
+          <li>„Ако имаш 2 различни тригера за един скрипт, какво ще стане ако натиснеш и двата едновременно?"</li>
+          <li>„Можеш ли да се сетиш за тригери от реалния живот? (звънец → някой отваря врата, будилник → събуждаш се)"</li>
+        </ul>
+      </div>
+    </div>
+    <div class="watch-box" style="margin:0 0 14px">
+      <div class="w-title">👁 Watch For</div>
+      <ul>
+        <li>Разбират ли, че веригата трябва да ЗАПОЧНЕ с тригер? (Ключов модел за мислене)</li>
+        <li>Пробват ли различните видове тригери? (Любопитство = чудесно)</li>
+        <li>Свързват ли блоковете в грешен ред? (Питай нежно „кой трябва да е пръв?")</li>
+      </ul>
+    </div>
+    <div class="success-bar">✅ Успехът изглежда така: Детето самостоятелно добавя тригер към скрипт и може да обясни „зеленият флаг стартира всичко."</div>
+  </div>
+</div>
+
+<!-- Day 4 - condensed for space -->
+<div class="day-lesson">
+  <div class="day-lesson-header">
+    <div class="day-emoji">🎨</div>
+    <div>
+      <div class="day-meta">Седмица 1 · Day 4 · Четвъртък</div>
+      <h3>Изглеждай различно! Блокове за вид</h3>
+    </div>
+  </div>
+  <div class="day-lesson-body">
+    <div class="segment">
+      <div class="segment-label"><span class="seg-dot" style="background:#6B7280"></span>НАЧАЛО — 5 мин</div>
+      <div class="script-block">
+        <strong>Кажи на детето →</strong>
+        „Блоковете от днес са любимите ми — те правят нещата да изглеждат НЕВЕРОЯТНО. Програмистите ги наричат команди за 'вид'. Преди да започнем: ако героят ти можеше да прави каквото и да е визуално — да расте огромен, да се смалява, да изчезва, да говори — кое би било най-готино?"
+      </div>
+    </div>
+    <div class="segment">
+      <div class="segment-label"><span class="seg-dot" style="background:#2563EB"></span>НАСОЧЕНО ИЗГРАЖДАНЕ — 30 мин</div>
+      <ul class="action-list">
+        <li><span class="tstamp">0:05</span>Намери лилавите блокове. Нека докоснат всеки на своя герой, за да открият какво прави.</li>
+        <li><span class="tstamp">0:12</span>Изградете заедно: Расте → Кажи „Здравей!" → Смали → Скрий. Пуснете го!</li>
+        <li><span class="tstamp">0:22</span>Попитай: „Какво ще стане ако сложиш ПОКАЖИ след СКРИЙ?" Нека предвидят, после тестват.</li>
+        <li><span class="tstamp">0:28</span>Свободно изграждане: направи най-драматичното влизане/излизане, което могат да си представят!</li>
+      </ul>
+    </div>
+    <div class="questions-box" style="margin-bottom:12px">
+      <div class="q-title">💬 Задай</div>
+      <ul>
+        <li>„Какво ще стане ако растеш 5 пъти поред без да се смаляваш? Пробвай!"</li>
+        <li>„Можеш ли да накараш героя да изглежда изненадан — сякаш вижда нещо страшно?"</li>
+        <li>„Каква е разликата между СКРИЙ и смаляване до много малко?"</li>
+      </ul>
+    </div>
+    <div class="success-bar">✅ Успехът изглежда така: Детето самостоятелно изгражда скрипт от 4+ блока за вид и може да обясни какво прави всеки блок.</div>
+  </div>
+</div>
+
+<!-- Day 5 -->
+<div class="day-lesson">
+  <div class="day-lesson-header">
+    <div class="day-emoji">🎉</div>
+    <div>
+      <div class="day-meta">Седмица 1 · Day 5 · Friday — MINI-PROJECT</div>
+      <h3>Здравей, свят! Първи завършен проект</h3>
+    </div>
+  </div>
+  <div class="day-lesson-body">
+    <div class="segment">
+      <div class="segment-label"><span class="seg-dot" style="background:#6B7280"></span>НАЧАЛО — 5 мин</div>
+      <div class="script-block">
+        <strong>Кажи на детето →</strong>
+        „Днес е денят, в който всичко се събира. Научи движение, тригери и вид. Сега ще изградиш ПЪРВИЯ си завършен проект — изцяло твой дизайн. Ще съм тук ако заседнеш, но това е ТВОЕТО творение. Какво ще правиш?"
+      </div>
+    </div>
+    <div class="segment">
+      <div class="segment-label"><span class="seg-dot" style="background:#2563EB"></span>РАБОТА ПО ПРОЕКТА — 45 мин</div>
+      <ul class="action-list">
+        <li><span class="tstamp">0:05</span>Let them pick background and characters with минimal input from you.</li>
+        <li><span class="tstamp">0:15</span>Провери: „Как вървят нещата? Разкажи ми какво строиш." Не решавай — питай!</li>
+        <li><span class="tstamp">0:35</span>Леко подтикване ако са заседнали: „Можеш ли да накараш и втория герой да прави нещо интересно?"</li>
+        <li><span class="tstamp">0:45</span>Споделяне: „Натисни старт и ми разкажи какво прави всяко нещо!"</li>
+        <li><span class="tstamp">0:55</span>Отпразнувай! „Току-що направи първата си ScratchJr програма!"</li>
+      </ul>
+    </div>
+    <div class="segment">
+      <div class="segment-label"><span class="seg-dot" style="background:#16A34A"></span>ВЪПРОСИ ЗА ОБОБЩЕНИЕ</div>
+      <div class="questions-box">
+        <div class="q-title">💬 After they show you</div>
+        <ul>
+          <li>„С коя част се гордееш най-много?"</li>
+          <li>„Имаше ли нещо, което не проработи така, както искаше? Какво направи?"</li>
+          <li>„Ако имаше още един час, какво щеше да добавиш?"</li>
+          <li>„Какво научи тази седмица, което те изненада?"</li>
+        </ul>
+      </div>
+    </div>
+    <div class="success-bar">✅ Успехът изглежда така: Завършен проект с 2 героя, всеки с поне тригер + 2 блока. Детето може да го обясни с думите си.</div>
+  </div>
+</div>
+
+<!-- ═══════════════════ WEEK 2 ═══════════════════ -->
+<div class="week-header" style="background: linear-gradient(135deg, #16A34A, #4ADE80);">
+  <div class="week-num-big">2</div>
+  <div>
+    <h2>Tell a Story!</h2>
+    <p>Цел: Детето изгражда 3-странична анимирана история с диалог и прескачания самостоятелно</p>
+  </div>
+</div>
+
+<div class="day-lesson">
+  <div class="day-lesson-header">
+    <div class="day-emoji">🎭</div>
+    <div>
+      <div class="day-meta">Седмица 2 · Day 1 · Понеделник</div>
+      <h3>Сцена 1 и Сцена 2 — Страници!</h3>
+    </div>
+  </div>
+  <div class="day-lesson-body">
+    <div class="segment">
+      <div class="segment-label"><span class="seg-dot" style="background:#6B7280"></span>НАЧАЛО — 5 мин</div>
+      <div class="script-block">
+        <strong>Кажи на детето →</strong>
+        „Страхотните истории имат повече от една сцена — представи си любимия си филм: прескача от място на място! В ScratchJr различните сцени се наричат страници. Днес ще научим как да имаме МНОЖЕСТВО сцени и да накараме историята да прескача."
+      </div>
+    </div>
+    <div class="segment">
+      <div class="segment-label"><span class="seg-dot" style="background:#2563EB"></span>НАСОЧЕНО ИЗГРАЖДАНЕ — 30 мин</div>
+      <ul class="action-list">
+        <li><span class="tstamp">0:05</span>Покажи им бутона + за добавяне на страници. Нека добавят Страница 2 сами.</li>
+        <li><span class="tstamp">0:10</span>„Всяка страница е различна сцена. Дай им различни фонове — Страница 1 = едно място, Страница 2 = друго."</li>
+        <li><span class="tstamp">0:20</span>Намери блока „отиди на страница" (оранжева секция). Свържи го: край на скрипта на Страница 1 → отиди на Страница 2.</li>
+        <li><span class="tstamp">0:30</span>Тест: натисни старт на Страница 1. Прескача ли? Ако не — дебъгвайте заедно!</li>
+      </ul>
+    </div>
+    <div class="questions-box" style="margin-bottom:12px">
+      <div class="q-title">💬 Задай</div>
+      <ul>
+        <li>„Каква история може да се случи на две различни места?"</li>
+        <li>„Какво трябва да се случи на Страница 1 ПРЕДИ прескачането на Страница 2?"</li>
+        <li>„Как е това като обръщане на страница в книга?"</li>
+      </ul>
+    </div>
+    <div class="success-bar">✅ Success: Детето създава 2 страници с различни фонове и ги свързва с блок за прескачане.</div>
+  </div>
+</div>
+
+<div class="day-lesson">
+  <div class="day-lesson-header">
+    <div class="day-emoji">💬</div>
+    <div>
+      <div class="day-meta">Седмица 2 · Day 2 · Вторник</div>
+      <h3>Героите говорят — Диалог!</h3>
+    </div>
+  </div>
+  <div class="day-lesson-body">
+    <div class="segment">
+      <div class="segment-label"><span class="seg-dot" style="background:#6B7280"></span>НАЧАЛО — 5 мин</div>
+      <div class="script-block">
+        <strong>Кажи на детето →</strong>
+        „Всяка добра история има герои, които говорят помежду си. Трудното е да ги накараме да се РЕДУВАТ — единият говори, после чака, после другият говори. Преди да кодираме, нека го изиграем! Ти бъди един герой, аз ще бъда другият. Какво биха си казали?"
+      </div>
+    </div>
+    <div class="segment">
+      <div class="segment-label"><span class="seg-dot" style="background:#2563EB"></span>НАСОЧЕНО ИЗГРАЖДАНЕ — 30 мин</div>
+      <ul class="action-list">
+        <li><span class="tstamp">0:05</span>Изиграйте разговора физически първо — поне 4 реплики.</li>
+        <li><span class="tstamp">0:10</span>В ScratchJr: добави скрипта на Герой А — блок „кажи" за неговата реплика.</li>
+        <li><span class="tstamp">0:18</span>Ключово прозрение: „Герой Б също се нуждае от тригер — но с блок ЧАКАЙ първо, за да завърши А."</li>
+        <li><span class="tstamp">0:25</span>Изградете го, тествайте, нагласете времето за чакане докато изглежда естествено.</li>
+        <li><span class="tstamp">0:40</span>Гледайте заедно — усеща ли се като истински разговор?</li>
+      </ul>
+    </div>
+    <div class="questions-box" style="margin-bottom:12px">
+      <div class="q-title">💬 Задай</div>
+      <ul>
+        <li>„Защо Герой Б трябва да чака? Какво ще стане ако не чака?"</li>
+        <li>„Колко дълго трябва да е изчакването? Какво ти изглежда естествено?"</li>
+        <li>„Могат ли да се прекъсват? Как би го кодирал?"</li>
+      </ul>
+    </div>
+    <div class="success-bar">✅ Success: Two characters have a 4+ line conversation with appropriate wait tiминg between turns.</div>
+  </div>
+</div>
+
+<div class="day-lesson">
+  <div class="day-lesson-header">
+    <div class="day-emoji">⏳</div>
+    <div>
+      <div class="day-meta">Седмица 2 · Day 3 · Сряда</div>
+      <h3>Wait For Me! Tiминg Events</h3>
+    </div>
+  </div>
+  <div class="day-lesson-body">
+    <div class="segment">
+      <div class="segment-label"><span class="seg-dot" style="background:#6B7280"></span>НАЧАЛО — 5 мин</div>
+      <div class="script-block">
+        <strong>Кажи на детето →</strong>
+        "Tiминg is everything in stories and movies. If things happen too fast — you miss them. Too slow — you get bored. Today we're learning to control TIME in our programs using the Wait block. Think of it like a pause button in your code."
+      </div>
+    </div>
+    <div class="segment">
+      <div class="segment-label"><span class="seg-dot" style="background:#2563EB"></span>НАСОЧЕНО ИЗГРАЖДАНЕ — 30 мин</div>
+      <ul class="action-list">
+        <li><span class="tstamp">0:05</span>Изгради сцена с изгрев: герой се появява → слънцето изгрява (расте от малко) → птиците прелитат.</li>
+        <li><span class="tstamp">0:15</span>Първо без блокове за чакане — всичко се случва едновременно! „Правилно ли изглежда това?"</li>
+        <li><span class="tstamp">0:20</span>Добави блокове за чакане между всяко събитие. Тествай. Нагласи. „Каква стойност за чакане прилича най-много на истински изгрев?"</li>
+        <li><span class="tstamp">0:30</span>Свободно време: изградете верига от 5 събития по тяхна идея.</li>
+      </ul>
+    </div>
+    <div class="questions-box" style="margin-bottom:12px">
+      <div class="q-title">💬 Задай</div>
+      <ul>
+        <li>„Каква е разликата между чакай=1 и чакай=4? Бройте секундите с мен."</li>
+        <li>„Ако правеше страшна сцена, щеше ли да правиш нещата бързо или бавно? Защо?"</li>
+        <li>„Можеш ли да контролираш настроението на сцена само като промениш времената за чакане?"</li>
+      </ul>
+    </div>
+    <div class="success-bar">✅ Success: Детето целенасочено използва блокове за чакане за контролирана последователност.</div>
+  </div>
+</div>
+
+<div class="day-lesson">
+  <div class="day-lesson-header">
+    <div class="day-emoji">🖌️</div>
+    <div>
+      <div class="day-meta">Седмица 2 · Day 4 · Четвъртък</div>
+      <h3>Нарисувай своя свят — Фонове!</h3>
+    </div>
+  </div>
+  <div class="day-lesson-body">
+    <div class="segment">
+      <div class="segment-label"><span class="seg-dot" style="background:#6B7280"></span>НАЧАЛО — 5 мин</div>
+      <div class="script-block">
+        <strong>Кажи на детето →</strong>
+        „Днес е предимно ден за изкуство — и ето тайната: колкото повече ТИ влагаш в проектирането на света, толкова повече ще те е грижа за историята. Страхотните дизайнери на игри прекарват месеци в изкуство преди да напишат код. Затова днес: нарисувай ТВОЯ свят. Едва ли ще помагам. Това е твоята визия."
+      </div>
+    </div>
+    <div class="segment">
+      <div class="segment-label"><span class="seg-dot" style="background:#2563EB"></span>BUILD — 40 мин (mostly free)</div>
+      <ul class="action-list">
+        <li><span class="tstamp">0:05</span>Let them design freely. Tip to share: "Draw sky layer first, then ground, then details."</li>
+        <li><span class="tstamp">0:25</span>Премини към дизайн на герой: „Нарисувай някой, който принадлежи на този свят."</li>
+        <li><span class="tstamp">0:40</span>Добави героя към сцената — подходящ ли е? Преоразмери при нужда.</li>
+        <li><span class="tstamp">0:50</span>Добави просто движение, за да изглежда жив.</li>
+      </ul>
+    </div>
+    <div class="questions-box" style="margin-bottom:12px">
+      <div class="q-title">💬 Задай (to inspire, not direct)</div>
+      <ul>
+        <li>„Ако този свят имаше име, кое би то?"</li>
+        <li>„Какво е времето в тази сцена? Сутрин? Нощ? Залез?"</li>
+        <li>„Кой друг живее в този свят освен главния герой?"</li>
+      </ul>
+    </div>
+    <div class="success-bar">✅ Success: Детето има уникален нарисуван фон и поне един герой, подходящ за света.</div>
+  </div>
+</div>
+
+<div class="day-lesson">
+  <div class="day-lesson-header">
+    <div class="day-emoji">📖</div>
+    <div>
+      <div class="day-meta">Седмица 2 · Day 5 · Friday — MINI-PROJECT</div>
+      <h3>Моята първа история!</h3>
+    </div>
+  </div>
+  <div class="day-lesson-body">
+    <div class="segment">
+      <div class="segment-label"><span class="seg-dot" style="background:#6B7280"></span>НАЧАЛО — 10 мин (paper first!)</div>
+      <div class="script-block">
+        <strong>Кажи на детето →</strong>
+        „Преди да отворим таблета, нека планираме на хартия. Страхотните програмисти планират преди да кодират! Напиши 3 изречения — историята в 3 реда. Сцена 1: Откъде започва? Сцена 2: Какво се случва? Сцена 3: Как завършва?"
+      </div>
+    </div>
+    <div class="segment">
+      <div class="segment-label"><span class="seg-dot" style="background:#2563EB"></span>РАБОТА ПО ПРОЕКТА — 40 мин</div>
+      <ul class="action-list">
+        <li><span class="tstamp">0:10</span>Изгради от хартиения план — 3 страници, техните фонове.</li>
+        <li><span class="tstamp">0:30</span>Провери: всяка страница има ли движение + диалог + прескачане?</li>
+        <li><span class="tstamp">0:45</span>Заглавна страница: „Добави името си като автор на Страница 1!"</li>
+        <li><span class="tstamp">0:50</span>Изпълнение с гласово четене — детето разказва докато се изпълнява.</li>
+      </ul>
+    </div>
+    <div class="segment">
+      <div class="segment-label"><span class="seg-dot" style="background:#16A34A"></span>ОБОБЩЕНИЕ</div>
+      <div class="questions-box">
+        <div class="q-title">💬 After show</div>
+        <ul>
+          <li>„Историята ти излезе ли като хартиения план или различно? Защо?"</li>
+          <li>„Коя част от разказването е най-трудна за кодиране?"</li>
+          <li>„Какво искаш да добавиш към тази история ако се върнеш към нея?"</li>
+        </ul>
+      </div>
+    </div>
+    <div class="success-bar">✅ Success: Анимирана история от 3 страници с 2 героя, диалог и прескачания. Детето може да я разказва на глас.</div>
+  </div>
+</div>
+
+<!-- WEEKS 3-6 abbreviated headers + key day summaries -->
+
+<!-- WEEK 3 -->
+<div class="week-header" style="background: linear-gradient(135deg, #7C3AED, #A855F7);">
+  <div class="week-num-big">3</div>
+  <div>
+    <h2>Loops & Repeats!</h2>
+    <p>Цел: Детето използва цикли за повтаряне и вечни цикли за шарки, танци и непрекъснати анимации</p>
+  </div>
+</div>
+
+<div class="day-lesson">
+  <div class="day-lesson-header">
+    <div class="day-emoji">🤔</div>
+    <div><div class="day-meta">Седмица 3 · Day 1 · Понеделник</div><h3>Защо се повтаря? Идеята за цикъл</h3></div>
+  </div>
+  <div class="day-lesson-body">
+    <div class="script-block"><strong>Opening Script →</strong>„Ето пъзел: как би накарал герой да ходи 20 стъпки надясно? Можеш да плъзнеш 20 блока... ИЛИ можеш да използваш един магически блок, наречен ЦИКЪЛ. Програмистите използват цикли, защото сме мързеливи по умен начин — никога не повтаряме себе си когато можем да повтаряме кода! Нека докажем."</div>
+    <div class="segment"><div class="segment-label"><span class="seg-dot" style="background:#2563EB"></span>КЛЮЧОВ МОМЕНТ — the "aha" comparison</div>
+    <ul class="action-list">
+      <li><span class="tstamp">0:05</span>Физически: ръкопляскай 5 пъти. „Току-що изпълни цикъл! Инструкцията беше 'ръкопляскай' и я повтори 5 пъти."</li>
+      <li><span class="tstamp">0:10</span>Изгради верига от 5 движения БЕЗ цикъл първо.</li>
+      <li><span class="tstamp">0:18</span>После преизгради С цикъл повтори-5. Същият резултат — по-малко блокове!</li>
+      <li><span class="tstamp">0:25</span>„Кое би предпочел да изградиш ако трябва да се изпълни 100 пъти?"</li>
+    </ul></div>
+    <div class="questions-box" style="margin-bottom:12px"><div class="q-title">💬 Задай</div><ul>
+      <li>„Можеш ли да се сетиш за нещо от реалния живот, което е цикъл? (миене на зъби, сезони, учебни дни)"</li>
+      <li>„Какво отива ВЪТРЕ в цикъла? Какво остава ИЗВЪН?"</li>
+      <li>„Какво ще стане ако числото в повтори е 0? Пробвай!"</li>
+    </ul></div>
+    <div class="success-bar">✅ Success: Детето може да изгради цикъл за повтаряне, да промени числото и да обясни „изпълнява се X пъти."</div>
+  </div>
+</div>
+
+<div class="day-lesson">
+  <div class="day-lesson-header">
+    <div class="day-emoji">🌀</div>
+    <div><div class="day-meta">Седмица 3 · Day 2 · Вторник</div><h3>Вечен цикъл!</h3></div>
+  </div>
+  <div class="day-lesson-body">
+    <div class="script-block"><strong>Opening Script →</strong>„Вчерашният цикъл се изпълни определен брой пъти. Но какво ако искаш нещо да НИКОГА не спира — като сърдечен ритъм или въртенето на Земята? Има специален цикъл, наречен Вечен. Няма число, защото върви докато не натиснеш стоп. Предупреждение: щом го стартираш, единственият начин да го спреш е червеният бутон!"</div>
+    <div class="questions-box" style="margin-bottom:12px"><div class="q-title">💬 Key questions</div><ul>
+      <li>„Можеш ли да направиш птица, маща крила вечно само с расте и смали вътре в вечен цикъл?"</li>
+      <li>„Какво е опасното в вечен цикъл ако сложиш прекалено много неща вътре?"</li>
+      <li>„Могат ли двама герои да имат различни вечни цикли едновременно? Пробвай!"</li>
+    </ul></div>
+    <div class="success-bar">✅ Success: Детето използва вечен цикъл за непрекъсната анимация — маха, отскача, върти — и може да го спре с червения бутон.</div>
+  </div>
+</div>
+
+<div class="day-lesson">
+  <div class="day-lesson-header">
+    <div class="day-emoji">🕺</div>
+    <div><div class="day-meta">Седмица 3 · Дни 3-4 · Ср-Чт</div><h3>Танцово парти + Шарки и изкуство</h3></div>
+  </div>
+  <div class="day-lesson-body">
+    <div class="script-block"><strong>Wed Opening →</strong>„Днес сме хореографи — ще проектираме танци с цикли. Първата стъпка: проектирай танца на ХАРТИЯ. Кои 4 движения правят добър танц? После ще го зациклим." <br><br><strong>Thu Opening →</strong>"Loops aren't just for dancing — they make beautiful patterns too. What do you think happens if a character moves AND turns inside a loop? Let's find out!"</div>
+    <div class="questions-box" style="margin-bottom:12px"><div class="q-title">💬 Задай both days</div><ul>
+      <li>„Какво ще стане ако двама герои имат цикли с РАЗЛИЧНИ числа? Остават ли в синхрон?"</li>
+      <li>„Можеш ли да направиш шарка, изглеждаща като спирала? Каква комбинация от движения би я създала?"</li>
+      <li>„Ако танцът има 4 движения и се зацикли 8 пъти, колко движения общо ще се случат?"</li>
+    </ul></div>
+    <div class="success-bar">✅ Успех Ср: 3 танцьора с различни циклични танци едновременно. Чт: Геометрична шарка с цикли движи+завърти.</div>
+  </div>
+</div>
+
+<!-- WEEK 4 -->
+<div class="week-header" style="background: linear-gradient(135deg, #EA580C, #FB923C);">
+  <div class="week-num-big">4</div>
+  <div>
+    <h2>Characters Talking to Each Other!</h2>
+    <p>Цел: Детето разбира и използва блокове за съобщения за взаимодействие между герои и проста интерактивна игра</p>
+  </div>
+</div>
+
+<div class="day-lesson">
+  <div class="day-lesson-header">
+    <div class="day-emoji">📬</div>
+    <div><div class="day-meta">Седмица 4 · Days 1-2 · Mon-Tue</div><h3>Съобщения + Верижни реакции</h3></div>
+  </div>
+  <div class="day-lesson-body">
+    <div class="script-block"><strong>Mon Opening →</strong>"This week we unlock one of the most powerful ideas in programминg: characters reacting to each other. One character does something, sends a signal, and another character responds. This is called event-driven programминg — and it's how almost every app you've ever used works."<br><br><strong>Tue Opening →</strong>"Yesterday one character sent a message to another. Today: can you make a chain — where the receiver ALSO sends a message to a third character? Like doминoes falling!"</div>
+    <div class="questions-box" style="margin-bottom:12px"><div class="q-title">💬 Key questions</div><ul>
+      <li>„Кое е най-важното при съобщенията? (Цветовете трябва да съвпадат!)"</li>
+      <li>„Какво ако използваш един и същ цвят съобщение за двама различни получатели? Какво ще стане?"</li>
+      <li>"Where else in real life do you see chain reactions? (News spreads, falling doминoes, passing notes)</li>
+    </ul></div>
+    <div class="success-bar">✅ Success Mon: Двама герои взаимодействат чрез съобщение. Вт: Верижна реакция с 3+ героя и различни цветове съобщения.</div>
+  </div>
+</div>
+
+<div class="day-lesson">
+  <div class="day-lesson-header">
+    <div class="day-emoji">🎮</div>
+    <div><div class="day-meta">Седмица 4 · Дни 3-4 · Ср-Чт</div><h3>Докосни и реагирай + Първа игра!</h3></div>
+  </div>
+  <div class="day-lesson-body">
+    <div class="script-block"><strong>Wed Opening →</strong>„Тригерите с докосване правят игрите да работят — докосваш нещо и нещата реагират. Днес ще изградим най-интерактивния ни проект досега."<br><br><strong>Thu Opening →</strong>"Today you're building a REAL game. When the star is caught, something happens. This is called event-driven programминg — exactly what Angry Birds, Mario, and every game you've ever played uses!"</div>
+    <div class="questions-box" style="margin-bottom:12px"><div class="q-title">💬 Key questions</div><ul>
+      <li>„В твоята игра, какво кара играча да се чувства победител? Как можеш да засилиш това усещане?"</li>
+      <li>„Какво би направило играта по-трудна? По-лесна? Можеш ли да добавиш настройка за трудност?"</li>
+      <li>„Вече си дизайнер на игри — кое едно нещо би добавил за повече забавление?"</li>
+    </ul></div>
+    <div class="success-bar">✅ Success: Работеща игра „докосни за победа" с съобщения. Детето може да я играе и да обясни как работи.</div>
+  </div>
+</div>
+
+<!-- WEEK 5 -->
+<div class="week-header" style="background: linear-gradient(135deg, #0891B2, #22D3EE);">
+  <div class="week-num-big">5</div>
+  <div>
+    <h2>Sound & Music!</h2>
+    <p>Цел: Детето може да добавя звукови ефекти, да записва глас, да прави инструмент и да синхронизира звук с движение</p>
+  </div>
+</div>
+
+<div class="day-lesson">
+  <div class="day-lesson-header">
+    <div class="day-emoji">🎵</div>
+    <div><div class="day-meta">Седмица 5 · Days 1-3 · Mon-Wed</div><h3>Звуци + Глас + Инструменти</h3></div>
+  </div>
+  <div class="day-lesson-body">
+    <div class="script-block"><strong>Mon →</strong>„Затвори очи. Ще пусна две версии на една анимация — с звук и без. Коя се усеща по-добре? [Демонстрирай] Звукът променя ВСИЧКО. Днес го добавяме."<br><br><strong>Tue →</strong>„Твоят глас вътре в таблета — колко готино е това? Днес твоят герой буквално ще говори с ТВОЯ глас."<br><br><strong>Wed →</strong>„Докосвал си приложения, правящи музика. Днес СТРОИШ едно — 4 героя, всеки различна нота. Ти си разработчик на музикално приложение!"</div>
+    <div class="questions-box" style="margin-bottom:12px"><div class="q-title">💬 Questions across the week</div><ul>
+      <li>„Как звукът променя УСЕЩАНЕТО на сцена? Пробвай същата анимация с различни звуци."</li>
+      <li>„Ако трябваше да избереш един звук за целия проект, кой би бил най-„ти"?"</li>
+      <li>„Можеш ли да изсвириш мелодия на своето приложение-инструмент? Каква песен би работила само с 4 ноти?"</li>
+    </ul></div>
+    <div class="success-bar">✅ Success: Детето е използвало всичките три звукови функции — библиотека, записан глас и прост инструмент.</div>
+  </div>
+</div>
+
+<!-- WEEK 6 -->
+<div class="week-header" style="background: linear-gradient(135deg, #BE123C, #FB7185);">
+  <div class="week-num-big">6</div>
+  <div>
+    <h2>Grand Finale — The Big Project!</h2>
+    <p>Цел: Детето самостоятелно проектира, изгражда и представя пълен оригинален ScratchJr проект</p>
+  </div>
+</div>
+
+<div class="day-lesson">
+  <div class="day-lesson-header">
+    <div class="day-emoji">🎓</div>
+    <div><div class="day-meta">Седмица 6 · Full Week</div><h3>Проектирай → Изгради → Полирай → Представи</h3></div>
+  </div>
+  <div class="day-lesson-body">
+    <div class="script-block"><strong>Mon Planning →</strong>„Това е ТВОЯТА седмица. Без уроци, без насочени стъпки — само ти и твоите идеи. Тук съм като помощник, не учител. Какво би СТРОИЛ ти, ако можеш да строиш всичко в ScratchJr? Точно това правим тази седмица."<br><br><strong>Fri Graduation →</strong>„Днес не само показваш проект — представяш работата си като истински разработчик. Разкажи ни: какво прави? Как го построи? Кое беше най-трудното? С кое се гордееш най-много?"</div>
+    <div class="segment">
+      <div class="segment-label"><span class="seg-dot" style="background:#2563EB"></span>РОЛЯ НА УЧИТЕЛЯ ТАЗИ СЕДМИЦА</div>
+      <ul class="action-list">
+        <li><span class="tstamp">Mon</span>Фасилитатор на мозъчна буря — ask questions, don't suggest directions</li>
+        <li><span class="tstamp">Tue</span>Поддръжка на изкуството — encourage, praise, stay hands-off</li>
+        <li><span class="tstamp">Wed</span>Партньор при дебъгване — "what were you trying to do?" before offering any help</li>
+        <li><span class="tstamp">Thu</span>Проверяващ качеството — "what would make this 10% better?" then let them decide</li>
+        <li><span class="tstamp">Fri</span>Горд зрител and facilitator of their presentation</li>
+      </ul>
+    </div>
+    <div class="questions-box" style="margin-bottom:12px"><div class="q-title">💬 Обобщение в Деня на дипломирането</div><ul>
+      <li>„Кое едно нещо научи за 6 седмици, което те изненада най-много?"</li>
+      <li>„Какво би строил следващото — сега когато знаеш как?"</li>
+      <li>„Кой беше най-трудният бъг, който поправи? Как го разбра?"</li>
+      <li>„Ако можеше да научиш приятел на ЕДНО нещо за ScratchJr, кое би то?"</li>
+    </ul></div>
+    <div class="success-bar">✅ Success: Детето представя завършен проект, с който се гордее и може да го обясни с думите си. Отпразнувайте! 🏆🎉</div>
+  </div>
+</div>
+
+</div><!-- container -->
+<footer class="site-footer">
+  <div class="footer-links">
+    <a href="../index-bg.html">Home</a>
+    <a href="curriculum-bg.html">Curriculum</a>
+    <a href="activity-cards-bg.html">Activity Cards</a>
+    <a href="lesson-scripts-bg.html">Lesson Scripts</a>
+    <a href="troubleshooting-bg.html">Troubleshooting</a>
+    <a href="checklist-bg.html">Progress Checklist</a>
+  </div>
+  <p>Направено с ❤️ за родители навсякъде · Free & Open Source · <a href="https://github.com" style="color:var(--yellow);">View on GitHub</a></p>
+</footer>
+<script>
+  document.getElementById('navToggle').addEventListener('click', () => {
+    document.getElementById('navLinks').classList.toggle('open');
+  });
+</script>
+</body>
+</html>
