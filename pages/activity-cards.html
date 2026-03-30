@@ -44,7 +44,7 @@
     border-radius: 24px;
     overflow: hidden;
     box-shadow: 0 8px 32px rgba(0,0,0,0.12);
-    background: white;
+    background: white !important;
     page-break-inside: avoid;
     break-inside: avoid;
     position: relative;
@@ -246,7 +246,8 @@
   @media (max-width: 700px) {
     .cards-grid { grid-template-columns: 1fr; }
   }
-<style>
+
+  /* ── LANG BAR ── */
   .lang-bar {
     background: #1C1917;
     margin: 0;
@@ -260,18 +261,8 @@
   .lang-btn { font-size:0.8rem; font-weight:700; padding:5px 14px; border-radius:8px; text-decoration:none; border:1.5px solid rgba(255,255,255,0.15); color:#D6D3D1; transition:background 0.15s,color 0.15s; }
   .lang-btn:hover { background:rgba(255,255,255,0.1); color:white; }
   .lang-btn.active { background:#FF6B35; border-color:#FF6B35; color:white; }
-  /* Nav link color fixes */
-  .nav-logo,.nav-logo:link,.nav-logo:visited { color:#FFD23F !important; -webkit-text-fill-color:#FFD23F !important; text-decoration:none !important; }
-  .nav-links a,.nav-links a:link,.nav-links a:visited { color:#D6D3D1 !important; -webkit-text-fill-color:#D6D3D1 !important; text-decoration:none !important; }
-  @media (max-width:700px) {
-    .nav-toggle { display:flex !important; background:transparent !important; border:none !important; -webkit-appearance:none; }
-    .nav-links { display:none !important; position:fixed !important; top:58px !important; left:0 !important; right:0 !important; z-index:9999 !important; background:#1C1917 !important; flex-direction:column !important; align-items:stretch !important; padding:8px 12px 16px !important; gap:2px !important; box-shadow:0 12px 32px rgba(0,0,0,0.7) !important; border-top:1px solid rgba(255,255,255,0.08) !important; }
-    .nav-links.open { display:flex !important; }
-    .nav-links a,.nav-links a:link,.nav-links a:visited { color:#FFFFFF !important; -webkit-text-fill-color:#FFFFFF !important; padding:13px 16px !important; font-size:0.95rem !important; border-radius:10px !important; }
-  }
-</style>
 
-  /* Week divider — forces clean grid break between weeks */
+  /* ── WEEK DIVIDER ── */
   .week-divider {
     grid-column: 1 / -1;
     display: flex;
@@ -279,13 +270,39 @@
     gap: 16px;
     padding: 8px 0;
     margin-top: 8px;
+    background: transparent;
   }
   .week-divider-line { flex: 1; height: 2px; background: #E8DCC8; border-radius: 2px; }
   .week-divider-label {
     font-family: 'Fredoka One', cursive;
     font-size: 1rem;
+    font-weight: 800;
     white-space: nowrap;
+    color: #44403C;
+    -webkit-text-fill-color: #44403C;
   }
+
+  /* ── NAV & MOBILE ── */
+  .nav-logo,.nav-logo:link,.nav-logo:visited { color:#FFD23F !important; -webkit-text-fill-color:#FFD23F !important; text-decoration:none !important; }
+  .nav-links a,.nav-links a:link,.nav-links a:visited { color:#D6D3D1 !important; -webkit-text-fill-color:#D6D3D1 !important; text-decoration:none !important; }
+  @media (max-width:700px) {
+    .nav-toggle { display:flex !important; background:transparent !important; border:none !important; -webkit-appearance:none; width:40px; height:40px; flex-direction:column; align-items:center; justify-content:center; gap:5px; }
+    .nav-toggle span { display:block; width:22px; height:2px; background:white !important; border-radius:2px; }
+    .nav-links { display:none !important; position:fixed !important; top:58px !important; left:0 !important; right:0 !important; z-index:9999 !important; background:#1C1917 !important; flex-direction:column !important; align-items:stretch !important; padding:8px 12px 16px !important; gap:2px !important; box-shadow:0 12px 32px rgba(0,0,0,0.7) !important; border-top:1px solid rgba(255,255,255,0.08) !important; }
+    .nav-links.open { display:flex !important; }
+    .nav-links a,.nav-links a:link,.nav-links a:visited { color:#FFFFFF !important; -webkit-text-fill-color:#FFFFFF !important; padding:13px 16px !important; font-size:0.95rem !important; border-radius:10px !important; }
+  }
+
+  /* ── FORCE LIGHT MODE ── */
+  body { background: #f5f0ff !important; color: #1C1917 !important; }
+  .card, .card-body, .done-row {
+    background: white !important;
+    color: #1C1917 !important;
+  }
+  .steps li { color: #333 !important; -webkit-text-fill-color: #333 !important; }
+  .done-label { color: #555555 !important; -webkit-text-fill-color: #555555 !important; }
+  .page-title { color: #4B1FA8 !important; -webkit-text-fill-color: #4B1FA8 !important; }
+  .page-subtitle { color: #888 !important; -webkit-text-fill-color: #888 !important; }
 </style>
 </head>
 <body>
@@ -296,8 +313,11 @@
     <li><a href="../index.html">🏠 Home</a></li>
     <li><a href="curriculum.html">📅 Curriculum</a></li>
     <li><a href="activity-cards.html" class="active">🧩 Activity Cards</a></li>
-    <li><a href="lesson-scripts.html">📋 Lesson Scripts</a></li>
-    <li><a href="troubleshooting.html">🔧 Troubleshooting</a></li>
+    <li><a href="lesson-scripts.html">📋 Scripts</a></li>
+    <li><a href="badges.html">🏅 Badges</a></li>
+    <li><a href="bonus-challenges.html">⚡ Bonus</a></li>
+    <li><a href="creative-expansions.html">🎨 Creative</a></li>
+    <li><a href="troubleshooting.html">🔧 Help</a></li>
     <li><a href="checklist.html">✅ Progress</a></li>
   </ul>
 </nav>
