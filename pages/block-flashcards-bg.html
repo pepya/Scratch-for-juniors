@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+  <meta charset="UTF-8">
+  <meta name="color-scheme" content="light">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Флашкарти за блокове — ScratchJr Приключение</title>
+  <meta name="description" content="Флашкарти за ScratchJr блокове за печат. Всеки блок обяснен на разбираем език — перфектни за деца да се изпитват или да ги ползват като справочник до таблета.">
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@700;800;900&family=Atkinson+Hyperlegible:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/site.css">
+  <style>
+    color-scheme: light only;
+    html,body { background:#FFFBF5 !important; color:#1C1917 !important; }
+
+    /* NAV */
+    .nav-logo,.nav-logo:link,.nav-logo:visited{color:#FFD23F !important;-webkit-text-fill-color:#FFD23F !important;text-decoration:none !important;}
+    .nav-links a,.nav-links a:link,.nav-links a:visited{color:#D6D3D1 !important;-webkit-text-fill-color:#D6D3D1 !important;text-decoration:none !important;}
+    @media(max-width:700px){
+      .nav-toggle{display:flex !important;background:transparent !important;border:none !important;-webkit-appearance:none;width:40px;height:40px;flex-direction:column;align-items:center;justify-content:center;gap:5px;}
+      .nav-toggle span{display:block;width:22px;height:2px;background:white !important;border-radius:2px;}
+      .nav-links{display:none !important;position:fixed !important;top:58px !important;left:0 !important;right:0 !important;z-index:9999 !important;background:#1C1917 !important;flex-direction:column !important;align-items:stretch !important;padding:8px 12px 16px !important;gap:2px !important;box-shadow:0 12px 32px rgba(0,0,0,.7) !important;border-top:1px solid rgba(255,255,255,.08) !important;}
+      .nav-links.open{display:flex !important;}
+      .nav-links a{color:#fff !important;-webkit-text-fill-color:#fff !important;padding:13px 16px !important;font-size:.95rem !important;border-radius:10px !important;}
+    }
+
+    /* LANG BAR */
+    .lang-bar{background:#292524;padding:8px 24px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;border-bottom:1px solid rgba(255,255,255,.06);}
+    .lang-bar span{font-size:.72rem;font-weight:700;color:#A8A29E;text-transform:uppercase;letter-spacing:.1em;}
+    .lang-btn{font-size:.8rem;font-weight:700;padding:4px 12px;border-radius:8px;text-decoration:none;border:1.5px solid rgba(255,255,255,.2);color:#D6D3D1 !important;-webkit-text-fill-color:#D6D3D1 !important;}
+    .lang-btn.active{background:#FF6B35;border-color:#FF6B35;color:white !important;-webkit-text-fill-color:white !important;}
+
+    /* HERO */
+    .hero{background:#1C1917;padding:52px 24px 44px;text-align:center;position:relative;overflow:hidden;}
+    .hero::before{content:'';position:absolute;inset:0;pointer-events:none;
+      background:radial-gradient(ellipse 60% 70% at 20% 80%,rgba(37,99,235,.15) 0%,transparent 60%),
+                 radial-gradient(ellipse 60% 70% at 80% 20%,rgba(124,58,237,.15) 0%,transparent 60%);}
+    .hero-eye{font-size:.72rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#FF6B35;margin-bottom:12px;position:relative;}
+    .hero h1{font-family:'Fredoka One',cursive;font-size:clamp(1.9rem,5vw,3.2rem);color:white;margin-bottom:12px;position:relative;line-height:1.1;}
+    .hero h1 em{font-style:normal;background:linear-gradient(135deg,#FFD23F,#FF6B35);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+    .hero-sub{color:#A8A29E;font-size:.95rem;font-weight:600;max-width:520px;margin:0 auto 28px;line-height:1.7;position:relative;}
+    .hero-pills{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;position:relative;}
+    .hero-pill{font-size:.78rem;font-weight:700;padding:5px 14px;border-radius:50px;border:1.5px solid rgba(255,255,255,.15);color:#D6D3D1;}
+
+    /* PRINT BUTTON */
+    .print-row{display:flex;align-items:center;gap:12px;flex-wrap:wrap;max-width:1080px;margin:28px auto 0;padding:0 24px;}
+    .btn-print{font-family:'Fredoka One',cursive;font-size:.95rem;background:linear-gradient(135deg,#FF6B35,#FF3D77);color:white !important;-webkit-text-fill-color:white !important;padding:11px 26px;border-radius:12px;text-decoration:none;border:none;cursor:pointer;display:inline-flex;align-items:center;gap:7px;transition:transform .15s,box-shadow .15s;}
+    .btn-print:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(255,107,53,.4);}
+    .print-note{font-size:.8rem;font-weight:600;color:#78716C;}
+
+    /* FILTER */
+    .filter-bar{max-width:1080px;margin:28px auto 0;padding:0 24px;display:flex;gap:8px;flex-wrap:wrap;align-items:center;}
+    .filter-label{font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:.12em;color:#78716C;margin-right:4px;}
+    .filter-btn{font-size:.78rem;font-weight:700;padding:6px 16px;border-radius:50px;border:1.5px solid #E8DCC8;background:white;color:#44403C !important;-webkit-text-fill-color:#44403C !important;cursor:pointer;transition:all .15s;}
+    .filter-btn.active{color:white !important;-webkit-text-fill-color:white !important;border-color:transparent;}
+    .filter-btn[data-cat="all"].active{background:#1C1917;}
+    .filter-btn[data-cat="trigger"].active{background:#D97706;}
+    .filter-btn[data-cat="motion"].active{background:#2563EB;}
+    .filter-btn[data-cat="looks"].active{background:#7C3AED;}
+    .filter-btn[data-cat="sound"].active{background:#16A34A;}
+    .filter-btn[data-cat="control"].active{background:#EA580C;}
+    .filter-btn[data-cat="end"].active{background:#DC2626;}
+
+    /* MAIN */
+    .main{max-width:1080px;margin:0 auto;padding:32px 24px 80px;}
+
+    /* CATEGORY HEADER */
+    .cat-header{display:flex;align-items:center;gap:14px;margin:36px 0 16px;}
+    .cat-dot{width:14px;height:14px;border-radius:50%;flex-shrink:0;}
+    .cat-title{font-family:'Fredoka One',cursive;font-size:1.4rem;}
+    .cat-desc{font-size:.84rem;font-weight:600;color:#78716C;margin-left:auto;text-align:right;}
+    .cat-header.hidden{display:none;}
+
+    /* GRID */
+    .cards-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px;margin-bottom:8px;}
+
+    /* FLASHCARD */
+    .fc{background:white;border-radius:20px;overflow:hidden;border:2px solid #E8DCC8;box-shadow:0 3px 14px rgba(0,0,0,.06);transition:transform .2s,box-shadow .2s;page-break-inside:avoid;break-inside:avoid;}
+    .fc:hover{transform:translateY(-4px);box-shadow:0 12px 36px rgba(0,0,0,.11);}
+    .fc.hidden{display:none;}
+
+    /* BLOCK PREVIEW — CSS-drawn block shape */
+    .fc-preview{height:100px;display:flex;align-items:center;justify-content:center;position:relative;padding:16px;}
+
+    /* Puzzle-piece block shape */
+    .block-shape{
+      display:inline-flex;align-items:center;justify-content:center;gap:6px;
+      padding:10px 16px 10px 20px;
+      border-radius:8px;
+      position:relative;
+      min-width:120px;
+      font-family:'Fredoka One',cursive;
+      font-size:1rem;
+      color:white;
+      box-shadow:0 4px 12px rgba(0,0,0,.2);
+      letter-spacing:.01em;
+    }
+    /* Left tab (connector nub) */
+    .block-shape::before{
+      content:'';
+      position:absolute;
+      left:-10px;top:50%;transform:translateY(-50%);
+      width:10px;height:20px;
+      border-radius:4px 0 0 4px;
+      background:inherit;
+      filter:brightness(.85);
+    }
+    /* Right slot (receives next block) */
+    .block-shape.has-slot::after{
+      content:'';
+      position:absolute;
+      right:-10px;top:50%;transform:translateY(-50%);
+      width:10px;height:16px;
+      background:rgba(0,0,0,.2);
+      border-radius:0 4px 4px 0;
+    }
+    /* Trigger blocks — no left tab, rounded left */
+    .block-shape.trigger-shape::before{display:none;}
+    .block-shape.trigger-shape{border-radius:50px 8px 8px 50px;padding-left:22px;}
+
+    /* End block — no right slot, rounded right */
+    .block-shape.end-shape::after{display:none;}
+    .block-shape.end-shape{border-radius:8px 50px 50px 8px;padding-right:22px;}
+
+    /* Number input inside block */
+    .block-num{
+      background:rgba(255,255,255,.3);
+      border-radius:4px;
+      width:22px;height:22px;
+      display:flex;align-items:center;justify-content:center;
+      font-size:.75rem;font-weight:900;color:white;
+      flex-shrink:0;
+    }
+
+    /* BODY */
+    .fc-body{padding:14px 16px 16px;}
+    .fc-name{font-family:'Fredoka One',cursive;font-size:1.05rem;margin-bottom:5px;line-height:1.1;}
+    .fc-what{font-size:.82rem;font-weight:700;color:#1C1917 !important;-webkit-text-fill-color:#1C1917 !important;line-height:1.5;margin-bottom:9px;}
+    .fc-example{font-size:.75rem;font-weight:700;color:#78716C;line-height:1.4;display:flex;gap:6px;align-items:flex-start;}
+    .fc-example-icon{font-size:.9rem;flex-shrink:0;}
+    .fc-tip{font-size:.72rem;font-weight:700;background:#FAFAF8;border-left:3px solid #E8DCC8;padding:5px 8px;border-radius:0 6px 6px 0;color:#44403C !important;-webkit-text-fill-color:#44403C !important;margin-top:8px;line-height:1.4;}
+
+    /* COLOUR FAMILIES */
+    .c-trigger{background:#D97706;} .c-trigger-bg{background:#FEF3C7;}
+    .c-motion{background:#2563EB;} .c-motion-bg{background:#EFF6FF;}
+    .c-looks{background:#7C3AED;} .c-looks-bg{background:#FAF5FF;}
+    .c-sound{background:#16A34A;} .c-sound-bg{background:#F0FDF4;}
+    .c-control{background:#EA580C;} .c-control-bg{background:#FFF7ED;}
+    .c-end{background:#DC2626;} .c-end-bg{background:#FEF2F2;}
+
+    .fc-name.c-trigger-text{color:#92400E !important;-webkit-text-fill-color:#92400E !important;}
+    .fc-name.c-motion-text{color:#1E40AF !important;-webkit-text-fill-color:#1E40AF !important;}
+    .fc-name.c-looks-text{color:#4C1D95 !important;-webkit-text-fill-color:#4C1D95 !important;}
+    .fc-name.c-sound-text{color:#14532D !important;-webkit-text-fill-color:#14532D !important;}
+    .fc-name.c-control-text{color:#7C2D12 !important;-webkit-text-fill-color:#7C2D12 !important;}
+    .fc-name.c-end-text{color:#7F1D1D !important;-webkit-text-fill-color:#7F1D1D !important;}
+
+    .fc-tip.c-trigger-tip{border-left-color:#D97706;}
+    .fc-tip.c-motion-tip{border-left-color:#2563EB;}
+    .fc-tip.c-looks-tip{border-left-color:#7C3AED;}
+    .fc-tip.c-sound-tip{border-left-color:#16A34A;}
+    .fc-tip.c-control-tip{border-left-color:#EA580C;}
+    .fc-tip.c-end-tip{border-left-color:#DC2626;}
+
+    /* HOW TO USE BOX */
+    .how-box{background:white;border:1.5px solid #E8DCC8;border-radius:16px;padding:20px 24px;display:flex;gap:20px;flex-wrap:wrap;margin:28px 24px 0;max-width:1080px;}
+    .how-item{display:flex;gap:10px;align-items:flex-start;flex:1;min-width:180px;}
+    .how-icon{font-size:1.3rem;flex-shrink:0;margin-top:1px;}
+    .how-text strong{display:block;font-size:.88rem;color:#1C1917;margin-bottom:2px;}
+    .how-text span{font-size:.78rem;color:#78716C;font-weight:600;line-height:1.45;}
+
+    /* PRINT */
+    @media print{
+      .hero,.lang-bar,.print-row,.filter-bar,.how-box,.site-nav,.site-footer,.cat-desc{display:none !important;}
+      body{background:white !important;padding:0;}
+      .main{padding:8px;}
+      .cat-header{margin:20px 0 10px;page-break-after:avoid;}
+      .cards-grid{grid-template-columns:repeat(3,1fr);gap:10px;}
+      .fc{box-shadow:none;border:1.5px solid #ddd;}
+      .fc.hidden{display:none !important;}
+    }
+    @media(max-width:500px){.cards-grid{grid-template-columns:1fr 1fr;}}
+    @media(max-width:360px){.cards-grid{grid-template-columns:1fr;}}
+
+    * { font-style: normal !important; }
+    .fc-name, .cat-title, .filter-btn, .filter-label { font-style: normal !important; }
+  </style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <a href="../index-bg.html" class="nav-logo">🐱 ScratchJr Adventure</a>
+  <button class="nav-toggle" id="navToggle" aria-label="Menu"><span></span><span></span><span></span></button>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="../index-bg.html">🏠 Начало</a></li>
+    <li><a href="curriculum-bg.html">📅 Програма</a></li>
+    <li><a href="activity-cards-bg.html">🧩 Карти</a></li>
+    <li><a href="project-gallery-bg.html">🎨 Галерия</a></li>
+    <li><a href="block-flashcards-bg.html" class="active">🃏 Флашкарти</a></li>
+    <li><a href="badges-bg.html">🏅 Значки</a></li>
+    <li><a href="whats-next-bg.html">🚀 Следващо</a></li>
+    <li><a href="troubleshooting-bg.html">🔧 Помощ</a></li>
+  </ul>
+</nav>
+
+<div class="lang-bar">
+  <span>🌍 Език:</span>
+  <a href="block-flashcards-bg.html" class="lang-btn">🇬🇧 English</a>
+  <a href="block-flashcards-bg.html" class="lang-btn active">🇧🇬 Български</a>
+</div>
+
+<div class="hero">
+  <div class="hero-eye">🃏 Справочни карти за деца</div>
+  <h1>Флашкарти за <em>блокове</em></h1>
+  <p class="hero-sub">Всеки ScratchJr блок — неговото име, цвят и точно какво прави — на разбираем език. Отпечатай, изрежи и дръж до таблета.</p>
+  <div class="hero-pills">
+    <span class="hero-pill">🟡 Trigger Blocks</span>
+    <span class="hero-pill">🔵 Motion Blocks</span>
+    <span class="hero-pill">🟣 Looks Blocks</span>
+    <span class="hero-pill">🟢 Sound Blocks</span>
+    <span class="hero-pill">🟠 Control Blocks</span>
+    <span class="hero-pill">🔴 End Blocks</span>
+  </div>
+</div>
+
+<div class="how-box" style="margin-left:auto;margin-right:auto;">
+  <div class="how-item"><span class="how-icon">✂️</span><div class="how-text"><strong>Отпечатай и изрежи</strong><span>Отпечатай страницата, изрежи по границите на всяка карта. Работи и в черно-бяло.</span></div></div>
+  <div class="how-item"><span class="how-icon">📚</span><div class="how-text"><strong>Справочен стек</strong><span>Дръж картите наредени до таблета. Вземи правилния цвят когато си затруднен.</span></div></div>
+  <div class="how-item"><span class="how-icon">🎮</span><div class="how-text"><strong>Игра с викторина</strong><span>Един избира карта и мимира ефекта на блока — другият познава името!</span></div></div>
+  <div class="how-item"><span class="how-icon">🗂️</span><div class="how-text"><strong>Сортирай по цвят</strong><span>Групирай картите по цвят — Сини за движение, Лилави за вид, Зелени за звук…</span></div></div>
+</div>
+
+<div class="print-row">
+  <button class="btn-print" onclick="window.print()">🖨️ Отпечатай всички флашкарти</button>
+  <span class="print-note">28 карти · 6 цветни групи · Отпечатай на А4, изрежи по границите</span>
+</div>
+
+<div class="filter-bar">
+  <span class="filter-label">Покажи:<span>
+  <button class="filter-btn active" data-cat="all">Всички блокове</button>
+  <button class="filter-btn" data-cat="trigger">🟡 Trigger</button>
+  <button class="filter-btn" data-cat="motion">🔵 Motion</button>
+  <button class="filter-btn" data-cat="looks">🟣 Looks</button>
+  <button class="filter-btn" data-cat="sound">🟢 Sound</button>
+  <button class="filter-btn" data-cat="control">🟠 Control</button>
+  <button class="filter-btn" data-cat="end">🔴 End</button>
+</div>
+
+<div class="main">
+
+<!-- ══════════════════════════════════════════
+     🟡 TRIGGER BLOCKS
+══════════════════════════════════════════ -->
+<div class="cat-header" id="cat-trigger">
+  <div class="cat-dot c-trigger"></div>
+  <div class="cat-title" style="color:#92400E;">Trigger Blocks</div>
+  <div class="cat-desc">Жълти · Отиват в НАЧАЛОТО на всеки скрипт · Те карат нещата да започват</div>
+</div>
+<div class="cards-grid">
+
+  <div class="fc" data-cat="trigger">
+    <div class="fc-preview c-trigger-bg">
+      <div class="block-shape c-trigger trigger-shape has-slot">
+        <span>▶</span> Green Flag
+      </div>
+    </div>
+    <div class="fc-body">
+      <div class="fc-name c-trigger-text">Green Flag</div>
+      <div class="fc-what">Стартира скрипта когато е натиснат големия зелен флаг. Това е главният бутон „Старт" за целия проект.</div>
+      <div class="fc-example"><span class="fc-example-icon">💡</span><span>Постави го в началото на всеки скрипт, който искаш да тръгне при натискане на Старт.</span></div>
+      <div class="fc-tip c-trigger-tip">Всеки скрипт ТРЯБВА да започва с тригер блок. Без тригер = нищо не се случва!</div>
+    </div>
+  </div>
+
+  <div class="fc" data-cat="trigger">
+    <div class="fc-preview c-trigger-bg">
+      <div class="block-shape c-trigger trigger-shape has-slot">
+        <span>👆</span> Tap
+      </div>
+    </div>
+    <div class="fc-body">
+      <div class="fc-name c-trigger-text">Tap (Character)</div>
+      <div class="fc-what">Стартира скрипта когато докоснеш конкретния герой на екрана с пръст.</div>
+      <div class="fc-example"><span class="fc-example-icon">💡</span><span>Докосни кучето → лае. Докосни звездата → изчезва. Всеки герой може да има свой скрипт с докосване!</span></div>
+      <div class="fc-tip c-trigger-tip">Един герой може да има И скрипт с Green Flag, И скрипт с Tap — те работят независимо.</div>
+    </div>
+  </div>
+
+  <div class="fc" data-cat="trigger">
+    <div class="fc-preview c-trigger-bg">
+      <div class="block-shape c-trigger trigger-shape has-slot">
+        <span>📩</span> Receive
+      </div>
+    </div>
+    <div class="fc-body">
+      <div class="fc-name c-trigger-text">Receive Message</div>
+      <div class="fc-what">Стартира скрипта когато пристигне съобщение от съответния цвят. Чака безмълвно докато не бъде изпратен правилният цвят от друг герой.</div>
+      <div class="fc-example"><span class="fc-example-icon">💡</span><span>Герой А изпраща червено съобщение → Receive блокът на Герой Б задейства и той тръгва.</span></div>
+      <div class="fc-tip c-trigger-tip">Цветовете на Send и Receive ТРЯБВА да съвпадат точно. Различен цвят = нищо не се случва.</div>
+    </div>
+  </div>
+
+  <div class="fc" data-cat="trigger">
+    <div class="fc-preview c-trigger-bg">
+      <div class="block-shape c-trigger trigger-shape has-slot">
+        <span>📳</span> Bump
+      </div>
+    </div>
+    <div class="fc-body">
+      <div class="fc-name c-trigger-text">Bump (Shake)</div>
+      <div class="fc-what">Стартира скрипта когато устройството е разклатено или ударено. Забавен изненадващ тригер!</div>
+      <div class="fc-example"><span class="fc-example-icon">💡</span><span>Разклати таблета → земетресение на екрана → героите летят във всички посоки!</span></div>
+      <div class="fc-tip c-trigger-tip">Работи най-добре на реални таблети/телефони. Чудесно за тайни ефекти, изненадващи по-малките деца.</div>
+    </div>
+  </div>
+
+</div><!-- end trigger grid -->
+
+
+<!-- ══════════════════════════════════════════
+     🔵 MOTION BLOCKS
+══════════════════════════════════════════ -->
+<div class="cat-header" id="cat-motion">
+  <div class="cat-dot c-motion"></div>
+  <div class="cat-title" style="color:#1E40AF;">Motion Blocks</div>
+  <div class="cat-desc">Сини · Движат героите по сцената</div>
+</div>
+<div class="cards-grid">
+
+  <div class="fc" data-cat="motion">
+    <div class="fc-preview c-motion-bg">
+      <div class="block-shape c-motion has-slot">
+        <span>→</span> Move Right <div class="block-num">1</div>
+      </div>
+    </div>
+    <div class="fc-body">
+      <div class="fc-name c-motion-text">Move Right</div>
+      <div class="fc-what">Движи героя надясно с броя стъпки, показан в блока. Числото в кутийката контролира разстоянието — по-голямо число = по-далеч.</div>
+      <div class="fc-example"><span class="fc-example-icon">💡</span><span>Число 1 = малка крачка. Число 10 = голям скок през целия екран.</span></div>
+      <div class="fc-tip c-motion-tip">Докосни числото вътре в блока за да го промениш. Свържи няколко блока за да изминеш по-голямо разстояние!</div>
+    </div>
+  </div>
+
+  <div class="fc" data-cat="motion">
+    <div class="fc-preview c-motion-bg">
+      <div class="block-shape c-motion has-slot">
+        <span>←</span> Move Left <div class="block-num">1</div>
+      </div>
+    </div>
+    <div class="fc-body">
+      <div class="fc-name c-motion-text">Move Left</div>
+      <div class="fc-what">Движи героя наляво. Същото като Move Right, но в обратна посока.</div>
+      <div class="fc-example"><span class="fc-example-icon">💡</span><span>Надясно след наляво кара героя да крачи напред-назад.</span></div>
+      <div class="fc-tip c-motion-tip">Героите гледат в същата посока при движение наляво — не се обръщат автоматично.</div>
+    </div>
+  </div>
+
+  <div class="fc" data-cat="motion">
+    <div class="fc-preview c-motion-bg">
+      <div class="block-shape c-motion has-slot">
+        <span>↑</span> Move Up <div class="block-num">1</div>
+      </div>
+    </div>
+    <div class="fc-body">
+      <div class="fc-name c-motion-text">Move Up</div>
+      <div class="fc-what">Движи героя нагоре по екрана. Използвай го за летене, подскачане или плуване нагоре.</div>
+      <div class="fc-example"><span class="fc-example-icon">💡</span><span>Move Up + Move Down = отскачаща топка или подскачащ герой.</span></div>
+      <div class="fc-tip c-motion-tip">Комбинирай с Move Right за диагонално движение — героите могат да се движат по диагонал!</div>
+    </div>
+  </div>
+
+  <div class="fc" data-cat="motion">
+    <div class="fc-preview c-motion-bg">
+      <div class="block-shape c-motion has-slot">
+        <span>↓</span> Move Down <div class="block-num">1</div>
+      </div>
+    </div>
+    <div class="fc-body">
+      <div class="fc-name c-motion-text">Move Down</div>
+      <div class="fc-what">Движи героя надолу по екрана. За падане, потъване или ходене надолу по склон.</div>
+      <div class="fc-example"><span class="fc-example-icon">💡</span><span>Направи дъжд с няколко малки героя, използвайки Move Down в цикъл.</span></div>
+      <div class="fc-tip c-motion-tip">Героите могат да излязат под долния ръб на екрана и да „изчезнат" — полезно за излизания!</div>
+    </div>
+  </div>
+
+  <div class="fc" data-cat="motion">
+    <div class="fc-preview c-motion-bg">
+      <div class="block-shape c-motion has-slot">
+        <span>↩️</span> Turn Right <div class="block-num">1</div>
+      </div>
+    </div>
+    <div class="fc-body">
+      <div class="fc-name c-motion-text">Turn Right</div>
+      <div class="fc-what">Върти героя по посока на часовниковата стрелка. Числото контролира колко завъртания — 1 завъртане = малко, 12 завъртания = пълни 360°.</div>
+      <div class="fc-example"><span class="fc-example-icon">💡</span><span>Turn Right 6 = половин оборот. Turn Right 12 = пълен оборот. Чудесно за колела и перки!</span></div>
+      <div class="fc-tip c-motion-tip">Вътре в цикъл, дори малко завъртане създава анимация на въртене.</div>
+    </div>
+  </div>
+
+  <div class="fc" data-cat="motion">
+    <div class="fc-preview c-motion-bg">
+      <div class="block-shape c-motion has-slot">
+        <span>↪️</span> Turn Left <div class="block-num">1</div>
+      </div>
+    </div>
+    <div class="fc-body">
+      <div class="fc-name c-motion-text">Turn Left</div>
+      <div class="fc-what">Върти героя обратно на часовниковата стрелка. Обратното на Turn Right.</div>
+      <div class="fc-example"><span class="fc-example-icon">💡</span><span>Turn Right след Turn Left в цикъл = люлеещ се танц!</span></div>
+      <div class="fc-tip c-motion-tip">Редуването на Turn Right и Turn Left създава ефект на клатене — перфектно за уплашен герой!</div>
+    </div>
+  </div>
+
+  <div class="fc" data-cat="motion">
+    <div class="fc-preview c-motion-bg">
+      <div class="block-shape c-motion has-slot">
+        <span>🏠</span> Go Home
+      </div>
+    </div>
+    <div class="fc-body">
+      <div class="fc-name c-motion-text">Go Home</div>
+      <div class="fc-what">Незабавно телепортира героя обратно на началното му място — „домашната" му позиция на сцената.</div>
+      <div class="fc-example"><span class="fc-example-icon">💡</span><span>В края на игра, Go Home връща всеки герой на началната му позиция за да може играта да се играе отново.</span></div>
+      <div class="fc-tip c-motion-tip">Домът на героя е там, където си го поставил когато си го добавил. Можеш да го преместиш за да зададеш нов дом.</div>
+    </div>
+  </div>
+
+  <div class="fc" data-cat="motion">
+    <div class="fc-preview c-motion-bg">
+      <div class="block-shape c-motion has-slot">
+        <span>💨</span> Hop
+      </div>
+    </div>
+    <div class="fc-body">
+      <div class="fc-name c-motion-text">Hop</div>
+      <div class="fc-what">Кара героя да скочи напред с малка дъга — като подскок! Движи се нагоре и после се връща надолу с плавно движение.</div>
+      <div class="fc-example"><span class="fc-example-icon">💡</span><span>Перфектно за скачаща жаба, подскачащ заек или скиплащ човек.</span></div>
+      <div class="fc-tip c-motion-tip">Hop винаги върви в посоката, в която героят гледа. Завъртай първо за да контролираш посоката на подскока.</div>
+    </div>
+  </div>
+
+</div><!-- end motion grid -->
+
+
+<!-- ══════════════════════════════════════════
+     🟣 LOOKS BLOCKS
+══════════════════════════════════════════ -->
+<div class="cat-header" id="cat-looks">
+  <div class="cat-dot c-looks"></div>
+  <div class="cat-title" style="color:#4C1D95;">Looks Blocks</div>
+  <div class="cat-desc">Лилави · Променят как изглеждат героите</div>
+</div>
+<div class="cards-grid">
+
+  <div class="fc" data-cat="looks">
+    <div class="fc-preview c-looks-bg">
+      <div class="block-shape c-looks has-slot">
+        <span>💬</span> Say
+      </div>
+    </div>
+    <div class="fc-body">
+      <div class="fc-name c-looks-text">Say</div>
+      <div class="fc-what">Показва говорен балон с текст над героя. Докосни блока за да напишеш какво искаш героят да каже.</div>
+      <div class="fc-example"><span class="fc-example-icon">💡</span><span>Напиши „Здравей!" и героят ще покаже говорен балон с Здравей! за момент.</span></div>
+      <div class="fc-tip c-looks-tip">Балонът се появява за кратко. Използвай блок Wait след Say за да дадеш на хората време да го прочетат.</div>
+    </div>
+  </div>
+
+  <div class="fc" data-cat="looks">
+    <div class="fc-preview c-looks-bg">
+      <div class="block-shape c-looks has-slot">
+        <span>📈</span> Grow
+      </div>
+    </div>
+    <div class="fc-body">
+      <div class="fc-name c-looks-text">Grow</div>
+      <div class="fc-what">Уголемява героя с една стъпка. Всеки Grow блок добавя по една стъпка размер.</div>
+      <div class="fc-example"><span class="fc-example-icon">💡</span><span>Свържи 5 Grow блока поред за да накараш героя да порасне драматично голям!</span></div>
+      <div class="fc-tip c-looks-tip">Grow вътре в цикъл създава непрекъсната анимация на растеж. Комбинирай с Shrink за пулсиращ ефект.</div>
+    </div>
+  </div>
+
+  <div class="fc" data-cat="looks">
+    <div class="fc-preview c-looks-bg">
+      <div class="block-shape c-looks has-slot">
+        <span>📉</span> Shrink
+      </div>
+    </div>
+    <div class="fc-body">
+      <div class="fc-name c-looks-text">Shrink</div>
+      <div class="fc-what">Смалява героя с една стъпка. Обратното на Grow.</div>
+      <div class="fc-example"><span class="fc-example-icon">💡</span><span>Shrink + Grow + Shrink + Grow в цикъл = пулсираща анимация на сърдечен ритъм!</span></div>
+      <div class="fc-tip c-looks-tip">Героят може да се смали докато напълно изчезне — чудесно за ефект „пуф, изчезна!".</div>
+    </div>
+  </div>
+
+  <div class="fc" data-cat="looks">
+    <div class="fc-preview c-looks-bg">
+      <div class="block-shape c-looks has-slot">
+        <span>🙈</span> Hide
+      </div>
+    </div>
+    <div class="fc-body">
+      <div class="fc-name c-looks-text">Hide</div>
+      <div class="fc-what">Прави героя невидим — изчезва от екрана, но все още е там. Може да се появи отново с блок Show.</div>
+      <div class="fc-example"><span class="fc-example-icon">💡</span><span>Скрий звезда в началото → когато е „хваната" тя се скрива → изглежда като че е събрана!</span></div>
+      <div class="fc-tip c-looks-tip">Скриптовете на скрит герой все още работят! Той може да изпраща съобщения и да реагира — просто не го виждаш.</div>
+    </div>
+  </div>
+
+  <div class="fc" data-cat="looks">
+    <div class="fc-preview c-looks-bg">
+      <div class="block-shape c-looks has-slot">
+        <span>👁️</span> Show
+      </div>
+    </div>
+    <div class="fc-body">
+      <div class="fc-name c-looks-text">Show</div>
+      <div class="fc-what">Прави скрит герой отново видим. Като магия — появява се от нищото!</div>
+      <div class="fc-example"><span class="fc-example-icon">💡</span><span>Започни с герой скрит → накарай го да се появи с Show когато пристигне съобщение → изненадващо разкритие!</span></div>
+      <div class="fc-tip c-looks-tip">Hide + Show в безкраен цикъл = мигаща, примигваща анимация. Чудесно за аларми и светлини!</div>
+    </div>
+  </div>
+
+  <div class="fc" data-cat="looks">
+    <div class="fc-preview c-looks-bg">
+      <div class="block-shape c-looks has-slot">
+        <span>🔄</span> Reset Size
+      </div>
+    </div>
+    <div class="fc-body">
+      <div class="fc-name c-looks-text">Reset Size</div>
+      <div class="fc-what">Връща героя незабавно на оригиналния му размер — без значение колко голям или малък е станал.</div>
+      <div class="fc-example"><span class="fc-example-icon">💡</span><span>След порастване до огромен за драматичен ефект, Reset Size го връща мигновено към нормален.</span></div>
+      <div class="fc-tip c-looks-tip">Чудесно в началото на последователност за „играй отново" за възстановяване на всичко до началното му състояние.</div>
+    </div>
+  </div>
+
+</div><!-- end looks grid -->
+
+
+<!-- ══════════════════════════════════════════
+     🟢 SOUND BLOCKS
+══════════════════════════════════════════ -->
+<div class="cat-header" id="cat-sound">
+  <div class="cat-dot c-sound"></div>
+  <div class="cat-title" style="color:#14532D;">Sound Blocks</div>
+  <div class="cat-desc">Зелени · Добавят звуци, музика и глас</div>
+</div>
+<div class="cards-grid">
+
+  <div class="fc" data-cat="sound">
+    <div class="fc-preview c-sound-bg">
+      <div class="block-shape c-sound has-slot">
+        <span>🎵</span> Play Sound
+      </div>
+    </div>
+    <div class="fc-body">
+      <div class="fc-name c-sound-text">Play Sound</div>
+      <div class="fc-what">Пуска звуков ефект от библиотеката на ScratchJr — неща като „поп!", „мяу", „бам" и още. Докосни блока за да избереш звук.</div>
+      <div class="fc-example"><span class="fc-example-icon">💡</span><span>Докосни герой → пуска звук „бам" → усеща се като реален бутон в приложение!</span></div>
+      <div class="fc-tip c-sound-tip">Скриптът продължава докато звукът се пуска. Използвай блок Wait ако искаш следващото действие да се случи СЛЕД края на звука.</div>
+    </div>
+  </div>
+
+  <div class="fc" data-cat="sound">
+    <div class="fc-preview c-sound-bg">
+      <div class="block-shape c-sound has-slot">
+        <span>🎤</span> Record
+      </div>
+    </div>
+    <div class="fc-body">
+      <div class="fc-name c-sound-text">Record (Voice)</div>
+      <div class="fc-what">Записва твоя глас или всякакъв звук с микрофона на устройството и го запазва в блока. Пуска записа когато скриптът тръгне.</div>
+      <div class="fc-example"><span class="fc-example-icon">💡</span><span>Запиши „3… 2… 1… Старт!" → прикрепи към ракетен герой → той разказва собственото си изстрелване!</span></div>
+      <div class="fc-tip c-sound-tip">Записвай в тиха стая и говори ясно. Всеки блок може да съдържа един уникален запис.</div>
+    </div>
+  </div>
+
+  <div class="fc" data-cat="sound">
+    <div class="fc-preview c-sound-bg">
+      <div class="block-shape c-sound has-slot">
+        <span>🔇</span> Stop Sound
+      </div>
+    </div>
+    <div class="fc-body">
+      <div class="fc-name c-sound-text">Stop Sound</div>
+      <div class="fc-what">Спира всеки звук, който в момента се пуска. Полезно за рязко прекъсване на звук преди естественото му завършване.</div>
+      <div class="fc-example"><span class="fc-example-icon">💡</span><span>Музика в цикъл → докосни герой-бутон → Stop Sound изрязва музиката рязко за драматичен ефект.</span></div>
+      <div class="fc-tip c-sound-tip">Спира ВСИЧКИ звуци — не само от същия герой. Добре за нулиране или момент „game over".</div>
+    </div>
+  </div>
+
+  <div class="fc" data-cat="sound">
+    <div class="fc-preview c-sound-bg">
+      <div class="block-shape c-sound has-slot">
+        <span>🎹</span> Play Note
+      </div>
+    </div>
+    <div class="fc-body">
+      <div class="fc-name c-sound-text">Play Note</div>
+      <div class="fc-what">Пуска музикална нота. Докосни блока за да избереш височина на тона. Свържи различни ноти за да създадеш мелодия.</div>
+      <div class="fc-example"><span class="fc-example-icon">💡</span><span>Свържи 8 ноти поред за да изсвириш „Честит рожден ден" — всеки блок е по една нота от песента.</span></div>
+      <div class="fc-tip c-sound-tip">Направи инструмент с докосване, като дадеш на всеки герой различна нота. Докосвай ги по ред за да свириш мелодия!</div>
+    </div>
+  </div>
+
+</div><!-- end sound grid -->
+
+
+<!-- ══════════════════════════════════════════
+     🟠 CONTROL BLOCKS
+══════════════════════════════════════════ -->
+<div class="cat-header" id="cat-control">
+  <div class="cat-dot c-control"></div>
+  <div class="cat-title" style="color:#7C2D12;">Control Blocks</div>
+  <div class="cat-desc">Оранжеви · Контролират времето, повторенията и съобщенията</div>
+</div>
+<div class="cards-grid">
+
+  <div class="fc" data-cat="control">
+    <div class="fc-preview c-control-bg">
+      <div class="block-shape c-control has-slot">
+        <span>⏳</span> Wait <div class="block-num">1</div>
+      </div>
+    </div>
+    <div class="fc-body">
+      <div class="fc-name c-control-text">Wait</div>
+      <div class="fc-what">Прави пауза в скрипта за определен брой секунди преди да продължи към следващия блок. Контролира синхронизацията на анимацията.</div>
+      <div class="fc-example"><span class="fc-example-icon">💡</span><span>Say „Готов?" → Wait 2 → Say „СТАРТ!" — паузата кара обратното броене да се усеща реално.</span></div>
+      <div class="fc-tip c-control-tip">Wait 1 = пауза от 1 секунда. Експериментирай — различните времена за чакане създават напълно различни настроения!</div>
+    </div>
+  </div>
+
+  <div class="fc" data-cat="control">
+    <div class="fc-preview c-control-bg" style="align-items:center;justify-content:center;gap:0;">
+      <div style="display:flex;flex-direction:column;align-items:flex-start;gap:2px;">
+        <div class="block-shape c-control" style="border-radius:8px 8px 0 0;min-width:100px;padding-right:8px;">
+          <span>🔁</span> Repeat <div class="block-num">2</div>
+        </div>
+        <div style="border-left:4px solid #EA580C;margin-left:12px;padding:4px 8px;background:#FFEDD5;border-radius:0 4px 4px 0;font-size:.65rem;font-weight:800;color:#7C2D12;width:90px;">→ blocks inside</div>
+        <div class="block-shape c-control" style="border-radius:0 0 8px 8px;min-width:100px;font-size:.7rem;padding:6px 12px;">end repeat</div>
+      </div>
+    </div>
+    <div class="fc-body">
+      <div class="fc-name c-control-text">Repeat</div>
+      <div class="fc-what">Изпълнява блоковете вътре определен брой пъти, след което продължава. Числото контролира колко пъти се повтаря.</div>
+      <div class="fc-example"><span class="fc-example-icon">💡</span><span>Repeat 3 → Move Right → изпълнява Move Right три пъти поред без да са нужни три отделни блока.</span></div>
+      <div class="fc-tip c-control-tip">Repeat 0 = пропуска блоковете вътре изцяло. Repeat 100 = върви много дълго. Какво прави Repeat 1?</div>
+    </div>
+  </div>
+
+  <div class="fc" data-cat="control">
+    <div class="fc-preview c-control-bg" style="align-items:center;justify-content:center;">
+      <div style="display:flex;flex-direction:column;align-items:flex-start;gap:2px;">
+        <div class="block-shape c-control" style="border-radius:8px 8px 0 0;min-width:100px;padding-right:8px;">
+          <span>♾️</span> Forever
+        </div>
+        <div style="border-left:4px solid #EA580C;margin-left:12px;padding:4px 8px;background:#FFEDD5;border-radius:0 4px 4px 0;font-size:.65rem;font-weight:800;color:#7C2D12;width:90px;">→ loops forever</div>
+        <div class="block-shape c-control" style="border-radius:0 0 8px 8px;min-width:100px;font-size:.7rem;padding:6px 12px;">↩ goes back up</div>
+      </div>
+    </div>
+    <div class="fc-body">
+      <div class="fc-name c-control-text">Forever (Loop)</div>
+      <div class="fc-what">Изпълнява блоковете вътре отново и отново — ЗАВИНАГИ — докато не е натиснат червеният бутон за стоп. Никога не завършва само по себе си.</div>
+      <div class="fc-example"><span class="fc-example-icon">💡</span><span>Forever → Grow → Shrink = непрекъснато махане с крила, като летяща птица!</span></div>
+      <div class="fc-tip c-control-tip">Нищо след блок Forever никога няма да тръгне — зацикля безкрайно. Използвай Stop за да го спреш.</div>
+    </div>
+  </div>
+
+  <div class="fc" data-cat="control">
+    <div class="fc-preview c-control-bg">
+      <div class="block-shape c-control has-slot">
+        <span>📤</span> Send
+      </div>
+    </div>
+    <div class="fc-body">
+      <div class="fc-name c-control-text">Send Message</div>
+      <div class="fc-what">Изпраща цветен сигнал до всеки герой, който има съответстващ Receive блок. Използва се за да накара героите да реагират един на друг.</div>
+      <div class="fc-example"><span class="fc-example-icon">💡</span><span>Герой А: Green Flag → Send Red → Герой Б: Receive Red → Скочи. А контролира Б!</span></div>
+      <div class="fc-tip c-control-tip">ВСИЧКИ герои с Receive блок от съответния цвят ще реагират — можеш да задействаш много герои с едно Send!</div>
+    </div>
+  </div>
+
+  <div class="fc" data-cat="control">
+    <div class="fc-preview c-control-bg">
+      <div class="block-shape c-control has-slot">
+        <span>📄</span> Go to Page <div class="block-num">2</div>
+      </div>
+    </div>
+    <div class="fc-body">
+      <div class="fc-name c-control-text">Go to Page</div>
+      <div class="fc-what">Незабавно прескача към различна страница (сцена) в проекта. Числото казва коя страница да отиде.</div>
+      <div class="fc-example"><span class="fc-example-icon">💡</span><span>Край на Сцена 1 → Go to Page 2. Докосни врата → Go to Page 3. Изгради цяла история с прескачания!</span></div>
+      <div class="fc-tip c-control-tip">Промени номера на страницата като го докоснеш. Page 1 е винаги първата страница — брой от ляво в тавата.</div>
+    </div>
+  </div>
+
+</div><!-- end control grid -->
+
+
+<!-- ══════════════════════════════════════════
+     🔴 END BLOCKS
+══════════════════════════════════════════ -->
+<div class="cat-header" id="cat-end">
+  <div class="cat-dot c-end"></div>
+  <div class="cat-title" style="color:#7F1D1D;">End Blocks</div>
+  <div class="cat-desc">Червени · Отиват в КРАЯ на скрипта · Те завършват нещата</div>
+</div>
+<div class="cards-grid">
+
+  <div class="fc" data-cat="end">
+    <div class="fc-preview c-end-bg">
+      <div class="block-shape c-end end-shape">
+        <span>🛑</span> Stop
+      </div>
+    </div>
+    <div class="fc-body">
+      <div class="fc-name c-end-text">Stop</div>
+      <div class="fc-what">Спира всички скриптове на ВСИЧКИ герои — като натискане на червения бутон за стоп. Всичко замразява мигновено.</div>
+      <div class="fc-example"><span class="fc-example-icon">💡</span><span>Хвани звездата → Send WIN → Герой Б получава WIN → Stop. Играта приключи!</span></div>
+      <div class="fc-tip c-end-tip">Stop е постоянен — нищо не може да рестартира след Stop освен натискане на Green Flag отново.</div>
+    </div>
+  </div>
+
+  <div class="fc" data-cat="end">
+    <div class="fc-preview c-end-bg">
+      <div class="block-shape c-end end-shape">
+        <span>🔂</span> Go Back
+      </div>
+    </div>
+    <div class="fc-body">
+      <div class="fc-name c-end-text">Go Back to Start</div>
+      <div class="fc-what">Скача обратно към самото начало на същия скрипт и го изпълнява отново — като автоматично натискане на старт втори път.</div>
+      <div class="fc-example"><span class="fc-example-icon">💡</span><span>Скрипт: Move Right → Go Back to Start → героят се плъзга надясно безкрайно без Forever цикъл!</span></div>
+      <div class="fc-tip c-end-tip">Това създава цикъл без да се използват Repeat или Forever блокове. Продължава да върви докато не натиснеш Stop.</div>
+    </div>
+  </div>
+
+</div><!-- end end-blocks grid -->
+
+<!-- BOTTOM CTA -->
+<div style="background:#1C1917;border-radius:24px;padding:40px 36px;text-align:center;margin-top:48px;">
+  <div style="font-family:'Fredoka One',cursive;font-size:1.6rem;color:#FFD23F;margin-bottom:10px;">Готов да използваш тези блокове? 🚀</div>
+  <p style="color:#A8A29E;font-weight:600;margin-bottom:24px;line-height:1.6;max-width:480px;margin-left:auto;margin-right:auto;">Отвори тази страница на телефона до таблета. Когато дете попита „какво прави този блок?" — потърсете заедно!</p>
+  <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
+    <a href="activity-cards-bg.html" style="font-family:'Fredoka One',cursive;font-size:.95rem;background:linear-gradient(135deg,#FF6B35,#FF3D77);color:white;padding:12px 26px;border-radius:12px;text-decoration:none;display:inline-flex;align-items:center;gap:7px;">🧩 Карти</a>
+    <a href="project-gallery-bg.html" style="font-family:'Fredoka One',cursive;font-size:.95rem;background:rgba(255,255,255,.08);color:#D6D3D1;border:1.5px solid rgba(255,255,255,.2);padding:12px 26px;border-radius:12px;text-decoration:none;display:inline-flex;align-items:center;gap:7px;">🎨 Галерия с проекти</a>
+  </div>
+</div>
+
+</div><!-- main -->
+
+<footer class="site-footer">
+  <div class="footer-links">
+    <a href="../index-bg.html">Начало</a>
+    <a href="curriculum-bg.html">Програма</a>
+    <a href="activity-cards-bg.html">Карти</a>
+    <a href="project-gallery-bg.html">Галерия</a>
+    <a href="block-flashcards-bg.html">Флашкарти</a>
+    <a href="badges-bg.html">Значки</a>
+    <a href="whats-next-bg.html">Следващо</a>
+    <a href="troubleshooting-bg.html">Помощ</a>
+  </div>
+  <p style="color:#A8A29E;margin-bottom:8px;">Направено с ❤️ за родители навсякъде · Безплатно и с отворен код · <a href="https://github.com" style="color:#FFD23F;text-decoration:none;">Виж в GitHub ↗</a></p>
+  <p style="font-size:.85rem;opacity:.8;color:#A8A29E;">Създадено от <strong style="color:#FFD23F;">Petya Lozanova</strong> · ScratchJr е продукт на Scratch Foundation · Независим образователен ресурс</p>
+</footer>
+
+<script>
+  document.getElementById('navToggle').addEventListener('click',()=>document.getElementById('navLinks').classList.toggle('open'));
+  document.querySelectorAll('.nav-links a').forEach(a=>a.addEventListener('click',()=>document.getElementById('navLinks').classList.remove('open')));
+
+  // Filter
+  const btns  = document.querySelectorAll('.filter-btn');
+  const cards = document.querySelectorAll('.fc');
+  const heads = document.querySelectorAll('.cat-header');
+
+  btns.forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      btns.forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+      const cat = btn.dataset.cat;
+
+      cards.forEach(c=>{
+        c.classList.toggle('hidden', cat!=='all' && c.dataset.cat!==cat);
+      });
+      heads.forEach(h=>{
+        if(cat==='all') h.classList.remove('hidden');
+        else h.classList.toggle('hidden', h.id!=='cat-'+cat);
+      });
+    });
+  });
+</script>
+</body>
+</html>

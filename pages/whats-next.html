@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="color-scheme" content="light">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>What Comes After ScratchJr? — The Learning Roadmap</title>
+  <meta name="description" content="A clear learning path for kids who finish the ScratchJr Adventure program. From ScratchJr to Scratch, Code.org, Python and beyond.">
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Atkinson+Hyperlegible:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/site.css">
+  <style>
+    color-scheme: light only;
+
+    /* ── NAV FIXES ── */
+    .nav-logo,.nav-logo:link,.nav-logo:visited,.nav-logo:hover,.nav-logo:active{color:#FFD23F !important;-webkit-text-fill-color:#FFD23F !important;text-decoration:none !important;}
+    .nav-links a,.nav-links a:link,.nav-links a:visited{color:#D6D3D1 !important;-webkit-text-fill-color:#D6D3D1 !important;text-decoration:none !important;}
+    @media(max-width:700px){
+      .nav-toggle{display:flex !important;background:transparent !important;border:none !important;-webkit-appearance:none;width:40px;height:40px;flex-direction:column;align-items:center;justify-content:center;gap:5px;}
+      .nav-toggle span{display:block;width:22px;height:2px;background:white !important;border-radius:2px;}
+      .nav-links{display:none !important;position:fixed !important;top:58px !important;left:0 !important;right:0 !important;z-index:9999 !important;background:#1C1917 !important;flex-direction:column !important;align-items:stretch !important;padding:8px 12px 16px !important;gap:2px !important;box-shadow:0 12px 32px rgba(0,0,0,0.7) !important;border-top:1px solid rgba(255,255,255,0.08) !important;}
+      .nav-links.open{display:flex !important;}
+      .nav-links a,.nav-links a:link,.nav-links a:visited{color:#FFFFFF !important;-webkit-text-fill-color:#FFFFFF !important;padding:13px 16px !important;font-size:0.95rem !important;border-radius:10px !important;}
+    }
+
+    /* ── BODY ── */
+    body {
+      background: #FFFBF5 !important;
+      color: #1C1917 !important;
+      font-family: 'Atkinson Hyperlegible', sans-serif;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      background: #1C1917;
+      padding: 56px 24px 48px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 50% 70% at 10% 60%, rgba(37,99,235,0.18) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 70% at 90% 40%, rgba(22,163,74,0.18) 0%, transparent 60%),
+        radial-gradient(ellipse 40% 50% at 50% 100%, rgba(255,107,53,0.12) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .hero-eyebrow {
+      font-size: 0.72rem; font-weight: 700;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: #FF6B35; margin-bottom: 16px; position: relative;
+    }
+    .hero h1 {
+      font-family: 'Fredoka One', cursive;
+      font-size: clamp(2rem, 6vw, 3.6rem);
+      color: white; margin-bottom: 16px;
+      line-height: 1.1; position: relative;
+    }
+    .hero h1 span {
+      background: linear-gradient(135deg, #FFD23F, #FF6B35);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero-sub {
+      color: #A8A29E; font-size: 1.05rem; font-weight: 600;
+      max-width: 540px; margin: 0 auto 32px;
+      line-height: 1.7; position: relative;
+    }
+    .hero-congrats {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: rgba(255,210,63,0.12);
+      border: 1.5px solid rgba(255,210,63,0.3);
+      border-radius: 50px;
+      padding: 10px 24px;
+      font-size: 0.9rem; font-weight: 700;
+      color: #FFD23F; position: relative;
+    }
+
+    /* ── LANG BAR ── */
+    .lang-bar {
+      background: #292524; padding: 8px 24px;
+      display: flex; align-items: center; gap: 10px;
+      flex-wrap: wrap; border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .lang-bar span { font-size:0.72rem;font-weight:700;color:#A8A29E;text-transform:uppercase;letter-spacing:0.1em; }
+    .lang-btn { font-size:0.8rem;font-weight:700;padding:4px 12px;border-radius:8px;text-decoration:none;border:1.5px solid rgba(255,255,255,0.2);color:#D6D3D1 !important; }
+    .lang-btn.active { background:#FF6B35;border-color:#FF6B35;color:white !important; }
+
+    /* ── MAIN ── */
+    .main { max-width: 860px; margin: 0 auto; padding: 56px 24px 80px; }
+
+    /* ── INTRO BOX ── */
+    .intro-box {
+      background: white;
+      border: 1.5px solid #E8DCC8;
+      border-radius: 20px;
+      padding: 28px 32px;
+      margin-bottom: 48px;
+      display: flex; gap: 20px; align-items: flex-start;
+    }
+    .intro-icon { font-size: 2.4rem; flex-shrink: 0; margin-top: 2px; }
+    .intro-text h2 {
+      font-family: 'Fredoka One', cursive;
+      font-size: 1.3rem; color: #1C1917; margin-bottom: 8px;
+    }
+    .intro-text p { font-size: 0.92rem; color: #44403C; font-weight: 600; line-height: 1.65; }
+
+    /* ── ROADMAP TRACK ── */
+    .roadmap { display: flex; flex-direction: column; gap: 0; position: relative; }
+
+    /* Vertical line connecting stages */
+    .roadmap::before {
+      content: '';
+      position: absolute;
+      left: 28px;
+      top: 56px;
+      bottom: 56px;
+      width: 3px;
+      background: linear-gradient(180deg, #2563EB 0%, #16A34A 25%, #7C3AED 50%, #EA580C 75%, #BE123C 100%);
+      border-radius: 3px;
+      z-index: 0;
+    }
+
+    /* ── STAGE CARD ── */
+    .stage {
+      display: flex;
+      gap: 0;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Left column: icon + connector */
+    .stage-left {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex-shrink: 0;
+      width: 60px;
+    }
+
+    .stage-dot {
+      width: 56px; height: 56px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.6rem;
+      flex-shrink: 0;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+      position: relative;
+      z-index: 2;
+    }
+
+    .stage-connector {
+      flex: 1;
+      width: 3px;
+      min-height: 32px;
+    }
+
+    /* Right column: content */
+    .stage-right {
+      flex: 1;
+      padding: 0 0 40px 24px;
+      padding-top: 8px;
+    }
+
+    .stage-card {
+      background: white;
+      border-radius: 20px;
+      overflow: hidden;
+      border: 2px solid #E8DCC8;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .stage-card:hover {
+      transform: translateX(4px);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+    }
+
+    .stage-card-header {
+      padding: 18px 22px 16px;
+      display: flex; align-items: flex-start;
+      gap: 14px; flex-wrap: wrap;
+    }
+
+    .stage-status {
+      font-size: 0.62rem; font-weight: 800;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      padding: 3px 10px; border-radius: 50px;
+      white-space: nowrap; flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .status-done  { background: #DCFCE7; color: #14532D; }
+    .status-next  { background: #FEF9C3; color: #713F12; }
+    .status-then  { background: #F1F5F9; color: #475569; }
+
+    .stage-header-text { flex: 1; }
+    .stage-tool-name {
+      font-family: 'Fredoka One', cursive;
+      font-size: 1.35rem;
+      margin-bottom: 2px;
+    }
+    .stage-age {
+      font-size: 0.75rem; font-weight: 700;
+      color: #78716C;
+    }
+
+    .stage-card-body { padding: 0 22px 20px; }
+
+    .stage-what {
+      font-size: 0.95rem; font-weight: 700;
+      color: #1C1917 !important;
+      -webkit-text-fill-color: #1C1917 !important;
+      margin-bottom: 14px;
+      line-height: 1.6;
+    }
+
+    .stage-skills {
+      display: flex; gap: 6px; flex-wrap: wrap;
+      margin-bottom: 16px;
+    }
+    .skill-pill {
+      font-size: 0.7rem; font-weight: 800;
+      padding: 3px 10px; border-radius: 50px;
+    }
+
+    .stage-why {
+      background: #FAFAF8;
+      border-left: 3px solid #E8DCC8;
+      border-radius: 0 10px 10px 0;
+      padding: 10px 14px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: #44403C !important;
+      -webkit-text-fill-color: #44403C !important;
+      line-height: 1.55;
+      margin-bottom: 14px;
+    }
+
+    .stage-link-row { display: flex; gap: 8px; flex-wrap: wrap; }
+    .stage-link {
+      font-size: 0.8rem; font-weight: 800;
+      padding: 7px 16px; border-radius: 10px;
+      text-decoration: none;
+      display: inline-flex; align-items: center; gap: 6px;
+      transition: opacity 0.15s, transform 0.15s;
+    }
+    .stage-link:hover { opacity: 0.85; transform: translateY(-1px); }
+    .stage-link-ghost {
+      background: transparent;
+      border: 1.5px solid #E8DCC8;
+      color: #78716C !important;
+      -webkit-text-fill-color: #78716C !important;
+    }
+
+    /* ── STAGE COLOUR THEMES ── */
+    /* Stage 0 — Done (Blue) */
+    .s0 .stage-dot { background: linear-gradient(135deg, #2563EB, #60A5FA); }
+    .s0 .stage-connector { background: linear-gradient(180deg, #2563EB, #16A34A); }
+    .s0 .stage-card { border-color: #BFDBFE; }
+    .s0 .stage-card-header { background: linear-gradient(135deg, #EFF6FF, #DBEAFE); }
+    .s0 .stage-tool-name { color: #1D4ED8 !important; -webkit-text-fill-color: #1D4ED8 !important; }
+    .s0 .stage-age { color: #3B82F6; }
+    .s0 .skill-pill { background: #DBEAFE; color: #1E40AF; }
+    .s0 .stage-why { border-left-color: #93C5FD; }
+    .s0 .stage-link-primary { background: #2563EB; color: white !important; -webkit-text-fill-color: white !important; }
+
+    /* Stage 1 — Next (Green) */
+    .s1 .stage-dot { background: linear-gradient(135deg, #16A34A, #4ADE80); }
+    .s1 .stage-connector { background: linear-gradient(180deg, #16A34A, #7C3AED); }
+    .s1 .stage-card { border-color: #BBF7D0; border-width: 2.5px; box-shadow: 0 8px 32px rgba(22,163,74,0.12); }
+    .s1 .stage-card-header { background: linear-gradient(135deg, #F0FDF4, #DCFCE7); }
+    .s1 .stage-tool-name { color: #15803D !important; -webkit-text-fill-color: #15803D !important; }
+    .s1 .stage-age { color: #16A34A; }
+    .s1 .skill-pill { background: #DCFCE7; color: #14532D; }
+    .s1 .stage-why { border-left-color: #4ADE80; }
+    .s1 .stage-link-primary { background: #16A34A; color: white !important; -webkit-text-fill-color: white !important; }
+
+    /* Stage 2 — Then (Purple) */
+    .s2 .stage-dot { background: linear-gradient(135deg, #7C3AED, #A855F7); }
+    .s2 .stage-connector { background: linear-gradient(180deg, #7C3AED, #EA580C); }
+    .s2 .stage-card { border-color: #DDD6FE; }
+    .s2 .stage-card-header { background: linear-gradient(135deg, #FAF5FF, #EDE9FE); }
+    .s2 .stage-tool-name { color: #6D28D9 !important; -webkit-text-fill-color: #6D28D9 !important; }
+    .s2 .stage-age { color: #7C3AED; }
+    .s2 .skill-pill { background: #EDE9FE; color: #4C1D95; }
+    .s2 .stage-why { border-left-color: #C084FC; }
+    .s2 .stage-link-primary { background: #7C3AED; color: white !important; -webkit-text-fill-color: white !important; }
+
+    /* Stage 3 — Then (Orange) */
+    .s3 .stage-dot { background: linear-gradient(135deg, #EA580C, #FB923C); }
+    .s3 .stage-connector { background: linear-gradient(180deg, #EA580C, #BE123C); }
+    .s3 .stage-card { border-color: #FED7AA; }
+    .s3 .stage-card-header { background: linear-gradient(135deg, #FFF7ED, #FFEDD5); }
+    .s3 .stage-tool-name { color: #C2410C !important; -webkit-text-fill-color: #C2410C !important; }
+    .s3 .stage-age { color: #EA580C; }
+    .s3 .skill-pill { background: #FFF7ED; color: #7C2D12; }
+    .s3 .stage-why { border-left-color: #FB923C; }
+    .s3 .stage-link-primary { background: #EA580C; color: white !important; -webkit-text-fill-color: white !important; }
+
+    /* Stage 4 — Then (Pink) */
+    .s4 .stage-dot { background: linear-gradient(135deg, #BE123C, #FB7185); }
+    .s4 .stage-connector { display: none; }
+    .s4 .stage-card { border-color: #FDA4AF; }
+    .s4 .stage-card-header { background: linear-gradient(135deg, #FFF1F2, #FFE4E6); }
+    .s4 .stage-tool-name { color: #9F1239 !important; -webkit-text-fill-color: #9F1239 !important; }
+    .s4 .stage-age { color: #BE123C; }
+    .s4 .skill-pill { background: #FFF1F2; color: #881337; }
+    .s4 .stage-why { border-left-color: #FDA4AF; }
+    .s4 .stage-link-primary { background: #BE123C; color: white !important; -webkit-text-fill-color: white !important; }
+
+    /* ── HIGHLIGHTED NEXT BADGE ── */
+    .next-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: linear-gradient(135deg, #FFD23F, #FF6B35);
+      color: #1C1917 !important; -webkit-text-fill-color: #1C1917 !important;
+      font-size: 0.7rem; font-weight: 900;
+      padding: 4px 12px; border-radius: 50px;
+      text-transform: uppercase; letter-spacing: 0.1em;
+      box-shadow: 0 4px 12px rgba(255,107,53,0.35);
+    }
+
+    /* ── AGE GUIDE ── */
+    .age-guide {
+      background: white;
+      border: 1.5px solid #E8DCC8;
+      border-radius: 20px;
+      padding: 28px 32px;
+      margin-top: 8px;
+      margin-bottom: 48px;
+    }
+    .age-guide h3 {
+      font-family: 'Fredoka One', cursive;
+      font-size: 1.2rem; color: #1C1917; margin-bottom: 20px;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .age-timeline {
+      position: relative;
+      padding-left: 0;
+    }
+    .age-row {
+      display: grid;
+      grid-template-columns: 80px 1fr;
+      gap: 16px;
+      align-items: start;
+      margin-bottom: 12px;
+    }
+    .age-label {
+      font-size: 0.78rem; font-weight: 900;
+      color: white; padding: 4px 8px;
+      border-radius: 8px; text-align: center;
+      white-space: nowrap;
+    }
+    .age-tools {
+      display: flex; gap: 6px; flex-wrap: wrap; align-items: center;
+      padding-top: 2px;
+    }
+    .age-tool-pill {
+      font-size: 0.75rem; font-weight: 800;
+      padding: 3px 10px; border-radius: 50px;
+    }
+    .age-note { font-size: 0.75rem; font-weight: 600; color: #78716C; margin-top: 2px; }
+
+    /* ── PARENT TIPS ── */
+    .tips-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
+      margin-bottom: 48px;
+    }
+    .tip-card {
+      background: white;
+      border: 1.5px solid #E8DCC8;
+      border-radius: 16px;
+      padding: 20px;
+    }
+    .tip-icon { font-size: 1.6rem; margin-bottom: 10px; display: block; }
+    .tip-title {
+      font-family: 'Fredoka One', cursive;
+      font-size: 1rem; color: #1C1917; margin-bottom: 6px;
+    }
+    .tip-text {
+      font-size: 0.82rem; font-weight: 600;
+      color: #44403C !important; -webkit-text-fill-color: #44403C !important;
+      line-height: 1.55;
+    }
+
+    /* ── BOTTOM CTA ── */
+    .bottom-cta {
+      background: #1C1917;
+      border-radius: 24px;
+      padding: 40px 36px;
+      text-align: center;
+    }
+    .bottom-cta h3 {
+      font-family: 'Fredoka One', cursive;
+      font-size: 1.6rem; color: #FFD23F; margin-bottom: 10px;
+    }
+    .bottom-cta p { color: #A8A29E; font-weight: 600; margin-bottom: 24px; line-height: 1.6; }
+    .cta-btns { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+    .btn-primary-cta {
+      font-family: 'Fredoka One', cursive;
+      background: linear-gradient(135deg, #FF6B35, #FF3D77);
+      color: white !important; -webkit-text-fill-color: white !important;
+      padding: 12px 28px; border-radius: 12px;
+      text-decoration: none; font-size: 0.95rem;
+      transition: transform 0.15s, box-shadow 0.15s;
+      display: inline-flex; align-items: center; gap: 8px;
+    }
+    .btn-primary-cta:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(255,107,53,0.4); }
+    .btn-ghost-cta {
+      font-family: 'Fredoka One', cursive;
+      background: rgba(255,255,255,0.08);
+      color: #D6D3D1 !important; -webkit-text-fill-color: #D6D3D1 !important;
+      border: 1.5px solid rgba(255,255,255,0.2);
+      padding: 12px 28px; border-radius: 12px;
+      text-decoration: none; font-size: 0.95rem;
+      display: inline-flex; align-items: center; gap: 8px;
+    }
+
+    /* ── SECTION HEADER ── */
+    .sec-head { margin-bottom: 32px; }
+    .sec-eyebrow {
+      font-size: 0.7rem; font-weight: 800;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: #FF6B35; margin-bottom: 8px;
+    }
+    .sec-title {
+      font-family: 'Fredoka One', cursive;
+      font-size: 1.8rem; color: #1C1917; line-height: 1.1;
+      margin-bottom: 8px;
+    }
+    .sec-desc {
+      font-size: 0.92rem; font-weight: 600;
+      color: #78716C; line-height: 1.65; max-width: 580px;
+    }
+
+    .divider { height: 1.5px; background: #E8DCC8; margin: 40px 0; border-radius: 2px; }
+
+    @media (max-width: 600px) {
+      .intro-box { flex-direction: column; }
+      .age-row { grid-template-columns: 60px 1fr; }
+      .roadmap::before { left: 24px; }
+      .stage-left { width: 52px; }
+      .stage-dot { width: 48px; height: 48px; font-size: 1.3rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="site-nav">
+  <a href="../index.html" class="nav-logo">🐱 ScratchJr Adventure</a>
+  <button class="nav-toggle" id="navToggle" aria-label="Menu"><span></span><span></span><span></span></button>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="../index.html">🏠 Home</a></li>
+    <li><a href="curriculum.html">📅 Curriculum</a></li>
+    <li><a href="activity-cards.html">🧩 Activity Cards</a></li>
+    <li><a href="lesson-scripts.html">📋 Scripts</a></li>
+    <li><a href="badges.html">🏅 Badges</a></li>
+    <li><a href="bonus-challenges.html">⚡ Bonus</a></li>
+    <li><a href="whats-next.html" class="active">🚀 What's Next</a></li>
+    <li><a href="troubleshooting.html">🔧 Help</a></li>
+  </ul>
+</nav>
+
+<!-- LANG BAR -->
+<div class="lang-bar">
+  <span>🌍 Language:</span>
+  <a href="whats-next.html" class="lang-btn active">🇬🇧 English</a>
+  <a href="whats-next-bg.html" class="lang-btn">🇧🇬 Български</a>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow">🚀 After ScratchJr Adventure</div>
+  <h1>What Comes<br><span>After ScratchJr?</span></h1>
+  <p class="hero-sub">Your child just completed 6 weeks of real programming thinking. Here's exactly where to go next — a clear, age-matched path from beginner to confident coder.</p>
+  <div class="hero-congrats">🎓 &nbsp;For graduates of the ScratchJr Adventure program</div>
+</div>
+
+<div class="main">
+
+  <!-- INTRO -->
+  <div class="intro-box">
+    <div class="intro-icon">💡</div>
+    <div class="intro-text">
+      <h2>Why this roadmap exists</h2>
+      <p>The most common question after Week 6 is: <em>"We finished — now what?"</em> Every stage below builds directly on what was learned in ScratchJr. The skills transfer. The excitement should too. This guide helps you pick the right next step without overwhelm.</p>
+    </div>
+  </div>
+
+  <!-- ══════════ ROADMAP ══════════ -->
+  <div class="sec-head">
+    <div class="sec-eyebrow">🗺️ The Learning Path</div>
+    <div class="sec-title">Five Stages, Zero Gaps</div>
+    <p class="sec-desc">Each stage introduces one new big idea. No skipping required — every tool genuinely builds on the previous one.</p>
+  </div>
+
+  <div class="roadmap">
+
+    <!-- ── STAGE 0: ScratchJr (Done) ── -->
+    <div class="stage s0">
+      <div class="stage-left">
+        <div class="stage-dot">✅</div>
+        <div class="stage-connector"></div>
+      </div>
+      <div class="stage-right">
+        <div class="stage-card">
+          <div class="stage-card-header">
+            <div class="stage-status status-done">✅ Completed!</div>
+            <div class="stage-header-text">
+              <div class="stage-tool-name">ScratchJr</div>
+              <div class="stage-age">Ages 5–8 &nbsp;·&nbsp; iPad &amp; Android &nbsp;·&nbsp; Free</div>
+            </div>
+          </div>
+          <div class="stage-card-body">
+            <p class="stage-what">Visual block programming — sequencing, loops, events, messages, and sound. Your child has already mastered this.</p>
+            <div class="stage-skills">
+              <span class="skill-pill">🔵 Motion blocks</span>
+              <span class="skill-pill">🟡 Triggers</span>
+              <span class="skill-pill">🔁 Loops</span>
+              <span class="skill-pill">📨 Messages</span>
+              <span class="skill-pill">🎵 Sound</span>
+              <span class="skill-pill">🎨 Drawing</span>
+            </div>
+            <div class="stage-why">
+              <strong>What they can do now:</strong> Build animated stories, simple games, and music videos. They understand cause-and-effect programming, loops, and event-driven logic. That's real computer science — just with pictures instead of text.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── STAGE 1: Scratch (Next) ── -->
+    <div class="stage s1">
+      <div class="stage-left">
+        <div class="stage-dot">🐱</div>
+        <div class="stage-connector"></div>
+      </div>
+      <div class="stage-right">
+        <div class="stage-card">
+          <div class="stage-card-header">
+            <div class="stage-status status-next">⭐ Start here next</div>
+            <div class="next-badge">🚀 Recommended next step</div>
+            <div class="stage-header-text">
+              <div class="stage-tool-name">Scratch</div>
+              <div class="stage-age">Ages 7–12 &nbsp;·&nbsp; Browser &amp; App &nbsp;·&nbsp; Free</div>
+            </div>
+          </div>
+          <div class="stage-card-body">
+            <p class="stage-what">The big brother of ScratchJr — same visual blocks but far more powerful. Variables, conditions, cloning, coordinates, and a massive community of shared projects.</p>
+            <div class="stage-skills">
+              <span class="skill-pill">📦 Variables</span>
+              <span class="skill-pill">❓ Conditions (if/else)</span>
+              <span class="skill-pill">🔢 Coordinates</span>
+              <span class="skill-pill">🧬 Cloning</span>
+              <span class="skill-pill">📡 Broadcasting</span>
+              <span class="skill-pill">🌐 Cloud data</span>
+            </div>
+            <div class="stage-why">
+              <strong>Why Scratch first:</strong> The blocks look almost identical to ScratchJr — the jump feels natural, not scary. Variables and conditions are the two new big ideas. Everything else is familiar territory with more power. Kids can also browse millions of projects others have built and remix them.
+            </div>
+            <div class="stage-link-row">
+              <a href="https://scratch.mit.edu" target="_blank" class="stage-link stage-link-primary">🐱 Open Scratch →</a>
+              <a href="https://scratch.mit.edu/projects/editor/?tutorial=getStarted" target="_blank" class="stage-link stage-link-ghost">▶ Try a tutorial</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── STAGE 2: Code.org ── -->
+    <div class="stage s2">
+      <div class="stage-left">
+        <div class="stage-dot">🧩</div>
+        <div class="stage-connector"></div>
+      </div>
+      <div class="stage-right">
+        <div class="stage-card">
+          <div class="stage-card-header">
+            <div class="stage-status status-then">→ Then</div>
+            <div class="stage-header-text">
+              <div class="stage-tool-name">Code.org</div>
+              <div class="stage-age">Ages 8–14 &nbsp;·&nbsp; Browser &nbsp;·&nbsp; Free</div>
+            </div>
+          </div>
+          <div class="stage-card-body">
+            <p class="stage-what">Structured puzzle-based courses that introduce real programming concepts in a game-like format. The Hour of Code is a great entry point — full courses go much deeper.</p>
+            <div class="stage-skills">
+              <span class="skill-pill">🧠 Algorithms</span>
+              <span class="skill-pill">🔄 Functions</span>
+              <span class="skill-pill">🔢 Parameters</span>
+              <span class="skill-pill">🌐 Web basics</span>
+              <span class="skill-pill">🤖 AI concepts</span>
+            </div>
+            <div class="stage-why">
+              <strong>Why Code.org:</strong> The progression is carefully designed by educators. It bridges visual block coding toward text-based thinking. The "CS Fundamentals" course (Course D onwards) is ideal for ages 8–10. Used by 70 million+ students worldwide.
+            </div>
+            <div class="stage-link-row">
+              <a href="https://code.org/learn" target="_blank" class="stage-link stage-link-primary">🧩 Start on Code.org →</a>
+              <a href="https://hourofcode.com" target="_blank" class="stage-link stage-link-ghost">⏱ Try Hour of Code</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── STAGE 3: Python ── -->
+    <div class="stage s3">
+      <div class="stage-left">
+        <div class="stage-dot">🐍</div>
+        <div class="stage-connector"></div>
+      </div>
+      <div class="stage-right">
+        <div class="stage-card">
+          <div class="stage-card-header">
+            <div class="stage-status status-then">→ Then</div>
+            <div class="stage-header-text">
+              <div class="stage-tool-name">Python</div>
+              <div class="stage-age">Ages 10+ &nbsp;·&nbsp; Trinket / Thonny / Replit &nbsp;·&nbsp; Free</div>
+            </div>
+          </div>
+          <div class="stage-card-body">
+            <p class="stage-what">The first real text-based programming language. Python reads almost like English, which makes it the ideal first step away from blocks. One of the most widely used languages in the world.</p>
+            <div class="stage-skills">
+              <span class="skill-pill">📝 Text-based syntax</span>
+              <span class="skill-pill">📋 Lists &amp; dictionaries</span>
+              <span class="skill-pill">🔧 Functions</span>
+              <span class="skill-pill">📁 Files</span>
+              <span class="skill-pill">🤖 Turtle graphics</span>
+            </div>
+            <div class="stage-why">
+              <strong>Best tools to start:</strong> <strong>Trinket.io</strong> runs Python in the browser with no install. <strong>Thonny</strong> is a free desktop app designed for beginners. <strong>Replit</strong> is great for collaborative coding. Start with Turtle graphics — kids can draw and animate immediately, which feels like ScratchJr but with real code.
+            </div>
+            <div class="stage-link-row">
+              <a href="https://trinket.io/python" target="_blank" class="stage-link stage-link-primary">🐍 Try Trinket →</a>
+              <a href="https://thonny.org" target="_blank" class="stage-link stage-link-ghost">⬇ Download Thonny</a>
+              <a href="https://replit.com" target="_blank" class="stage-link stage-link-ghost">🌐 Try Replit</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── STAGE 4: HTML/CSS ── -->
+    <div class="stage s4">
+      <div class="stage-left">
+        <div class="stage-dot">🌐</div>
+      </div>
+      <div class="stage-right">
+        <div class="stage-card">
+          <div class="stage-card-header">
+            <div class="stage-status status-then">→ Then</div>
+            <div class="stage-header-text">
+              <div class="stage-tool-name">HTML &amp; CSS</div>
+              <div class="stage-age">Ages 11+ &nbsp;·&nbsp; Any browser &nbsp;·&nbsp; Free</div>
+            </div>
+          </div>
+          <div class="stage-card-body">
+            <p class="stage-what">Build real websites — the same technology this site is built with. HTML is the structure, CSS is the style. Instantly visible results make it deeply satisfying for kids who love design.</p>
+            <div class="stage-skills">
+              <span class="skill-pill">🏗️ HTML structure</span>
+              <span class="skill-pill">🎨 CSS styling</span>
+              <span class="skill-pill">📐 Layouts</span>
+              <span class="skill-pill">🔤 Typography</span>
+              <span class="skill-pill">📱 Responsive design</span>
+            </div>
+            <div class="stage-why">
+              <strong>Why HTML/CSS is special:</strong> The result is immediately shareable with anyone in the world. A child can say "I made this website" and send a link. That pride is unmatched. Start with <strong>Khan Academy</strong>'s HTML/CSS course or <strong>freeCodeCamp</strong> — both are completely free.
+            </div>
+            <div class="stage-link-row">
+              <a href="https://www.khanacademy.org/computing/computer-programming/html-css" target="_blank" class="stage-link stage-link-primary">🌐 Khan Academy HTML →</a>
+              <a href="https://www.freecodecamp.org/learn/2022/responsive-web-design/" target="_blank" class="stage-link stage-link-ghost">📚 freeCodeCamp</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- end roadmap -->
+
+  <div class="divider"></div>
+
+  <!-- ══════════ AGE GUIDE ══════════ -->
+  <div class="age-guide">
+    <h3>📅 Quick Age Reference</h3>
+    <div class="age-timeline">
+
+      <div class="age-row">
+        <div class="age-label" style="background:#2563EB;">Age 5–7</div>
+        <div>
+          <div class="age-tools">
+            <span class="age-tool-pill" style="background:#DBEAFE;color:#1E40AF;">✅ ScratchJr</span>
+          </div>
+          <div class="age-note">Visual blocks, no reading required. Ideal starting point.</div>
+        </div>
+      </div>
+
+      <div class="age-row">
+        <div class="age-label" style="background:#16A34A;">Age 7–9</div>
+        <div>
+          <div class="age-tools">
+            <span class="age-tool-pill" style="background:#DCFCE7;color:#14532D;">🐱 Scratch</span>
+            <span class="age-tool-pill" style="background:#DCFCE7;color:#14532D;">🧩 Code.org</span>
+          </div>
+          <div class="age-note">Can read instructions. Blocks still, but more complex logic now possible.</div>
+        </div>
+      </div>
+
+      <div class="age-row">
+        <div class="age-label" style="background:#7C3AED;">Age 9–11</div>
+        <div>
+          <div class="age-tools">
+            <span class="age-tool-pill" style="background:#EDE9FE;color:#4C1D95;">🧩 Code.org</span>
+            <span class="age-tool-pill" style="background:#EDE9FE;color:#4C1D95;">🐍 Python (intro)</span>
+          </div>
+          <div class="age-note">Ready to start thinking in text. Turtle graphics = instant reward.</div>
+        </div>
+      </div>
+
+      <div class="age-row">
+        <div class="age-label" style="background:#EA580C;">Age 11–13</div>
+        <div>
+          <div class="age-tools">
+            <span class="age-tool-pill" style="background:#FFF7ED;color:#7C2D12;">🐍 Python</span>
+            <span class="age-tool-pill" style="background:#FFF7ED;color:#7C2D12;">🌐 HTML/CSS</span>
+          </div>
+          <div class="age-note">Ready for real languages. Projects can be shared with the world.</div>
+        </div>
+      </div>
+
+      <div class="age-row">
+        <div class="age-label" style="background:#BE123C;">Age 13+</div>
+        <div>
+          <div class="age-tools">
+            <span class="age-tool-pill" style="background:#FFF1F2;color:#881337;">🌐 HTML/CSS/JS</span>
+            <span class="age-tool-pill" style="background:#FFF1F2;color:#881337;">🐍 Python (advanced)</span>
+          </div>
+          <div class="age-note">Full websites, games, automation, and beyond.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ══════════ PARENT TIPS ══════════ -->
+  <div class="sec-head">
+    <div class="sec-eyebrow">👨‍👩‍👧 For Parents</div>
+    <div class="sec-title">How to Keep the Momentum</div>
+  </div>
+
+  <div class="tips-grid">
+
+    <div class="tip-card">
+      <span class="tip-icon">⏳</span>
+      <div class="tip-title">Don't rush the next stage</div>
+      <p class="tip-text">A child who is still excitedly building in ScratchJr after Week 6 isn't "stuck" — they're deepening mastery. Only move on when they're genuinely curious about what they can't yet do.</p>
+    </div>
+
+    <div class="tip-card">
+      <span class="tip-icon">🎯</span>
+      <div class="tip-title">Follow their interest</div>
+      <p class="tip-text">A child who loves stories → Scratch storytelling. Loves games → Scratch game-making. Loves art → HTML/CSS. Loves logic puzzles → Python. The tool should serve their passion, not the other way around.</p>
+    </div>
+
+    <div class="tip-card">
+      <span class="tip-icon">🐛</span>
+      <div class="tip-title">Bugs are the curriculum</div>
+      <p class="tip-text">When something breaks, resist fixing it for them. Ask "what did you expect to happen?" and "what actually happened?" The gap between those two is where real learning lives.</p>
+    </div>
+
+    <div class="tip-card">
+      <span class="tip-icon">🌍</span>
+      <div class="tip-title">Share their work</div>
+      <p class="tip-text">A Scratch project shared with a grandparent, a website sent to a friend, a game played by a sibling — real audiences make the work feel real. Publish and share early and often.</p>
+    </div>
+
+    <div class="tip-card">
+      <span class="tip-icon">📚</span>
+      <div class="tip-title">Great books to read together</div>
+      <p class="tip-text"><em>Hello Ruby</em> by Linda Liukas (ages 5–8) · <em>Secret Coders</em> graphic novel series (ages 8–12) · <em>Python for Kids</em> by Jason Briggs (ages 10+) · <em>How to Be a Coder</em> by DK (ages 9+)</p>
+    </div>
+
+    <div class="tip-card">
+      <span class="tip-icon">🏫</span>
+      <div class="tip-title">Clubs &amp; communities</div>
+      <p class="tip-text">Scratch has a huge online community at scratch.mit.edu/explore. CoderDojo runs free coding clubs in 100+ countries for ages 7–17. Code Clubs are in libraries worldwide — all free, all welcoming.</p>
+    </div>
+
+  </div>
+
+  <!-- ══════════ BOTTOM CTA ══════════ -->
+  <div class="bottom-cta">
+    <h3>🐱 Still in Week 1–6?</h3>
+    <p>Come back to this page after Graduation Day. Right now, focus on the 30 lessons — there's plenty of exciting territory left to explore in ScratchJr Adventure.</p>
+    <div class="cta-btns">
+      <a href="curriculum.html" class="btn-primary-cta">📅 Back to the Curriculum</a>
+      <a href="badges.html" class="btn-ghost-cta">🏅 Print Your Badges</a>
+    </div>
+  </div>
+
+</div><!-- main -->
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="footer-links">
+    <a href="../index.html">Home</a>
+    <a href="curriculum.html">Curriculum</a>
+    <a href="activity-cards.html">Activity Cards</a>
+    <a href="badges.html">Badges</a>
+    <a href="whats-next.html">What's Next</a>
+    <a href="troubleshooting.html">Help</a>
+    <a href="checklist.html">Progress</a>
+  </div>
+  <p style="color:#A8A29E;margin-bottom:8px;">Made with ❤️ for parents everywhere · Free &amp; Open Source · <a href="https://github.com" style="color:#FFD23F;text-decoration:none;">View on GitHub ↗</a></p>
+  <p style="font-size:0.85rem;opacity:0.8;color:#A8A29E;">Created by <strong style="color:#FFD23F;">Petya Lozanova</strong> · ScratchJr is a product of the Scratch Foundation · Independent educational resource</p>
+</footer>
+
+<script>
+  document.getElementById('navToggle').addEventListener('click', () => {
+    document.getElementById('navLinks').classList.toggle('open');
+  });
+  document.querySelectorAll('.nav-links a').forEach(a =>
+    a.addEventListener('click', () => document.getElementById('navLinks').classList.remove('open'))
+  );
+</script>
+</body>
+</html>

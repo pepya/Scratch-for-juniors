@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="color-scheme" content="light">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Block Flashcards — ScratchJr Adventure</title>
+  <meta name="description" content="Printable ScratchJr block flashcards. Every block explained in plain language — perfect for kids to quiz each other or use as a reference next to the tablet.">
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Atkinson+Hyperlegible:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/site.css">
+  <style>
+    color-scheme: light only;
+    html,body { background:#FFFBF5 !important; color:#1C1917 !important; }
+
+    /* NAV */
+    .nav-logo,.nav-logo:link,.nav-logo:visited{color:#FFD23F !important;-webkit-text-fill-color:#FFD23F !important;text-decoration:none !important;}
+    .nav-links a,.nav-links a:link,.nav-links a:visited{color:#D6D3D1 !important;-webkit-text-fill-color:#D6D3D1 !important;text-decoration:none !important;}
+    @media(max-width:700px){
+      .nav-toggle{display:flex !important;background:transparent !important;border:none !important;-webkit-appearance:none;width:40px;height:40px;flex-direction:column;align-items:center;justify-content:center;gap:5px;}
+      .nav-toggle span{display:block;width:22px;height:2px;background:white !important;border-radius:2px;}
+      .nav-links{display:none !important;position:fixed !important;top:58px !important;left:0 !important;right:0 !important;z-index:9999 !important;background:#1C1917 !important;flex-direction:column !important;align-items:stretch !important;padding:8px 12px 16px !important;gap:2px !important;box-shadow:0 12px 32px rgba(0,0,0,.7) !important;border-top:1px solid rgba(255,255,255,.08) !important;}
+      .nav-links.open{display:flex !important;}
+      .nav-links a{color:#fff !important;-webkit-text-fill-color:#fff !important;padding:13px 16px !important;font-size:.95rem !important;border-radius:10px !important;}
+    }
+
+    /* LANG BAR */
+    .lang-bar{background:#292524;padding:8px 24px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;border-bottom:1px solid rgba(255,255,255,.06);}
+    .lang-bar span{font-size:.72rem;font-weight:700;color:#A8A29E;text-transform:uppercase;letter-spacing:.1em;}
+    .lang-btn{font-size:.8rem;font-weight:700;padding:4px 12px;border-radius:8px;text-decoration:none;border:1.5px solid rgba(255,255,255,.2);color:#D6D3D1 !important;-webkit-text-fill-color:#D6D3D1 !important;}
+    .lang-btn.active{background:#FF6B35;border-color:#FF6B35;color:white !important;-webkit-text-fill-color:white !important;}
+
+    /* HERO */
+    .hero{background:#1C1917;padding:52px 24px 44px;text-align:center;position:relative;overflow:hidden;}
+    .hero::before{content:'';position:absolute;inset:0;pointer-events:none;
+      background:radial-gradient(ellipse 60% 70% at 20% 80%,rgba(37,99,235,.15) 0%,transparent 60%),
+                 radial-gradient(ellipse 60% 70% at 80% 20%,rgba(124,58,237,.15) 0%,transparent 60%);}
+    .hero-eye{font-size:.72rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#FF6B35;margin-bottom:12px;position:relative;}
+    .hero h1{font-family:'Fredoka One',cursive;font-size:clamp(1.9rem,5vw,3.2rem);color:white;margin-bottom:12px;position:relative;line-height:1.1;}
+    .hero h1 em{font-style:normal;background:linear-gradient(135deg,#FFD23F,#FF6B35);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+    .hero-sub{color:#A8A29E;font-size:.95rem;font-weight:600;max-width:520px;margin:0 auto 28px;line-height:1.7;position:relative;}
+    .hero-pills{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;position:relative;}
+    .hero-pill{font-size:.78rem;font-weight:700;padding:5px 14px;border-radius:50px;border:1.5px solid rgba(255,255,255,.15);color:#D6D3D1;}
+
+    /* PRINT BUTTON */
+    .print-row{display:flex;align-items:center;gap:12px;flex-wrap:wrap;max-width:1080px;margin:28px auto 0;padding:0 24px;}
+    .btn-print{font-family:'Fredoka One',cursive;font-size:.95rem;background:linear-gradient(135deg,#FF6B35,#FF3D77);color:white !important;-webkit-text-fill-color:white !important;padding:11px 26px;border-radius:12px;text-decoration:none;border:none;cursor:pointer;display:inline-flex;align-items:center;gap:7px;transition:transform .15s,box-shadow .15s;}
+    .btn-print:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(255,107,53,.4);}
+    .print-note{font-size:.8rem;font-weight:600;color:#78716C;}
+
+    /* FILTER */
+    .filter-bar{max-width:1080px;margin:28px auto 0;padding:0 24px;display:flex;gap:8px;flex-wrap:wrap;align-items:center;}
+    .filter-label{font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:.12em;color:#78716C;margin-right:4px;}
+    .filter-btn{font-size:.78rem;font-weight:700;padding:6px 16px;border-radius:50px;border:1.5px solid #E8DCC8;background:white;color:#44403C !important;-webkit-text-fill-color:#44403C !important;cursor:pointer;transition:all .15s;}
+    .filter-btn.active{color:white !important;-webkit-text-fill-color:white !important;border-color:transparent;}
+    .filter-btn[data-cat="all"].active{background:#1C1917;}
+    .filter-btn[data-cat="trigger"].active{background:#D97706;}
+    .filter-btn[data-cat="motion"].active{background:#2563EB;}
+    .filter-btn[data-cat="looks"].active{background:#7C3AED;}
+    .filter-btn[data-cat="sound"].active{background:#16A34A;}
+    .filter-btn[data-cat="control"].active{background:#EA580C;}
+    .filter-btn[data-cat="end"].active{background:#DC2626;}
+
+    /* MAIN */
+    .main{max-width:1080px;margin:0 auto;padding:32px 24px 80px;}
+
+    /* CATEGORY HEADER */
+    .cat-header{display:flex;align-items:center;gap:14px;margin:36px 0 16px;}
+    .cat-dot{width:14px;height:14px;border-radius:50%;flex-shrink:0;}
+    .cat-title{font-family:'Fredoka One',cursive;font-size:1.4rem;}
+    .cat-desc{font-size:.84rem;font-weight:600;color:#78716C;margin-left:auto;text-align:right;}
+    .cat-header.hidden{display:none;}
+
+    /* GRID */
+    .cards-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px;margin-bottom:8px;}
+
+    /* FLASHCARD */
+    .fc{background:white;border-radius:20px;overflow:hidden;border:2px solid #E8DCC8;box-shadow:0 3px 14px rgba(0,0,0,.06);transition:transform .2s,box-shadow .2s;page-break-inside:avoid;break-inside:avoid;}
+    .fc:hover{transform:translateY(-4px);box-shadow:0 12px 36px rgba(0,0,0,.11);}
+    .fc.hidden{display:none;}
+
+    /* BLOCK PREVIEW — CSS-drawn block shape */
+    .fc-preview{height:100px;display:flex;align-items:center;justify-content:center;position:relative;padding:16px;}
+
+    /* Puzzle-piece block shape */
+    .block-shape{
+      display:inline-flex;align-items:center;justify-content:center;gap:6px;
+      padding:10px 16px 10px 20px;
+      border-radius:8px;
+      position:relative;
+      min-width:120px;
+      font-family:'Fredoka One',cursive;
+      font-size:1rem;
+      color:white;
+      box-shadow:0 4px 12px rgba(0,0,0,.2);
+      letter-spacing:.01em;
+    }
+    /* Left tab (connector nub) */
+    .block-shape::before{
+      content:'';
+      position:absolute;
+      left:-10px;top:50%;transform:translateY(-50%);
+      width:10px;height:20px;
+      border-radius:4px 0 0 4px;
+      background:inherit;
+      filter:brightness(.85);
+    }
+    /* Right slot (receives next block) */
+    .block-shape.has-slot::after{
+      content:'';
+      position:absolute;
+      right:-10px;top:50%;transform:translateY(-50%);
+      width:10px;height:16px;
+      background:rgba(0,0,0,.2);
+      border-radius:0 4px 4px 0;
+    }
+    /* Trigger blocks — no left tab, rounded left */
+    .block-shape.trigger-shape::before{display:none;}
+    .block-shape.trigger-shape{border-radius:50px 8px 8px 50px;padding-left:22px;}
+
+    /* End block — no right slot, rounded right */
+    .block-shape.end-shape::after{display:none;}
+    .block-shape.end-shape{border-radius:8px 50px 50px 8px;padding-right:22px;}
+
+    /* Number input inside block */
+    .block-num{
+      background:rgba(255,255,255,.3);
+      border-radius:4px;
+      width:22px;height:22px;
+      display:flex;align-items:center;justify-content:center;
+      font-size:.75rem;font-weight:900;color:white;
+      flex-shrink:0;
+    }
+
+    /* BODY */
+    .fc-body{padding:14px 16px 16px;}
+    .fc-name{font-family:'Fredoka One',cursive;font-size:1.05rem;margin-bottom:5px;line-height:1.1;}
+    .fc-what{font-size:.82rem;font-weight:700;color:#1C1917 !important;-webkit-text-fill-color:#1C1917 !important;line-height:1.5;margin-bottom:9px;}
+    .fc-example{font-size:.75rem;font-weight:700;color:#78716C;line-height:1.4;display:flex;gap:6px;align-items:flex-start;}
+    .fc-example-icon{font-size:.9rem;flex-shrink:0;}
+    .fc-tip{font-size:.72rem;font-weight:700;background:#FAFAF8;border-left:3px solid #E8DCC8;padding:5px 8px;border-radius:0 6px 6px 0;color:#44403C !important;-webkit-text-fill-color:#44403C !important;margin-top:8px;line-height:1.4;}
+
+    /* COLOUR FAMILIES */
+    .c-trigger{background:#D97706;} .c-trigger-bg{background:#FEF3C7;}
+    .c-motion{background:#2563EB;} .c-motion-bg{background:#EFF6FF;}
+    .c-looks{background:#7C3AED;} .c-looks-bg{background:#FAF5FF;}
+    .c-sound{background:#16A34A;} .c-sound-bg{background:#F0FDF4;}
+    .c-control{background:#EA580C;} .c-control-bg{background:#FFF7ED;}
+    .c-end{background:#DC2626;} .c-end-bg{background:#FEF2F2;}
+
+    .fc-name.c-trigger-text{color:#92400E !important;-webkit-text-fill-color:#92400E !important;}
+    .fc-name.c-motion-text{color:#1E40AF !important;-webkit-text-fill-color:#1E40AF !important;}
+    .fc-name.c-looks-text{color:#4C1D95 !important;-webkit-text-fill-color:#4C1D95 !important;}
+    .fc-name.c-sound-text{color:#14532D !important;-webkit-text-fill-color:#14532D !important;}
+    .fc-name.c-control-text{color:#7C2D12 !important;-webkit-text-fill-color:#7C2D12 !important;}
+    .fc-name.c-end-text{color:#7F1D1D !important;-webkit-text-fill-color:#7F1D1D !important;}
+
+    .fc-tip.c-trigger-tip{border-left-color:#D97706;}
+    .fc-tip.c-motion-tip{border-left-color:#2563EB;}
+    .fc-tip.c-looks-tip{border-left-color:#7C3AED;}
+    .fc-tip.c-sound-tip{border-left-color:#16A34A;}
+    .fc-tip.c-control-tip{border-left-color:#EA580C;}
+    .fc-tip.c-end-tip{border-left-color:#DC2626;}
+
+    /* HOW TO USE BOX */
+    .how-box{background:white;border:1.5px solid #E8DCC8;border-radius:16px;padding:20px 24px;display:flex;gap:20px;flex-wrap:wrap;margin:28px 24px 0;max-width:1080px;}
+    .how-item{display:flex;gap:10px;align-items:flex-start;flex:1;min-width:180px;}
+    .how-icon{font-size:1.3rem;flex-shrink:0;margin-top:1px;}
+    .how-text strong{display:block;font-size:.88rem;color:#1C1917;margin-bottom:2px;}
+    .how-text span{font-size:.78rem;color:#78716C;font-weight:600;line-height:1.45;}
+
+    /* PRINT */
+    @media print{
+      .hero,.lang-bar,.print-row,.filter-bar,.how-box,.site-nav,.site-footer,.cat-desc{display:none !important;}
+      body{background:white !important;padding:0;}
+      .main{padding:8px;}
+      .cat-header{margin:20px 0 10px;page-break-after:avoid;}
+      .cards-grid{grid-template-columns:repeat(3,1fr);gap:10px;}
+      .fc{box-shadow:none;border:1.5px solid #ddd;}
+      .fc.hidden{display:none !important;}
+    }
+    @media(max-width:500px){.cards-grid{grid-template-columns:1fr 1fr;}}
+    @media(max-width:360px){.cards-grid{grid-template-columns:1fr;}}
+  </style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <a href="../index.html" class="nav-logo">🐱 ScratchJr Adventure</a>
+  <button class="nav-toggle" id="navToggle" aria-label="Menu"><span></span><span></span><span></span></button>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="../index.html">🏠 Home</a></li>
+    <li><a href="curriculum.html">📅 Curriculum</a></li>
+    <li><a href="activity-cards.html">🧩 Activity Cards</a></li>
+    <li><a href="project-gallery.html">🎨 Gallery</a></li>
+    <li><a href="block-flashcards.html" class="active">🃏 Flashcards</a></li>
+    <li><a href="badges.html">🏅 Badges</a></li>
+    <li><a href="whats-next.html">🚀 What's Next</a></li>
+    <li><a href="troubleshooting.html">🔧 Help</a></li>
+  </ul>
+</nav>
+
+<div class="lang-bar">
+  <span>🌍 Language:</span>
+  <a href="block-flashcards.html" class="lang-btn active">🇬🇧 English</a>
+  <a href="block-flashcards-bg.html" class="lang-btn">🇧🇬 Български</a>
+</div>
+
+<div class="hero">
+  <div class="hero-eye">🃏 Reference Cards for Kids</div>
+  <h1>Block <em>Flashcards</em></h1>
+  <p class="hero-sub">Every ScratchJr block — its name, its colour, and exactly what it does in plain language. Print, cut, and keep next to the tablet.</p>
+  <div class="hero-pills">
+    <span class="hero-pill">🟡 Trigger Blocks</span>
+    <span class="hero-pill">🔵 Motion Blocks</span>
+    <span class="hero-pill">🟣 Looks Blocks</span>
+    <span class="hero-pill">🟢 Sound Blocks</span>
+    <span class="hero-pill">🟠 Control Blocks</span>
+    <span class="hero-pill">🔴 End Blocks</span>
+  </div>
+</div>
+
+<div class="how-box" style="margin-left:auto;margin-right:auto;">
+  <div class="how-item"><span class="how-icon">✂️</span><div class="how-text"><strong>Print &amp; cut</strong><span>Print this page, cut along each card border. Works in black &amp; white too.</span></div></div>
+  <div class="how-item"><span class="how-icon">📚</span><div class="how-text"><strong>Reference stack</strong><span>Keep the cards rubber-banded next to the tablet. Grab the right colour when stuck.</span></div></div>
+  <div class="how-item"><span class="how-icon">🎮</span><div class="how-text"><strong>Quiz game</strong><span>One person picks a card and mimes the block's effect — the other guesses the name!</span></div></div>
+  <div class="how-item"><span class="how-icon">🗂️</span><div class="how-text"><strong>Sort by colour</strong><span>Group cards by colour family — Blue for moving, Purple for looking, Green for sound…</span></div></div>
+</div>
+
+<div class="print-row">
+  <button class="btn-print" onclick="window.print()">🖨️ Print All Flashcards</button>
+  <span class="print-note">28 cards · 6 colour groups · Print on A4, cut along borders</span>
+</div>
+
+<div class="filter-bar">
+  <span class="filter-label">Show:</span>
+  <button class="filter-btn active" data-cat="all">All blocks</button>
+  <button class="filter-btn" data-cat="trigger">🟡 Trigger</button>
+  <button class="filter-btn" data-cat="motion">🔵 Motion</button>
+  <button class="filter-btn" data-cat="looks">🟣 Looks</button>
+  <button class="filter-btn" data-cat="sound">🟢 Sound</button>
+  <button class="filter-btn" data-cat="control">🟠 Control</button>
+  <button class="filter-btn" data-cat="end">🔴 End</button>
+</div>
+
+<div class="main">
+
+<!-- ══════════════════════════════════════════
+     🟡 TRIGGER BLOCKS
+══════════════════════════════════════════ -->
+<div class="cat-header" id="cat-trigger">
+  <div class="cat-dot c-trigger"></div>
+  <div class="cat-title" style="color:#92400E;">Trigger Blocks</div>
+  <div class="cat-desc">Yellow · Go at the START of every script · These make things begin</div>
+</div>
+<div class="cards-grid">
+
+  <div class="fc" data-cat="trigger">
+    <div class="fc-preview c-trigger-bg">
+      <div class="block-shape c-trigger trigger-shape has-slot">
+        <span>▶</span> Green Flag
+      </div>
+    </div>
+    <div class="fc-body">
+      <div class="fc-name c-trigger-text">Green Flag</div>
+      <div class="fc-what">Starts the script when the big green flag button is pressed. This is the main "Play" button for your whole project.</div>
+      <div class="fc-example"><span class="fc-example-icon">💡</span><span>Put this at the start of every script you want to run when you press Play.</span></div>
+      <div class="fc-tip c-trigger-tip">Every script MUST start with a trigger block. No trigger = nothing happens!</div>
+    </div>
+  </div>
+
+  <div class="fc" data-cat="trigger">
+    <div class="fc-preview c-trigger-bg">
+      <div class="block-shape c-trigger trigger-shape has-slot">
+        <span>👆</span> Tap
+      </div>
+    </div>
+    <div class="fc-body">
+      <div class="fc-name c-trigger-text">Tap (Character)</div>
+      <div class="fc-what">Starts the script when you tap that specific character on the screen with your finger.</div>
+      <div class="fc-example"><span class="fc-example-icon">💡</span><span>Tap the dog → it barks. Tap the star → it disappears. Each character can have its own tap script!</span></div>
+      <div class="fc-tip c-trigger-tip">A character can have BOTH a Green Flag script AND a Tap script — they work independently.</div>
+    </div>
+  </div>
+
+  <div class="fc" data-cat="trigger">
+    <div class="fc-preview c-trigger-bg">
+      <div class="block-shape c-trigger trigger-shape has-slot">
+        <span>📩</span> Receive
+      </div>
+    </div>
+    <div class="fc-body">
+      <div class="fc-name c-trigger-text">Receive Message</div>
+      <div class="fc-what">Starts the script when a matching coloured message arrives. Waits silently until that message colour is sent by another character.</div>
+      <div class="fc-example"><span class="fc-example-icon">💡</span><span>Character A sends a red message → Character B's red Receive block fires and it starts moving.</span></div>
+      <div class="fc-tip c-trigger-tip">The colour of Send and Receive MUST match exactly. Different colour = nothing happens.</div>
+    </div>
+  </div>
+
+  <div class="fc" data-cat="trigger">
+    <div class="fc-preview c-trigger-bg">
+      <div class="block-shape c-trigger trigger-shape has-slot">
+        <span>📳</span> Bump
+      </div>
+    </div>
+    <div class="fc-body">
+      <div class="fc-name c-trigger-text">Bump (Shake)</div>
+      <div class="fc-what">Starts the script when the device is shaken or bumped. A fun surprise trigger!</div>
+      <div class="fc-example"><span class="fc-example-icon">💡</span><span>Shake the tablet → an earthquake happens on screen → characters fly in all directions!</span></div>
+      <div class="fc-tip c-trigger-tip">Works best on real tablets/phones. Great for secret effects that surprise younger kids.</div>
+    </div>
+  </div>
+
+</div><!-- end trigger grid -->
+
+
+<!-- ══════════════════════════════════════════
+     🔵 MOTION BLOCKS
+══════════════════════════════════════════ -->
+<div class="cat-header" id="cat-motion">
+  <div class="cat-dot c-motion"></div>
+  <div class="cat-title" style="color:#1E40AF;">Motion Blocks</div>
+  <div class="cat-desc">Blue · Move characters around the stage</div>
+</div>
+<div class="cards-grid">
+
+  <div class="fc" data-cat="motion">
+    <div class="fc-preview c-motion-bg">
+      <div class="block-shape c-motion has-slot">
+        <span>→</span> Move Right <div class="block-num">1</div>
+      </div>
+    </div>
+    <div class="fc-body">
+      <div class="fc-name c-motion-text">Move Right</div>
+      <div class="fc-what">Moves the character to the right by the number of steps shown. The number in the box controls how far — bigger number = farther.</div>
+      <div class="fc-example"><span class="fc-example-icon">💡</span><span>Number 1 = tiny step. Number 10 = big jump across the screen.</span></div>
+      <div class="fc-tip c-motion-tip">Tap the number inside the block to change it. Chain multiple blocks to travel farther!</div>
+    </div>
+  </div>
+
+  <div class="fc" data-cat="motion">
+    <div class="fc-preview c-motion-bg">
+      <div class="block-shape c-motion has-slot">
+        <span>←</span> Move Left <div class="block-num">1</div>
+      </div>
+    </div>
+    <div class="fc-body">
+      <div class="fc-name c-motion-text">Move Left</div>
+      <div class="fc-what">Moves the character to the left. Same as Move Right but in the opposite direction.</div>
+      <div class="fc-example"><span class="fc-example-icon">💡</span><span>Right then Left makes a character pace back and forth.</span></div>
+      <div class="fc-tip c-motion-tip">Characters keep facing the same direction when moving left — they don't flip around automatically.</div>
+    </div>
+  </div>
+
+  <div class="fc" data-cat="motion">
+    <div class="fc-preview c-motion-bg">
+      <div class="block-shape c-motion has-slot">
+        <span>↑</span> Move Up <div class="block-num">1</div>
+      </div>
+    </div>
+    <div class="fc-body">
+      <div class="fc-name c-motion-text">Move Up</div>
+      <div class="fc-what">Moves the character up the screen. Use it to make things fly, jump, or float upwards.</div>
+      <div class="fc-example"><span class="fc-example-icon">💡</span><span>Move Up + Move Down = a bouncing ball or a jumping character.</span></div>
+      <div class="fc-tip c-motion-tip">Combine with Move Right for diagonal movement — characters can move diagonally!</div>
+    </div>
+  </div>
+
+  <div class="fc" data-cat="motion">
+    <div class="fc-preview c-motion-bg">
+      <div class="block-shape c-motion has-slot">
+        <span>↓</span> Move Down <div class="block-num">1</div>
+      </div>
+    </div>
+    <div class="fc-body">
+      <div class="fc-name c-motion-text">Move Down</div>
+      <div class="fc-what">Moves the character down the screen. For falling, sinking, or walking downhill.</div>
+      <div class="fc-example"><span class="fc-example-icon">💡</span><span>Make rain fall with several small characters using Move Down in a loop.</span></div>
+      <div class="fc-tip c-motion-tip">Characters can go below the bottom edge of the screen and "disappear" — useful for exits!</div>
+    </div>
+  </div>
+
+  <div class="fc" data-cat="motion">
+    <div class="fc-preview c-motion-bg">
+      <div class="block-shape c-motion has-slot">
+        <span>↩️</span> Turn Right <div class="block-num">1</div>
+      </div>
+    </div>
+    <div class="fc-body">
+      <div class="fc-name c-motion-text">Turn Right</div>
+      <div class="fc-what">Rotates the character clockwise. The number controls how many clockwise turns — 1 turn = a small rotation, 12 turns = a full 360° spin.</div>
+      <div class="fc-example"><span class="fc-example-icon">💡</span><span>Turn Right 6 = half a turn. Turn Right 12 = full spin. Great for wheels and propellers!</span></div>
+      <div class="fc-tip c-motion-tip">Inside a loop, even a small turn creates a spinning animation effect.</div>
+    </div>
+  </div>
+
+  <div class="fc" data-cat="motion">
+    <div class="fc-preview c-motion-bg">
+      <div class="block-shape c-motion has-slot">
+        <span>↪️</span> Turn Left <div class="block-num">1</div>
+      </div>
+    </div>
+    <div class="fc-body">
+      <div class="fc-name c-motion-text">Turn Left</div>
+      <div class="fc-what">Rotates the character counter-clockwise. Opposite of Turn Right.</div>
+      <div class="fc-example"><span class="fc-example-icon">💡</span><span>Turn Right then Turn Left in a loop = a wobbling wiggle dance!</span></div>
+      <div class="fc-tip c-motion-tip">Alternating Turn Right and Turn Left creates a rocking or shaking effect — perfect for a scared character!</div>
+    </div>
+  </div>
+
+  <div class="fc" data-cat="motion">
+    <div class="fc-preview c-motion-bg">
+      <div class="block-shape c-motion has-slot">
+        <span>🏠</span> Go Home
+      </div>
+    </div>
+    <div class="fc-body">
+      <div class="fc-name c-motion-text">Go Home</div>
+      <div class="fc-what">Instantly teleports the character back to where it started — its "home" position on the stage.</div>
+      <div class="fc-example"><span class="fc-example-icon">💡</span><span>At the end of a game, Go Home resets every character to its starting position so the game can be played again.</span></div>
+      <div class="fc-tip c-motion-tip">A character's home is wherever you placed it when you added it. You can move it to set a new home.</div>
+    </div>
+  </div>
+
+  <div class="fc" data-cat="motion">
+    <div class="fc-preview c-motion-bg">
+      <div class="block-shape c-motion has-slot">
+        <span>💨</span> Hop
+      </div>
+    </div>
+    <div class="fc-body">
+      <div class="fc-name c-motion-text">Hop</div>
+      <div class="fc-what">Makes the character jump forward with a little arc — like a hop! It moves up and then comes back down in one smooth motion.</div>
+      <div class="fc-example"><span class="fc-example-icon">💡</span><span>Perfect for a frog jumping, a rabbit hopping, or a person skipping.</span></div>
+      <div class="fc-tip c-motion-tip">Hop always goes in the direction the character is facing. Rotate first to control the direction of the hop.</div>
+    </div>
+  </div>
+
+</div><!-- end motion grid -->
+
+
+<!-- ══════════════════════════════════════════
+     🟣 LOOKS BLOCKS
+══════════════════════════════════════════ -->
+<div class="cat-header" id="cat-looks">
+  <div class="cat-dot c-looks"></div>
+  <div class="cat-title" style="color:#4C1D95;">Looks Blocks</div>
+  <div class="cat-desc">Purple · Change how characters look</div>
+</div>
+<div class="cards-grid">
+
+  <div class="fc" data-cat="looks">
+    <div class="fc-preview c-looks-bg">
+      <div class="block-shape c-looks has-slot">
+        <span>💬</span> Say
+      </div>
+    </div>
+    <div class="fc-body">
+      <div class="fc-name c-looks-text">Say</div>
+      <div class="fc-what">Shows a speech bubble with text above the character. Tap the block to type what you want the character to say.</div>
+      <div class="fc-example"><span class="fc-example-icon">💡</span><span>Type "Hello!" and the character will show a speech bubble saying Hello! for a moment.</span></div>
+      <div class="fc-tip c-looks-tip">The bubble appears briefly. Use a Wait block after Say to give people time to read it.</div>
+    </div>
+  </div>
+
+  <div class="fc" data-cat="looks">
+    <div class="fc-preview c-looks-bg">
+      <div class="block-shape c-looks has-slot">
+        <span>📈</span> Grow
+      </div>
+    </div>
+    <div class="fc-body">
+      <div class="fc-name c-looks-text">Grow</div>
+      <div class="fc-what">Makes the character bigger by one size step. Each Grow block adds one step of size.</div>
+      <div class="fc-example"><span class="fc-example-icon">💡</span><span>Chain 5 Grow blocks in a row to make a character grow dramatically large!</span></div>
+      <div class="fc-tip c-looks-tip">Grow inside a loop creates a continuous growing animation. Combine with Shrink for a pulsing effect.</div>
+    </div>
+  </div>
+
+  <div class="fc" data-cat="looks">
+    <div class="fc-preview c-looks-bg">
+      <div class="block-shape c-looks has-slot">
+        <span>📉</span> Shrink
+      </div>
+    </div>
+    <div class="fc-body">
+      <div class="fc-name c-looks-text">Shrink</div>
+      <div class="fc-what">Makes the character smaller by one size step. Opposite of Grow.</div>
+      <div class="fc-example"><span class="fc-example-icon">💡</span><span>Shrink + Grow + Shrink + Grow in a loop = a heartbeat pulsing animation!</span></div>
+      <div class="fc-tip c-looks-tip">A character can shrink until it disappears completely — great for a "poof, it's gone!" effect.</div>
+    </div>
+  </div>
+
+  <div class="fc" data-cat="looks">
+    <div class="fc-preview c-looks-bg">
+      <div class="block-shape c-looks has-slot">
+        <span>🙈</span> Hide
+      </div>
+    </div>
+    <div class="fc-body">
+      <div class="fc-name c-looks-text">Hide</div>
+      <div class="fc-what">Makes the character invisible — it disappears from the screen but is still there. It can reappear with a Show block.</div>
+      <div class="fc-example"><span class="fc-example-icon">💡</span><span>Hide a star at the start → when it's "caught" it hides → looks like it was collected!</span></div>
+      <div class="fc-tip c-looks-tip">A hidden character's scripts still run! It can still send messages and react — you just can't see it.</div>
+    </div>
+  </div>
+
+  <div class="fc" data-cat="looks">
+    <div class="fc-preview c-looks-bg">
+      <div class="block-shape c-looks has-slot">
+        <span>👁️</span> Show
+      </div>
+    </div>
+    <div class="fc-body">
+      <div class="fc-name c-looks-text">Show</div>
+      <div class="fc-what">Makes a hidden character visible again. Like magic — it appears out of thin air!</div>
+      <div class="fc-example"><span class="fc-example-icon">💡</span><span>Start with a character hidden → make it appear with Show when a message arrives → surprise reveal!</span></div>
+      <div class="fc-tip c-looks-tip">Hide + Show in a forever loop = a flashing, blinking animation. Great for alarms and lights!</div>
+    </div>
+  </div>
+
+  <div class="fc" data-cat="looks">
+    <div class="fc-preview c-looks-bg">
+      <div class="block-shape c-looks has-slot">
+        <span>🔄</span> Reset Size
+      </div>
+    </div>
+    <div class="fc-body">
+      <div class="fc-name c-looks-text">Reset Size</div>
+      <div class="fc-what">Returns the character instantly to its original size — no matter how big or small it has become.</div>
+      <div class="fc-example"><span class="fc-example-icon">💡</span><span>After growing huge for a dramatic effect, Reset Size snaps it back to normal instantly.</span></div>
+      <div class="fc-tip c-looks-tip">Great at the start of a "play again" reset sequence to restore everything to its original state.</div>
+    </div>
+  </div>
+
+</div><!-- end looks grid -->
+
+
+<!-- ══════════════════════════════════════════
+     🟢 SOUND BLOCKS
+══════════════════════════════════════════ -->
+<div class="cat-header" id="cat-sound">
+  <div class="cat-dot c-sound"></div>
+  <div class="cat-title" style="color:#14532D;">Sound Blocks</div>
+  <div class="cat-desc">Green · Add sounds, music &amp; voice</div>
+</div>
+<div class="cards-grid">
+
+  <div class="fc" data-cat="sound">
+    <div class="fc-preview c-sound-bg">
+      <div class="block-shape c-sound has-slot">
+        <span>🎵</span> Play Sound
+      </div>
+    </div>
+    <div class="fc-body">
+      <div class="fc-name c-sound-text">Play Sound</div>
+      <div class="fc-what">Plays a sound effect from ScratchJr's library — things like "pop!", "meow", "boing", and more. Tap the block to pick which sound.</div>
+      <div class="fc-example"><span class="fc-example-icon">💡</span><span>Tap a character → it plays a "boing" sound → feels like a real button in an app!</span></div>
+      <div class="fc-tip c-sound-tip">The script continues while the sound plays. Use a Wait block if you want the next action to happen AFTER the sound finishes.</div>
+    </div>
+  </div>
+
+  <div class="fc" data-cat="sound">
+    <div class="fc-preview c-sound-bg">
+      <div class="block-shape c-sound has-slot">
+        <span>🎤</span> Record
+      </div>
+    </div>
+    <div class="fc-body">
+      <div class="fc-name c-sound-text">Record (Voice)</div>
+      <div class="fc-what">Records your own voice or any sound using the device microphone and saves it to this block. Plays your recording when the script runs.</div>
+      <div class="fc-example"><span class="fc-example-icon">💡</span><span>Record "3… 2… 1… Launch!" → attach to a rocket character → it narrates its own launch!</span></div>
+      <div class="fc-tip c-sound-tip">Record in a quiet room and speak clearly. Each block can hold one unique recording.</div>
+    </div>
+  </div>
+
+  <div class="fc" data-cat="sound">
+    <div class="fc-preview c-sound-bg">
+      <div class="block-shape c-sound has-slot">
+        <span>🔇</span> Stop Sound
+      </div>
+    </div>
+    <div class="fc-body">
+      <div class="fc-name c-sound-text">Stop Sound</div>
+      <div class="fc-what">Stops any sound that is currently playing. Useful to cut a sound short before it finishes naturally.</div>
+      <div class="fc-example"><span class="fc-example-icon">💡</span><span>Music playing in a loop → tap a button character → Stop Sound cuts the music suddenly for dramatic effect.</span></div>
+      <div class="fc-tip c-sound-tip">Stops ALL sounds — not just the one from the same character. Good for a reset or "game over" moment.</div>
+    </div>
+  </div>
+
+  <div class="fc" data-cat="sound">
+    <div class="fc-preview c-sound-bg">
+      <div class="block-shape c-sound has-slot">
+        <span>🎹</span> Play Note
+      </div>
+    </div>
+    <div class="fc-body">
+      <div class="fc-name c-sound-text">Play Note</div>
+      <div class="fc-what">Plays a musical note. Tap the block to select the pitch. Chain different notes together to create a melody.</div>
+      <div class="fc-example"><span class="fc-example-icon">💡</span><span>Connect 8 notes in a row to play "Happy Birthday" — each block is one note of the song.</span></div>
+      <div class="fc-tip c-sound-tip">Build a tap-instrument by giving each character a different note. Tap them in order to play a tune!</div>
+    </div>
+  </div>
+
+</div><!-- end sound grid -->
+
+
+<!-- ══════════════════════════════════════════
+     🟠 CONTROL BLOCKS
+══════════════════════════════════════════ -->
+<div class="cat-header" id="cat-control">
+  <div class="cat-dot c-control"></div>
+  <div class="cat-title" style="color:#7C2D12;">Control Blocks</div>
+  <div class="cat-desc">Orange · Control timing, repeating &amp; messages</div>
+</div>
+<div class="cards-grid">
+
+  <div class="fc" data-cat="control">
+    <div class="fc-preview c-control-bg">
+      <div class="block-shape c-control has-slot">
+        <span>⏳</span> Wait <div class="block-num">1</div>
+      </div>
+    </div>
+    <div class="fc-body">
+      <div class="fc-name c-control-text">Wait</div>
+      <div class="fc-what">Pauses the script for a set number of seconds before continuing to the next block. Controls the timing of your animation.</div>
+      <div class="fc-example"><span class="fc-example-icon">💡</span><span>Say "Ready?" → Wait 2 → Say "GO!" — the pause makes the countdown feel real.</span></div>
+      <div class="fc-tip c-control-tip">Wait 1 = 1 second pause. Experiment — different wait times create totally different moods!</div>
+    </div>
+  </div>
+
+  <div class="fc" data-cat="control">
+    <div class="fc-preview c-control-bg" style="align-items:center;justify-content:center;gap:0;">
+      <div style="display:flex;flex-direction:column;align-items:flex-start;gap:2px;">
+        <div class="block-shape c-control" style="border-radius:8px 8px 0 0;min-width:100px;padding-right:8px;">
+          <span>🔁</span> Repeat <div class="block-num">2</div>
+        </div>
+        <div style="border-left:4px solid #EA580C;margin-left:12px;padding:4px 8px;background:#FFEDD5;border-radius:0 4px 4px 0;font-size:.65rem;font-weight:800;color:#7C2D12;width:90px;">→ blocks inside</div>
+        <div class="block-shape c-control" style="border-radius:0 0 8px 8px;min-width:100px;font-size:.7rem;padding:6px 12px;">end repeat</div>
+      </div>
+    </div>
+    <div class="fc-body">
+      <div class="fc-name c-control-text">Repeat</div>
+      <div class="fc-what">Runs the blocks inside it a set number of times, then moves on. The number controls how many times it repeats.</div>
+      <div class="fc-example"><span class="fc-example-icon">💡</span><span>Repeat 3 → Move Right → runs Move Right three times in a row without needing three separate blocks.</span></div>
+      <div class="fc-tip c-control-tip">Repeat 0 = skips the blocks inside entirely. Repeat 100 = runs a very long time. What does Repeat 1 do?</div>
+    </div>
+  </div>
+
+  <div class="fc" data-cat="control">
+    <div class="fc-preview c-control-bg" style="align-items:center;justify-content:center;">
+      <div style="display:flex;flex-direction:column;align-items:flex-start;gap:2px;">
+        <div class="block-shape c-control" style="border-radius:8px 8px 0 0;min-width:100px;padding-right:8px;">
+          <span>♾️</span> Forever
+        </div>
+        <div style="border-left:4px solid #EA580C;margin-left:12px;padding:4px 8px;background:#FFEDD5;border-radius:0 4px 4px 0;font-size:.65rem;font-weight:800;color:#7C2D12;width:90px;">→ loops forever</div>
+        <div class="block-shape c-control" style="border-radius:0 0 8px 8px;min-width:100px;font-size:.7rem;padding:6px 12px;">↩ goes back up</div>
+      </div>
+    </div>
+    <div class="fc-body">
+      <div class="fc-name c-control-text">Forever (Loop)</div>
+      <div class="fc-what">Runs the blocks inside it over and over — FOREVER — until the red stop button is pressed. It never ends on its own.</div>
+      <div class="fc-example"><span class="fc-example-icon">💡</span><span>Forever → Grow → Shrink = wings flapping continuously, like a flying bird!</span></div>
+      <div class="fc-tip c-control-tip">Nothing after a Forever block will ever run — it loops infinitely. Use Stop to end it.</div>
+    </div>
+  </div>
+
+  <div class="fc" data-cat="control">
+    <div class="fc-preview c-control-bg">
+      <div class="block-shape c-control has-slot">
+        <span>📤</span> Send
+      </div>
+    </div>
+    <div class="fc-body">
+      <div class="fc-name c-control-text">Send Message</div>
+      <div class="fc-what">Sends a coloured signal to any character that has a matching Receive block. Used to make characters react to each other.</div>
+      <div class="fc-example"><span class="fc-example-icon">💡</span><span>Character A: Green Flag → Send Red → Character B: Receive Red → Jump. A controls B!</span></div>
+      <div class="fc-tip c-control-tip">ALL characters with the matching colour Receive block will react — you can trigger many characters with one Send!</div>
+    </div>
+  </div>
+
+  <div class="fc" data-cat="control">
+    <div class="fc-preview c-control-bg">
+      <div class="block-shape c-control has-slot">
+        <span>📄</span> Go to Page <div class="block-num">2</div>
+      </div>
+    </div>
+    <div class="fc-body">
+      <div class="fc-name c-control-text">Go to Page</div>
+      <div class="fc-what">Instantly jumps to a different page (scene) in your project. The number tells it which page to go to.</div>
+      <div class="fc-example"><span class="fc-example-icon">💡</span><span>End of Scene 1 → Go to Page 2. Tap a door → Go to Page 3. Build a whole story with page jumps!</span></div>
+      <div class="fc-tip c-control-tip">Change the page number by tapping it. Page 1 is always your first page — count from left in the page tray.</div>
+    </div>
+  </div>
+
+</div><!-- end control grid -->
+
+
+<!-- ══════════════════════════════════════════
+     🔴 END BLOCKS
+══════════════════════════════════════════ -->
+<div class="cat-header" id="cat-end">
+  <div class="cat-dot c-end"></div>
+  <div class="cat-title" style="color:#7F1D1D;">End Blocks</div>
+  <div class="cat-desc">Red · Go at the END of a script · These finish things off</div>
+</div>
+<div class="cards-grid">
+
+  <div class="fc" data-cat="end">
+    <div class="fc-preview c-end-bg">
+      <div class="block-shape c-end end-shape">
+        <span>🛑</span> Stop
+      </div>
+    </div>
+    <div class="fc-body">
+      <div class="fc-name c-end-text">Stop</div>
+      <div class="fc-what">Stops all scripts on ALL characters — like pressing the red stop button. Everything freezes instantly.</div>
+      <div class="fc-example"><span class="fc-example-icon">💡</span><span>Catch the star → Send WIN message → Character B receives WIN → Stop. Game over!</span></div>
+      <div class="fc-tip c-end-tip">Stop is permanent — nothing can restart after Stop except pressing the Green Flag again.</div>
+    </div>
+  </div>
+
+  <div class="fc" data-cat="end">
+    <div class="fc-preview c-end-bg">
+      <div class="block-shape c-end end-shape">
+        <span>🔂</span> Go Back
+      </div>
+    </div>
+    <div class="fc-body">
+      <div class="fc-name c-end-text">Go Back to Start</div>
+      <div class="fc-what">Jumps back to the very beginning of the same script and runs it again — like pressing play a second time automatically.</div>
+      <div class="fc-example"><span class="fc-example-icon">💡</span><span>Script: Move Right → Go Back to Start → the character slides right endlessly without a Forever loop!</span></div>
+      <div class="fc-tip c-end-tip">This creates a loop without using the Repeat or Forever blocks. It keeps running until you press Stop.</div>
+    </div>
+  </div>
+
+</div><!-- end end-blocks grid -->
+
+<!-- BOTTOM CTA -->
+<div style="background:#1C1917;border-radius:24px;padding:40px 36px;text-align:center;margin-top:48px;">
+  <div style="font-family:'Fredoka One',cursive;font-size:1.6rem;color:#FFD23F;margin-bottom:10px;">Ready to use these blocks? 🚀</div>
+  <p style="color:#A8A29E;font-weight:600;margin-bottom:24px;line-height:1.6;max-width:480px;margin-left:auto;margin-right:auto;">Open this page on your phone next to the tablet. When a child asks "what does this block do?" — look it up together!</p>
+  <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
+    <a href="activity-cards.html" style="font-family:'Fredoka One',cursive;font-size:.95rem;background:linear-gradient(135deg,#FF6B35,#FF3D77);color:white;padding:12px 26px;border-radius:12px;text-decoration:none;display:inline-flex;align-items:center;gap:7px;">🧩 Activity Cards</a>
+    <a href="project-gallery.html" style="font-family:'Fredoka One',cursive;font-size:.95rem;background:rgba(255,255,255,.08);color:#D6D3D1;border:1.5px solid rgba(255,255,255,.2);padding:12px 26px;border-radius:12px;text-decoration:none;display:inline-flex;align-items:center;gap:7px;">🎨 Project Gallery</a>
+  </div>
+</div>
+
+</div><!-- main -->
+
+<footer class="site-footer">
+  <div class="footer-links">
+    <a href="../index.html">Home</a>
+    <a href="curriculum.html">Curriculum</a>
+    <a href="activity-cards.html">Activity Cards</a>
+    <a href="project-gallery.html">Gallery</a>
+    <a href="block-flashcards.html">Flashcards</a>
+    <a href="badges.html">Badges</a>
+    <a href="whats-next.html">What's Next</a>
+    <a href="troubleshooting.html">Help</a>
+  </div>
+  <p style="color:#A8A29E;margin-bottom:8px;">Made with ❤️ for parents everywhere · Free &amp; Open Source · <a href="https://github.com" style="color:#FFD23F;text-decoration:none;">View on GitHub ↗</a></p>
+  <p style="font-size:.85rem;opacity:.8;color:#A8A29E;">Created by <strong style="color:#FFD23F;">Petya Lozanova</strong> · ScratchJr is a product of the Scratch Foundation · Independent educational resource</p>
+</footer>
+
+<script>
+  document.getElementById('navToggle').addEventListener('click',()=>document.getElementById('navLinks').classList.toggle('open'));
+  document.querySelectorAll('.nav-links a').forEach(a=>a.addEventListener('click',()=>document.getElementById('navLinks').classList.remove('open')));
+
+  // Filter
+  const btns  = document.querySelectorAll('.filter-btn');
+  const cards = document.querySelectorAll('.fc');
+  const heads = document.querySelectorAll('.cat-header');
+
+  btns.forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      btns.forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+      const cat = btn.dataset.cat;
+
+      cards.forEach(c=>{
+        c.classList.toggle('hidden', cat!=='all' && c.dataset.cat!==cat);
+      });
+      heads.forEach(h=>{
+        if(cat==='all') h.classList.remove('hidden');
+        else h.classList.toggle('hidden', h.id!=='cat-'+cat);
+      });
+    });
+  });
+</script>
+</body>
+</html>
