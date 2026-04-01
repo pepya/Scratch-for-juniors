@@ -2,9 +2,7 @@
 
 > A complete 6-week home learning program for kids aged 7–10. Daily 1-hour lessons, printable activity cards, teacher scripts, achievement badges, project ideas, block flashcards — and everything in **English and Bulgarian**. No coding experience needed.
 
-🌐 **Live site:** `https://yourusername.github.io/Scratch-for-juniors/`
-
-> Replace `yourusername` with your actual GitHub username. Find the exact URL under **Settings → Pages** in your repository.
+🌐 **Live site:** `https://pepya.github.io/Scratch-for-juniors/`
 
 ---
 
@@ -129,31 +127,6 @@ Scratch-for-juniors/
     ├── creative-expansions-bg.html ← Paper planning tools (БГ)
     └── whats-next.html             ← Learning roadmap after ScratchJr (EN)
 ```
-
----
-
-## 🚀 Publishing on GitHub Pages
-
-### 1. Create a GitHub account
-Go to [github.com](https://github.com) and sign up for a free account.
-
-### 2. Create a new repository
-- Click **+** → **New repository**
-- Name it: `Scratch-for-juniors`
-- Set to **Public**
-- Click **Create repository**
-
-### 3. Upload the files
-Click **Add file** → **Upload files** and upload maintaining the folder structure above. Click **Commit changes**.
-
-### 4. Enable GitHub Pages
-**Settings** → **Pages** → Source: **Deploy from a branch** → Branch: `main`, folder `/` → **Save**
-
-### 5. Live in 1–2 minutes 🎉
-```
-https://yourusername.github.io/Scratch-for-juniors/
-```
-
 ---
 
 ## 🖨️ Printing Tips
@@ -207,9 +180,9 @@ https://yourusername.github.io/Scratch-for-juniors/
 
 ## 🤝 Contributing
 
-- 🐛 **Bug or broken link?** Open an [Issue](https://github.com/yourusername/Scratch-for-juniors/issues)
-- 💡 **New idea?** Open a [Pull Request](https://github.com/yourusername/Scratch-for-juniors/pulls)
-- 🌍 **Want to translate?** Spanish, Italian, Portuguese, and French versions are planned. Contributions very welcome — the Bulgarian translation took ~4 hours and the infrastructure is already built.
+- 🐛 **Bug or broken link?** Open an [Issue](https://pepya.github.io/Scratch-for-juniors/issues)
+- 💡 **New idea?** Open a [Pull Request](https://pepya.github.io/Scratch-for-juniors/pulls)
+- 🌍 **Want to translate?** Spanish, Italian, Portuguese, and French versions are planned. Contributions very welcome and the infrastructure is already built.
 - The site is plain HTML/CSS — no framework, no build tools, no Node. Any text editor works.
 
 ---
