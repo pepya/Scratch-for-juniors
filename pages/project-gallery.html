@@ -1,0 +1,1010 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="color-scheme" content="light">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Project Gallery — ScratchJr Adventure</title>
+  <meta name="description" content="18 ScratchJr project ideas across 6 weeks. Stories, games, music videos and more — spark your child's imagination before they open the tablet.">
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Atkinson+Hyperlegible:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/site.css">
+  <style>
+    color-scheme: light only;
+
+    /* ── FORCE LIGHT ── */
+    html, body, .main, .gallery-grid, .proj-card, .proj-body {
+      background-color: #FFFBF5 !important;
+      color: #1C1917 !important;
+    }
+
+    /* ── NAV FIXES ── */
+    .nav-logo,.nav-logo:link,.nav-logo:visited,.nav-logo:hover { color:#FFD23F !important; -webkit-text-fill-color:#FFD23F !important; text-decoration:none !important; }
+    .nav-links a,.nav-links a:link,.nav-links a:visited { color:#D6D3D1 !important; -webkit-text-fill-color:#D6D3D1 !important; text-decoration:none !important; }
+    @media(max-width:700px){
+      .nav-toggle{display:flex !important;background:transparent !important;border:none !important;-webkit-appearance:none;width:40px;height:40px;flex-direction:column;align-items:center;justify-content:center;gap:5px;}
+      .nav-toggle span{display:block;width:22px;height:2px;background:white !important;border-radius:2px;}
+      .nav-links{display:none !important;position:fixed !important;top:58px !important;left:0 !important;right:0 !important;z-index:9999 !important;background:#1C1917 !important;flex-direction:column !important;align-items:stretch !important;padding:8px 12px 16px !important;gap:2px !important;box-shadow:0 12px 32px rgba(0,0,0,0.7) !important;border-top:1px solid rgba(255,255,255,0.08) !important;}
+      .nav-links.open{display:flex !important;}
+      .nav-links a,.nav-links a:link,.nav-links a:visited{color:#FFFFFF !important;-webkit-text-fill-color:#FFFFFF !important;padding:13px 16px !important;font-size:0.95rem !important;border-radius:10px !important;}
+    }
+
+    /* ── HERO ── */
+    .hero {
+      background: #1C1917;
+      padding: 56px 24px 48px;
+      text-align: center;
+      position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content:''; position:absolute; inset:0; pointer-events:none;
+      background:
+        radial-gradient(ellipse 60% 80% at 20% 80%, rgba(124,58,237,0.15) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 80% at 80% 20%, rgba(22,163,74,0.15) 0%, transparent 60%),
+        radial-gradient(ellipse 40% 50% at 50% 110%, rgba(255,107,53,0.12) 0%, transparent 55%);
+    }
+    .hero-eyebrow { font-size:.72rem; font-weight:700; letter-spacing:.18em; text-transform:uppercase; color:#FF6B35; margin-bottom:14px; position:relative; }
+    .hero h1 {
+      font-family:'Fredoka One',cursive;
+      font-size:clamp(2rem,6vw,3.4rem);
+      color:white; margin-bottom:14px; position:relative; line-height:1.1;
+    }
+    .hero h1 em { font-style:normal; background:linear-gradient(135deg,#FFD23F,#FF6B35); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+    .hero-sub { color:#A8A29E; font-size:.98rem; font-weight:600; max-width:500px; margin:0 auto 28px; line-height:1.7; position:relative; }
+    .hero-stat-row { display:flex; gap:24px; justify-content:center; flex-wrap:wrap; position:relative; }
+    .hero-stat { text-align:center; }
+    .hero-stat-num { font-family:'Fredoka One',cursive; font-size:2rem; color:#FFD23F; line-height:1; }
+    .hero-stat-label { font-size:.72rem; font-weight:700; color:#78716C; text-transform:uppercase; letter-spacing:.1em; }
+
+    /* ── LANG BAR ── */
+    .lang-bar { background:#292524; padding:8px 24px; display:flex; align-items:center; gap:10px; flex-wrap:wrap; border-bottom:1px solid rgba(255,255,255,.06); }
+    .lang-bar span { font-size:.72rem; font-weight:700; color:#A8A29E; text-transform:uppercase; letter-spacing:.1em; }
+    .lang-btn { font-size:.8rem; font-weight:700; padding:4px 12px; border-radius:8px; text-decoration:none; border:1.5px solid rgba(255,255,255,.2); color:#D6D3D1 !important; -webkit-text-fill-color:#D6D3D1 !important; }
+    .lang-btn.active { background:#FF6B35; border-color:#FF6B35; color:white !important; -webkit-text-fill-color:white !important; }
+
+    /* ── MAIN ── */
+    .main { max-width:1080px; margin:0 auto; padding:48px 24px 80px; }
+
+    /* ── FILTER BAR ── */
+    .filter-bar {
+      display:flex; gap:8px; flex-wrap:wrap;
+      align-items:center; margin-bottom:36px;
+    }
+    .filter-label { font-size:.72rem; font-weight:800; text-transform:uppercase; letter-spacing:.12em; color:#78716C; margin-right:4px; flex-shrink:0; }
+    .filter-btn {
+      font-family:'Atkinson Hyperlegible',sans-serif;
+      font-size:.78rem; font-weight:700;
+      padding:6px 16px; border-radius:50px;
+      border:1.5px solid #E8DCC8;
+      background:white; color:#44403C !important; -webkit-text-fill-color:#44403C !important;
+      cursor:pointer; transition:all .15s;
+    }
+    .filter-btn:hover { border-color:#aaa; }
+    .filter-btn.active { color:white !important; -webkit-text-fill-color:white !important; border-color:transparent; }
+    .filter-btn[data-week="all"].active { background:#1C1917; }
+    .filter-btn[data-week="1"].active  { background:#2563EB; }
+    .filter-btn[data-week="2"].active  { background:#16A34A; }
+    .filter-btn[data-week="3"].active  { background:#7C3AED; }
+    .filter-btn[data-week="4"].active  { background:#EA580C; }
+    .filter-btn[data-week="5"].active  { background:#0891B2; }
+    .filter-btn[data-week="6"].active  { background:#BE123C; }
+
+    /* ── GALLERY GRID ── */
+    .gallery-grid {
+      display:grid;
+      grid-template-columns:repeat(auto-fill, minmax(300px,1fr));
+      gap:22px;
+    }
+
+    /* ── PROJECT CARD ── */
+    .proj-card {
+      background:white !important;
+      border-radius:22px;
+      overflow:hidden;
+      border:2px solid #E8DCC8;
+      box-shadow:0 4px 20px rgba(0,0,0,.06);
+      transition:transform .2s, box-shadow .2s;
+      display:flex; flex-direction:column;
+    }
+    .proj-card:hover { transform:translateY(-5px); box-shadow:0 14px 40px rgba(0,0,0,.11); }
+    .proj-card.hidden { display:none; }
+
+    /* ── SCENE: CSS-illustrated preview ── */
+    .proj-scene {
+      height:160px;
+      position:relative;
+      overflow:hidden;
+      display:flex; align-items:center; justify-content:center;
+      flex-shrink:0;
+    }
+
+    /* ── SCENE: sky/ground layers ── */
+    .scene-sky    { position:absolute; inset:0; }
+    .scene-ground { position:absolute; bottom:0; left:0; right:0; }
+    .scene-chars  { position:relative; z-index:2; display:flex; gap:16px; align-items:flex-end; font-size:3rem; line-height:1; }
+    .scene-char   { display:flex; flex-direction:column; align-items:center; }
+    .scene-bubble {
+      background:white; border-radius:12px 12px 12px 2px;
+      padding:4px 10px; font-size:.7rem; font-weight:800;
+      color:#1C1917; margin-bottom:6px;
+      box-shadow:0 2px 8px rgba(0,0,0,.15);
+      white-space:nowrap;
+    }
+    .scene-label {
+      position:absolute; bottom:10px; right:12px;
+      font-size:.6rem; font-weight:800; text-transform:uppercase;
+      letter-spacing:.1em; opacity:.6; color:white;
+    }
+
+    /* ── PROJ BODY ── */
+    .proj-body { padding:18px 20px 20px; flex:1; display:flex; flex-direction:column; }
+
+    .proj-tags { display:flex; gap:6px; flex-wrap:wrap; margin-bottom:12px; }
+    .proj-week-tag {
+      font-size:.62rem; font-weight:800; text-transform:uppercase;
+      letter-spacing:.1em; padding:3px 9px; border-radius:50px;
+    }
+    .proj-type-tag {
+      font-size:.62rem; font-weight:800; text-transform:uppercase;
+      letter-spacing:.1em; padding:3px 9px; border-radius:50px;
+      background:#F1F5F9; color:#475569 !important; -webkit-text-fill-color:#475569 !important;
+    }
+    .proj-diff-tag {
+      font-size:.62rem; font-weight:800; text-transform:uppercase;
+      letter-spacing:.1em; padding:3px 9px; border-radius:50px;
+    }
+
+    .proj-title {
+      font-family:'Fredoka One',cursive;
+      font-size:1.2rem; color:#1C1917 !important; -webkit-text-fill-color:#1C1917 !important;
+      margin-bottom:6px; line-height:1.15;
+    }
+    .proj-spark {
+      font-size:.85rem; font-weight:700;
+      color:#44403C !important; -webkit-text-fill-color:#44403C !important;
+      line-height:1.55; margin-bottom:14px; flex:1;
+    }
+
+    .proj-blocks { display:flex; gap:5px; flex-wrap:wrap; margin-bottom:14px; }
+    .block-pill {
+      font-size:.65rem; font-weight:800; padding:2px 8px; border-radius:50px;
+    }
+
+    .proj-steps {
+      border-top:1.5px dashed #E8DCC8; padding-top:12px;
+    }
+    .proj-steps-label { font-size:.62rem; font-weight:800; text-transform:uppercase; letter-spacing:.1em; color:#78716C; margin-bottom:8px; }
+    .proj-step {
+      display:flex; gap:8px; align-items:flex-start;
+      font-size:.78rem; font-weight:700;
+      color:#1C1917 !important; -webkit-text-fill-color:#1C1917 !important;
+      margin-bottom:5px; line-height:1.4;
+    }
+    .proj-step-num {
+      width:18px; height:18px; border-radius:50%;
+      display:flex; align-items:center; justify-content:center;
+      font-size:.6rem; color:white; flex-shrink:0; margin-top:1px;
+    }
+
+    /* ── WEEK COLOUR PALETTES ── */
+    /* W1 Blue */
+    .w1-tag  { background:#DBEAFE; color:#1E40AF !important; -webkit-text-fill-color:#1E40AF !important; }
+    .w1-dot  { background:#2563EB; }
+    .w1-diff { background:#EFF6FF; color:#2563EB !important; -webkit-text-fill-color:#2563EB !important; }
+    .w1-pill { background:#EFF6FF; color:#1E40AF !important; -webkit-text-fill-color:#1E40AF !important; }
+
+    /* W2 Green */
+    .w2-tag  { background:#DCFCE7; color:#14532D !important; -webkit-text-fill-color:#14532D !important; }
+    .w2-dot  { background:#16A34A; }
+    .w2-diff { background:#F0FDF4; color:#16A34A !important; -webkit-text-fill-color:#16A34A !important; }
+    .w2-pill { background:#F0FDF4; color:#14532D !important; -webkit-text-fill-color:#14532D !important; }
+
+    /* W3 Purple */
+    .w3-tag  { background:#EDE9FE; color:#4C1D95 !important; -webkit-text-fill-color:#4C1D95 !important; }
+    .w3-dot  { background:#7C3AED; }
+    .w3-diff { background:#FAF5FF; color:#7C3AED !important; -webkit-text-fill-color:#7C3AED !important; }
+    .w3-pill { background:#FAF5FF; color:#4C1D95 !important; -webkit-text-fill-color:#4C1D95 !important; }
+
+    /* W4 Orange */
+    .w4-tag  { background:#FFF7ED; color:#7C2D12 !important; -webkit-text-fill-color:#7C2D12 !important; }
+    .w4-dot  { background:#EA580C; }
+    .w4-diff { background:#FFF7ED; color:#EA580C !important; -webkit-text-fill-color:#EA580C !important; }
+    .w4-pill { background:#FFF7ED; color:#7C2D12 !important; -webkit-text-fill-color:#7C2D12 !important; }
+
+    /* W5 Teal */
+    .w5-tag  { background:#ECFEFF; color:#164E63 !important; -webkit-text-fill-color:#164E63 !important; }
+    .w5-dot  { background:#0891B2; }
+    .w5-diff { background:#ECFEFF; color:#0891B2 !important; -webkit-text-fill-color:#0891B2 !important; }
+    .w5-pill { background:#ECFEFF; color:#164E63 !important; -webkit-text-fill-color:#164E63 !important; }
+
+    /* W6 Pink */
+    .w6-tag  { background:#FFF1F2; color:#881337 !important; -webkit-text-fill-color:#881337 !important; }
+    .w6-dot  { background:#BE123C; }
+    .w6-diff { background:#FFF1F2; color:#BE123C !important; -webkit-text-fill-color:#BE123C !important; }
+    .w6-pill { background:#FFF1F2; color:#881337 !important; -webkit-text-fill-color:#881337 !important; }
+
+    /* ── EMPTY STATE ── */
+    .empty-state { display:none; text-align:center; padding:60px 24px; color:#78716C; }
+    .empty-state.visible { display:block; }
+    .empty-state-icon { font-size:3rem; margin-bottom:12px; }
+    .empty-state p { font-size:.92rem; font-weight:600; }
+
+    /* ── BOTTOM CTA ── */
+    .bottom-cta {
+      background:#1C1917; border-radius:24px;
+      padding:40px 36px; text-align:center; margin-top:48px;
+    }
+    .bottom-cta h3 { font-family:'Fredoka One',cursive; font-size:1.6rem; color:#FFD23F; margin-bottom:10px; }
+    .bottom-cta p { color:#A8A29E; font-weight:600; margin-bottom:24px; line-height:1.6; max-width:480px; margin-left:auto; margin-right:auto; }
+    .cta-btn-row { display:flex; gap:10px; justify-content:center; flex-wrap:wrap; }
+    .btn-cta-primary {
+      font-family:'Fredoka One',cursive; font-size:.95rem;
+      background:linear-gradient(135deg,#FF6B35,#FF3D77); color:white !important; -webkit-text-fill-color:white !important;
+      padding:12px 26px; border-radius:12px; text-decoration:none;
+      display:inline-flex; align-items:center; gap:7px;
+      transition:transform .15s, box-shadow .15s;
+    }
+    .btn-cta-primary:hover { transform:translateY(-2px); box-shadow:0 8px 24px rgba(255,107,53,.4); }
+    .btn-cta-ghost {
+      font-family:'Fredoka One',cursive; font-size:.95rem;
+      background:rgba(255,255,255,.08); color:#D6D3D1 !important; -webkit-text-fill-color:#D6D3D1 !important;
+      border:1.5px solid rgba(255,255,255,.2);
+      padding:12px 26px; border-radius:12px; text-decoration:none;
+      display:inline-flex; align-items:center; gap:7px;
+    }
+
+    /* ── SCENE SPECIFIC BACKGROUNDS ── */
+    .bg-space      { background:linear-gradient(180deg,#0F0720 0%,#1e1b4b 100%); }
+    .bg-forest     { background:linear-gradient(180deg,#86efac 0%,#4ade80 40%,#15803d 100%); }
+    .bg-ocean      { background:linear-gradient(180deg,#7dd3fc 0%,#0ea5e9 40%,#0c4a6e 100%); }
+    .bg-city       { background:linear-gradient(180deg,#fbbf24 0%,#f97316 30%,#ea580c 60%,#1c1917 100%); }
+    .bg-candy      { background:linear-gradient(135deg,#f9a8d4,#e879f9,#a855f7); }
+    .bg-stage      { background:linear-gradient(180deg,#1c1917 0%,#292524 60%,#78350f 100%); }
+    .bg-farm       { background:linear-gradient(180deg,#bae6fd 0%,#86efac 50%,#4ade80 100%); }
+    .bg-kitchen    { background:linear-gradient(180deg,#fef9c3 0%,#fef08a 50%,#fde047 100%); }
+    .bg-haunted    { background:linear-gradient(180deg,#1e1b4b 0%,#312e81 50%,#1c1917 100%); }
+    .bg-jungle     { background:linear-gradient(180deg,#166534 0%,#15803d 40%,#14532d 100%); }
+    .bg-underwater { background:linear-gradient(180deg,#0ea5e9 0%,#0369a1 50%,#0c4a6e 100%); }
+    .bg-snowday    { background:linear-gradient(180deg,#e0f2fe 0%,#bae6fd 50%,#7dd3fc 100%); }
+    .bg-robot      { background:linear-gradient(135deg,#374151,#6b7280,#9ca3af); }
+    .bg-sunrise    { background:linear-gradient(180deg,#fde68a 0%,#fb923c 40%,#f97316 70%,#ea580c 100%); }
+    .bg-fairytale  { background:linear-gradient(135deg,#fce7f3,#f9a8d4,#ec4899); }
+    .bg-racetrack  { background:linear-gradient(180deg,#6b7280 0%,#374151 50%,#1f2937 100%); }
+    .bg-planetarium{ background:linear-gradient(180deg,#0f172a 0%,#1e1b4b 50%,#312e81 100%); }
+    .bg-garden     { background:linear-gradient(180deg,#bef264 0%,#84cc16 40%,#4d7c0f 100%); }
+
+    @media(max-width:500px){ .gallery-grid{ grid-template-columns:1fr; } }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="site-nav">
+  <a href="../index.html" class="nav-logo">🐱 ScratchJr Adventure</a>
+  <button class="nav-toggle" id="navToggle" aria-label="Menu"><span></span><span></span><span></span></button>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="../index.html">🏠 Home</a></li>
+    <li><a href="curriculum.html">📅 Curriculum</a></li>
+    <li><a href="activity-cards.html">🧩 Activity Cards</a></li>
+    <li><a href="project-gallery.html" class="active">🎨 Gallery</a></li>
+    <li><a href="badges.html">🏅 Badges</a></li>
+    <li><a href="bonus-challenges.html">⚡ Bonus</a></li>
+    <li><a href="whats-next.html">🚀 What's Next</a></li>
+    <li><a href="troubleshooting.html">🔧 Help</a></li>
+  </ul>
+</nav>
+
+<!-- LANG BAR -->
+<div class="lang-bar">
+  <span>🌍 Language:</span>
+  <a href="project-gallery.html" class="lang-btn active">🇬🇧 English</a>
+  <a href="project-gallery-bg.html" class="lang-btn">🇧🇬 Български</a>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow">🎨 Spark Their Imagination</div>
+  <h1>Project <em>Gallery</em></h1>
+  <p class="hero-sub">Stuck on what to make? Browse 18 ready-to-build project ideas — one for every mood, matched to your current week.</p>
+  <div class="hero-stat-row">
+    <div class="hero-stat"><div class="hero-stat-num">18</div><div class="hero-stat-label">Project Ideas</div></div>
+    <div class="hero-stat"><div class="hero-stat-num">6</div><div class="hero-stat-label">Weeks Covered</div></div>
+    <div class="hero-stat"><div class="hero-stat-num">3</div><div class="hero-stat-label">Difficulty Levels</div></div>
+  </div>
+</div>
+
+<div class="main">
+
+  <!-- FILTER BAR -->
+  <div class="filter-bar">
+    <span class="filter-label">Filter:</span>
+    <button class="filter-btn active" data-week="all">⭐ All projects</button>
+    <button class="filter-btn" data-week="1">🔵 Week 1</button>
+    <button class="filter-btn" data-week="2">🟢 Week 2</button>
+    <button class="filter-btn" data-week="3">🟣 Week 3</button>
+    <button class="filter-btn" data-week="4">🟠 Week 4</button>
+    <button class="filter-btn" data-week="5">🩵 Week 5</button>
+    <button class="filter-btn" data-week="6">🔴 Week 6</button>
+  </div>
+
+  <div class="gallery-grid" id="gallery">
+
+    <!-- ══════════ WEEK 1 ══════════ -->
+
+    <!-- 1. Space Adventure -->
+    <div class="proj-card" data-week="1">
+      <div class="proj-scene bg-space">
+        <div class="scene-chars">
+          <div class="scene-char"><div class="scene-bubble">Blast off!</div>🚀</div>
+          <div class="scene-char" style="font-size:1.8rem;">⭐🌙⭐</div>
+          <div class="scene-char">👽</div>
+        </div>
+        <div class="scene-label">Week 1</div>
+      </div>
+      <div class="proj-body">
+        <div class="proj-tags">
+          <span class="proj-week-tag w1-tag">Week 1</span>
+          <span class="proj-type-tag">🚀 Story</span>
+          <span class="proj-diff-tag w1-diff">⭐ Starter</span>
+        </div>
+        <div class="proj-title">Space Adventure!</div>
+        <p class="proj-spark">A rocket launches into space and meets a friendly alien. The alien has never seen a human before — what do they say to each other? Draw a space background, a rocket, and your alien.</p>
+        <div class="proj-blocks">
+          <span class="block-pill w1-pill">🔵 Move</span>
+          <span class="block-pill w1-pill">🟡 Green flag</span>
+          <span class="block-pill w1-pill">🟣 Say</span>
+          <span class="block-pill w1-pill">🟣 Grow/Shrink</span>
+        </div>
+        <div class="proj-steps">
+          <div class="proj-steps-label">Quick start steps</div>
+          <div class="proj-step"><div class="proj-step-num w1-dot">1</div>Draw a black space background with stars and a moon</div>
+          <div class="proj-step"><div class="proj-step-num w1-dot">2</div>Draw a rocket (or use the emoji) — make it move up across the screen</div>
+          <div class="proj-step"><div class="proj-step-num w1-dot">3</div>Draw a funny alien — make it say "Hello Earthling!" when the flag is pressed</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. Dog & Cat Chase -->
+    <div class="proj-card" data-week="1">
+      <div class="proj-scene bg-farm">
+        <div class="scene-chars">
+          <div class="scene-char">🐕</div>
+          <div class="scene-char" style="font-size:2rem; margin-bottom:8px;">💨</div>
+          <div class="scene-char"><div class="scene-bubble">MEOW!</div>🐈</div>
+        </div>
+        <div class="scene-label">Week 1</div>
+      </div>
+      <div class="proj-body">
+        <div class="proj-tags">
+          <span class="proj-week-tag w1-tag">Week 1</span>
+          <span class="proj-type-tag">😄 Comedy</span>
+          <span class="proj-diff-tag w1-diff">⭐ Starter</span>
+        </div>
+        <div class="proj-title">The Great Chase!</div>
+        <p class="proj-spark">A dog spots a cat and starts chasing it across the garden! The cat runs one way, the dog runs the other. They both end up running in circles. Who will catch who?</p>
+        <div class="proj-blocks">
+          <span class="block-pill w1-pill">🔵 Move left/right</span>
+          <span class="block-pill w1-pill">🟡 Tap trigger</span>
+          <span class="block-pill w1-pill">🟣 Say</span>
+        </div>
+        <div class="proj-steps">
+          <div class="proj-steps-label">Quick start steps</div>
+          <div class="proj-step"><div class="proj-step-num w1-dot">1</div>Draw a garden background — green grass, maybe a fence</div>
+          <div class="proj-step"><div class="proj-step-num w1-dot">2</div>Add a dog character — when tapped, it moves right with "WOOF!"</div>
+          <div class="proj-step"><div class="proj-step-num w1-dot">3</div>Add a cat — when green flag pressed, it runs left saying "MEOW!"</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. Superhero Origin -->
+    <div class="proj-card" data-week="1">
+      <div class="proj-scene bg-city">
+        <div class="scene-chars">
+          <div class="scene-char"><div class="scene-bubble">I'll save you!</div>🦸</div>
+          <div class="scene-char" style="font-size:2rem;">🏙️</div>
+        </div>
+        <div class="scene-label">Week 1</div>
+      </div>
+      <div class="proj-body">
+        <div class="proj-tags">
+          <span class="proj-week-tag w1-tag">Week 1</span>
+          <span class="proj-type-tag">💪 Action</span>
+          <span class="proj-diff-tag w1-diff">⭐ Starter</span>
+        </div>
+        <div class="proj-title">My Superhero!</div>
+        <p class="proj-spark">Draw YOUR OWN superhero — a totally original one with a name you invent. What's their superpower? They fly across the city, grow huge, and announce their arrival. The world is saved!</p>
+        <div class="proj-blocks">
+          <span class="block-pill w1-pill">🔵 Move</span>
+          <span class="block-pill w1-pill">🟣 Grow big</span>
+          <span class="block-pill w1-pill">🟣 Say</span>
+          <span class="block-pill w1-pill">🟡 Green flag</span>
+        </div>
+        <div class="proj-steps">
+          <div class="proj-steps-label">Quick start steps</div>
+          <div class="proj-step"><div class="proj-step-num w1-dot">1</div>Draw your superhero — cape, mask, logo — make them unique!</div>
+          <div class="proj-step"><div class="proj-step-num w1-dot">2</div>On green flag: fly right, grow BIG, say their superhero name</div>
+          <div class="proj-step"><div class="proj-step-num w1-dot">3</div>When tapped: they say "The city is safe!" and shrink back down</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════ WEEK 2 ══════════ -->
+
+    <!-- 4. Haunted House Story -->
+    <div class="proj-card" data-week="2">
+      <div class="proj-scene bg-haunted">
+        <div class="scene-chars">
+          <div class="scene-char"><div class="scene-bubble">BOO! 👻</div>🏚️</div>
+          <div class="scene-char">😨</div>
+        </div>
+        <div class="scene-label">Week 2</div>
+      </div>
+      <div class="proj-body">
+        <div class="proj-tags">
+          <span class="proj-week-tag w2-tag">Week 2</span>
+          <span class="proj-type-tag">👻 Story</span>
+          <span class="proj-diff-tag w2-diff">⭐⭐ Intermediate</span>
+        </div>
+        <div class="proj-title">The Haunted House</div>
+        <p class="proj-spark">A brave explorer enters a spooky house on a dark night. Inside: a friendly ghost who just wants someone to talk to! Three scenes — outside the house, inside the dark hallway, and the ghost's hidden room.</p>
+        <div class="proj-blocks">
+          <span class="block-pill w2-pill">📄 Pages (3)</span>
+          <span class="block-pill w2-pill">💬 Say blocks</span>
+          <span class="block-pill w2-pill">⏳ Wait</span>
+          <span class="block-pill w2-pill">🟣 Hide/Show</span>
+        </div>
+        <div class="proj-steps">
+          <div class="proj-steps-label">Quick start steps</div>
+          <div class="proj-step"><div class="proj-step-num w2-dot">1</div>Page 1: dark night outside a spooky house — character walks in</div>
+          <div class="proj-step"><div class="proj-step-num w2-dot">2</div>Page 2: dark hallway — ghost appears from the shadows (hide → show!)</div>
+          <div class="proj-step"><div class="proj-step-num w2-dot">3</div>Page 3: ghost's cosy room — they become friends and have tea 🍵</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5. Underwater World -->
+    <div class="proj-card" data-week="2">
+      <div class="proj-scene bg-underwater">
+        <div class="scene-chars">
+          <div class="scene-char"><div class="scene-bubble">Blub blub!</div>🐠</div>
+          <div class="scene-char">🐙</div>
+          <div class="scene-char">🐚</div>
+        </div>
+        <div class="scene-label">Week 2</div>
+      </div>
+      <div class="proj-body">
+        <div class="proj-tags">
+          <span class="proj-week-tag w2-tag">Week 2</span>
+          <span class="proj-type-tag">🌊 Story</span>
+          <span class="proj-diff-tag w2-diff">⭐⭐ Intermediate</span>
+        </div>
+        <div class="proj-title">Deep Ocean Friends</div>
+        <p class="proj-spark">A little fish gets lost in the big ocean and asks different sea creatures for directions home. An octopus, a crab, and a whale all give different advice. Which way is home?</p>
+        <div class="proj-blocks">
+          <span class="block-pill w2-pill">📄 Pages (3)</span>
+          <span class="block-pill w2-pill">💬 Dialogue</span>
+          <span class="block-pill w2-pill">⏳ Wait timing</span>
+          <span class="block-pill w2-pill">🎨 Draw background</span>
+        </div>
+        <div class="proj-steps">
+          <div class="proj-steps-label">Quick start steps</div>
+          <div class="proj-step"><div class="proj-step-num w2-dot">1</div>Draw a blue ocean background with coral and seaweed</div>
+          <div class="proj-step"><div class="proj-step-num w2-dot">2</div>Each page: little fish meets a new creature — 4-line conversation with wait blocks</div>
+          <div class="proj-step"><div class="proj-step-num w2-dot">3</div>Final page: fish finds home — big celebration!</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 6. Cooking Show -->
+    <div class="proj-card" data-week="2">
+      <div class="proj-scene bg-kitchen">
+        <div class="scene-chars">
+          <div class="scene-char"><div class="scene-bubble">Today we make pizza! 🍕</div>👨‍🍳</div>
+        </div>
+        <div class="scene-label">Week 2</div>
+      </div>
+      <div class="proj-body">
+        <div class="proj-tags">
+          <span class="proj-week-tag w2-tag">Week 2</span>
+          <span class="proj-type-tag">🍳 Tutorial</span>
+          <span class="proj-diff-tag w2-diff">⭐⭐ Intermediate</span>
+        </div>
+        <div class="proj-title">My Cooking Show!</div>
+        <p class="proj-spark">You are the host of a cooking show! Each page is a step in making your favourite food. Narrate everything with speech bubbles. The audience is watching — make it dramatic!</p>
+        <div class="proj-blocks">
+          <span class="block-pill w2-pill">📄 Pages (4)</span>
+          <span class="block-pill w2-pill">💬 Narration</span>
+          <span class="block-pill w2-pill">⏳ Wait</span>
+          <span class="block-pill w2-pill">🟣 Grow (dramatic!)</span>
+        </div>
+        <div class="proj-steps">
+          <div class="proj-steps-label">Quick start steps</div>
+          <div class="proj-step"><div class="proj-step-num w2-dot">1</div>Page 1: intro — chef character says "Welcome to my cooking show!"</div>
+          <div class="proj-step"><div class="proj-step-num w2-dot">2</div>Pages 2–3: ingredients appear one by one with wait timing</div>
+          <div class="proj-step"><div class="proj-step-num w2-dot">3</div>Page 4: the finished dish appears — chef grows BIG and takes a bow!</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════ WEEK 3 ══════════ -->
+
+    <!-- 7. Candy Land Dance Party -->
+    <div class="proj-card" data-week="3">
+      <div class="proj-scene bg-candy">
+        <div class="scene-chars">
+          <div class="scene-char">🍭</div>
+          <div class="scene-char" style="animation:none;">💃</div>
+          <div class="scene-char">🍬</div>
+          <div class="scene-char">🕺</div>
+          <div class="scene-char">🍰</div>
+        </div>
+        <div class="scene-label">Week 3</div>
+      </div>
+      <div class="proj-body">
+        <div class="proj-tags">
+          <span class="proj-week-tag w3-tag">Week 3</span>
+          <span class="proj-type-tag">💃 Animation</span>
+          <span class="proj-diff-tag w3-diff">⭐⭐ Intermediate</span>
+        </div>
+        <div class="proj-title">Candy Land Dance Party!</div>
+        <p class="proj-spark">Everything in Candy Land comes alive and dances — lollipops spin, gummies bounce, cupcakes wobble. Five characters, five different forever loops, all dancing at the same time to an invisible beat.</p>
+        <div class="proj-blocks">
+          <span class="block-pill w3-pill">♾️ Forever loops</span>
+          <span class="block-pill w3-pill">🔁 Repeat 8</span>
+          <span class="block-pill w3-pill">🟣 Grow/Shrink</span>
+          <span class="block-pill w3-pill">🔵 Spin/Turn</span>
+        </div>
+        <div class="proj-steps">
+          <div class="proj-steps-label">Quick start steps</div>
+          <div class="proj-step"><div class="proj-step-num w3-dot">1</div>Draw a colourful candy background — pinks, purples, yellows</div>
+          <div class="proj-step"><div class="proj-step-num w3-dot">2</div>Draw 5 candy characters — each completely different shape and colour</div>
+          <div class="proj-step"><div class="proj-step-num w3-dot">3</div>Give each one a DIFFERENT forever loop — spin, bounce, grow-shrink, wiggle, zoom</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 8. Solar System -->
+    <div class="proj-card" data-week="3">
+      <div class="proj-scene bg-planetarium">
+        <div class="scene-chars" style="gap:8px;">
+          <div class="scene-char" style="font-size:2.5rem;">☀️</div>
+          <div class="scene-char" style="font-size:1.4rem;">🌍</div>
+          <div class="scene-char" style="font-size:1rem;">🔴</div>
+          <div class="scene-char" style="font-size:1.8rem;">🪐</div>
+        </div>
+        <div class="scene-label">Week 3</div>
+      </div>
+      <div class="proj-body">
+        <div class="proj-tags">
+          <span class="proj-week-tag w3-tag">Week 3</span>
+          <span class="proj-type-tag">🔭 Science</span>
+          <span class="proj-diff-tag w3-diff">⭐⭐⭐ Challenge</span>
+        </div>
+        <div class="proj-title">My Solar System!</div>
+        <p class="proj-spark">Build a working solar system where every planet orbits at a different speed! The sun stays still, Mercury spins fast, Saturn spins slowly. Each planet has a forever loop — but with different timing.</p>
+        <div class="proj-blocks">
+          <span class="block-pill w3-pill">♾️ Forever loops</span>
+          <span class="block-pill w3-pill">🔵 Turn + Move</span>
+          <span class="block-pill w3-pill">⏳ Wait (timing)</span>
+        </div>
+        <div class="proj-steps">
+          <div class="proj-steps-label">Quick start steps</div>
+          <div class="proj-step"><div class="proj-step-num w3-dot">1</div>Draw a black space background — add a bright sun in the middle</div>
+          <div class="proj-step"><div class="proj-step-num w3-dot">2</div>Draw 4 planets of different sizes — position them at different distances</div>
+          <div class="proj-step"><div class="proj-step-num w3-dot">3</div>Each planet: forever loop → turn + move. Different turn numbers = different speeds!</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 9. Snowstorm Penguin -->
+    <div class="proj-card" data-week="3">
+      <div class="proj-scene bg-snowday">
+        <div class="scene-chars">
+          <div class="scene-char">❄️</div>
+          <div class="scene-char"><div class="scene-bubble">Wheee!</div>🐧</div>
+          <div class="scene-char">⛄</div>
+          <div class="scene-char">❄️</div>
+        </div>
+        <div class="scene-label">Week 3</div>
+      </div>
+      <div class="proj-body">
+        <div class="proj-tags">
+          <span class="proj-week-tag w3-tag">Week 3</span>
+          <span class="proj-type-tag">❄️ Animation</span>
+          <span class="proj-diff-tag w3-diff">⭐⭐ Intermediate</span>
+        </div>
+        <div class="proj-title">Penguin Snowstorm!</div>
+        <p class="proj-spark">It's snowing! Snowflakes fall from the top of the screen in forever loops. A penguin slides back and forth happily. A snowman slowly grows taller as the snow piles up. Everything moves at once!</p>
+        <div class="proj-blocks">
+          <span class="block-pill w3-pill">♾️ Forever loops</span>
+          <span class="block-pill w3-pill">🔵 Move up/down</span>
+          <span class="block-pill w3-pill">🟣 Grow</span>
+          <span class="block-pill w3-pill">🔁 Repeat</span>
+        </div>
+        <div class="proj-steps">
+          <div class="proj-steps-label">Quick start steps</div>
+          <div class="proj-step"><div class="proj-step-num w3-dot">1</div>Draw an icy blue background with a white snow ground</div>
+          <div class="proj-step"><div class="proj-step-num w3-dot">2</div>Draw 3 snowflakes — each with a forever loop moving down the screen</div>
+          <div class="proj-step"><div class="proj-step-num w3-dot">3</div>Add a penguin sliding left-right + snowman slowly growing bigger!</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════ WEEK 4 ══════════ -->
+
+    <!-- 10. Robot Factory -->
+    <div class="proj-card" data-week="4">
+      <div class="proj-scene bg-robot">
+        <div class="scene-chars">
+          <div class="scene-char">🤖</div>
+          <div class="scene-char" style="font-size:1.5rem;">→</div>
+          <div class="scene-char">⚙️</div>
+          <div class="scene-char" style="font-size:1.5rem;">→</div>
+          <div class="scene-char">🤖✨</div>
+        </div>
+        <div class="scene-label">Week 4</div>
+      </div>
+      <div class="proj-body">
+        <div class="proj-tags">
+          <span class="proj-week-tag w4-tag">Week 4</span>
+          <span class="proj-type-tag">🏭 Game/Story</span>
+          <span class="proj-diff-tag w4-diff">⭐⭐ Intermediate</span>
+        </div>
+        <div class="proj-title">Robot Factory!</div>
+        <p class="proj-spark">Build an assembly line! Robot A moves along and sends a message to Robot B → B adds a part and sends to Robot C → C finishes the robot and sends a WIN message → confetti explodes everywhere!</p>
+        <div class="proj-blocks">
+          <span class="block-pill w4-pill">📨 Messages (chain)</span>
+          <span class="block-pill w4-pill">🔵 Move</span>
+          <span class="block-pill w4-pill">🟣 Show/Hide</span>
+          <span class="block-pill w4-pill">⏳ Wait</span>
+        </div>
+        <div class="proj-steps">
+          <div class="proj-steps-label">Quick start steps</div>
+          <div class="proj-step"><div class="proj-step-num w4-dot">1</div>Draw a factory background with conveyor belt sections</div>
+          <div class="proj-step"><div class="proj-step-num w4-dot">2</div>3 robot characters — each receives a message, does something, sends the next message</div>
+          <div class="proj-step"><div class="proj-step-num w4-dot">3</div>Final robot: receives DONE → grows big → says "COMPLETE!" → confetti appears!</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 11. Wizard Duel -->
+    <div class="proj-card" data-week="4">
+      <div class="proj-scene bg-fairytale">
+        <div class="scene-chars">
+          <div class="scene-char"><div class="scene-bubble">Expecto! ✨</div>🧙</div>
+          <div class="scene-char" style="font-size:1.8rem;">⚡</div>
+          <div class="scene-char">🧙‍♀️</div>
+        </div>
+        <div class="scene-label">Week 4</div>
+      </div>
+      <div class="proj-body">
+        <div class="proj-tags">
+          <span class="proj-week-tag w4-tag">Week 4</span>
+          <span class="proj-type-tag">✨ Fantasy</span>
+          <span class="proj-diff-tag w4-diff">⭐⭐⭐ Challenge</span>
+        </div>
+        <div class="proj-title">Wizard Duel!</div>
+        <p class="proj-spark">Two wizards face off! Wizard A casts a spell → sends a ZAP message → Wizard B reacts (grows huge, wobbles, says "My turn!") → B sends back a COUNTER spell → A flies backwards and lands on their hat!</p>
+        <div class="proj-blocks">
+          <span class="block-pill w4-pill">📨 Messages (2-way)</span>
+          <span class="block-pill w4-pill">👆 Tap trigger</span>
+          <span class="block-pill w4-pill">🟣 Grow/Shrink</span>
+          <span class="block-pill w4-pill">💬 Say</span>
+        </div>
+        <div class="proj-steps">
+          <div class="proj-steps-label">Quick start steps</div>
+          <div class="proj-step"><div class="proj-step-num w4-dot">1</div>Draw a dramatic castle or forest background</div>
+          <div class="proj-step"><div class="proj-step-num w4-dot">2</div>Wizard A: tap → ZAP message → sparkle effect; Wizard B: receives ZAP → reacts dramatically</div>
+          <div class="proj-step"><div class="proj-step-num w4-dot">3</div>Wizard B then sends COUNTER → Wizard A reacts and ends the duel with a funny bow!</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 12. Race to the Finish -->
+    <div class="proj-card" data-week="4">
+      <div class="proj-scene bg-racetrack">
+        <div class="scene-chars">
+          <div class="scene-char">🐇</div>
+          <div class="scene-char" style="font-size:1.5rem;color:#FFD23F;">🏁</div>
+          <div class="scene-char">🐢</div>
+        </div>
+        <div class="scene-label">Week 4</div>
+      </div>
+      <div class="proj-body">
+        <div class="proj-tags">
+          <span class="proj-week-tag w4-tag">Week 4</span>
+          <span class="proj-type-tag">🏆 Game</span>
+          <span class="proj-diff-tag w4-diff">⭐⭐ Intermediate</span>
+        </div>
+        <div class="proj-title">Tap to Race!</div>
+        <p class="proj-spark">Tap the rabbit to make it hop forward — but tap the tortoise too or it falls behind! First one to reach the finish flag sends a WIN message. A trophy appears and the crowd goes wild! 🏆</p>
+        <div class="proj-blocks">
+          <span class="block-pill w4-pill">👆 Tap trigger</span>
+          <span class="block-pill w4-pill">📨 WIN message</span>
+          <span class="block-pill w4-pill">🟣 Show/Hide</span>
+          <span class="block-pill w4-pill">🔵 Move right</span>
+        </div>
+        <div class="proj-steps">
+          <div class="proj-steps-label">Quick start steps</div>
+          <div class="proj-step"><div class="proj-step-num w4-dot">1</div>Draw a racetrack background with a finish line flag on the right</div>
+          <div class="proj-step"><div class="proj-step-num w4-dot">2</div>Rabbit + tortoise: when tapped → move right a little bit</div>
+          <div class="proj-step"><div class="proj-step-num w4-dot">3</div>First to right edge: sends WIN message → trophy appears → fireworks!</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════ WEEK 5 ══════════ -->
+
+    <!-- 13. Jungle Music Band -->
+    <div class="proj-card" data-week="5">
+      <div class="proj-scene bg-jungle">
+        <div class="scene-chars">
+          <div class="scene-char">🦁</div>
+          <div class="scene-char"><div class="scene-bubble">🎵🎶</div>🐒</div>
+          <div class="scene-char">🦜</div>
+          <div class="scene-char">🐘</div>
+        </div>
+        <div class="scene-label">Week 5</div>
+      </div>
+      <div class="proj-body">
+        <div class="proj-tags">
+          <span class="proj-week-tag w5-tag">Week 5</span>
+          <span class="proj-type-tag">🎵 Music</span>
+          <span class="proj-diff-tag w5-diff">⭐⭐ Intermediate</span>
+        </div>
+        <div class="proj-title">Jungle Music Band!</div>
+        <p class="proj-spark">Four jungle animals form a band! Tap the lion for the drums 🥁, tap the monkey for the xylophone, tap the parrot for its squawk, tap the elephant for the bass. Record your own sounds for each animal!</p>
+        <div class="proj-blocks">
+          <span class="block-pill w5-pill">🟢 Sound blocks</span>
+          <span class="block-pill w5-pill">🎤 Voice recording</span>
+          <span class="block-pill w5-pill">👆 Tap trigger</span>
+          <span class="block-pill w5-pill">🟣 Grow (beat!)</span>
+        </div>
+        <div class="proj-steps">
+          <div class="proj-steps-label">Quick start steps</div>
+          <div class="proj-step"><div class="proj-step-num w5-dot">1</div>Draw a lush jungle background with 4 animal positions</div>
+          <div class="proj-step"><div class="proj-step-num w5-dot">2</div>Record a different mouth sound for each animal (beat, melody, squawk, boom!)</div>
+          <div class="proj-step"><div class="proj-step-num w5-dot">3</div>Each animal: when tapped → plays sound + grows big then back → feels like a beat!</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 14. Weather Forecast Show -->
+    <div class="proj-card" data-week="5">
+      <div class="proj-scene bg-sunrise">
+        <div class="scene-chars">
+          <div class="scene-char"><div class="scene-bubble">And tomorrow... ☁️</div>🌤️</div>
+          <div class="scene-char" style="font-size:2rem;">📺</div>
+        </div>
+        <div class="scene-label">Week 5</div>
+      </div>
+      <div class="proj-body">
+        <div class="proj-tags">
+          <span class="proj-week-tag w5-tag">Week 5</span>
+          <span class="proj-type-tag">📺 Show</span>
+          <span class="proj-diff-tag w5-diff">⭐⭐ Intermediate</span>
+        </div>
+        <div class="proj-title">My Weather Show!</div>
+        <p class="proj-spark">You are the TV weather forecaster! Record your voice narrating today's weather AND tomorrow's. Sun appears, then clouds, then rain — each one timed with your voice narration perfectly.</p>
+        <div class="proj-blocks">
+          <span class="block-pill w5-pill">🎤 Voice narration</span>
+          <span class="block-pill w5-pill">⏳ Sync timing</span>
+          <span class="block-pill w5-pill">📄 Pages (3)</span>
+          <span class="block-pill w5-pill">🟣 Show/Hide</span>
+        </div>
+        <div class="proj-steps">
+          <div class="proj-steps-label">Quick start steps</div>
+          <div class="proj-step"><div class="proj-step-num w5-dot">1</div>Record your weather report intro: "Good evening! Today's weather is…"</div>
+          <div class="proj-step"><div class="proj-step-num w5-dot">2</div>Each page: a new weather scene — sunny, cloudy, rainy — with voice sync</div>
+          <div class="proj-step"><div class="proj-step-num w5-dot">3</div>Add background music sounds — chirping birds for sunny, rain taps for rainy!</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 15. Lullaby for a Dragon -->
+    <div class="proj-card" data-week="5">
+      <div class="proj-scene bg-fairytale">
+        <div class="scene-chars">
+          <div class="scene-char">🐲</div>
+          <div class="scene-char" style="font-size:1.4rem;">💤 💤 💤</div>
+        </div>
+        <div class="scene-label">Week 5</div>
+      </div>
+      <div class="proj-body">
+        <div class="proj-tags">
+          <span class="proj-week-tag w5-tag">Week 5</span>
+          <span class="proj-type-tag">🎶 Music Video</span>
+          <span class="proj-diff-tag w5-diff">⭐⭐⭐ Challenge</span>
+        </div>
+        <div class="proj-title">Lullaby for a Dragon 🐲</div>
+        <p class="proj-spark">A tiny dragon can't fall asleep. Sing it a lullaby — record YOUR VOICE singing! As the song plays, stars appear one by one, the dragon slowly shrinks (getting sleepy), and finally falls asleep surrounded by moonlight.</p>
+        <div class="proj-blocks">
+          <span class="block-pill w5-pill">🎤 Singing voice</span>
+          <span class="block-pill w5-pill">⏳ Precise timing</span>
+          <span class="block-pill w5-pill">🟣 Grow/Shrink</span>
+          <span class="block-pill w5-pill">🟣 Show (stars)</span>
+        </div>
+        <div class="proj-steps">
+          <div class="proj-steps-label">Quick start steps</div>
+          <div class="proj-step"><div class="proj-step-num w5-dot">1</div>Draw a night sky — dark blue, with hidden stars (start hidden!)</div>
+          <div class="proj-step"><div class="proj-step-num w5-dot">2</div>Record yourself singing a lullaby — any melody, even made up!</div>
+          <div class="proj-step"><div class="proj-step-num w5-dot">3</div>Time the stars appearing and dragon shrinking to match your song beats</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════ WEEK 6 ══════════ -->
+
+    <!-- 16. My Dream Garden -->
+    <div class="proj-card" data-week="6">
+      <div class="proj-scene bg-garden">
+        <div class="scene-chars">
+          <div class="scene-char">🌸</div>
+          <div class="scene-char">🦋</div>
+          <div class="scene-char">🌻</div>
+          <div class="scene-char">🐝</div>
+          <div class="scene-char">🌺</div>
+        </div>
+        <div class="scene-label">Week 6</div>
+      </div>
+      <div class="proj-body">
+        <div class="proj-tags">
+          <span class="proj-week-tag w6-tag">Week 6</span>
+          <span class="proj-type-tag">🌸 Grand Project</span>
+          <span class="proj-diff-tag w6-diff">⭐⭐⭐ Challenge</span>
+        </div>
+        <div class="proj-title">My Dream Garden!</div>
+        <p class="proj-spark">Build an entire living garden — flowers that grow when you tap them, butterflies fluttering in forever loops, bees buzzing with sound effects, a sun spinning overhead, and a secret door that leads to a hidden magical page!</p>
+        <div class="proj-blocks">
+          <span class="block-pill w6-pill">👆 Tap to grow</span>
+          <span class="block-pill w6-pill">♾️ Forever loops</span>
+          <span class="block-pill w6-pill">🔊 Bee buzz sounds</span>
+          <span class="block-pill w6-pill">📄 Secret page</span>
+          <span class="block-pill w6-pill">📨 Messages</span>
+        </div>
+        <div class="proj-steps">
+          <div class="proj-steps-label">Quick start steps</div>
+          <div class="proj-step"><div class="proj-step-num w6-dot">1</div>Draw a detailed garden background — sky, grass, soil, path</div>
+          <div class="proj-step"><div class="proj-step-num w6-dot">2</div>Tap a flower seed → it grows tall! Butterflies: forever loop fluttering. Bee: buzzing sound.</div>
+          <div class="proj-step"><div class="proj-step-num w6-dot">3</div>Hidden door: tap it → page jumps to a magical garden inside a rainbow!</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 17. The Time Machine -->
+    <div class="proj-card" data-week="6">
+      <div class="proj-scene bg-space">
+        <div class="scene-chars">
+          <div class="scene-char"><div class="scene-bubble">Year: 3000! 🚀</div>⏱️</div>
+          <div class="scene-char" style="font-size:2rem;">→</div>
+          <div class="scene-char">🤖</div>
+        </div>
+        <div class="scene-label">Week 6</div>
+      </div>
+      <div class="proj-body">
+        <div class="proj-tags">
+          <span class="proj-week-tag w6-tag">Week 6</span>
+          <span class="proj-type-tag">🕰️ Grand Project</span>
+          <span class="proj-diff-tag w6-diff">⭐⭐⭐ Challenge</span>
+        </div>
+        <div class="proj-title">The Time Machine!</div>
+        <p class="proj-spark">You've built a time machine! Page 1: press a button → it vibrates and flashes → jumps to Page 2 (DINOSAURS!) → tap a dinosaur → it sends you back to Page 1 → press the button again → jump to Page 3 (FUTURE with robots!). Two different time periods to explore!</p>
+        <div class="proj-blocks">
+          <span class="block-pill w6-pill">📄 Pages (3)</span>
+          <span class="block-pill w6-pill">👆 Tap triggers</span>
+          <span class="block-pill w6-pill">📨 Messages</span>
+          <span class="block-pill w6-pill">🔊 Sounds</span>
+          <span class="block-pill w6-pill">🟣 Flash effects</span>
+        </div>
+        <div class="proj-steps">
+          <div class="proj-steps-label">Quick start steps</div>
+          <div class="proj-step"><div class="proj-step-num w6-dot">1</div>Page 1: time machine control panel — draw all the buttons and levers!</div>
+          <div class="proj-step"><div class="proj-step-num w6-dot">2</div>Tap the big red button → machine vibrates (grow/shrink fast) → jumps to Page 2</div>
+          <div class="proj-step"><div class="proj-step-num w6-dot">3</div>Each time period has its own characters, sounds, and a way to travel back!</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 18. My Pet's Day -->
+    <div class="proj-card" data-week="6">
+      <div class="proj-scene bg-farm">
+        <div class="scene-chars">
+          <div class="scene-char"><div class="scene-bubble">Walkies! 🦮</div>🐕</div>
+          <div class="scene-char">🌳</div>
+          <div class="scene-char">☀️</div>
+        </div>
+        <div class="scene-label">Week 6</div>
+      </div>
+      <div class="proj-body">
+        <div class="proj-tags">
+          <span class="proj-week-tag w6-tag">Week 6</span>
+          <span class="proj-type-tag">🐾 Story</span>
+          <span class="proj-diff-tag w6-diff">⭐⭐ Intermediate</span>
+        </div>
+        <div class="proj-title">A Day in My Pet's Life!</div>
+        <p class="proj-spark">Tell the story of a whole day from your pet's point of view — or an imaginary pet if you don't have one! Morning wake-up, walk in the park, lunchtime, afternoon nap with zzz's floating up, and finally bedtime cuddles. Record your pet's voice — you be the voice actor!</p>
+        <div class="proj-blocks">
+          <span class="block-pill w6-pill">📄 Pages (5 scenes)</span>
+          <span class="block-pill w6-pill">🎤 Voice acting</span>
+          <span class="block-pill w6-pill">⏳ Timing</span>
+          <span class="block-pill w6-pill">♾️ Sleep loop</span>
+          <span class="block-pill w6-pill">🟣 Show/Hide</span>
+        </div>
+        <div class="proj-steps">
+          <div class="proj-steps-label">Quick start steps</div>
+          <div class="proj-step"><div class="proj-step-num w6-dot">1</div>Plan on paper: 5 scenes — morning, park, lunch, nap, bedtime. Draw a storyboard!</div>
+          <div class="proj-step"><div class="proj-step-num w6-dot">2</div>Record your pet's narration for each scene in your best animal voice</div>
+          <div class="proj-step"><div class="proj-step-num w6-dot">3</div>Sleep scene: zzz characters appear in a forever loop and pet slowly shrinks</div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- gallery-grid -->
+
+  <div class="empty-state" id="emptyState">
+    <div class="empty-state-icon">🔍</div>
+    <p>No projects match this filter. Try a different week!</p>
+  </div>
+
+  <!-- BOTTOM CTA -->
+  <div class="bottom-cta">
+    <h3>Ready to Build? 🚀</h3>
+    <p>Pick your favourite project above, then grab the activity card for that week. The cards walk you through every step.</p>
+    <div class="cta-btn-row">
+      <a href="activity-cards.html" class="btn-cta-primary">🧩 Get Activity Cards</a>
+      <a href="curriculum.html" class="btn-cta-ghost">📅 View Full Curriculum</a>
+    </div>
+  </div>
+
+</div><!-- main -->
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="footer-links">
+    <a href="../index.html">Home</a>
+    <a href="curriculum.html">Curriculum</a>
+    <a href="activity-cards.html">Activity Cards</a>
+    <a href="project-gallery.html">Project Gallery</a>
+    <a href="badges.html">Badges</a>
+    <a href="whats-next.html">What's Next</a>
+    <a href="troubleshooting.html">Help</a>
+    <a href="checklist.html">Progress</a>
+  </div>
+  <p style="color:#A8A29E;margin-bottom:8px;">Made with ❤️ for parents everywhere · Free &amp; Open Source · <a href="https://github.com" style="color:#FFD23F;text-decoration:none;">View on GitHub ↗</a></p>
+  <p style="font-size:.85rem;opacity:.8;color:#A8A29E;">Created by <strong style="color:#FFD23F;">Petya Lozanova</strong> · ScratchJr is a product of the Scratch Foundation · Independent educational resource</p>
+</footer>
+
+<script>
+  // Nav toggle
+  document.getElementById('navToggle').addEventListener('click', () => {
+    document.getElementById('navLinks').classList.toggle('open');
+  });
+  document.querySelectorAll('.nav-links a').forEach(a =>
+    a.addEventListener('click', () => document.getElementById('navLinks').classList.remove('open'))
+  );
+
+  // Week filter
+  const btns  = document.querySelectorAll('.filter-btn');
+  const cards = document.querySelectorAll('.proj-card');
+  const empty = document.getElementById('emptyState');
+
+  btns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      // Update active button
+      btns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const week = btn.dataset.week;
+      let visible = 0;
+
+      cards.forEach(card => {
+        const match = week === 'all' || card.dataset.week === week;
+        card.classList.toggle('hidden', !match);
+        if (match) visible++;
+      });
+
+      empty.classList.toggle('visible', visible === 0);
+    });
+  });
+</script>
+</body>
+</html>

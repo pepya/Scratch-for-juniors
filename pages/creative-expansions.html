@@ -1,0 +1,1388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="color-scheme" content="light">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Creative Expansions — ScratchJr Adventure</title>
+  <meta name="description" content="Printable story starter cards, character design sheets, and storyboard templates for the ScratchJr Adventure program.">
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Atkinson+Hyperlegible:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/site.css">
+  <style>
+    color-scheme: light only;
+
+    /* ══════════════════════════════════════════
+       FORCE LIGHT MODE — Override any dark mode
+       applied by mobile browsers on this page
+    ══════════════════════════════════════════ */
+    html, body, .main, .section-block,
+    .sec-header, .sec-header-text,
+    .tip-row, .tip-text, .tip-item,
+    .sec-how, .sec-how-item,
+    .print-btn-row, .print-note,
+    .sec-divider {
+      background-color: #FFFBF5 !important;
+      color: #1C1917 !important;
+      -webkit-text-fill-color: #1C1917 !important;
+    }
+
+    /* Specific text elements — explicit colors */
+    .sec-number {
+      color: #78716C !important;
+      -webkit-text-fill-color: #78716C !important;
+    }
+    .sec-title {
+      color: #1C1917 !important;
+      -webkit-text-fill-color: #1C1917 !important;
+      font-family: 'Fredoka One', cursive !important;
+    }
+    .sec-desc {
+      color: #44403C !important;
+      -webkit-text-fill-color: #44403C !important;
+      font-weight: 600 !important;
+    }
+    .tip-text strong {
+      color: #1C1917 !important;
+      -webkit-text-fill-color: #1C1917 !important;
+    }
+    .tip-text span {
+      color: #44403C !important;
+      -webkit-text-fill-color: #44403C !important;
+    }
+    .sec-how-item {
+      color: #1C1917 !important;
+      -webkit-text-fill-color: #1C1917 !important;
+    }
+    .print-note {
+      color: #78716C !important;
+      -webkit-text-fill-color: #78716C !important;
+    }
+
+    /* Story cards body text */
+    .sc-body, .sc-field-value, .sc-prompt-text,
+    .sc-your-turn-label, .sc-genre {
+      color: #1C1917 !important;
+      -webkit-text-fill-color: #1C1917 !important;
+    }
+    .sc-field-label { font-weight: 800 !important; }
+
+    /* Design sheet text */
+    .ds-label { font-weight: 800 !important; }
+    .ds-check { color: #1C1917 !important; -webkit-text-fill-color: #1C1917 !important; }
+
+    /* Storyboard text */
+    .sb-meta-label, .sb-panel-label, .sb-panel-field-label, .sb-footer-label {
+      color: #EA580C !important;
+      -webkit-text-fill-color: #EA580C !important;
+    }
+    .sb-footer-item {
+      color: #1C1917 !important;
+      -webkit-text-fill-color: #1C1917 !important;
+    }
+
+    /* Hero stays dark — override the light reset for hero */
+    .hero, .hero * {
+      background-color: transparent !important;
+    }
+    .hero { background: #1C1917 !important; }
+    .hero .eyebrow { color: #FF6B35 !important; -webkit-text-fill-color: #FF6B35 !important; }
+    .hero p { color: #A8A29E !important; -webkit-text-fill-color: #A8A29E !important; }
+
+    /* ── NAV FIXES ── */
+    .nav-logo,.nav-logo:link,.nav-logo:visited,.nav-logo:hover,.nav-logo:active{color:#FFD23F !important;-webkit-text-fill-color:#FFD23F !important;text-decoration:none !important;}
+    .nav-links a,.nav-links a:link,.nav-links a:visited{color:#D6D3D1 !important;-webkit-text-fill-color:#D6D3D1 !important;text-decoration:none !important;}
+    @media(max-width:700px){
+      .nav-toggle{display:flex !important;background:transparent !important;border:none !important;-webkit-appearance:none;width:40px;height:40px;flex-direction:column;align-items:center;justify-content:center;gap:5px;}
+      .nav-toggle span{display:block;width:22px;height:2px;background:white !important;border-radius:2px;}
+      .nav-links{display:none !important;position:fixed !important;top:58px !important;left:0 !important;right:0 !important;z-index:9999 !important;background:#1C1917 !important;flex-direction:column !important;align-items:stretch !important;padding:8px 12px 16px !important;gap:2px !important;box-shadow:0 12px 32px rgba(0,0,0,0.7) !important;border-top:1px solid rgba(255,255,255,0.08) !important;}
+      .nav-links.open{display:flex !important;}
+      .nav-links a,.nav-links a:link,.nav-links a:visited{color:#FFFFFF !important;-webkit-text-fill-color:#FFFFFF !important;padding:13px 16px !important;font-size:0.95rem !important;border-radius:10px !important;}
+    }
+
+    /* ── HERO ── */
+    .hero {
+      background: #1C1917;
+      padding: 52px 24px 44px;
+      text-align: center;
+      color: white;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content:'';position:absolute;inset:0;
+      background:
+        radial-gradient(ellipse 55% 60% at 15% 70%, rgba(22,163,74,0.14) 0%, transparent 60%),
+        radial-gradient(ellipse 55% 60% at 85% 30%, rgba(124,58,237,0.14) 0%, transparent 60%);
+      pointer-events:none;
+    }
+    .hero .eyebrow{font-size:0.72rem;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:#FF6B35;margin-bottom:12px;position:relative;}
+    .hero h1{font-family:'Fredoka One',cursive;font-size:clamp(1.8rem,5vw,3rem);background:linear-gradient(135deg,#FFD23F,#FF6B35,#FF3D77);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:14px;position:relative;}
+    .hero p{color:#A8A29E;font-size:0.95rem;font-weight:600;max-width:560px;margin:0 auto 28px;line-height:1.65;position:relative;}
+
+    .section-tabs {
+      display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;
+      position: relative;
+    }
+    .tab-btn {
+      font-family: 'Fredoka One', cursive;
+      font-size: 0.9rem;
+      padding: 10px 22px;
+      border-radius: 50px;
+      text-decoration: none;
+      border: 2px solid rgba(255,255,255,0.2);
+      color: #D6D3D1;
+      background: rgba(255,255,255,0.07);
+      transition: background 0.15s, color 0.15s, border-color 0.15s;
+      cursor: pointer;
+    }
+    .tab-btn:hover { background: rgba(255,255,255,0.12); color: white; }
+    .tab-btn.t1 { border-color: rgba(22,163,74,0.5); }
+    .tab-btn.t2 { border-color: rgba(124,58,237,0.5); }
+    .tab-btn.t3 { border-color: rgba(234,88,12,0.5); }
+
+    /* ── MAIN WRAPPER ── */
+    .main {
+      max-width: 1080px; margin: 0 auto; padding: 0 24px 80px;
+      background: #FFFBF5 !important;
+      color: #1C1917 !important;
+    }
+    body {
+      background: #FFFBF5 !important;
+      color: #1C1917 !important;
+    }
+
+    /* ── SECTION BLOCK ── */
+    .section-block {
+      padding: 56px 0 0;
+      background: #FFFBF5 !important;
+      color: #1C1917 !important;
+    }
+
+    .sec-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 20px;
+      margin-bottom: 10px;
+    }
+    .sec-icon {
+      width: 56px; height: 56px;
+      border-radius: 16px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.8rem;
+      flex-shrink: 0;
+    }
+    .sec-header-text {}
+    .sec-number {
+      font-size: 0.68rem; font-weight: 800; letter-spacing: 0.18em;
+      text-transform: uppercase; color: #78716C !important;
+      -webkit-text-fill-color: #78716C !important;
+      margin-bottom: 3px;
+    }
+    .sec-title {
+      font-family: 'Fredoka One', cursive;
+      font-size: 1.8rem;
+      color: #1C1917 !important;
+      -webkit-text-fill-color: #1C1917 !important;
+      line-height: 1.1; margin-bottom: 6px;
+    }
+    .sec-desc {
+      font-size: 0.92rem; font-weight: 600;
+      color: #44403C !important;
+      -webkit-text-fill-color: #44403C !important;
+      line-height: 1.6; max-width: 620px;
+    }
+
+    .sec-how {
+      background: white;
+      border: 1.5px solid #E8DCC8;
+      border-radius: 14px;
+      padding: 16px 20px;
+      margin: 18px 0 32px;
+      display: flex; gap: 28px; flex-wrap: wrap; align-items: center;
+    }
+    .sec-how-item { display: flex; align-items: center; gap: 8px; font-size: 0.83rem; font-weight: 700; color: #44403C !important; -webkit-text-fill-color: #44403C !important; }
+    .sec-how-icon { font-size: 1rem; }
+
+    .sec-divider { height: 1.5px; background: #E8DCC8; margin: 56px 0 0; border-radius: 2px; display: block; }
+
+    /* ── PRINT BUTTON ── */
+    .print-btn-row { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; margin-bottom: 28px; }
+    .print-btn {
+      display: inline-flex; align-items: center; gap: 7px;
+      font-family: 'Fredoka One', cursive; font-size: 0.9rem;
+      padding: 10px 22px; border-radius: 10px;
+      text-decoration: none; border: none; cursor: pointer;
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+    .print-btn:hover { transform: translateY(-2px); }
+    .print-btn-primary { background: #1C1917; color: white; }
+    .print-btn-primary:hover { box-shadow: 0 6px 20px rgba(0,0,0,0.2); }
+    .print-note { font-size: 0.8rem; font-weight: 600; color: #78716C !important; -webkit-text-fill-color: #78716C !important; }
+
+    /* ════════════════════════════════════
+       SECTION 1 — STORY STARTER CARDS
+    ════════════════════════════════════ */
+    .story-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+      gap: 18px;
+    }
+
+    .story-card {
+      border-radius: 20px;
+      overflow: hidden;
+      border: 2px solid #E8DCC8;
+      box-shadow: 0 3px 16px rgba(0,0,0,0.06);
+      background: white;
+      page-break-inside: avoid;
+      break-inside: avoid;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .story-card:hover { transform: translateY(-3px); box-shadow: 0 10px 32px rgba(0,0,0,0.1); }
+
+    .sc-header {
+      padding: 16px 20px 14px;
+      display: flex; align-items: center; gap: 12px;
+      color: white;
+    }
+    .sc-num {
+      font-family: 'Fredoka One', cursive;
+      font-size: 2rem; line-height: 1;
+      opacity: 0.3; flex-shrink: 0;
+    }
+    .sc-label-wrap {}
+    .sc-genre {
+      font-size: 0.6rem; font-weight: 800;
+      letter-spacing: 0.16em; text-transform: uppercase;
+      opacity: 0.8; margin-bottom: 2px;
+    }
+    .sc-headline {
+      font-family: 'Fredoka One', cursive;
+      font-size: 1rem; line-height: 1.2;
+    }
+
+    .sc-body { padding: 18px 20px 20px; }
+
+    .sc-field {
+      margin-bottom: 14px;
+    }
+    .sc-field-label {
+      font-size: 0.62rem; font-weight: 800;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      margin-bottom: 5px; display: flex; align-items: center; gap: 5px;
+    }
+    .sc-field-value {
+      font-size: 0.88rem; font-weight: 700;
+      color: #1C1917; line-height: 1.45;
+      padding: 8px 12px;
+      background: #FAFAF8;
+      border-radius: 8px;
+      border-left: 3px solid #E8DCC8;
+    }
+
+    .sc-prompt {
+      border-radius: 12px;
+      padding: 12px 14px;
+      display: flex; gap: 10px; align-items: flex-start;
+      margin-top: 4px;
+    }
+    .sc-prompt-icon { font-size: 1.3rem; flex-shrink: 0; }
+    .sc-prompt-label { font-size: 0.6rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 2px; }
+    .sc-prompt-text { font-size: 0.84rem; font-weight: 700; line-height: 1.4; }
+
+    .sc-your-turn {
+      margin-top: 14px;
+      border-top: 1.5px dashed #E8DCC8;
+      padding-top: 14px;
+    }
+    .sc-your-turn-label {
+      font-size: 0.62rem; font-weight: 800;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: #78716C; margin-bottom: 8px;
+      display: flex; align-items: center; gap: 5px;
+    }
+    .sc-write-line {
+      height: 22px;
+      border-bottom: 1.5px solid #E8DCC8;
+      margin-bottom: 8px;
+    }
+
+    /* card colour variants */
+    .sc-v1 .sc-header { background: linear-gradient(135deg,#15803D,#4ADE80); }
+    .sc-v1 .sc-field-label { color: #16A34A; }
+    .sc-v1 .sc-field-value { border-left-color: #4ADE80; }
+    .sc-v1 .sc-prompt { background: #F0FDF4; }
+    .sc-v1 .sc-prompt-label { color: #16A34A; }
+    .sc-v1 .sc-prompt-text { color: #14532D; }
+
+    .sc-v2 .sc-header { background: linear-gradient(135deg,#1D4ED8,#60A5FA); }
+    .sc-v2 .sc-field-label { color: #2563EB; }
+    .sc-v2 .sc-field-value { border-left-color: #60A5FA; }
+    .sc-v2 .sc-prompt { background: #EFF6FF; }
+    .sc-v2 .sc-prompt-label { color: #2563EB; }
+    .sc-v2 .sc-prompt-text { color: #1E40AF; }
+
+    .sc-v3 .sc-header { background: linear-gradient(135deg,#C2410C,#FB923C); }
+    .sc-v3 .sc-field-label { color: #EA580C; }
+    .sc-v3 .sc-field-value { border-left-color: #FB923C; }
+    .sc-v3 .sc-prompt { background: #FFF7ED; }
+    .sc-v3 .sc-prompt-label { color: #EA580C; }
+    .sc-v3 .sc-prompt-text { color: #7C2D12; }
+
+    .sc-v4 .sc-header { background: linear-gradient(135deg,#6D28D9,#A855F7); }
+    .sc-v4 .sc-field-label { color: #7C3AED; }
+    .sc-v4 .sc-field-value { border-left-color: #A855F7; }
+    .sc-v4 .sc-prompt { background: #FAF5FF; }
+    .sc-v4 .sc-prompt-label { color: #7C3AED; }
+    .sc-v4 .sc-prompt-text { color: #4C1D95; }
+
+    .sc-v5 .sc-header { background: linear-gradient(135deg,#0E7490,#22D3EE); }
+    .sc-v5 .sc-field-label { color: #0891B2; }
+    .sc-v5 .sc-field-value { border-left-color: #22D3EE; }
+    .sc-v5 .sc-prompt { background: #ECFEFF; }
+    .sc-v5 .sc-prompt-label { color: #0891B2; }
+    .sc-v5 .sc-prompt-text { color: #164E63; }
+
+    .sc-v6 .sc-header { background: linear-gradient(135deg,#9F1239,#FB7185); }
+    .sc-v6 .sc-field-label { color: #BE123C; }
+    .sc-v6 .sc-field-value { border-left-color: #FB7185; }
+    .sc-v6 .sc-prompt { background: #FFF1F2; }
+    .sc-v6 .sc-prompt-label { color: #BE123C; }
+    .sc-v6 .sc-prompt-text { color: #881337; }
+
+    /* Blank card */
+    .sc-blank .sc-header { background: linear-gradient(135deg,#374151,#9CA3AF); }
+    .sc-blank .sc-field-label { color: #4B5563; }
+    .sc-blank .sc-field-value { background: white; border: 1.5px dashed #D1D5DB; border-left: none; min-height: 36px; }
+    .sc-blank .sc-prompt { background: #F9FAFB; border: 1.5px dashed #D1D5DB; }
+    .sc-blank .sc-prompt-label { color: #6B7280; }
+
+    /* ════════════════════════════════════
+       SECTION 2 — CHARACTER DESIGN SHEET
+    ════════════════════════════════════ */
+    .design-sheet {
+      background: white;
+      border: 2px solid #E8DCC8;
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+      margin-bottom: 20px;
+      page-break-inside: avoid;
+      break-inside: avoid;
+    }
+
+    .ds-header {
+      background: linear-gradient(135deg,#6D28D9,#A855F7);
+      padding: 20px 28px;
+      display: flex; align-items: center; gap: 16px; color: white;
+    }
+    .ds-header-icon { font-size: 2.4rem; }
+    .ds-header-title { font-family:'Fredoka One',cursive; font-size: 1.4rem; }
+    .ds-header-sub { font-size: 0.8rem; font-weight: 600; opacity: 0.85; margin-top: 2px; }
+
+    .ds-body { padding: 28px; display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+    @media (max-width:640px) { .ds-body { grid-template-columns: 1fr; } }
+
+    .ds-col {}
+
+    .ds-field { margin-bottom: 20px; }
+    .ds-label {
+      font-size: 0.65rem; font-weight: 800;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: #7C3AED; margin-bottom: 5px;
+      display: flex; align-items: center; gap: 5px;
+    }
+    .ds-input-line {
+      border: none; border-bottom: 2px solid #E8DCC8;
+      width: 100%; padding: 6px 2px;
+      font-family: 'Atkinson Hyperlegible', sans-serif;
+      font-size: 0.95rem; font-weight: 700;
+      color: #1C1917; background: transparent; outline: none;
+    }
+    .ds-input-line::placeholder { color: #D1D5DB; font-weight: 400; }
+    .ds-input-line:focus { border-bottom-color: #7C3AED; }
+
+    .ds-draw-box {
+      border: 2.5px dashed #C084FC;
+      border-radius: 16px;
+      background: #FAF5FF;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center;
+      padding: 20px;
+      gap: 8px;
+    }
+    .ds-draw-icon { font-size: 2rem; opacity: 0.4; }
+    .ds-draw-label { font-size: 0.75rem; font-weight: 700; color: #A78BFA; line-height: 1.4; }
+
+    .ds-draw-box-tall { min-height: 220px; }
+    .ds-draw-box-short { min-height: 100px; }
+
+    .ds-checkbox-group { display: flex; flex-direction: column; gap: 8px; }
+    .ds-check {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 0.84rem; font-weight: 700; color: #44403C;
+    }
+    .ds-check-box {
+      width: 18px; height: 18px;
+      border: 2px solid #C084FC; border-radius: 4px; flex-shrink: 0;
+    }
+
+    .ds-colour-row {
+      display: flex; gap: 6px; flex-wrap: wrap; margin-top: 4px;
+    }
+    .ds-colour-swatch {
+      width: 28px; height: 28px;
+      border-radius: 50%;
+      border: 2px solid #E8DCC8;
+    }
+    .ds-colour-swatch.filled { border-style: dashed; }
+
+    .ds-emotion-grid {
+      display: grid; grid-template-columns: repeat(3,1fr); gap: 8px;
+    }
+    .ds-emotion {
+      border: 1.5px solid #E8DCC8; border-radius: 10px;
+      padding: 8px 6px; text-align: center;
+    }
+    .ds-emotion-face { font-size: 1.4rem; }
+    .ds-emotion-name { font-size: 0.62rem; font-weight: 700; color: #78716C; margin-top: 2px; }
+
+    .ds-footer {
+      background: #FAF5FF;
+      border-top: 1.5px solid #EDE9FE;
+      padding: 16px 28px;
+      display: flex; gap: 24px; align-items: center; flex-wrap: wrap;
+    }
+    .ds-footer-item { display: flex; flex-direction: column; gap: 2px; }
+    .ds-footer-label { font-size: 0.6rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: #A78BFA; }
+    .ds-footer-line { width: 140px; height: 1px; background: #C084FC; margin-top: 12px; }
+
+    /* ════════════════════════════════════
+       SECTION 3 — STORYBOARD TEMPLATE
+    ════════════════════════════════════ */
+    .storyboard {
+      background: white;
+      border: 2px solid #E8DCC8;
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+      margin-bottom: 20px;
+      page-break-inside: avoid;
+      break-inside: avoid;
+    }
+
+    .sb-header {
+      background: linear-gradient(135deg,#C2410C,#FB923C);
+      padding: 20px 28px;
+      display: flex; align-items: center; gap: 16px; color: white;
+    }
+    .sb-icon { font-size: 2.2rem; }
+    .sb-title { font-family:'Fredoka One',cursive; font-size:1.4rem; }
+    .sb-sub { font-size:0.8rem; font-weight:600; opacity:0.85; margin-top:2px; }
+
+    .sb-top { padding: 18px 28px 0; }
+    .sb-top-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-bottom: 20px; }
+    @media (max-width:600px) { .sb-top-grid { grid-template-columns:1fr; } }
+
+    .sb-meta-field {}
+    .sb-meta-label { font-size:0.6rem; font-weight:800; letter-spacing:0.14em; text-transform:uppercase; color:#EA580C; margin-bottom:5px; }
+    .sb-meta-line { border:none; border-bottom:2px solid #E8DCC8; width:100%; padding:5px 2px; font-family:'Atkinson Hyperlegible',sans-serif; font-size:0.9rem; font-weight:700; color:#1C1917; background:transparent; outline:none; }
+    .sb-meta-line::placeholder { color:#D1D5DB; font-weight:400; }
+    .sb-meta-line:focus { border-bottom-color:#EA580C; }
+
+    /* Panel grid */
+    .sb-panels { padding: 0 28px 28px; display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+    @media (max-width:600px) { .sb-panels { grid-template-columns:1fr; } }
+
+    .sb-panel {
+      display: flex; flex-direction: column; gap: 10px;
+    }
+
+    .sb-panel-header {
+      display: flex; align-items: center; gap: 8px;
+    }
+    .sb-panel-num {
+      width: 28px; height: 28px; border-radius: 50%;
+      background: #EA580C; color: white;
+      font-family: 'Fredoka One', cursive; font-size: 0.95rem;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .sb-panel-label { font-size:0.72rem; font-weight:800; color:#78716C; }
+
+    .sb-draw-area {
+      border: 2.5px dashed #FCA5A5;
+      border-radius: 12px;
+      background: #FFF7ED;
+      min-height: 160px;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center; gap: 6px; padding: 16px;
+    }
+    .sb-draw-icon { font-size: 1.8rem; opacity: 0.35; }
+    .sb-draw-hint { font-size: 0.68rem; font-weight: 700; color: #FB923C; line-height: 1.4; }
+
+    .sb-panel-fields { display: flex; flex-direction: column; gap: 8px; }
+    .sb-panel-field {}
+    .sb-panel-field-label { font-size:0.58rem; font-weight:800; letter-spacing:0.12em; text-transform:uppercase; color:#EA580C; margin-bottom:3px; }
+    .sb-field-line { border:none; border-bottom:1.5px solid #FED7AA; width:100%; padding:3px 2px; font-family:'Atkinson Hyperlegible',sans-serif; font-size:0.82rem; font-weight:700; color:#1C1917; background:transparent; outline:none; }
+    .sb-field-line::placeholder { color:#D1D5DB; font-weight:400; }
+
+    .sb-field-textarea {
+      border: 1.5px solid #FED7AA; border-radius: 8px;
+      width: 100%; padding: 6px 8px;
+      font-family:'Atkinson Hyperlegible',sans-serif;
+      font-size:0.82rem; font-weight:700; color:#1C1917;
+      background:#FFF7ED; outline:none; resize:none;
+      min-height:52px; line-height:1.4;
+    }
+    .sb-field-textarea::placeholder { color:#D1D5DB; font-weight:400; }
+
+    /* Blocks needed */
+    .sb-blocks-row { display:flex; gap:5px; flex-wrap:wrap; margin-top:2px; }
+    .sb-block-pill {
+      font-size:0.65rem; font-weight:800; padding:2px 8px;
+      border-radius:50px; border:1.5px solid;
+      cursor:pointer; transition:background 0.1s;
+      background:white;
+    }
+    .sb-block-pill.motion { border-color:#60A5FA; color:#1D4ED8; }
+    .sb-block-pill.motion:hover,.sb-block-pill.motion.on { background:#DBEAFE; }
+    .sb-block-pill.looks  { border-color:#C084FC; color:#6D28D9; }
+    .sb-block-pill.looks:hover,.sb-block-pill.looks.on  { background:#EDE9FE; }
+    .sb-block-pill.sound  { border-color:#4ADE80; color:#15803D; }
+    .sb-block-pill.sound:hover,.sb-block-pill.sound.on  { background:#DCFCE7; }
+    .sb-block-pill.loops  { border-color:#A855F7; color:#6D28D9; }
+    .sb-block-pill.loops:hover,.sb-block-pill.loops.on  { background:#FAF5FF; }
+    .sb-block-pill.msg    { border-color:#FB923C; color:#C2410C; }
+    .sb-block-pill.msg:hover,.sb-block-pill.msg.on    { background:#FFF7ED; }
+
+    /* Bottom legend row */
+    .sb-footer {
+      border-top: 1.5px solid #FED7AA;
+      background: #FFF7ED;
+      padding: 14px 28px;
+      display: flex; gap: 16px; align-items: center; flex-wrap: wrap;
+    }
+    .sb-footer-label { font-size:0.65rem; font-weight:800; text-transform:uppercase; letter-spacing:0.1em; color:#EA580C; margin-right:6px; }
+    .sb-footer-item { display:flex; align-items:center; gap:5px; font-size:0.78rem; font-weight:700; color:#44403C; }
+
+    /* Tips row between sections */
+    .tip-row {
+      background: white;
+      border: 1.5px solid #E8DCC8;
+      border-radius: 14px;
+      padding: 16px 20px;
+      display: flex; gap: 20px; flex-wrap: wrap;
+      margin-bottom: 28px;
+    }
+    .tip-item { display:flex; gap:10px; align-items:flex-start; flex:1; min-width:180px; }
+    .tip-text strong { color: #1C1917 !important; -webkit-text-fill-color: #1C1917 !important; }
+    .tip-text span { color: #44403C !important; -webkit-text-fill-color: #44403C !important; }
+    .tip-icon { font-size:1.3rem; flex-shrink:0; margin-top:1px; }
+    .tip-text strong { display:block; font-size:0.85rem; color:#1C1917; margin-bottom:2px; }
+    .tip-text span { font-size:0.78rem; color:#78716C; font-weight:600; line-height:1.45; }
+
+    /* ── PRINT STYLES ── */
+    @media print {
+      .hero, .site-nav, .site-footer,
+      .print-btn-row, .tip-row, .sec-how,
+      .section-tabs, .sec-divider { display: none !important; }
+      body { background: white !important; padding: 0; }
+      .main { padding: 0; }
+      .section-block { padding-top: 20px; }
+      .sec-header { margin-bottom: 8px; }
+      .sec-desc { display: none; }
+
+      .story-cards-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+        page-break-after: always;
+      }
+      .story-card { page-break-inside: avoid; break-inside: avoid; box-shadow: none; }
+      .design-sheet { page-break-before: always; box-shadow: none; }
+      .storyboard { page-break-before: always; box-shadow: none; }
+
+      /* Make draw areas taller when printing */
+      .ds-draw-box-tall { min-height: 280px; }
+      .sb-draw-area { min-height: 200px; }
+
+      input, textarea { border-color: #999 !important; }
+      .sb-field-textarea { border-color: #999 !important; background: white !important; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="site-nav">
+  <a href="../index.html" class="nav-logo">🐱 ScratchJr Adventure</a>
+  <button class="nav-toggle" id="navToggle" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="../index.html">🏠 Home</a></li>
+    <li><a href="curriculum.html">📅 Curriculum</a></li>
+    <li><a href="activity-cards.html">🧩 Activity Cards</a></li>
+    <li><a href="badges.html">🏅 Badges</a></li>
+    <li><a href="bonus-challenges.html">⚡ Bonus</a></li>
+    <li><a href="creative-expansions.html" class="active">🎨 Creative</a></li>
+    <li><a href="troubleshooting.html">🔧 Help</a></li>
+  </ul>
+</nav>
+
+<div style="background:#292524;padding:8px 24px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;border-bottom:1px solid rgba(255,255,255,0.06);">
+  <span style="font-size:0.72rem;font-weight:700;color:#A8A29E;text-transform:uppercase;letter-spacing:0.1em;">🌍 Language:</span>
+  <a href="creative-expansions.html" style="font-size:0.8rem;font-weight:700;padding:4px 12px;border-radius:8px;text-decoration:none;background:#FF6B35;border:1.5px solid #FF6B35;color:white !important;">🇬🇧 English</a>
+  <a href="creative-expansions-bg.html" style="font-size:0.8rem;font-weight:700;padding:4px 12px;border-radius:8px;text-decoration:none;border:1.5px solid rgba(255,255,255,0.2);color:#D6D3D1 !important;">🇧🇬 Български</a>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="eyebrow">🎨 Paper-First Learning Tools</div>
+  <h1>Creative Expansions</h1>
+  <p>Three printable tools that help kids plan, design, and imagine before they touch the tablet. The best projects start on paper.</p>
+  <div class="section-tabs">
+    <a href="#story-starters" class="tab-btn t1">📖 Story Starter Cards</a>
+    <a href="#character-sheets" class="tab-btn t2">🎭 Character Design Sheets</a>
+    <a href="#storyboard" class="tab-btn t3">🎬 Storyboard Template</a>
+  </div>
+</div>
+
+<div class="main" style="background:#FFFBF5 !important; color:#1C1917 !important;">
+
+<!-- ════════════════════════════════════════════════
+     SECTION 1 — STORY STARTER CARDS
+════════════════════════════════════════════════ -->
+<div class="section-block" id="story-starters" style="background:#FFFBF5 !important;">
+
+  <div class="sec-header">
+    <div class="sec-icon" style="background:#DCFCE7;">📖</div>
+    <div class="sec-header-text">
+      <div class="sec-number">Tool 1 of 3</div>
+      <div class="sec-title">Story Starter Cards</div>
+      <div class="sec-desc">Each card gives a setting, two characters, and a conflict. Cut them out and keep them in a box. When a child is stuck for ideas, pull a card and start building! Perfect for Week 2 and Week 6.</div>
+    </div>
+  </div>
+
+  <div class="sec-how">
+    <div class="sec-how-item"><span class="sec-how-icon">✂️</span> Print, cut out each card</div>
+    <div class="sec-how-item"><span class="sec-how-icon">📦</span> Keep in a story box or envelope</div>
+    <div class="sec-how-item"><span class="sec-how-icon">🎲</span> Pull one randomly when stuck</div>
+    <div class="sec-how-item"><span class="sec-how-icon">✏️</span> Fill in the "Your Twist" section</div>
+    <div class="sec-how-item"><span class="sec-how-icon">📱</span> Then open ScratchJr and build it!</div>
+  </div>
+
+  <div class="print-btn-row">
+    <button class="print-btn print-btn-primary" onclick="window.print()">🖨️ Print All Cards</button>
+    <span class="print-note">6 story cards + 1 blank card to fill in yourself · Print on A4, cut along the card borders</span>
+  </div>
+
+  <div class="story-cards-grid">
+
+    <!-- Card 1 -->
+    <div class="story-card sc-v1">
+      <div class="sc-header">
+        <div class="sc-num">1</div>
+        <div class="sc-label-wrap">
+          <div class="sc-genre">🌿 Adventure</div>
+          <div class="sc-headline">The Lost Robot</div>
+        </div>
+      </div>
+      <div class="sc-body">
+        <div class="sc-field">
+          <div class="sc-field-label" style="color:inherit">🗺️ Setting</div>
+          <div class="sc-field-value">A deep enchanted forest where the trees can whisper</div>
+        </div>
+        <div class="sc-field">
+          <div class="sc-field-label">🎭 Character 1</div>
+          <div class="sc-field-value">🤖 A small robot who is lost and looking for home</div>
+        </div>
+        <div class="sc-field">
+          <div class="sc-field-label">🎭 Character 2</div>
+          <div class="sc-field-value">🍄 A talking mushroom who knows every path in the forest</div>
+        </div>
+        <div class="sc-prompt sc-v1">
+          <span class="sc-prompt-icon">⚡</span>
+          <div>
+            <div class="sc-prompt-label">The Conflict</div>
+            <div class="sc-prompt-text">The mushroom will only help if the robot can answer its riddle — but robots don't know riddles!</div>
+          </div>
+        </div>
+        <div class="sc-your-turn">
+          <div class="sc-your-turn-label">✏️ Your Twist — how does it end?</div>
+          <div class="sc-write-line"></div>
+          <div class="sc-write-line"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 2 -->
+    <div class="story-card sc-v2">
+      <div class="sc-header">
+        <div class="sc-num">2</div>
+        <div class="sc-label-wrap">
+          <div class="sc-genre">🚀 Sci-Fi</div>
+          <div class="sc-headline">Space Rescue</div>
+        </div>
+      </div>
+      <div class="sc-body">
+        <div class="sc-field">
+          <div class="sc-field-label">🗺️ Setting</div>
+          <div class="sc-field-value">A space station orbiting a purple planet, far from Earth</div>
+        </div>
+        <div class="sc-field">
+          <div class="sc-field-label">🎭 Character 1</div>
+          <div class="sc-field-value">🧑‍🚀 A young astronaut who forgot the launch code</div>
+        </div>
+        <div class="sc-field">
+          <div class="sc-field-label">🎭 Character 2</div>
+          <div class="sc-field-value">🛸 A friendly alien who speaks only in beeps and colours</div>
+        </div>
+        <div class="sc-prompt sc-v2">
+          <span class="sc-prompt-icon">⚡</span>
+          <div>
+            <div class="sc-prompt-label">The Conflict</div>
+            <div class="sc-prompt-text">The rocket must leave in 10 minutes or they're both stuck. The alien knows the code but can't say it!</div>
+          </div>
+        </div>
+        <div class="sc-your-turn">
+          <div class="sc-your-turn-label">✏️ Your Twist — how does it end?</div>
+          <div class="sc-write-line"></div>
+          <div class="sc-write-line"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 3 -->
+    <div class="story-card sc-v3">
+      <div class="sc-header">
+        <div class="sc-num">3</div>
+        <div class="sc-label-wrap">
+          <div class="sc-genre">🌊 Mystery</div>
+          <div class="sc-headline">The Sunken Crown</div>
+        </div>
+      </div>
+      <div class="sc-body">
+        <div class="sc-field">
+          <div class="sc-field-label">🗺️ Setting</div>
+          <div class="sc-field-value">An underwater kingdom where fish wear tiny hats</div>
+        </div>
+        <div class="sc-field">
+          <div class="sc-field-label">🎭 Character 1</div>
+          <div class="sc-field-value">🐠 A clownfish detective searching for the missing crown</div>
+        </div>
+        <div class="sc-field">
+          <div class="sc-field-label">🎭 Character 2</div>
+          <div class="sc-field-value">🦑 A nervous squid who saw everything but is too scared to talk</div>
+        </div>
+        <div class="sc-prompt sc-v3">
+          <span class="sc-prompt-icon">⚡</span>
+          <div>
+            <div class="sc-prompt-label">The Conflict</div>
+            <div class="sc-prompt-text">The squid will only speak if it feels completely safe — and the detective's flashing badge is terrifying it!</div>
+          </div>
+        </div>
+        <div class="sc-your-turn">
+          <div class="sc-your-turn-label">✏️ Your Twist — how does it end?</div>
+          <div class="sc-write-line"></div>
+          <div class="sc-write-line"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 4 -->
+    <div class="story-card sc-v4">
+      <div class="sc-header">
+        <div class="sc-num">4</div>
+        <div class="sc-label-wrap">
+          <div class="sc-genre">🏰 Fantasy</div>
+          <div class="sc-headline">The Tiny Dragon</div>
+        </div>
+      </div>
+      <div class="sc-body">
+        <div class="sc-field">
+          <div class="sc-field-label">🗺️ Setting</div>
+          <div class="sc-field-value">A magical library where the books fly around on their own</div>
+        </div>
+        <div class="sc-field">
+          <div class="sc-field-label">🎭 Character 1</div>
+          <div class="sc-field-value">🐉 A very tiny dragon who breathes glitter instead of fire</div>
+        </div>
+        <div class="sc-field">
+          <div class="sc-field-label">🎭 Character 2</div>
+          <div class="sc-field-value">📚 A grumpy old librarian who hates glitter with a passion</div>
+        </div>
+        <div class="sc-prompt sc-v4">
+          <span class="sc-prompt-icon">⚡</span>
+          <div>
+            <div class="sc-prompt-label">The Conflict</div>
+            <div class="sc-prompt-text">The dragon accidentally covered the most important book in glitter — and now no one can read it!</div>
+          </div>
+        </div>
+        <div class="sc-your-turn">
+          <div class="sc-your-turn-label">✏️ Your Twist — how does it end?</div>
+          <div class="sc-write-line"></div>
+          <div class="sc-write-line"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 5 -->
+    <div class="story-card sc-v5">
+      <div class="sc-header">
+        <div class="sc-num">5</div>
+        <div class="sc-label-wrap">
+          <div class="sc-genre">🌍 Real World</div>
+          <div class="sc-headline">The Big Race</div>
+        </div>
+      </div>
+      <div class="sc-body">
+        <div class="sc-field">
+          <div class="sc-field-label">🗺️ Setting</div>
+          <div class="sc-field-value">A city park on the day of the most important race of the year</div>
+        </div>
+        <div class="sc-field">
+          <div class="sc-field-label">🎭 Character 1</div>
+          <div class="sc-field-value">🐢 A slow but very clever tortoise who has been training for months</div>
+        </div>
+        <div class="sc-field">
+          <div class="sc-field-label">🎭 Character 2</div>
+          <div class="sc-field-value">🐇 A super-fast rabbit who never takes anything seriously</div>
+        </div>
+        <div class="sc-prompt sc-v5">
+          <span class="sc-prompt-icon">⚡</span>
+          <div>
+            <div class="sc-prompt-label">The Conflict</div>
+            <div class="sc-prompt-text">Halfway through the race, the rabbit sees the tortoise struggling and has to decide — win, or help?</div>
+          </div>
+        </div>
+        <div class="sc-your-turn">
+          <div class="sc-your-turn-label">✏️ Your Twist — how does it end?</div>
+          <div class="sc-write-line"></div>
+          <div class="sc-write-line"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 6 -->
+    <div class="story-card sc-v6">
+      <div class="sc-header">
+        <div class="sc-num">6</div>
+        <div class="sc-label-wrap">
+          <div class="sc-genre">😄 Comedy</div>
+          <div class="sc-headline">The Wrong Door</div>
+        </div>
+      </div>
+      <div class="sc-body">
+        <div class="sc-field">
+          <div class="sc-field-label">🗺️ Setting</div>
+          <div class="sc-field-value">A funny hotel where every door leads somewhere completely unexpected</div>
+        </div>
+        <div class="sc-field">
+          <div class="sc-field-label">🎭 Character 1</div>
+          <div class="sc-field-value">🧳 A very confused traveller who just wants to find their room</div>
+        </div>
+        <div class="sc-field">
+          <div class="sc-field-label">🎭 Character 2</div>
+          <div class="sc-field-value">🦜 A parrot receptionist who gives directions in riddles</div>
+        </div>
+        <div class="sc-prompt sc-v6">
+          <span class="sc-prompt-icon">⚡</span>
+          <div>
+            <div class="sc-prompt-label">The Conflict</div>
+            <div class="sc-prompt-text">The traveller has opened 5 wrong doors — and ended up in a swimming pool, a jungle, and a disco. Room 7 must be here somewhere!</div>
+          </div>
+        </div>
+        <div class="sc-your-turn">
+          <div class="sc-your-turn-label">✏️ Your Twist — how does it end?</div>
+          <div class="sc-write-line"></div>
+          <div class="sc-write-line"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Blank card -->
+    <div class="story-card sc-blank">
+      <div class="sc-header" style="background:linear-gradient(135deg,#374151,#9CA3AF);">
+        <div class="sc-num">✨</div>
+        <div class="sc-label-wrap">
+          <div class="sc-genre" style="color:rgba(255,255,255,0.8);">✏️ Your Own Story</div>
+          <div class="sc-headline">Create Your Card!</div>
+        </div>
+      </div>
+      <div class="sc-body">
+        <div class="sc-field">
+          <div class="sc-field-label" style="color:#4B5563;">🗺️ Setting</div>
+          <div class="sc-field-value" style="border:1.5px dashed #D1D5DB; border-left:none; background:white; min-height:36px;"></div>
+        </div>
+        <div class="sc-field">
+          <div class="sc-field-label" style="color:#4B5563;">🎭 Character 1</div>
+          <div class="sc-field-value" style="border:1.5px dashed #D1D5DB; border-left:none; background:white; min-height:36px;"></div>
+        </div>
+        <div class="sc-field">
+          <div class="sc-field-label" style="color:#4B5563;">🎭 Character 2</div>
+          <div class="sc-field-value" style="border:1.5px dashed #D1D5DB; border-left:none; background:white; min-height:36px;"></div>
+        </div>
+        <div class="sc-prompt" style="background:#F9FAFB; border:1.5px dashed #D1D5DB;">
+          <span class="sc-prompt-icon">⚡</span>
+          <div>
+            <div class="sc-prompt-label" style="color:#6B7280;">The Conflict</div>
+            <div class="sc-write-line" style="margin-top:6px;"></div>
+            <div class="sc-write-line"></div>
+          </div>
+        </div>
+        <div class="sc-your-turn">
+          <div class="sc-your-turn-label" style="color:#9CA3AF;">✏️ Your Twist</div>
+          <div class="sc-write-line"></div>
+          <div class="sc-write-line"></div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- story-cards-grid -->
+</div>
+
+<div class="sec-divider"></div>
+
+<!-- ════════════════════════════════════════════════
+     SECTION 2 — CHARACTER DESIGN SHEET
+════════════════════════════════════════════════ -->
+<div class="section-block" id="character-sheets" style="background:#FFFBF5 !important;">
+
+  <div class="sec-header">
+    <div class="sec-icon" style="background:#EDE9FE;">🎭</div>
+    <div class="sec-header-text">
+      <div class="sec-number">Tool 2 of 3</div>
+      <div class="sec-title">Character Design Sheet</div>
+      <div class="sec-desc">Before drawing in ScratchJr, kids design their character on paper first — just like professional game designers. Name, personality, colours, emotions. Included: one completed example + two blank sheets to print.</div>
+    </div>
+  </div>
+
+  <div class="tip-row">
+    <div class="tip-item"><span class="tip-icon">💡</span><div class="tip-text"><strong>Why paper first?</strong><span>Professional game designers always sketch characters before coding. It's faster to change on paper than to redraw in the app.</span></div></div>
+    <div class="tip-item"><span class="tip-icon">🎨</span><div class="tip-text"><strong>Best for Week 1 & 6</strong><span>Use before Day 1 (creating first character) and before Week 6 Day 2 (art day). Makes the tablet session much smoother.</span></div></div>
+    <div class="tip-item"><span class="tip-icon">✂️</span><div class="tip-text"><strong>How to use</strong><span>Print 2–3 sheets. Child fills in name, personality, and colours. Then draws character in the big box. Then opens ScratchJr.</span></div></div>
+  </div>
+
+  <div class="print-btn-row">
+    <button class="print-btn print-btn-primary" onclick="window.print()">🖨️ Print Design Sheets</button>
+    <span class="print-note">Prints 1 sheet per page · Print 2–3 copies per child · Works in black &amp; white too</span>
+  </div>
+
+  <!-- EXAMPLE (filled in) -->
+  <div class="design-sheet" style="margin-bottom:24px;">
+    <div class="ds-header">
+      <div class="ds-header-icon">🎭</div>
+      <div>
+        <div class="ds-header-title">Character Design Sheet</div>
+        <div class="ds-header-sub">Example — "Zara the Space Explorer" · Fill in your own below!</div>
+      </div>
+    </div>
+    <div class="ds-body">
+      <div class="ds-col">
+        <div class="ds-field">
+          <div class="ds-label">✏️ Character Name</div>
+          <div style="font-family:'Fredoka One',cursive;font-size:1.3rem;color:#7C3AED;border-bottom:2px solid #C084FC;padding-bottom:4px;">Zara the Space Explorer</div>
+        </div>
+        <div class="ds-field">
+          <div class="ds-label">❓ What does your character want?</div>
+          <div style="font-size:0.88rem;font-weight:700;color:#1C1917;line-height:1.5;">To find a new planet and name it after her cat</div>
+        </div>
+        <div class="ds-field">
+          <div class="ds-label">💪 Special ability or power</div>
+          <div style="font-size:0.88rem;font-weight:700;color:#1C1917;line-height:1.5;">Can breathe in space without a helmet (somehow!)</div>
+        </div>
+        <div class="ds-field">
+          <div class="ds-label">😅 Biggest weakness or fear</div>
+          <div style="font-size:0.88rem;font-weight:700;color:#1C1917;line-height:1.5;">Absolutely terrified of asteroids (they're just rocks, she knows)</div>
+        </div>
+        <div class="ds-field">
+          <div class="ds-label">🎨 Main colours</div>
+          <div class="ds-colour-row">
+            <div class="ds-colour-swatch" style="background:#8B5CF6;border-color:#8B5CF6;"></div>
+            <div class="ds-colour-swatch" style="background:#F9A8D4;border-color:#F9A8D4;"></div>
+            <div class="ds-colour-swatch" style="background:#FCD34D;border-color:#FCD34D;"></div>
+            <div class="ds-colour-swatch filled" style="background:white;border-color:#D1D5DB;border-style:dashed;"></div>
+          </div>
+        </div>
+        <div class="ds-field">
+          <div class="ds-label">😊 Emotions this character shows</div>
+          <div class="ds-emotion-grid">
+            <div class="ds-emotion"><div class="ds-emotion-face">😄</div><div class="ds-emotion-name">Happy ✓</div></div>
+            <div class="ds-emotion"><div class="ds-emotion-face">😨</div><div class="ds-emotion-name">Scared ✓</div></div>
+            <div class="ds-emotion"><div class="ds-emotion-face">🤩</div><div class="ds-emotion-name">Excited ✓</div></div>
+            <div class="ds-emotion"><div class="ds-emotion-face">😤</div><div class="ds-emotion-name">Determined</div></div>
+            <div class="ds-emotion"><div class="ds-emotion-face">😂</div><div class="ds-emotion-name">Laughing</div></div>
+            <div class="ds-emotion"><div class="ds-emotion-face">😮</div><div class="ds-emotion-name">Surprised</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="ds-col">
+        <div class="ds-field">
+          <div class="ds-label">🖊️ Draw your character here</div>
+          <div class="ds-draw-box ds-draw-box-tall" style="background:#FAF5FF;border-color:#C084FC;min-height:300px;position:relative;">
+            <div style="font-size:5rem;opacity:0.15;">🧑‍🚀</div>
+            <div style="font-size:0.75rem;font-weight:700;color:#A78BFA;line-height:1.4;text-align:center;">Example: Zara wears a purple spacesuit<br>with a star on the helmet and<br>rocket boots that glow yellow</div>
+          </div>
+        </div>
+        <div class="ds-field" style="margin-top:14px;">
+          <div class="ds-label">💬 Catchphrase (what they always say)</div>
+          <div style="font-size:0.95rem;font-weight:700;color:#7C3AED;font-style:italic;border-left:3px solid #C084FC;padding:8px 12px;background:#FAF5FF;border-radius:0 8px 8px 0;">"To infinity and slightly beyond that!"</div>
+        </div>
+        <div class="ds-field">
+          <div class="ds-label">🎮 What will this character DO in ScratchJr?</div>
+          <div class="ds-checkbox-group">
+            <div class="ds-check"><div class="ds-check-box" style="background:#EDE9FE;border-color:#8B5CF6;"></div>Move across the stage</div>
+            <div class="ds-check"><div class="ds-check-box" style="background:#EDE9FE;border-color:#8B5CF6;"></div>Say something</div>
+            <div class="ds-check"><div class="ds-check-box" style="background:#EDE9FE;border-color:#8B5CF6;"></div>Grow big &amp; shrink small</div>
+            <div class="ds-check"><div class="ds-check-box"></div>Loop / dance</div>
+            <div class="ds-check"><div class="ds-check-box" style="background:#EDE9FE;border-color:#8B5CF6;"></div>React to messages</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="ds-footer">
+      <div class="ds-footer-item"><div class="ds-footer-label">Designer</div><div style="font-size:0.88rem;font-weight:700;color:#7C3AED;">Your name here</div></div>
+      <div class="ds-footer-item"><div class="ds-footer-label">Week</div><div style="font-size:0.88rem;font-weight:700;color:#7C3AED;">Week 1 / Week 6</div></div>
+      <div class="ds-footer-item"><div class="ds-footer-label">Project name</div><div style="font-size:0.88rem;font-weight:700;color:#7C3AED;">Space Adventure</div></div>
+    </div>
+  </div>
+
+  <!-- BLANK SHEET -->
+  <div class="design-sheet">
+    <div class="ds-header">
+      <div class="ds-header-icon">✏️</div>
+      <div>
+        <div class="ds-header-title">Character Design Sheet</div>
+        <div class="ds-header-sub">Fill me in! · Print extra copies from the website</div>
+      </div>
+    </div>
+    <div class="ds-body">
+      <div class="ds-col">
+        <div class="ds-field">
+          <div class="ds-label">✏️ Character Name</div>
+          <input class="ds-input-line" type="text" placeholder="Give your character a name…">
+        </div>
+        <div class="ds-field">
+          <div class="ds-label">❓ What does your character want?</div>
+          <input class="ds-input-line" type="text" placeholder="Their goal or dream…">
+          <input class="ds-input-line" type="text" placeholder="" style="margin-top:6px;">
+        </div>
+        <div class="ds-field">
+          <div class="ds-label">💪 Special ability or power</div>
+          <input class="ds-input-line" type="text" placeholder="Something only they can do…">
+        </div>
+        <div class="ds-field">
+          <div class="ds-label">😅 Biggest weakness or fear</div>
+          <input class="ds-input-line" type="text" placeholder="What scares or stops them?">
+        </div>
+        <div class="ds-field">
+          <div class="ds-label">🎨 Main colours (colour the circles)</div>
+          <div class="ds-colour-row">
+            <div class="ds-colour-swatch filled"></div>
+            <div class="ds-colour-swatch filled"></div>
+            <div class="ds-colour-swatch filled"></div>
+            <div class="ds-colour-swatch filled"></div>
+          </div>
+        </div>
+        <div class="ds-field">
+          <div class="ds-label">😊 Circle the emotions they show</div>
+          <div class="ds-emotion-grid">
+            <div class="ds-emotion"><div class="ds-emotion-face">😄</div><div class="ds-emotion-name">Happy</div></div>
+            <div class="ds-emotion"><div class="ds-emotion-face">😨</div><div class="ds-emotion-name">Scared</div></div>
+            <div class="ds-emotion"><div class="ds-emotion-face">🤩</div><div class="ds-emotion-name">Excited</div></div>
+            <div class="ds-emotion"><div class="ds-emotion-face">😤</div><div class="ds-emotion-name">Determined</div></div>
+            <div class="ds-emotion"><div class="ds-emotion-face">😂</div><div class="ds-emotion-name">Laughing</div></div>
+            <div class="ds-emotion"><div class="ds-emotion-face">😮</div><div class="ds-emotion-name">Surprised</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="ds-col">
+        <div class="ds-field">
+          <div class="ds-label">🖊️ Draw your character here</div>
+          <div class="ds-draw-box ds-draw-box-tall">
+            <div class="ds-draw-icon">✏️</div>
+            <div class="ds-draw-label">Draw your character!<br>Show their colours,<br>outfit, and expression</div>
+          </div>
+        </div>
+        <div class="ds-field" style="margin-top:14px;">
+          <div class="ds-label">💬 Catchphrase (what they always say)</div>
+          <input class="ds-input-line" type="text" placeholder='"Something they always say…"'>
+        </div>
+        <div class="ds-field">
+          <div class="ds-label">🎮 Tick what they will DO in ScratchJr</div>
+          <div class="ds-checkbox-group">
+            <div class="ds-check"><div class="ds-check-box"></div>Move across the stage</div>
+            <div class="ds-check"><div class="ds-check-box"></div>Say something with a speech bubble</div>
+            <div class="ds-check"><div class="ds-check-box"></div>Grow big &amp; shrink small</div>
+            <div class="ds-check"><div class="ds-check-box"></div>Loop / repeat a dance</div>
+            <div class="ds-check"><div class="ds-check-box"></div>React to another character</div>
+            <div class="ds-check"><div class="ds-check-box"></div>Make a sound or play music</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="ds-footer">
+      <div class="ds-footer-item">
+        <div class="ds-footer-label">Designed by</div>
+        <div class="ds-footer-line"></div>
+      </div>
+      <div class="ds-footer-item">
+        <div class="ds-footer-label">Week</div>
+        <div class="ds-footer-line" style="width:80px;"></div>
+      </div>
+      <div class="ds-footer-item">
+        <div class="ds-footer-label">Project name</div>
+        <div class="ds-footer-line" style="width:200px;"></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="sec-divider"></div>
+
+<!-- ════════════════════════════════════════════════
+     SECTION 3 — STORYBOARD TEMPLATE
+════════════════════════════════════════════════ -->
+<div class="section-block" id="storyboard" style="background:#FFFBF5 !important;">
+
+  <div class="sec-header">
+    <div class="sec-icon" style="background:#FFF7ED;">🎬</div>
+    <div class="sec-header-text">
+      <div class="sec-number">Tool 3 of 3</div>
+      <div class="sec-title">Storyboard Template</div>
+      <div class="sec-desc">A 3-panel planning sheet for the Week 6 final project — or any multi-scene project. Kids sketch each scene, write what happens, and tick which ScratchJr blocks they'll need. Plan before you build — every great project starts here.</div>
+    </div>
+  </div>
+
+  <div class="tip-row">
+    <div class="tip-item"><span class="tip-icon">🎬</span><div class="tip-text"><strong>Used by real filmmakers</strong><span>Pixar, Disney, and every game studio uses storyboards. Now your child does too.</span></div></div>
+    <div class="tip-item"><span class="tip-icon">📅</span><div class="tip-text"><strong>Best for Week 6 Day 1</strong><span>Use on the Big Idea Planning Day. Fill it in before touching ScratchJr. Saves hours of confusion later.</span></div></div>
+    <div class="tip-item"><span class="tip-icon">📄</span><div class="tip-text"><strong>Print 2 copies</strong><span>First copy for rough ideas. Second copy for the final plan once they've decided on their story.</span></div></div>
+  </div>
+
+  <div class="print-btn-row">
+    <button class="print-btn print-btn-primary" onclick="window.print()">🖨️ Print Storyboard</button>
+    <span class="print-note">One sheet = one scene sequence · Print 2 copies (rough + final) · Works perfectly in black &amp; white</span>
+  </div>
+
+  <!-- STORYBOARD TEMPLATE -->
+  <div class="storyboard">
+    <div class="sb-header">
+      <div class="sb-icon">🎬</div>
+      <div>
+        <div class="sb-title">Project Storyboard</div>
+        <div class="sb-sub">Plan your scenes before you build · Week 6 Final Project · ScratchJr Adventure</div>
+      </div>
+    </div>
+
+    <div class="sb-top">
+      <div class="sb-top-grid">
+        <div class="sb-meta-field">
+          <div class="sb-meta-label">📛 Project Title</div>
+          <input class="sb-meta-line" type="text" placeholder="My Amazing Project…">
+        </div>
+        <div class="sb-meta-field">
+          <div class="sb-meta-label">✏️ Designer's Name</div>
+          <input class="sb-meta-line" type="text" placeholder="Your name here…">
+        </div>
+        <div class="sb-meta-field">
+          <div class="sb-meta-label">🎯 Project Type</div>
+          <input class="sb-meta-line" type="text" placeholder="Story / Game / Music Video…">
+        </div>
+      </div>
+
+      <!-- Characters row -->
+      <div style="margin-bottom:20px;">
+        <div style="font-size:0.65rem;font-weight:800;letter-spacing:0.14em;text-transform:uppercase;color:#EA580C;margin-bottom:10px;">🎭 Characters in this project</div>
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;">
+          <div>
+            <div style="border:2px dashed #FED7AA;border-radius:10px;height:60px;background:#FFF7ED;display:flex;align-items:center;justify-content:center;font-size:0.7rem;font-weight:700;color:#FB923C;margin-bottom:5px;">Draw character 1</div>
+            <input class="sb-meta-line" type="text" placeholder="Name…" style="font-size:0.78rem;">
+          </div>
+          <div>
+            <div style="border:2px dashed #FED7AA;border-radius:10px;height:60px;background:#FFF7ED;display:flex;align-items:center;justify-content:center;font-size:0.7rem;font-weight:700;color:#FB923C;margin-bottom:5px;">Draw character 2</div>
+            <input class="sb-meta-line" type="text" placeholder="Name…" style="font-size:0.78rem;">
+          </div>
+          <div>
+            <div style="border:2px dashed #FED7AA;border-radius:10px;height:60px;background:#FFF7ED;display:flex;align-items:center;justify-content:center;font-size:0.7rem;font-weight:700;color:#FB923C;margin-bottom:5px;">Draw character 3</div>
+            <input class="sb-meta-line" type="text" placeholder="Name…" style="font-size:0.78rem;">
+          </div>
+          <div>
+            <div style="border:2px dashed #FED7AA;border-radius:10px;height:60px;background:#FFF7ED;display:flex;align-items:center;justify-content:center;font-size:0.7rem;font-weight:700;color:#FB923C;margin-bottom:5px;">Draw character 4</div>
+            <input class="sb-meta-line" type="text" placeholder="Name…" style="font-size:0.78rem;">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- THREE PANELS -->
+    <div class="sb-panels">
+
+      <!-- Panel 1 -->
+      <div class="sb-panel">
+        <div class="sb-panel-header">
+          <div class="sb-panel-num">1</div>
+          <div class="sb-panel-label">Scene 1 · Beginning</div>
+        </div>
+        <div class="sb-draw-area">
+          <div class="sb-draw-icon">🖊️</div>
+          <div class="sb-draw-hint">Draw what the<br>scene looks like<br>(background + characters)</div>
+        </div>
+        <div class="sb-panel-fields">
+          <div class="sb-panel-field">
+            <div class="sb-panel-field-label">📍 Where does it happen?</div>
+            <input class="sb-field-line" type="text" placeholder="Describe the background…">
+          </div>
+          <div class="sb-panel-field">
+            <div class="sb-panel-field-label">🎬 What happens?</div>
+            <textarea class="sb-field-textarea" placeholder="Describe the action in 2-3 sentences…"></textarea>
+          </div>
+          <div class="sb-panel-field">
+            <div class="sb-panel-field-label">💬 What is said?</div>
+            <input class="sb-field-line" type="text" placeholder="Any speech bubbles?">
+          </div>
+          <div class="sb-panel-field">
+            <div class="sb-panel-field-label">🧩 ScratchJr blocks needed</div>
+            <div class="sb-blocks-row">
+              <span class="sb-block-pill motion" onclick="this.classList.toggle('on')">🔵 Motion</span>
+              <span class="sb-block-pill looks" onclick="this.classList.toggle('on')">🟣 Looks</span>
+              <span class="sb-block-pill sound" onclick="this.classList.toggle('on')">🟢 Sound</span>
+              <span class="sb-block-pill loops" onclick="this.classList.toggle('on')">🔁 Loop</span>
+              <span class="sb-block-pill msg" onclick="this.classList.toggle('on')">📨 Message</span>
+            </div>
+          </div>
+          <div class="sb-panel-field">
+            <div class="sb-panel-field-label">➡️ Goes to</div>
+            <input class="sb-field-line" type="text" placeholder="Next scene / page number…">
+          </div>
+        </div>
+      </div>
+
+      <!-- Panel 2 -->
+      <div class="sb-panel">
+        <div class="sb-panel-header">
+          <div class="sb-panel-num">2</div>
+          <div class="sb-panel-label">Scene 2 · Middle</div>
+        </div>
+        <div class="sb-draw-area">
+          <div class="sb-draw-icon">🖊️</div>
+          <div class="sb-draw-hint">Draw what the<br>scene looks like<br>(background + characters)</div>
+        </div>
+        <div class="sb-panel-fields">
+          <div class="sb-panel-field">
+            <div class="sb-panel-field-label">📍 Where does it happen?</div>
+            <input class="sb-field-line" type="text" placeholder="Describe the background…">
+          </div>
+          <div class="sb-panel-field">
+            <div class="sb-panel-field-label">🎬 What happens?</div>
+            <textarea class="sb-field-textarea" placeholder="Describe the action in 2-3 sentences…"></textarea>
+          </div>
+          <div class="sb-panel-field">
+            <div class="sb-panel-field-label">💬 What is said?</div>
+            <input class="sb-field-line" type="text" placeholder="Any speech bubbles?">
+          </div>
+          <div class="sb-panel-field">
+            <div class="sb-panel-field-label">🧩 ScratchJr blocks needed</div>
+            <div class="sb-blocks-row">
+              <span class="sb-block-pill motion" onclick="this.classList.toggle('on')">🔵 Motion</span>
+              <span class="sb-block-pill looks" onclick="this.classList.toggle('on')">🟣 Looks</span>
+              <span class="sb-block-pill sound" onclick="this.classList.toggle('on')">🟢 Sound</span>
+              <span class="sb-block-pill loops" onclick="this.classList.toggle('on')">🔁 Loop</span>
+              <span class="sb-block-pill msg" onclick="this.classList.toggle('on')">📨 Message</span>
+            </div>
+          </div>
+          <div class="sb-panel-field">
+            <div class="sb-panel-field-label">➡️ Goes to</div>
+            <input class="sb-field-line" type="text" placeholder="Next scene / page number…">
+          </div>
+        </div>
+      </div>
+
+      <!-- Panel 3 -->
+      <div class="sb-panel">
+        <div class="sb-panel-header">
+          <div class="sb-panel-num">3</div>
+          <div class="sb-panel-label">Scene 3 · End</div>
+        </div>
+        <div class="sb-draw-area">
+          <div class="sb-draw-icon">🖊️</div>
+          <div class="sb-draw-hint">Draw what the<br>scene looks like<br>(background + characters)</div>
+        </div>
+        <div class="sb-panel-fields">
+          <div class="sb-panel-field">
+            <div class="sb-panel-field-label">📍 Where does it happen?</div>
+            <input class="sb-field-line" type="text" placeholder="Describe the background…">
+          </div>
+          <div class="sb-panel-field">
+            <div class="sb-panel-field-label">🎬 What happens?</div>
+            <textarea class="sb-field-textarea" placeholder="Describe the action in 2-3 sentences…"></textarea>
+          </div>
+          <div class="sb-panel-field">
+            <div class="sb-panel-field-label">💬 What is said?</div>
+            <input class="sb-field-line" type="text" placeholder="Any speech bubbles?">
+          </div>
+          <div class="sb-panel-field">
+            <div class="sb-panel-field-label">🧩 ScratchJr blocks needed</div>
+            <div class="sb-blocks-row">
+              <span class="sb-block-pill motion" onclick="this.classList.toggle('on')">🔵 Motion</span>
+              <span class="sb-block-pill looks" onclick="this.classList.toggle('on')">🟣 Looks</span>
+              <span class="sb-block-pill sound" onclick="this.classList.toggle('on')">🟢 Sound</span>
+              <span class="sb-block-pill loops" onclick="this.classList.toggle('on')">🔁 Loop</span>
+              <span class="sb-block-pill msg" onclick="this.classList.toggle('on')">📨 Message</span>
+            </div>
+          </div>
+          <div class="sb-panel-field">
+            <div class="sb-panel-field-label">🏁 How does it end?</div>
+            <input class="sb-field-line" type="text" placeholder="The End / Play Again / ?">
+          </div>
+        </div>
+      </div>
+
+    </div><!-- sb-panels -->
+
+    <div class="sb-footer">
+      <span class="sb-footer-label">Blocks key:</span>
+      <div class="sb-footer-item"><span style="width:10px;height:10px;background:#60A5FA;border-radius:50%;display:inline-block;"></span> 🔵 Blue = Motion</div>
+      <div class="sb-footer-item"><span style="width:10px;height:10px;background:#A855F7;border-radius:50%;display:inline-block;"></span> 🟣 Purple = Looks</div>
+      <div class="sb-footer-item"><span style="width:10px;height:10px;background:#4ADE80;border-radius:50%;display:inline-block;"></span> 🟢 Green = Sound</div>
+      <div class="sb-footer-item"><span style="width:10px;height:10px;background:#A855F7;border-radius:50%;display:inline-block;"></span> 🔁 Orange = Loops</div>
+      <div class="sb-footer-item"><span style="width:10px;height:10px;background:#FB923C;border-radius:50%;display:inline-block;"></span> 📨 Yellow = Messages</div>
+      <div style="margin-left:auto;font-size:0.75rem;font-weight:700;color:#78716C;">scratchjr-adventure · Created by Petya Lozanova</div>
+    </div>
+  </div>
+
+</div><!-- section-block storyboard -->
+
+</div><!-- main -->
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="footer-links">
+    <a href="../index.html">Home</a>
+    <a href="curriculum.html">Curriculum</a>
+    <a href="activity-cards.html">Activity Cards</a>
+    <a href="badges.html">Badges</a>
+    <a href="bonus-challenges.html">Bonus Challenges</a>
+    <a href="creative-expansions.html">Creative Expansions</a>
+    <a href="troubleshooting.html">Help</a>
+    <a href="checklist.html">Progress</a>
+  </div>
+  <p style="color:#A8A29E;margin-bottom:8px;">Made with ❤️ for parents everywhere · Free &amp; Open Source · <a href="https://github.com" style="color:#FFD23F;text-decoration:none;">View on GitHub ↗</a></p>
+  <p style="font-size:0.85rem;opacity:0.8;color:#A8A29E;">Created by <strong style="color:#FFD23F;">Petya Lozanova</strong> · ScratchJr is a product of the Scratch Foundation · Independent educational resource</p>
+</footer>
+
+<script>
+  document.getElementById('navToggle').addEventListener('click', () => {
+    document.getElementById('navLinks').classList.toggle('open');
+  });
+  document.querySelectorAll('.nav-links a').forEach(a =>
+    a.addEventListener('click', () => document.getElementById('navLinks').classList.remove('open'))
+  );
+</script>
+</body>
+</html>
