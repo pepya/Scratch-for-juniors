@@ -16,102 +16,33 @@
 
   body { font-family: 'Atkinson Hyperlegible', sans-serif !important; line-height: 1.75; letter-spacing: 0.01em; }
 
-  /* Force nav logo yellow — override browser default blue link color */
+  
   .nav-logo,
   .nav-logo:link,
   .nav-logo:visited,
   .nav-logo:hover,
-  .nav-logo:active {
-    color: #FFD23F !important;
-    -webkit-text-fill-color: #FFD23F !important;
-    text-decoration: none !important;
-  }
+  
 
   /* Force all nav links white — override browser default */
   .nav-links a,
   .nav-links a:link,
-  .nav-links a:visited {
-    color: #D6D3D1 !important;
-    -webkit-text-fill-color: #D6D3D1 !important;
-    text-decoration: none !important;
-  }
+  
   .nav-links a.active,
-  .nav-links a.active:visited {
-    color: #FFFFFF !important;
-    -webkit-text-fill-color: #FFFFFF !important;
-  }
+  
 
-  /* NAV fix — sticky */
-  .site-nav { position: fixed; width: 100%; top: 0; z-index: 200; }
+  
+  
 
   /* ── HAMBURGER FIX — full reset ── */
-  .nav-toggle {
-    display: none;
-    background: transparent !important;
-    -webkit-appearance: none;
-    appearance: none;
-    border: none !important;
-    outline: none !important;
-    box-shadow: none !important;
-    cursor: pointer;
-    padding: 8px;
-    margin-left: 8px;
-    width: 40px;
-    height: 40px;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 5px;
-    flex-shrink: 0;
-  }
-  .nav-toggle span {
-    display: block;
-    width: 22px;
-    height: 2px;
-    background: white !important;
-    border-radius: 2px;
-    transition: transform 0.25s, opacity 0.25s;
-    pointer-events: none;
-  }
+  
+  
 
-  @media (max-width: 700px) {
-    .nav-toggle { display: flex !important; }
-    .nav-links {
-      display: none !important;
-      position: fixed !important;
-      top: 58px !important;
-      left: 0 !important; right: 0 !important;
-      z-index: 9999 !important;
-      background: #1C1917 !important;
-      flex-direction: column !important;
-      align-items: stretch !important;
-      padding: 8px 12px 16px !important;
-      gap: 2px !important;
-      box-shadow: 0 12px 32px rgba(0,0,0,0.7) !important;
-      border-top: 1px solid rgba(255,255,255,0.08) !important;
-    }
-    .nav-links.open { display: flex !important; }
+  
     .nav-links a,
     .nav-links a:link,
-    .nav-links a:visited {
-      padding: 13px 16px !important;
-      font-size: 0.95rem !important;
-      border-radius: 10px !important;
-      color: #FFFFFF !important;
-      -webkit-text-fill-color: #FFFFFF !important;
-      text-decoration: none !important;
-      font-weight: 700 !important;
-    }
-    .nav-links a:hover {
-      background: rgba(255,255,255,0.1) !important;
-      color: #FFFFFF !important;
-      -webkit-text-fill-color: #FFFFFF !important;
-    }
-    .nav-links a.active {
-      background: #FF6B35 !important;
-      color: #FFFFFF !important;
-      -webkit-text-fill-color: #FFFFFF !important;
-    }
+    
+    
+    
   }
 
   /* ── HERO ── */
@@ -555,24 +486,65 @@
 <!-- ══════════════ NAV ══════════════ -->
 <nav class="site-nav">
   <a href="index.html" class="nav-logo">🐱 ScratchJr Adventure</a>
-  <button class="nav-toggle" id="navToggle" aria-label="Open menu">
+
+  <ul class="nav-links" id="navLinks">
+
+    <li><a href="index.html" class="active">🏠 Home</a></li>
+
+    <!-- LEARN group -->
+    <li class="nav-group " id="navLearn">
+      <button class="nav-group-btn" aria-haspopup="true" aria-expanded="false">📚 Learn</button>
+      <div class="nav-dropdown">
+        <span class="nav-dropdown-label">📚 Learn</span>
+      <a href="pages/curriculum.html">📅 Curriculum</a>
+      <a href="pages/activity-cards.html">🧩 Activity Cards</a>
+      <a href="pages/lesson-scripts.html">📋 Lesson Scripts</a>
+      </div>
+    </li>
+
+    <!-- RESOURCES group -->
+    <li class="nav-group " id="navResources">
+      <button class="nav-group-btn" aria-haspopup="true" aria-expanded="false">🗂️ Resources</button>
+      <div class="nav-dropdown">
+        <span class="nav-dropdown-label">🗂️ Resources</span>
+      <a href="pages/badges.html">🏅 Badges</a>
+      <a href="pages/bonus-challenges.html">⚡ Bonus</a>
+      <a href="pages/project-gallery.html">🎨 Gallery</a>
+      <a href="pages/block-flashcards.html">🃏 Flashcards</a>
+      <a href="pages/creative-expansions.html">🎨 Creative</a>
+      <a href="pages/whats-next.html">🚀 What's Next</a>
+      </div>
+    </li>
+
+    <!-- Mobile-only lang toggle (inside menu) -->
+    <li class="nav-lang-mobile">
+      <span style="font-size:.65rem;font-weight:800;color:#57534E;text-transform:uppercase;letter-spacing:.1em;margin-right:4px;">🌍</span>
+      <a href="index.html" class="lang-active">🇬🇧 EN</a>
+      <a href="index-bg.html">🇧🇬 БГ</a>
+    </li>
+
+    <!-- Mobile-only CTA -->
+    <li class="nav-cta-mobile" style="margin:8px 4px 0;">
+      <a href="pages/curriculum.html" style="font-family:'Fredoka One',cursive;font-size:.9rem;background:linear-gradient(135deg,#FF6B35,#FF3D77);color:white;padding:11px 18px;border-radius:12px;text-decoration:none;display:flex;align-items:center;gap:6px;width:100%;justify-content:center;">📅 Start Week 1 →</a>
+    </li>
+
+  </ul>
+
+  <!-- Right side: lang toggle + CTA (desktop) -->
+  <div class="nav-right">
+    <div class="nav-lang">
+      <a href="index.html" class="lang-active">🇬🇧 EN</a>
+      <a href="index-bg.html" class="">🇧🇬 БГ</a>
+    </div>
+    <a href="pages/curriculum.html" class="nav-cta">📅 Start Week 1 →</a>
+  </div>
+
+  <button class="nav-toggle" id="navToggle" aria-label="Menu">
     <span></span><span></span><span></span>
   </button>
-  <ul class="nav-links" id="navLinks">
-    <li><a href="index.html" class="active">🏠 Home</a></li>
-    <li><a href="pages/curriculum.html">📅 Curriculum</a></li>
-    <li><a href="pages/activity-cards.html">🧩 Activity Cards</a></li>
-    <li><a href="pages/lesson-scripts.html">📋 Lesson Scripts</a></li>
-    <li><a href="pages/troubleshooting.html">🔧 Troubleshooting</a></li>
-    <li><a href="pages/checklist.html">✅ Progress</a></li>
-  </ul>
+
 </nav>
 
-<div class="lang-bar" style="background:#292524;padding:8px 24px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;border-bottom:1px solid rgba(255,255,255,0.06);">
-  <span style="font-size:0.72rem;font-weight:700;color:#A8A29E;text-transform:uppercase;letter-spacing:0.1em;">🌍 Language:</span>
-  <a href="index.html" style="font-size:0.8rem;font-weight:700;padding:4px 12px;border-radius:8px;text-decoration:none;background:#FF6B35;border:1.5px solid #FF6B35;color:white;">🇬🇧 English</a>
-  <a href="index-bg.html" style="font-size:0.8rem;font-weight:700;padding:4px 12px;border-radius:8px;text-decoration:none;border:1.5px solid rgba(255,255,255,0.15);color:#D6D3D1;">🇧🇬 Български</a>
-</div>
 
 <!-- ══════════════ HERO ══════════════ -->
 <section class="hero">
@@ -1041,8 +1013,6 @@
 
 <script>
   // Mobile nav
-  const toggle = document.getElementById('navToggle');
-  const links  = document.getElementById('navLinks');
   toggle.addEventListener('click', () => links.classList.toggle('open'));
   links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => links.classList.remove('open')));
 
@@ -1051,6 +1021,38 @@
     entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
   }, { threshold: 0.07 });
   document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+<script>
+  // ── Nav: hamburger + dropdown groups ──
+  const navToggle = document.getElementById('navToggle');
+  const navLinks  = document.getElementById('navLinks');
+  if (navToggle) {
+    navToggle.addEventListener('click', () => {
+      navLinks.classList.toggle('open');
+      navToggle.setAttribute('aria-expanded', navLinks.classList.contains('open'));
+    });
+    navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+  }
+
+  // Desktop dropdown groups — click to toggle (touch-friendly)
+  document.querySelectorAll('.nav-group').forEach(group => {
+    const btn = group.querySelector('.nav-group-btn');
+    if (!btn) return;
+    btn.addEventListener('click', e => {
+      e.stopPropagation();
+      const isOpen = group.classList.contains('open');
+      // Close all other groups first
+      document.querySelectorAll('.nav-group').forEach(g => g.classList.remove('open'));
+      if (!isOpen) group.classList.add('open');
+      btn.setAttribute('aria-expanded', !isOpen);
+    });
+  });
+  // Close dropdowns when clicking outside
+  document.addEventListener('click', () => {
+    document.querySelectorAll('.nav-group').forEach(g => g.classList.remove('open'));
+  });
+  // Prevent dropdown panel clicks from closing
+  document.querySelectorAll('.nav-dropdown').forEach(d => d.addEventListener('click', e => e.stopPropagation()));
 </script>
 </body>
 </html>
